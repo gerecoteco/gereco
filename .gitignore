@@ -25,6 +25,8 @@ hs_err_pid*
 # IntelliJ IDEA
 out/
 *.iml
+.idea/workspace.xml
+.idea/vcs.xml
 
 # Mac e Windows
 .DS_Store
