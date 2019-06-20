@@ -1,0 +1,540 @@
+{
+  "nome": "Interclasse",
+  "modalidades": [
+    {
+      "nome": "Handebol",
+      "masculino": {
+        "equipes": [
+          {
+            "nome": "1DS",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1A",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1B",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1C",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          }
+        ],
+        "grupos": [
+          [
+            "1DS",
+            "1A",
+            "1B",
+            "1C"
+          ],
+          [
+            "2DS",
+            "2A",
+            "2B",
+            "2C"
+          ],
+          [
+            "3DS",
+            "3A",
+            "3B",
+            "3C"
+          ]
+        ],
+        "partidas": [
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          },
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          },
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          }
+        ]
+      },
+      "feminino": {
+        "equipes": [
+          {
+            "nome": "1DS",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1A",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1B",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1C",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          }
+        ],
+        "grupos": [
+          [
+            "1DS",
+            "1A",
+            "1B",
+            "1C"
+          ],
+          [
+            "2DS",
+            "2A",
+            "2B",
+            "2C"
+          ],
+          [
+            "3DS",
+            "3A",
+            "3B",
+            "3C"
+          ]
+        ],
+        "partidas": [
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          },
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          },
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "nome": "Volei",
+      "masculino": {
+        "equipes": [
+          {
+            "nome": "1DS",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1A",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1B",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1C",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          }
+        ],
+        "grupos": [
+          [
+            "1DS",
+            "1A",
+            "1B",
+            "1C"
+          ],
+          [
+            "2DS",
+            "2A",
+            "2B",
+            "2C"
+          ],
+          [
+            "3DS",
+            "3A",
+            "3B",
+            "3C"
+          ]
+        ],
+        "partidas": [
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          },
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          },
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          }
+        ]
+      },
+      "feminino": {
+        "equipes": [
+          {
+            "nome": "1DS",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1A",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1B",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          },
+          {
+            "nome": "1C",
+            "pontuacao": {
+              "pontuacao": 0,
+              "saldo": 0,
+              "pontosProprios": 0,
+              "pontosContra": 0,
+              "pontosFaltas": 0
+            }
+          }
+        ],
+        "grupos": [
+          [
+            "1DS",
+            "1A",
+            "1B",
+            "1C"
+          ],
+          [
+            "2DS",
+            "2A",
+            "2B",
+            "2C"
+          ],
+          [
+            "3DS",
+            "3A",
+            "3B",
+            "3C"
+          ]
+        ],
+        "partidas": [
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          },
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          },
+          {
+            "idEquipes": [
+              "2839123fsd",
+              "31231gfda"
+            ],
+            "pontuacoes": [
+              {
+                "pontuacao": 3,
+                "saldo": 4,
+                "pontosProprios": 5,
+                "pontosContra": 1,
+                "pontosFaltas": 0
+              },
+              {
+                "pontuacao": 0,
+                "saldo": -4,
+                "pontosProprios": 1,
+                "pontosContra": 5,
+                "pontosFaltas": 0
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
+
