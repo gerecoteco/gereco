@@ -1,0 +1,59 @@
+{
+  "nome": "Interclasse",
+  "modalidades": [
+    "Handebol",
+    "Futsal",
+    "Volei",
+    "Basquete"
+  ],
+  "equipesParticipantes": [
+    {
+      "nome": "1DS",
+      "modalidade": "Handebol",
+      "genero": "m",
+      "pontuacao": {
+        "pontuacao": 0,
+        "saldo": 0,
+        "pontosProprios": 0,
+        "pontosContra": 0,
+        "pontosFaltas": 0
+      }
+    },
+    {
+      "nome": "1A",
+      "modalidade": "Handebol",
+      "genero": "m",
+      "pontuacao": {
+        "pontuacao": 0,
+        "saldo": 0,
+        "pontosProprios": 0,
+        "pontosContra": 0,
+        "pontosFaltas": 0
+      }
+    },
+    {
+      "nome": "1B",
+      "modalidade": "Handebol",
+      "genero": "m",
+      "pontuacao": {
+        "pontuacao": 0,
+        "saldo": 0,
+        "pontosProprios": 0,
+        "pontosContra": 0,
+        "pontosFaltas": 0
+      }
+    },
+    {
+      "nome": "1C",
+      "modalidade": "Handebol",
+      "genero": "m",
+      "pontuacao": {
+        "pontuacao": 0,
+        "saldo": 0,
+        "pontosProprios": 0,
+        "pontosContra": 0,
+        "pontosFaltas": 0
+      }
+    }
+  ]
+}
