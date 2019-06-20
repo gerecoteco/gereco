@@ -4,16 +4,23 @@ import java.util.List;
 
 public class Evento {
     private String nome;
-    private List<String> modalidades;
-    private List<Equipe> equipesParticipantes;
-    private List<Partida> partidas;
-    private List<List<Equipe>> grupos;
+    private List<Modalidade> modalidades;
 
-    public Evento(String nome, List<String> modalidades, List<Equipe> equipesParticipantes, List<Partida> partidas, List<List<Equipe>> grupos) {
+    public Evento(String nome, List<Modalidade> modalidades) {
         this.nome = nome;
         this.modalidades = modalidades;
-        this.equipesParticipantes = equipesParticipantes;
-        this.partidas = partidas;
-        this.grupos = grupos;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public List<Modalidade> getModalidades() {
+        return modalidades;
+    }
+    public void setModalidades(List<Modalidade> modalidades) {
+        this.modalidades = modalidades;
     }
 }
