@@ -1,0 +1,22 @@
+{
+  "idEquipes": [
+    "2839123fsd",
+    "31231gfda"
+  ],
+  "pontuacoes": [
+    {
+      "pontuacao": 3,
+      "saldo": 4,
+      "pontosProprios": 5,
+      "pontosContra": 1,
+      "pontosFaltas": 0
+    },
+    {
+      "pontuacao": 0,
+      "saldo": -4,
+      "pontosProprios": 1,
+      "pontosContra": 5,
+      "pontosFaltas": 0
+    }
+  ]
+}
