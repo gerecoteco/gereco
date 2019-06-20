@@ -6,13 +6,13 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-class DBConnection {
+class MongoConnection {
     private MongoDatabase getConnection(){
         MongoClient mongoClient = MongoClients.create("mongodb+srv://admin_user:12345@clustergereco-rhvgo.mongodb.net");
         return mongoClient.getDatabase("gereco");
     }
 
-    public MongoCollection<Document> getCollection(String nameCollection){
-        return getConnection().getCollection(nameCollection);
+    MongoCollection<Document> getCollection(String collectionName){
+        return getConnection().getCollection(collectionName);
     }
 }
