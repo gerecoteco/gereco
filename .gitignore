@@ -27,6 +27,7 @@ out/
 *.iml
 .idea/workspace.xml
 .idea/vcs.xml
+.idea/uiDesigner.xml
 
 # Mac e Windows
 .DS_Store
