@@ -13,7 +13,7 @@ public class MongoCollections {
         String jsonEvent = mongoConnection.getCollection("eventos").find(eq(key, value)).first().toJson();
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("jsonFiles/evento.json"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("jsonFiles/event.json"));
             bw.write(jsonEvent);
             bw.flush();
             bw.close();
@@ -23,15 +23,15 @@ public class MongoCollections {
     }
 
     public void insertEvent(){
-        String jsonEvento = "";
+        String jsonEvent = "";
 
         try{
-            BufferedReader br = new BufferedReader(new FileReader("jsonFiles/evento.json"));
-            jsonEvento = br.readLine();
+            BufferedReader br = new BufferedReader(new FileReader("jsonFiles/event.json"));
+            jsonEvent = br.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        mongoConnection.getCollection("eventos").insertOne(Document.parse(jsonEvento));
+        mongoConnection.getCollection("eventos").insertOne(Document.parse(jsonEvent));
     }
 }

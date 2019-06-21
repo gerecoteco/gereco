@@ -1,0 +1,22 @@
+{
+  "teamsId": [
+    "2839123fsd",
+    "31231gfda"
+  ],
+  "scores": [
+    {
+      "points": 3,
+      "balance": 4,
+      "ownPoints": 5,
+      "againstPoints": 1,
+      "fouls": 0
+    },
+    {
+      "points": 0,
+      "balance": -4,
+      "ownPoints": 1,
+      "againstPoints": 5,
+      "fouls": 0
+    }
+  ]
+}
