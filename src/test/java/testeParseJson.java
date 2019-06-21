@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 import models.*;
 import org.junit.Test;
+import services.MongoCollections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,5 +52,19 @@ public class testeParseJson {
 
         interclasse.getModalidades().get(0).getGeneros()[0].getEquipes().get(0).getPontuacao().getSaldo();
         interclasse.getModalidades().get(0).getGeneros()[1].getPartidas().get(0).getIdEquipes();
+    }
+
+    @Test
+    public void lerBackup(){
+        MongoCollections mongoCollections = new MongoCollections();
+
+        mongoCollections.requestEvent("nome", "Interclasse");
+    }
+
+    @Test
+    public void atualizarBackup(){
+        MongoCollections mongoCollections = new MongoCollections();
+
+        mongoCollections.insertEvent();
     }
 }
