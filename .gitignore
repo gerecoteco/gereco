@@ -29,6 +29,7 @@ out/
 .idea/vcs.xml
 .idea/uiDesigner.xml
 .idea/.name
+.idea/inspectionProfiles/Project_Default.xml
 
 # Mac e Windows
 .DS_Store
