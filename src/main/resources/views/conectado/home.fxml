@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" stylesheets="@../../css/base.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="675.0" prefWidth="400.0" styleClass="backgroud" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox layoutY="475.0" prefHeight="200.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton layoutX="50.0" prefHeight="50.0" prefWidth="350.0" text="Eventos">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="font-white" />
+                              <String fx:value="button-left-radius" />
+                              <String fx:value="background-button-primary" />
+                           </styleClass>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton layoutX="50.0" prefHeight="50.0" prefWidth="350.0" text="Modelos">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="font-white" />
+                              <String fx:value="button-left-radius" />
+                              <String fx:value="background-button-secondary" />
+                           </styleClass>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton layoutX="50.0" prefHeight="50.0" prefWidth="350.0" text="Backups">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="font-white" />
+                              <String fx:value="button-left-radius" />
+                              <String fx:value="background-button-secondary" />
+                           </styleClass>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton layoutX="50.0" prefHeight="50.0" prefWidth="350.0" text="Configurações">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="font-white" />
+                              <String fx:value="button-left-radius" />
+                              <String fx:value="background-button-secondary" />
+                           </styleClass>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+            <Pane prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #00bfa5;">
+               <children>
+                  <Label layoutX="171.0" layoutY="10.0" styleClass="font-white" text="PERFIL">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="400.0" prefHeight="675.0" prefWidth="800.0" styleClass="background-secondary" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>

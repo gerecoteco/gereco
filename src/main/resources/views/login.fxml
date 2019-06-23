@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="600.0" prefWidth="500.0" styleClass="backgroud" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="121.0" fitWidth="350.0" layoutX="82.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/gereco.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="79.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/user.png" />
+         </image>
+      </ImageView>
+      <JFXTextField focusColor="#00e676" layoutX="165.0" layoutY="235.0" prefHeight="44.0" prefWidth="260.0" styleClass="font-white" unFocusColor="#039be5">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="77.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/lock.png" />
+         </image>
+      </ImageView>
+      <JFXPasswordField focusColor="#00e676" layoutX="163.0" layoutY="330.0" prefHeight="44.0" prefWidth="260.0" styleClass="font-white" unFocusColor="#039be5">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXButton layoutX="75.0" layoutY="424.0" prefHeight="32.0" prefWidth="350.0" style="-fx-background-radius: 12;" styleClass="background-button-primary" text="Conectar" textFill="WHITE" />
+      <JFXCheckBox checkedColor="#039be5" layoutX="79.0" layoutY="505.0" styleClass="font-white" text="Manter Conectado?" unCheckedColor="#eeeeee" />
+      <Hyperlink layoutX="275.0" layoutY="501.0" style="-fx-font-style: italic;" styleClass="font-grey" text="Não possui uma conta?" />
+   </children>
 </AnchorPane>

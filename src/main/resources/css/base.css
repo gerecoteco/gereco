@@ -1,0 +1,32 @@
+.backgroud{
+	-fx-background-color: #01579b;
+}
+
+.background-secondary{
+-fx-background-color: #052F5F
+}
+
+.backgorud-degrade{
+	
+}
+
+.font-white{
+	-fx-text-fill: #Ffffff;
+}
+
+.font-grey{
+	-fx-text-fill: #eeeeee;
+}
+
+.button-left-radius{
+	-fx-background-radius: 25 0 0 25;
+	-fx-border-radius: 25 0 0 25;
+}
+
+.background-button-primary{
+	-fx-background-color: #039be5
+}
+
+.background-button-secondary{
+	-fx-background-color: #014A82
+}
