@@ -1,5 +1,5 @@
 <h1 align="center">
-    Gerenciador de eventos competitivos
+    Gereco
 </h1>
 
 <p align="center">
@@ -10,12 +10,17 @@ Projeto de TCC do grupo 7 do ETIM de informática (turma de 2017) da <a href="ht
 </sup>
 </p>
 
-![GitHub license](https://img.shields.io/github/license/pedrogneri/gerenciador-eventos-competitivos.svg)
-![Github commits](https://img.shields.io/github/commit-activity/m/pedrogneri/gerenciador-eventos-competitivos.svg)
-[![HitCount](http://hits.dwyl.io/pedrogneri/gerenciador-eventos-competitivos.svg)](http://hits.dwyl.io/pedrogneri/gerenciador-eventos-competitivos)
+![GitHub license](https://img.shields.io/github/license/pedrogneri/gereco.svg)
+![Github commits](https://img.shields.io/github/commit-activity/m/pedrogneri/gereco.svg)
+![HitCount](http://hits.dwyl.io/pedrogneri/gereco.svg)
 
 ## Objetivo
-Desenvolvimento de um software para auxiliar no gerenciamento e organização de eventos competitivos, para o benefício dos responsáveis pelo evento, 
-que terão maior facilidade em administra-lo por meio da automação que o software irá proporcionar em relação ao processo manual.
+Desenvolver um software para auxiliar no gerenciamento e organização de eventos competitivos, beneficiando os responsáveis pelo evento, 
+que terão maior facilidade em administra-lo por meio da automação que o software irá proporcionar. 
 
-<a href='https://trello.com/tccgrupo07/'>Acompanhe o desenvolvimento</a>
+## Integrantes
+| <img src="https://avatars.githubusercontent.com/luizgustavo234" width=115> | <img src="https://avatars.githubusercontent.com/MatheusGualtieri" width=115> | <img src="https://avatars.githubusercontent.com/pedrogneri" width=115> | <img src="https://avatars.githubusercontent.com/ryteck" width=115> | <img src="https://avatars.githubusercontent.com/ThomasRibeiro" width=115> |  
+|---|---|---|---|---|
+| <a href="https://github.com/luizgustavo234">@luizgustavo234</a> | <a href="https://github.com/MatheusGualtieri">@MatheusGualtieri</a> | <a href="https://github.com/pedrogneri">@pedrogneri</a> | <a href="https://github.com/ryteck">@ryteck</a> | <a href="https://github.com/ThomasRibeiro">@ThomasRibeiro</a> |
+
+Acompanhe nosso desenvolvimento no <a href='https://trello.com/tccgrupo07/'>trello</a>
