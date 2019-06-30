@@ -8,7 +8,7 @@ import org.bson.Document;
 
 class MongoConnection {
     private MongoDatabase getConnection(){
-        MongoClient mongoClient = MongoClients.create("mongodb+srv://admin_user:12345@clustergereco-rhvgo.mongodb.net");
+        MongoClient mongoClient = MongoClients.create("mongodb+srv://user:user@clustergereco-rhvgo.mongodb.net");
         return mongoClient.getDatabase("gereco");
     }
 
