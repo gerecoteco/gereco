@@ -10,7 +10,7 @@ public class MongoCollections {
     private MongoConnection mongoConnection = new MongoConnection();
 
     public void requestEvent(String key, String value){
-        String jsonEvent = mongoConnection.getCollection("eventos").find(eq(key, value)).first().toJson();
+        String jsonEvent = mongoConnection.getCollection("events").find(eq(key, value)).first().toJson();
 
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("jsonFiles/event.json"));
@@ -32,6 +32,6 @@ public class MongoCollections {
             e.printStackTrace();
         }
 
-        mongoConnection.getCollection("eventos").insertOne(Document.parse(jsonEvent));
+        mongoConnection.getCollection("events").insertOne(Document.parse(jsonEvent));
     }
 }
