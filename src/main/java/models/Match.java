@@ -1,19 +1,19 @@
 package models;
 
 public class Match {
-    private String[] teamsId;
+    private String[] teams;
     private Score[] scores;
 
-    public Match(String[] teamsId, Score[] scores) {
-        this.teamsId = teamsId;
+    public Match(String[] teams, Score[] scores) {
+        this.teams = teams;
         this.scores = scores;
     }
 
-    public String[] getTeamsId() {
-        return teamsId;
+    public String[] getTeams() {
+        return teams;
     }
-    public void setTeamsId(String[] teamsId) {
-        this.teamsId = teamsId;
+    public void setTeams(String[] teams) {
+        this.teams = teams;
     }
     public Score[] getScores() {
         return scores;
