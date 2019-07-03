@@ -52,9 +52,7 @@ public class EventService {
             e.printStackTrace();
         }
 
-        Document update = new Document("$set", Document.parse(jsonEvent));
-
-        eventsCollection.updateOne(query, update);
+        eventsCollection.replaceOne(query, Document.parse(jsonEvent));
     }
 
     public void insertOneEvent(String json, String institutionId){

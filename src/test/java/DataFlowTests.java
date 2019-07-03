@@ -15,7 +15,7 @@ public class DataFlowTests {
 
     @Test
     public void readBackup(){
-        eventService.requestOneEvent("5d0d49f5ff94054db4198a83");
+        eventService.updateOneEvent("5d0d49f5ff94054db4198a83");
     }
 
     @Test
