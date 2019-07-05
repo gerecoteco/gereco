@@ -38,7 +38,7 @@ public class EventService {
         }
     }
 
-    public void updateOneEvent(String eventId){
+    public void updateEvent(String eventId){
         String eventJson = "";
 
         try{
@@ -51,7 +51,7 @@ public class EventService {
         eventsCollection.replaceOne(eq("_id", new ObjectId(eventId)), Document.parse(eventJson));
     }
 
-    public void insertOneEvent(String eventJson, String institutionId){
+    public void insertEvent(String eventJson, String institutionId){
         Document newEvent = Document.parse(eventJson);
         eventsCollection.insertOne(newEvent);
         String newEventId = Objects.requireNonNull(eventsCollection.find(newEvent).first()).get("_id").toString();
