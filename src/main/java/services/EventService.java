@@ -21,19 +21,16 @@ public class EventService {
     private MongoCollection<Document> institutionCollection = mongoConnection.getCollection("institution");
 
     public List<Event> requestAllEvents(){
-        String jsonEvents = new Gson().toJson(eventsCollection.find().into(new ArrayList<>()));
-        return new Gson().fromJson(jsonEvents, new TypeToken<List<Event>>(){}.getType());
+        String eventsJson = new Gson().toJson(eventsCollection.find().into(new ArrayList<>()));
+        return new Gson().fromJson(eventsJson, new TypeToken<List<Event>>(){}.getType());
     }
 
     public void requestOneEvent(String eventId){
-        String jsonEvent = "";
-
-        if(eventsCollection.countDocuments() != 0)
-            jsonEvent = Objects.requireNonNull(eventsCollection.find(eq("_id", new ObjectId(eventId))).first()).toJson();
+        String eventJson = Objects.requireNonNull(eventsCollection.find(eq("_id", new ObjectId(eventId))).first()).toJson();
 
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("eventFiles/" + eventId + ".json"));
-            bw.write(jsonEvent);
+            bw.write(eventJson);
             bw.flush();
             bw.close();
         } catch (IOException e) {
@@ -41,22 +38,21 @@ public class EventService {
         }
     }
 
-    public void updateOneEvent(String eventId){
-        String jsonEvent = "";
-        Document query = new Document("_id", new ObjectId(eventId));
+    public void updateEvent(String eventId){
+        String eventJson = "";
 
         try{
             BufferedReader br = new BufferedReader(new FileReader("eventFiles/" + eventId + ".json"));
-            jsonEvent = br.readLine();
+            eventJson = br.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        eventsCollection.replaceOne(query, Document.parse(jsonEvent));
+        eventsCollection.replaceOne(eq("_id", new ObjectId(eventId)), Document.parse(eventJson));
     }
 
-    public void insertOneEvent(String json, String institutionId){
-        Document newEvent = Document.parse(json);
+    public void insertEvent(String eventJson, String institutionId){
+        Document newEvent = Document.parse(eventJson);
         eventsCollection.insertOne(newEvent);
         String newEventId = Objects.requireNonNull(eventsCollection.find(newEvent).first()).get("_id").toString();
 
