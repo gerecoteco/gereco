@@ -37,6 +37,11 @@ public class DataFlowTests {
         institutionService.updateInstitution(new Gson().fromJson(readAndReturnJson("institution"), Institution.class), "5d1e827d0b7f8e7746315c82");
     }
 
+    @Test
+    public void requestInstitution(){
+        institutionService.requestInstitution("5d1e827d0b7f8e7746315c82");
+    }
+
     private String readAndReturnJson(String path){
         String jsonEvent = "";
         try{

@@ -29,6 +29,11 @@ public class InstitutionService {
         institutionCollection.replaceOne(eq("_id", new ObjectId(institutionId)), Document.parse(new Gson().toJson(institution)));
     }
 
+    public Institution requestInstitution(String institutionId){
+        String institutionJson = institutionCollection.find(eq("_id", new ObjectId(institutionId))).first().toJson();
+        return new Gson().fromJson(institutionJson, Institution.class);
+    }
+
     public String encryptPassword(String originalPassword) {
         String hashedPassword;
         char[] passwordChar = originalPassword.toCharArray();
