@@ -29,7 +29,12 @@ public class DataFlowTests {
 
     @Test
     public void insertNewInstitution(){
-        institutionService.insertOneInstitution(new Gson().fromJson(readAndReturnJson("institution"), Institution.class));
+        institutionService.insertInstitution(new Gson().fromJson(readAndReturnJson("institution"), Institution.class));
+    }
+
+    @Test
+    public void updateInstitution(){
+        institutionService.updateInstitution(new Gson().fromJson(readAndReturnJson("institution"), Institution.class), "5d1e827d0b7f8e7746315c82");
     }
 
     private String readAndReturnJson(String path){

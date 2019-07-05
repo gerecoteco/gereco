@@ -5,21 +5,28 @@ import com.mongodb.client.MongoCollection;
 import models.Institution;
 import org.apache.commons.codec.binary.Hex;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import javax.print.Doc;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class InstitutionService {
     private MongoConnection mongoConnection = new MongoConnection();
     private MongoCollection<Document> institutionCollection = mongoConnection.getCollection("institution");
 
-    public void insertOneInstitution(Institution newInstitution){
+    public void insertInstitution(Institution newInstitution){
         newInstitution.setPassword(encryptPassword(newInstitution.getPassword()));
         institutionCollection.insertOne(Document.parse(new Gson().toJson(newInstitution)));
+    }
+
+    public void updateInstitution(Institution institution,String institutionId){
+        institution.setPassword(encryptPassword(institution.getPassword()));
+        institutionCollection.replaceOne(eq("_id", new ObjectId(institutionId)), Document.parse(new Gson().toJson(institution)));
     }
 
     public String encryptPassword(String originalPassword) {
