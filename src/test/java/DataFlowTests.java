@@ -30,8 +30,9 @@ public class DataFlowTests {
     }
 
     @Test
-    public void insertNewInstitution(){
-        institutionService.insertInstitution(new Gson().fromJson(readAndReturnJson("institution"), Institution.class));
+    public void failureInsertNewInstitution(){
+        String message = institutionService.insertInstitution(new Gson().fromJson(readAndReturnJson("institution"), Institution.class));
+        assertEquals("Esse email já está cadastrado", message);
     }
 
     @Test
