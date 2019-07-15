@@ -11,7 +11,7 @@ import static helpers.Encrypt.encryptPassword;
 
 public class InstitutionService {
     private MongoConnection mongoConnection = new MongoConnection();
-    private MongoCollection<Document> institutionCollection = mongoConnection.getCollection("institution");
+    private MongoCollection<Document> institutionCollection = mongoConnection.getCollection("institutions");
 
     public String insertInstitution(Institution newInstitution){
         if(requestInstitution(newInstitution.getEmail()) == null) {

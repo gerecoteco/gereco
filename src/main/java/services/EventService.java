@@ -18,15 +18,19 @@ import static com.mongodb.client.model.Filters.eq;
 public class EventService {
     private MongoConnection mongoConnection = new MongoConnection();
     private MongoCollection<Document> eventsCollection = mongoConnection.getCollection("events");
-    private MongoCollection<Document> institutionCollection = mongoConnection.getCollection("institution");
+    private MongoCollection<Document> institutionCollection = mongoConnection.getCollection("institutions");
 
-    public List<Event> requestAllEvents(){
+    public List<Event> requestAllEventsAndReturn(){
         String eventsJson = new Gson().toJson(eventsCollection.find().into(new ArrayList<>()));
         return new Gson().fromJson(eventsJson, new TypeToken<List<Event>>(){}.getType());
     }
 
-    public void requestOneEvent(String eventId){
-        String eventJson = Objects.requireNonNull(eventsCollection.find(eq("_id", new ObjectId(eventId))).first()).toJson();
+    public String requestOneEvent(String eventId){
+        return Objects.requireNonNull(eventsCollection.find(eq("_id", new ObjectId(eventId))).first()).toJson();
+    }
+
+    public void writeEventInJson(String eventId){
+        String eventJson = requestOneEvent(eventId);
 
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("eventFiles/" + eventId + ".json"));
@@ -38,7 +42,7 @@ public class EventService {
         }
     }
 
-    public void updateEvent(String eventId){
+    public void readJsonAndUpdateEvent(String eventId){
         String eventJson = "";
 
         try{
@@ -51,7 +55,7 @@ public class EventService {
         eventsCollection.replaceOne(eq("_id", new ObjectId(eventId)), Document.parse(eventJson));
     }
 
-    public void insertEvent(String eventJson, String institutionId){
+    public void insertEventInCollection(String eventJson, String institutionId){
         Document newEvent = Document.parse(eventJson);
         eventsCollection.insertOne(newEvent);
         String newEventId = Objects.requireNonNull(eventsCollection.find(newEvent).first()).get("_id").toString();
