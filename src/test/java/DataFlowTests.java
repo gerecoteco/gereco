@@ -16,7 +16,7 @@ public class DataFlowTests {
 
     @Test
     public void updateLocalEvent(){
-        eventService.requestOneEvent("5d0d49f5ff94054db4198a83");
+        eventService.writeEventInJson("5d0d49f5ff94054db4198a83");
     }
 
     @Test
