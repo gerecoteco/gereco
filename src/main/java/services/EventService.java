@@ -4,11 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Updates;
+import helpers.EventFilesManager;
 import models.Event;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,29 +32,13 @@ public class EventService {
         return Objects.requireNonNull(eventsCollection.find(eq("_id", new ObjectId(eventId))).first()).toJson();
     }
 
-    public void writeEventInJson(String eventId){
+    public void writeEvent(String eventId){
         String eventJson = requestOneEvent(eventId);
-
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("eventFiles/" + eventId + ".json"));
-            bw.write(eventJson);
-            bw.flush();
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        EventFilesManager.write(eventId, eventJson);
     }
 
-    public void readJsonAndUpdateEvent(String eventId){
-        String eventJson = "";
-
-        try{
-            BufferedReader br = new BufferedReader(new FileReader("eventFiles/" + eventId + ".json"));
-            eventJson = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public void updateEvent(String eventId){
+        String eventJson = EventFilesManager.read(eventId);
         eventsCollection.replaceOne(eq("_id", new ObjectId(eventId)), Document.parse(eventJson));
     }
 
