@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="home" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="150.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="152.0" prefHeight="50.0" prefWidth="650.0" styleClass="top_pane" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="lblInstitutionInfo" layoutX="14.0" layoutY="18.0" text="&lt;Institution info&gt;" textFill="WHITE" />
+            <Button layoutX="558.0" layoutY="12.0" mnemonicParsing="false" styleClass="btnLogout" text="Sair" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="12.0" />
+            <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="609.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0">
+               <image>
+                  <Image url="@../img/config-icon.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ScrollPane layoutX="150.0" layoutY="50.0" prefHeight="550.0" prefWidth="650.0" styleClass="main_pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+        <content>
+          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <children>
+                  <GridPane fx:id="gridEvents" hgap="15.0" prefHeight="240.0" prefWidth="1082.0" vgap="15.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="535.0" percentWidth="0.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </content>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </ScrollPane>
+   </children>
+   <stylesheets>
+      <URL value="@../css/style.css" />
+   </stylesheets>
+</AnchorPane>

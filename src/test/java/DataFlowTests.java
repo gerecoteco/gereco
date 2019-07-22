@@ -31,13 +31,15 @@ public class DataFlowTests {
 
     @Test
     public void failureInsertNewInstitution(){
-        String message = institutionService.insertInstitution(new Gson().fromJson(readAndReturnJson("institution"), Institution.class));
+        String message = institutionService.insertInstitution(
+                new Gson().fromJson(readAndReturnJson("institution"), Institution.class));
         assertEquals("Esse email já está cadastrado", message);
     }
 
     @Test
     public void updateInstitution(){
-        institutionService.updateInstitution(new Gson().fromJson(readAndReturnJson("institution"), Institution.class), "5d2cf92efa8a5f7beaa5c2b0");
+        institutionService.updateInstitution(new Gson().fromJson(readAndReturnJson("institution"),
+                Institution.class), "5d2cf92efa8a5f7beaa5c2b0");
     }
 
     private String readAndReturnJson(String path){

@@ -21,7 +21,8 @@ import static com.mongodb.client.model.Filters.eq;
 public class EventService {
     private MongoConnection mongoConnection = new MongoConnection();
     private MongoCollection<Document> eventsCollection = mongoConnection.getCollection("events");
-    private MongoCollection<Document> institutionCollection = mongoConnection.getCollection("institutions");
+    private MongoCollection<Document> institutionCollection = mongoConnection.getCollection(
+            "institutions");
 
     public List<Event> requestAllEventsAndReturn(){
         String eventsJson = new Gson().toJson(eventsCollection.find().into(new ArrayList<>()));
@@ -29,7 +30,8 @@ public class EventService {
     }
 
     public String requestOneEvent(String eventId){
-        return Objects.requireNonNull(eventsCollection.find(eq("_id", new ObjectId(eventId))).first()).toJson();
+        return Objects.requireNonNull(eventsCollection.find(eq("_id",
+                new ObjectId(eventId))).first()).toJson();
     }
 
     public void writeEvent(String eventId){

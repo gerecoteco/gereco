@@ -1,6 +1,9 @@
 package helpers;
 
+import application.Session;
+import models.Institution;
 import org.apache.commons.codec.binary.Hex;
+import services.InstitutionService;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -8,7 +11,23 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-public class Encrypt {
+public class InstitutionAuth {
+    private InstitutionService institutionService = new InstitutionService();
+
+    public boolean login(String email, String password) {
+        Institution requestedInstitution = institutionService.findByEmail(email);
+
+        if(requestedInstitution != null){
+            String encryptedPassword = encryptPassword(password);
+
+            if(requestedInstitution.getPassword().equals(encryptedPassword)) {
+                Session.getInstance().setInstitution(requestedInstitution);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static String encryptPassword(String originalPassword) {
         String hashedPassword;
         char[] passwordChar = originalPassword.toCharArray();
