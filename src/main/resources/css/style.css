@@ -1,0 +1,25 @@
+.home Label, Text{
+  -fx-text-fill: white;
+}
+
+.sidebar, Accordion AnchorPane {
+    -fx-background-color: #49599a;  
+}
+
+.top_pane {
+    -fx-background-color: #5c6bc0;
+}
+
+.event {
+    -fx-background-color: #5c6bc0;
+}
+
+.main_pane {
+    -fx-background: #8e99f3;
+    -fx-border-color: #8e99f3;
+}
+
+.btnLogout {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}

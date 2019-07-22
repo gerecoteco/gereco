@@ -16,7 +16,7 @@ public class DataFlowTests {
 
     @Test
     public void updateLocalEvent(){
-        eventService.requestOneEvent("5d0d49f5ff94054db4198a83");
+        eventService.writeEvent("5d0d49f5ff94054db4198a83");
     }
 
     @Test
@@ -26,24 +26,20 @@ public class DataFlowTests {
 
     @Test
     public void insertNewEvent(){
-        eventService.insertEvent(readAndReturnJson("event"), "5d1e81f16272763c4e85ac96");
+        eventService.insertEventInCollection(readAndReturnJson("event"), "5d2cfa783ebf7429754f7116");
     }
 
     @Test
     public void failureInsertNewInstitution(){
-        String message = institutionService.insertInstitution(new Gson().fromJson(readAndReturnJson("institution"), Institution.class));
+        String message = institutionService.insertInstitution(
+                new Gson().fromJson(readAndReturnJson("institution"), Institution.class));
         assertEquals("Esse email já está cadastrado", message);
     }
 
     @Test
     public void updateInstitution(){
-        institutionService.updateInstitution(new Gson().fromJson(readAndReturnJson("institution"), Institution.class), "5d1e827d0b7f8e7746315c82");
-    }
-
-    @Test
-    public void requestInstitution(){
-        String expectedJson = "{\"name\":\"ETEC JOÃO BELARMINO\",\"email\":\"etec@etec.com\",\"password\":\"28970aab014cf552b44cf480a4e9a9db47cfc1d6ecd29d8a23a8b4a0aba7395f33ca1695fde9f9dd36aa3f4eb4404c02a29454fb47632d68f16e26ffeb7bed42\",\"events_id\":[\"5d1e865417ec112ab6f500f9\",\"5d1e986b8b33d02853ae3599\"]}";
-        assertEquals(expectedJson, new Gson().toJson(institutionService.requestInstitution("5d1e81f16272763c4e85ac96")));
+        institutionService.updateInstitution(new Gson().fromJson(readAndReturnJson("institution"),
+                Institution.class), "5d2cf92efa8a5f7beaa5c2b0");
     }
 
     private String readAndReturnJson(String path){
