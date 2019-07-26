@@ -1,37 +1,32 @@
 package controllers;
 
 import application.Session;
-import com.google.gson.Gson;
 import helpers.InstitutionAuth;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
 import models.Event;
 import models.Institution;
-import services.EventService;
 
-import java.util.List;
+import java.io.IOException;
 
 public class HomeController {
     public Label lblInstitutionInfo;
-    public GridPane gridEvents;
+    public ScrollPane scrollHome;
 
     private Institution institutionLogged;
-    private EventService eventService;
     static Event event;
 
     @FXML
     public void initialize() {
         efetuateInstitutionAuth();
 
-        eventService = new EventService();
         institutionLogged = Session.getInstance().getInstitution();
-
         lblInstitutionInfo.setText(institutionLogged.getName() + " |  " + institutionLogged.getEmail());
-        listAllEvents();
+
+        loadView();
     }
 
     private void efetuateInstitutionAuth() {
@@ -39,18 +34,12 @@ public class HomeController {
         System.out.println(institutionAuth.login("etec@etec.com", "12345"));
     }
 
-    private void listAllEvents() {
-        Gson gson = new Gson();
-        List<String> eventsId = institutionLogged.getEvents_id();
-
-        int columnSize = 2;
-        for (int i = 0; i < eventsId.size(); i++) {
-            event = gson.fromJson(eventService.requestOneEvent(eventsId.get(i)), Event.class);
-            try{
-                AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/views/partials/event.fxml"));
-                anchorPane.getStyleClass().add("event");
-                gridEvents.add(anchorPane, i % columnSize,i / columnSize);
-            } catch (Exception e){ e.printStackTrace(); }
+    private void loadView(){
+        try{
+            HBox hBox = FXMLLoader.load(getClass().getResource("/views/event-list.fxml"));
+            scrollHome.setContent(hBox);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
