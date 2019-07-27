@@ -84,7 +84,7 @@
                         </Label>
                         <JFXTextField fx:id="txtLoginEmail" focusColor="#2f96f3" layoutX="110.0" layoutY="190.0" prefHeight="27.0" prefWidth="162.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                         <JFXPasswordField fx:id="txtLoginPassword" focusColor="#2f96f3" layoutX="110.0" layoutY="260.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <JFXButton buttonType="RAISED" layoutX="110.0" layoutY="310.0" onAction="#efetuateInstitutionLogin" prefHeight="27.0" prefWidth="263.0" text="Logar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="110.0" layoutY="310.0" onAction="#efetuateInstitutionLogin" prefHeight="27.0" prefWidth="263.0" text="Logar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <font>
                               <Font size="18.0" />
                            </font>

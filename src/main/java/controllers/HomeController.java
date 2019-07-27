@@ -1,7 +1,6 @@
 package controllers;
 
 import application.Session;
-import helpers.InstitutionAuth;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -16,17 +15,10 @@ public class HomeController {
 
     @FXML
     public void initialize() {
-        efetuateInstitutionAuth();
-
         Institution institutionLogged = Session.getInstance().getInstitution();
         lblInstitutionInfo.setText(institutionLogged.getName() + " |  " + institutionLogged.getEmail());
 
         loadView();
-    }
-
-    private void efetuateInstitutionAuth() {
-        InstitutionAuth institutionAuth = new InstitutionAuth();
-        System.out.println(institutionAuth.login("etec@etec.com", "12345"));
     }
 
     private void loadView(){

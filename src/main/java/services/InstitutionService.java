@@ -33,6 +33,7 @@ public class InstitutionService {
 
     public Institution findByEmail(String institutionEmail){
         Document institutionDocument = institutionCollection.find(eq("email", institutionEmail)).first();
-        return institutionDocument == null ? null : new Gson().fromJson(institutionDocument.toJson(), Institution.class);
+        return institutionDocument == null ?
+                null : new Gson().fromJson(institutionDocument.toJson(), Institution.class);
     }
 }
