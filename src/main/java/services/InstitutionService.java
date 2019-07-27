@@ -16,13 +16,13 @@ public class InstitutionService {
     private MongoCollection<Document> institutionCollection = mongoConnection.getCollection(
             "institutions");
 
-    public String insertInstitution(Institution newInstitution){
+    public boolean insertInstitution(Institution newInstitution){
         if(findByEmail(newInstitution.getEmail()) == null) {
             newInstitution.setPassword(encryptPassword(newInstitution.getPassword()));
             institutionCollection.insertOne(Document.parse(new Gson().toJson(newInstitution)));
-            return "Cadastro efetuado com sucesso!";
+            return true;
         }
-        return "Esse email já está cadastrado";
+        return false;
     }
 
     public void updateInstitution(Institution institution, String institutionId){
