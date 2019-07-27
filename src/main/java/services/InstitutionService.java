@@ -6,6 +6,8 @@ import models.Institution;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import java.util.Objects;
+
 import static com.mongodb.client.model.Filters.eq;
 import static helpers.InstitutionAuth.encryptPassword;
 
@@ -30,7 +32,7 @@ public class InstitutionService {
     }
 
     public Institution findByEmail(String institutionEmail){
-        String institutionJson = institutionCollection.find(eq("email", institutionEmail)).first().toJson();
-        return new Gson().fromJson(institutionJson, Institution.class);
+        Document institutionDocument = institutionCollection.find(eq("email", institutionEmail)).first();
+        return institutionDocument == null ? null : new Gson().fromJson(institutionDocument.toJson(), Institution.class);
     }
 }

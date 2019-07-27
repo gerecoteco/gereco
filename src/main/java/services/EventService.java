@@ -1,6 +1,7 @@
 package services;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Updates;
@@ -24,9 +25,13 @@ public class EventService {
     private MongoCollection<Document> institutionCollection = mongoConnection.getCollection(
             "institutions");
 
-    public List<Event> requestAllEventsAndReturn(){
-        String eventsJson = new Gson().toJson(eventsCollection.find().into(new ArrayList<>()));
-        return new Gson().fromJson(eventsJson, new TypeToken<List<Event>>(){}.getType());
+    public List<Event> requestAllEventsOfInstitution(List<String> eventsId){
+        List<Event> institutionEvents = new ArrayList<>();
+
+        eventsId.forEach(eventId ->
+                institutionEvents.add(new Gson().fromJson(requestOneEvent(eventId), Event.class)));
+
+        return institutionEvents;
     }
 
     public String requestOneEvent(String eventId){
