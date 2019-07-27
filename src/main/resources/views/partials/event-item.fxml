@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventItemController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="320.0" styleClass="event_item" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventItemController">
    <children>
       <Label fx:id="lblEventName" alignment="CENTER" layoutX="5.0" layoutY="73.0" text="&lt;NAME&gt;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
       <GridPane fx:id="gridModalities" layoutX="400.0" layoutY="97.0" prefHeight="19.0" prefWidth="81.0">

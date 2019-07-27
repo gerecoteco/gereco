@@ -9,12 +9,12 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/initial.fxml"));
         Scene scene = new Scene(root);
 
         stage.setTitle("Gereco");
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
     }
 

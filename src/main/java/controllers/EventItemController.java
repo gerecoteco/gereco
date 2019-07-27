@@ -14,20 +14,15 @@ public class EventItemController {
 
     @FXML
     public void initialize() {
-        lblEventName.setText(HomeController.event.getName());
+        lblEventName.setText(EventListController.event.getName());
         listAllModalities();
     }
 
     private void listAllModalities() {
-        List<Modality> modalities = HomeController.event.getModalities();
+        List<Modality> modalities = EventListController.event.getModalities();
         StringBuilder modalitiesString = new StringBuilder();
-        for (Modality modality : modalities) {
-            try {
-                modalitiesString.append(modality.getName()).append(" | ");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+
+        modalities.forEach(modality ->  modalitiesString.append(modality.getName()).append(" | "));
         lblModalities.setText(modalitiesString.toString().substring(0, modalitiesString.length()-2));
     }
 }

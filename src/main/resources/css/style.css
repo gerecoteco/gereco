@@ -6,7 +6,7 @@
     -fx-background-color: #5c6bc0;
 }
 
-.event {
+.event_item {
     -fx-background-color: #717cd2;
 }
 
@@ -17,4 +17,12 @@
 
 .btnEvent {
     -fx-background-color: #5c6bc0;
+}
+
+.initial Label, Text, JFXTextField, JFXPasswordField, JFXButton {
+    -fx-text-fill: white;
+}
+
+.initial JFXButton {
+    -fx-background-color: #2f96f3;
 }
