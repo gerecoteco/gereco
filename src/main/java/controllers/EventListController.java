@@ -3,35 +3,87 @@ package controllers;
 import application.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import models.Event;
-import models.Institution;
 import services.EventService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventListController {
     public GridPane gridEvents;
+    public Label lblPageIndex;
+    public AnchorPane panePageNav;
 
-    private EventService eventService;
-    private List<String> eventsId;
+    private List<List<Event>> eventPages;
+    private int numberOfPages;
+    private List<Event> institutionEvents;
+    private int pageIndex;
     static Event event;
 
     @FXML
     public void initialize() {
-        eventService = new EventService();
-        eventsId = Session.getInstance().getInstitution().getEvents_id();
+        EventService eventService = new EventService();
+        List<String> eventsId = Session.getInstance().getInstitution().getEvents_id();
+        institutionEvents = eventService.requestAllEventsOfInstitution(eventsId);
+        numberOfPages = calculateNumberOfPages();
+        pageIndex = 0;
 
-        listAllEvents();
+        paginationEvents();
+        listEventsPage();
+        panePageNav.setVisible(true);
     }
 
-    private void listAllEvents() {
-        List<Event> institutionEvents = eventService.requestAllEventsOfInstitution(eventsId);
+    private void listEventsPage() {
+        List<Event> eventListPage = eventPages.get(pageIndex);
+        lblPageIndex.setText(String.valueOf(pageIndex + 1));
+        gridEvents.getChildren().clear();
 
-        for (int i = 0; i < 9; i++) {
-            event = institutionEvents.get(i);
+        for (int i = 0; i < eventListPage.size(); i++) {
+            event = eventListPage.get(i);
             addNewEventItem(i);
+        }
+    }
+
+    private void paginationEvents(){
+        eventPages = new ArrayList<>();
+
+        for(int pageIndex = 0; pageIndex < numberOfPages; pageIndex++)
+            eventPages.add(appendEventsOnPageAndReturn(pageIndex));
+    }
+
+    private List<Event> appendEventsOnPageAndReturn(int pageIndex){
+        List<Event> page = new ArrayList<>();
+        boolean lastPage = pageIndex == numberOfPages-1;
+        int eventIndex = 9 * pageIndex;
+        int eventLimit = lastPage ? institutionEvents.size() - eventIndex : 9;
+
+        for(int eventCount = 0; eventCount < eventLimit; eventCount++){
+            page.add(institutionEvents.get(eventIndex));
+            eventIndex++;
+        }
+        return page;
+    }
+
+    private int calculateNumberOfPages(){
+        return (institutionEvents.size() / 9) + (institutionEvents.size() % 9 == 0 ? 0 : 1);
+    }
+
+    @FXML
+    protected void navigatePreviousPage(){
+        if(pageIndex > 0){
+            pageIndex--;
+            listEventsPage();
+        }
+    }
+
+    @FXML
+    protected void navigateNextPage(){
+        if(pageIndex < eventPages.size()-1){
+            pageIndex++;
+            listEventsPage();
         }
     }
 
