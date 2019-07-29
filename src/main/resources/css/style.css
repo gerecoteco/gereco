@@ -23,6 +23,10 @@
     -fx-text-fill: white;
 }
 
+.btnNav {
+    -fx-background-color: transparent;
+}
+
 .initial JFXButton {
     -fx-background-color: #2f96f3;
 }
