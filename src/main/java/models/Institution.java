@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Institution {
@@ -8,11 +9,11 @@ public class Institution {
     private String password;
     private List<String> events_id;
 
-    public Institution(String name, String email, String password, List<String> events_id) {
+    public Institution(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.events_id = events_id;
+        this.events_id = new ArrayList<>();
     }
 
     public String getName() {

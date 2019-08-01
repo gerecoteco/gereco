@@ -48,7 +48,7 @@ public class InitialController implements Initializable {
     @FXML
     protected void efetuateInstitutionRegister() {
         Institution newInstitution = new Institution(txtRegisterName.getText(), txtRegisterEmail.getText(),
-                txtRegisterPassword.getText(),null);
+                txtRegisterPassword.getText());
         boolean validRegister = institutionService.insertInstitution(newInstitution);
 
         lblRegisterMessage.setText(validRegister ? "Cadastro efetuado com sucesso" : "Falha ao efetuar o cadastro");

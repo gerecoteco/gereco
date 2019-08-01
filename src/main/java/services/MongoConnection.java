@@ -9,14 +9,19 @@ import org.bson.Document;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class MongoConnection {
+public class MongoConnection {
+    private static MongoClient mongoClient;
+
+    public void createConnection(){
+        defineMongoLoggerLevel();
+        mongoClient = MongoClients.create();
+    }
+
     MongoCollection<Document> getCollection(String collectionName){
         return getConnection().getCollection(collectionName);
     }
 
     private MongoDatabase getConnection(){
-        defineMongoLoggerLevel();
-        MongoClient mongoClient = MongoClients.create("mongodb+srv://user:user@clustergereco-rhvgo.mongodb.net");
         return mongoClient.getDatabase("gereco");
     }
 

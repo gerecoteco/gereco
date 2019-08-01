@@ -31,9 +31,11 @@ public class EventListController {
         numberOfPages = calculateNumberOfPages();
         pageIndex = 0;
 
-        paginationEvents();
-        listEventsPage();
-        panePageNav.setVisible(true);
+        if(eventsId.size() > 0){
+            paginationEvents();
+            listEventsPage();
+            panePageNav.setVisible(true);
+        }
     }
 
     private void listEventsPage() {
