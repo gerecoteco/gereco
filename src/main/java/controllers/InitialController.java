@@ -63,6 +63,7 @@ public class InitialController implements Initializable {
 
             stage.setScene(scene);
             stage.setResizable(true);
+            stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

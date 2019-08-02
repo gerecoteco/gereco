@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -23,9 +24,9 @@
             </GridPane>
          </children>
       </HBox>
-      <HBox alignment="CENTER">
+      <AnchorPane>
          <children>
-            <AnchorPane fx:id="panePageNav" minWidth="150.0" prefHeight="45.0" prefWidth="150.0" visible="false">
+            <AnchorPane fx:id="panePageNav" minWidth="150.0" prefHeight="45.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Button layoutX="585.0" layoutY="109.0" mnemonicParsing="false" onAction="#navigateNextPage" styleClass="btnNav" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
@@ -47,7 +48,11 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </padding>
             </AnchorPane>
+            <JFXButton layoutX="932.0" layoutY="14.0" styleClass="btnEvent" text="Criar novo evento" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
          </children>
-      </HBox>
+         <padding>
+            <Insets left="100.0" right="100.0" />
+         </padding>
+      </AnchorPane>
    </children>
 </VBox>
