@@ -8,10 +8,13 @@ import javafx.stage.Stage;
 import services.MongoConnection;
 
 public class Main extends Application {
+    public static Stage mainStage;
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/views/initial.fxml"));
         Scene scene = new Scene(root);
+        mainStage = stage;
 
         stage.setTitle("Gereco");
         stage.setScene(scene);

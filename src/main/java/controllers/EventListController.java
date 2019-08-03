@@ -3,12 +3,15 @@ package controllers;
 import application.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import models.Event;
 import services.EventService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,5 +97,18 @@ public class EventListController {
             AnchorPane eventItem = FXMLLoader.load(getClass().getResource("/views/partials/event-item.fxml"));
             gridEvents.add(eventItem, eventCount % 3,eventCount / 3);
         } catch (Exception e){ e.printStackTrace(); }
+    }
+
+    @FXML
+    protected void openEventCreateView(){
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/event-create.fxml")));
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

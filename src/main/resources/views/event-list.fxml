@@ -48,7 +48,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </padding>
             </AnchorPane>
-            <JFXButton layoutX="932.0" layoutY="14.0" styleClass="btnEvent" text="Criar novo evento" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
+            <JFXButton layoutX="932.0" layoutY="14.0" onAction="#openEventCreateView" styleClass="btnEvent" text="Criar novo evento" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
          </children>
          <padding>
             <Insets left="100.0" right="100.0" />

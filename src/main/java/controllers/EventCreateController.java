@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import models.Team;
 
 import java.util.ArrayList;
@@ -28,6 +29,10 @@ public class EventCreateController {
         teams = new ArrayList<>();
         genderGroup.selectToggle(genderGroup.getToggles().get(0));
 
+        setOnActionToTeamsButtons();
+    }
+
+    private void setOnActionToTeamsButtons(){
         for(Node nodeTeam : gridTeams.getChildren()){
             if(nodeTeam.getClass().getTypeName().equals(JFXToggleNode.class.getTypeName())){
                 JFXToggleNode btnTeam = (JFXToggleNode) nodeTeam;
@@ -37,7 +42,7 @@ public class EventCreateController {
     }
 
     @FXML
-    protected void listChips(){
+    protected void appendModalitiesOnComboBox(){
         cbxModalities.setItems(chipModalities.getChips());
         chipModalities.setDisable(true);
     }
@@ -62,38 +67,48 @@ public class EventCreateController {
 
     @FXML
     protected void saveTeam(){
-        JFXToggleNode selectedToggle = (JFXToggleNode) teamGroup.getSelectedToggle();
         Team teamFound = findTeamByName();
 
-        if(teamFound != null){
-            int teamIndex = teams.indexOf(teamFound);
-            teams.get(teamIndex).setName(txtTeamName.getText());
-            teams.get(teamIndex).setTag(txtTeamTag.getText());
-        } else {
-            teams.add(new Team(txtTeamName.getText(), txtTeamTag.getText()));
-            selectedToggle.setText(txtTeamName.getText());
-        }
+        if(teamFound != null)
+            updateTeam(teamFound);
+        else
+           createTeam();
 
-        clearTextFields();
+        getSelectedTeam().setText(txtTeamName.getText());
         listTeams();
+    }
+
+    private void updateTeam(Team teamFound){
+        int teamIndex = teams.indexOf(teamFound);
+        teams.get(teamIndex).setName(txtTeamName.getText());
+        teams.get(teamIndex).setTag(txtTeamTag.getText());
+    }
+
+    private void createTeam(){
+        teams.add(new Team(txtTeamName.getText(), txtTeamTag.getText()));
     }
 
     @FXML
     protected void deleteTeam(){
-        JFXToggleNode btn = (JFXToggleNode) teamGroup.getSelectedToggle();
         if(findTeamByName() != null) {
             Team teamFound = findTeamByName();
             teams.remove(teamFound);
-            btn.setText("");
+            getSelectedTeam().setText("");
             clearTextFields();
         }
     }
 
+    @FXML
+    protected void cancelEvenCreation(ActionEvent event){
+        Button btnCancel = (Button) event.getSource();
+        Stage actualStage = (Stage) btnCancel.getScene().getWindow();
+        actualStage.close();
+    }
+
     private Team findTeamByName(){
         if(teamGroup.getSelectedToggle() != null){
-            JFXToggleNode selectedToggle = (JFXToggleNode) teamGroup.getSelectedToggle();
             return teams.stream().filter(team ->
-                    team.getName().equals(selectedToggle.getText())).findFirst().orElse(null);
+                    team.getName().equals(getSelectedTeam().getText())).findFirst().orElse(null);
         }
         return null;
     }
@@ -106,5 +121,9 @@ public class EventCreateController {
     private void clearTextFields(){
         txtTeamName.clear();
         txtTeamTag.clear();
+    }
+
+    private JFXToggleNode getSelectedTeam(){
+        return (JFXToggleNode) teamGroup.getSelectedToggle();
     }
 }
