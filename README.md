@@ -1,5 +1,5 @@
 <h1 align="center">
-    Gereco
+    <img src="https://i.imgur.com/NzIDvNA.png" width="275"/>
 </h1>
 
 <p align="center">
