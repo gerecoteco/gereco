@@ -7,6 +7,10 @@ public class Score {
     private int againstPoints;
     private int fouls;
 
+    public Score() {
+        this(0,0,0,0,0);
+    }
+
     public Score(int points, int balance, int ownPoints, int againstPoints, int fouls) {
         this.points = points;
         this.balance = balance;

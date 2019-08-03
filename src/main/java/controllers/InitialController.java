@@ -1,5 +1,6 @@
 package controllers;
 
+import application.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -42,27 +43,27 @@ public class InitialController implements Initializable {
         if(!validLogin)
             lblLoginMessage.setText("Falha ao efetuar login");
         else
-            switchScene();
+            openHomeView();
     }
 
     @FXML
     protected void efetuateInstitutionRegister() {
         Institution newInstitution = new Institution(txtRegisterName.getText(), txtRegisterEmail.getText(),
-                txtRegisterPassword.getText(),null);
+                txtRegisterPassword.getText());
         boolean validRegister = institutionService.insertInstitution(newInstitution);
 
         lblRegisterMessage.setText(validRegister ? "Cadastro efetuado com sucesso" : "Falha ao efetuar o cadastro");
     }
 
-    private void switchScene(){
-        Stage stage = (Stage) btnLogin.getScene().getWindow();
-        Scene scene;
+    private void openHomeView(){
+        Stage stage = Main.mainStage;
 
         try {
-            scene = new Scene(FXMLLoader.load(getClass().getResource("/views/home.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/home.fxml")));
 
             stage.setScene(scene);
             stage.setResizable(true);
+            stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

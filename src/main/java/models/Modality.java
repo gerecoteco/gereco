@@ -1,10 +1,12 @@
 package models;
 
+import java.util.List;
+
 public class Modality {
     private String name;
-    private Gender[] genders;
+    private List<Gender> genders;
 
-    public Modality(String name, Gender[] genders) {
+    public Modality(String name, List<Gender> genders) {
         this.name = name;
         this.genders = genders;
     }
@@ -15,10 +17,10 @@ public class Modality {
     public void setName(String name) {
         this.name = name;
     }
-    public Gender[] getGenders() {
+    public List<Gender> getGenders() {
         return genders;
     }
-    public void setGenders(Gender[] genders) {
+    public void setGenders(List<Gender> genders) {
         this.genders = genders;
     }
 }

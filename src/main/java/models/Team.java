@@ -2,11 +2,13 @@ package models;
 
 public class Team {
     private String name;
+    private String tag;
     private Score score;
 
-    public Team(String name, Score score) {
+    public Team(String name, String tag) {
         this.name = name;
-        this.score = score;
+        this.tag = tag;
+        this.score = new Score();
     }
 
     public String getName() {
@@ -14,6 +16,12 @@ public class Team {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public String getTag() {
+        return tag;
+    }
+    public void setTag(String tag) {
+        this.tag = tag;
     }
     public Score getScore() {
         return score;

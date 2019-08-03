@@ -1,22 +1,28 @@
-.home Label, Text, Button{
-  -fx-text-fill: white;
+.top_pane {
+    -fx-background-color: #369137;
 }
 
-.top_pane {
-    -fx-background-color: #5c6bc0;
+.top_pane Label, Text, Button{
+    -fx-text-fill: white;
 }
 
 .event_item {
-    -fx-background-color: #717cd2;
+    -fx-background-color: #fff;
+    -fx-border-color: #ddd;
 }
 
 .main_pane {
-    -fx-background: #8e99f3;
-    -fx-border-color: #8e99f3;
+    -fx-background: #f5f5f5;
+    -fx-border-color: #f5f5f5;
+}
+
+.main_pane Label, Text, Button{
+    -fx-text-fill: #666;
 }
 
 .btnEvent {
-    -fx-background-color: #5c6bc0;
+    -fx-background-color: #369137;
+    -fx-text-fill: white;
 }
 
 .initial Label, Text, JFXTextField, JFXPasswordField, JFXButton {

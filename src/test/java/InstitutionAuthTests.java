@@ -18,7 +18,7 @@ public class InstitutionAuthTests {
     @Test
     public void successLogin(){
         String institutionEmail = "etec@etec.com";
-        String institutionPassword = "1234";
+        String institutionPassword = "12345";
         assertTrue(institutionAuth.login(institutionEmail, institutionPassword));
     }
 

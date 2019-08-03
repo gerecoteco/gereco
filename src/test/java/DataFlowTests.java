@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class DataFlowTests {
     private EventService eventService = new EventService();
@@ -31,9 +31,9 @@ public class DataFlowTests {
 
     @Test
     public void failureInsertNewInstitution(){
-        String message = institutionService.insertInstitution(
+        boolean validRegister = institutionService.insertInstitution(
                 new Gson().fromJson(readAndReturnJson("institution"), Institution.class));
-        assertEquals("Esse email já está cadastrado", message);
+        assertFalse(validRegister);
     }
 
     @Test
