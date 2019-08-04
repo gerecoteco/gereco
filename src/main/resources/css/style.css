@@ -29,10 +29,15 @@
     -fx-text-fill: white;
 }
 
+#initial-background {
+    -fx-background-image: url("../img/initial-background.jpg");
+    -fx-background-size: cover;
+}
+
 .btnNav {
     -fx-background-color: transparent;
 }
 
 .initial JFXButton {
-    -fx-background-color: #2f96f3;
+    -fx-background-color: #369137;
 }

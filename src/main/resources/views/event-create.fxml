@@ -15,16 +15,31 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventCreateController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventCreateController">
    <children>
-      <JFXTextField layoutX="80.0" layoutY="26.0" prefHeight="27.0" prefWidth="250.0" AnchorPane.leftAnchor="65.0" />
+      <Label alignment="CENTER" layoutX="16.0" layoutY="16.0" text="Nome" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <JFXTextField layoutX="116.0" layoutY="26.0" prefHeight="27.0" prefWidth="250.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="319.0" layoutY="70.0" text="Modalidades" AnchorPane.leftAnchor="0.0">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <JFXChipView fx:id="chipModalities" layoutX="16.0" layoutY="98.0" maxHeight="85.0" minHeight="10.0" minWidth="400.0" prefHeight="85.0" prefWidth="627.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding></JFXChipView>
-      <Label layoutX="319.0" layoutY="70.0" text="Modalidades" AnchorPane.leftAnchor="0.0" />
-      <HBox alignment="CENTER" layoutX="358.0" layoutY="260.0" prefHeight="30.0" prefWidth="300.0" spacing="20.0">
+      <JFXButton layoutX="14.0" layoutY="195.0" onAction="#appendModalitiesOnComboBox" prefHeight="27.0" prefWidth="207.0" style="-fx-background-color: #ddd;" text="Adicionar modalidades" AnchorPane.rightAnchor="0.0" />
+      <Label alignment="CENTER" layoutX="17.0" layoutY="244.0" text="Selecione uma modalidade" AnchorPane.leftAnchor="0.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cbxModalities" layoutX="195.0" layoutY="241.0" onAction="#changeModalityAndGender" prefHeight="27.0" prefWidth="200.0" />
+      <HBox alignment="CENTER" layoutX="20.0" layoutY="239.0" prefHeight="30.0" prefWidth="300.0" spacing="20.0" AnchorPane.rightAnchor="0.0">
          <children>
             <JFXRadioButton onAction="#changeModalityAndGender" text="Masculino">
                <toggleGroup>
@@ -35,7 +50,7 @@
             <JFXRadioButton onAction="#changeModalityAndGender" text="Misto" toggleGroup="$genderGroup" />
          </children>
       </HBox>
-      <AnchorPane layoutX="19.0" layoutY="326.0" prefHeight="195.0" prefWidth="679.0" style="-fx-border-color: #666;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane layoutX="19.0" layoutY="281.0" prefHeight="195.0" prefWidth="679.0" style="-fx-border-color: #666;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <ScrollPane layoutX="15.5" layoutY="41.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <content>
@@ -82,19 +97,22 @@
                   </GridPane>
                </content>
             </ScrollPane>
-            <Label layoutX="76.0" layoutY="14.0" text="Times participantes do(a)" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label layoutX="76.0" layoutY="14.0" text="Times participantes do(a)" AnchorPane.leftAnchor="0.0" />
             <AnchorPane layoutX="486.0" layoutY="32.0" prefHeight="139.0" prefWidth="167.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <JFXTextField fx:id="txtTeamName" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="106.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <JFXTextField fx:id="txtTeamTag" layoutX="14.0" layoutY="62.0" prefHeight="27.0" prefWidth="106.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
-                  <Label layoutX="5.0" layoutY="10.0" prefHeight="27.0" prefWidth="37.0" text="Nome" AnchorPane.topAnchor="5.0" />
-                  <Label layoutX="10.0" layoutY="70.0" prefHeight="27.0" prefWidth="37.0" text="Tag" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="65.0" />
+                  <Label layoutX="5.0" layoutY="10.0" text="Nome" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label layoutX="10.0" layoutY="70.0" text="Tag" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="65.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <JFXButton layoutX="4.0" layoutY="113.0" onAction="#saveTeam" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #ddd;" text="Salvar time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                   <JFXButton layoutX="11.0" layoutY="156.0" onAction="#deleteTeam" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #ddd;" text="Excluir Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
             </AnchorPane>
             <Label fx:id="lblModalityAndGender" layoutX="182.0" layoutY="16.0" AnchorPane.leftAnchor="161.0" AnchorPane.topAnchor="0.0" />
          </children>
@@ -105,13 +123,10 @@
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
       </AnchorPane>
-      <JFXButton layoutX="14.0" layoutY="195.0" onAction="#appendModalitiesOnComboBox" prefHeight="27.0" prefWidth="207.0" style="-fx-background-color: #ddd;" text="Adicionar modalidades" AnchorPane.rightAnchor="0.0" />
-      <Label layoutX="24.0" layoutY="26.0" prefHeight="27.0" prefWidth="37.0" text="Nome" AnchorPane.leftAnchor="0.0" />
-      <JFXButton layoutX="491.0" layoutY="539.0" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #ddd;" text="Criar evento" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <JFXButton layoutX="371.0" layoutY="538.0" onAction="#cancelEventCreation" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #ddd;" text="Cancelar" AnchorPane.bottomAnchor="0.0" />
-      <JFXComboBox fx:id="cbxModalities" layoutX="19.0" layoutY="262.0" onAction="#changeModalityAndGender" prefHeight="27.0" prefWidth="201.0" promptText="Selecione a modalidade" AnchorPane.leftAnchor="0.0" />
+      <JFXButton layoutX="491.0" layoutY="539.0" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #ddd;" text="Criar evento" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
    <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 </AnchorPane>

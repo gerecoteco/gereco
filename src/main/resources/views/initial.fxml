@@ -4,101 +4,102 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="800.0" styleClass="initial" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InitialController">
+<AnchorPane id="initial-background" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="480.0" prefWidth="800.0" styleClass="initial" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InitialController">
    <children>
-      <ImageView fitHeight="480.0" fitWidth="800.0" nodeOrientation="INHERIT" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../img/initial-background.jpg" />
-         </image>
-      </ImageView>
-      <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="480.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER">
-               <children>
-                  <AnchorPane minHeight="480.0" minWidth="400.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="110.0" text="Cadastrar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="36.0" layoutY="160.0" text="Nome" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="36.0" layoutY="230.0" text="Email" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="36.0" layoutY="300.0" text="Senha" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="txtRegisterName" focusColor="#2f96f3" layoutX="125.0" layoutY="190.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <JFXTextField fx:id="txtRegisterEmail" focusColor="#2f96f3" layoutX="114.0" layoutY="260.0" prefHeight="27.0" prefWidth="162.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <JFXPasswordField fx:id="txtRegisterPassword" focusColor="#2f96f3" layoutX="117.0" layoutY="330.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <JFXButton buttonType="RAISED" layoutX="57.0" layoutY="380.0" onAction="#efetuateInstitutionRegister" prefHeight="27.0" prefWidth="263.0" text="Cadastrar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </JFXButton>
-                        <Label fx:id="lblRegisterMessage" alignment="CENTER" layoutX="-35.0" layoutY="62.0" prefHeight="17.0" prefWidth="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                     <padding>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                     </padding>
-                  </AnchorPane>
-                  <Separator maxWidth="0.0" minWidth="0.0" orientation="VERTICAL" prefWidth="0.0">
-                     <HBox.margin>
-                        <Insets bottom="50.0" top="50.0" />
-                     </HBox.margin>
-                  </Separator>
-                  <AnchorPane minHeight="480.0" minWidth="400.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="110.0" text="Logar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="110.0" layoutY="160.0" text="Email" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="110.0" layoutY="230.0" text="Senha" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="txtLoginEmail" focusColor="#2f96f3" layoutX="110.0" layoutY="190.0" prefHeight="27.0" prefWidth="162.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <JFXPasswordField fx:id="txtLoginPassword" focusColor="#2f96f3" layoutX="110.0" layoutY="260.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="110.0" layoutY="310.0" onAction="#efetuateInstitutionLogin" prefHeight="27.0" prefWidth="263.0" text="Logar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </JFXButton>
-                        <Label fx:id="lblLoginMessage" alignment="CENTER" layoutX="60.0" prefHeight="17.0" prefWidth="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Label layoutX="221.0" layoutY="371.0" text="Esqueci minha senha" underline="true" AnchorPane.rightAnchor="0.0" />
-                     </children>
-                     <padding>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                     </padding>
-                  </AnchorPane>
-               </children>
-            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="110.0" text="Cadastrar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="160.0" text="Nome" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="230.0" text="Email" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="300.0" text="Senha" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txtRegisterName" focusColor="#2f96f3" layoutX="125.0" layoutY="190.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <JFXTextField fx:id="txtRegisterEmail" focusColor="#2f96f3" layoutX="114.0" layoutY="260.0" prefHeight="27.0" prefWidth="162.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <JFXPasswordField fx:id="txtRegisterPassword" focusColor="#2f96f3" layoutX="117.0" layoutY="330.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <JFXButton buttonType="RAISED" layoutX="57.0" layoutY="380.0" onAction="#efetuateInstitutionRegister" prefHeight="27.0" prefWidth="263.0" text="Cadastrar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label fx:id="lblRegisterMessage" alignment="CENTER" layoutX="-35.0" layoutY="62.0" prefHeight="17.0" prefWidth="0.0" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
-      </VBox>
+         <padding>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </padding>
+      </AnchorPane>
+      <Separator focusTraversable="false" layoutX="400.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" pickOnBounds="false" prefHeight="400.0" prefWidth="1.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="40.0" />
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="480.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="110.0" text="Logar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="110.0" layoutY="160.0" text="Email" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="110.0" layoutY="230.0" text="Senha" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txtLoginEmail" focusColor="#2f96f3" layoutX="110.0" layoutY="190.0" prefHeight="27.0" prefWidth="162.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <JFXPasswordField fx:id="txtLoginPassword" focusColor="#2f96f3" layoutX="110.0" layoutY="260.0" unFocusColor="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="110.0" layoutY="310.0" onAction="#efetuateInstitutionLogin" prefHeight="27.0" prefWidth="263.0" text="Logar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label fx:id="lblLoginMessage" alignment="CENTER" layoutX="60.0" prefHeight="17.0" prefWidth="0.0" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="221.0" layoutY="371.0" text="Esqueci minha senha" textFill="WHITE" underline="true" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </padding>
+      </AnchorPane>
    </children>
 </AnchorPane>
