@@ -43,15 +43,20 @@ public class EventCreateController {
 
     @FXML
     protected void appendModalitiesOnComboBox(){
-        cbxModalities.setItems(chipModalities.getChips());
-        chipModalities.setDisable(true);
+        if(!chipModalities.getChips().isEmpty()){
+            cbxModalities.setItems(chipModalities.getChips());
+            chipModalities.setDisable(true);
+        }
     }
 
     @FXML
     protected void changeModalityAndGender(){
         JFXRadioButton rdb = (JFXRadioButton) genderGroup.getSelectedToggle();
-        String modalityAndGender = cbxModalities.getValue().toString() + " " + rdb.getText();
-        lblModalityAndGender.setText(modalityAndGender.toLowerCase());
+
+        if(cbxModalities.getValue() != null){
+            String modalityAndGender = cbxModalities.getValue().toString() + " " + rdb.getText();
+            lblModalityAndGender.setText(modalityAndGender.toLowerCase());
+        }
     }
 
     @FXML
@@ -99,7 +104,7 @@ public class EventCreateController {
     }
 
     @FXML
-    protected void cancelEvenCreation(ActionEvent event){
+    protected void cancelEventCreation(ActionEvent event){
         Button btnCancel = (Button) event.getSource();
         Stage actualStage = (Stage) btnCancel.getScene().getWindow();
         actualStage.close();

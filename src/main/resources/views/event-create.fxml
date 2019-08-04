@@ -108,7 +108,7 @@
       <JFXButton layoutX="14.0" layoutY="195.0" onAction="#appendModalitiesOnComboBox" prefHeight="27.0" prefWidth="207.0" style="-fx-background-color: #ddd;" text="Adicionar modalidades" AnchorPane.rightAnchor="0.0" />
       <Label layoutX="24.0" layoutY="26.0" prefHeight="27.0" prefWidth="37.0" text="Nome" AnchorPane.leftAnchor="0.0" />
       <JFXButton layoutX="491.0" layoutY="539.0" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #ddd;" text="Criar evento" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <JFXButton layoutX="371.0" layoutY="538.0" onAction="#cancelEvenCreation" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #ddd;" text="Cancelar" AnchorPane.bottomAnchor="0.0" />
+      <JFXButton layoutX="371.0" layoutY="538.0" onAction="#cancelEventCreation" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #ddd;" text="Cancelar" AnchorPane.bottomAnchor="0.0" />
       <JFXComboBox fx:id="cbxModalities" layoutX="19.0" layoutY="262.0" onAction="#changeModalityAndGender" prefHeight="27.0" prefWidth="201.0" promptText="Selecione a modalidade" AnchorPane.leftAnchor="0.0" />
    </children>
    <padding>

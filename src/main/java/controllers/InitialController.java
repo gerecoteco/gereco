@@ -58,16 +58,17 @@ public class InitialController implements Initializable {
     }
 
     private void openHomeView(){
-        Stage stage = Main.mainStage;
+        Main.mainStage.close();
+        Main.mainStage = new Stage();
         maximizeView();
 
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/home.fxml")));
 
-            stage.setScene(scene);
-            stage.setResizable(true);
-            stage.centerOnScreen();
-            stage.show();
+            Main.mainStage .setScene(scene);
+            Main.mainStage .setResizable(true);
+            Main.mainStage .centerOnScreen();
+            Main.mainStage .show();
         } catch (IOException e) {
             e.printStackTrace();
         }
