@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane minHeight="675.0" minWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="103.0" layoutY="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text="&lt;NAME&gt;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="50.0">
+               <children>
+                  <JFXComboBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Selecione uma Modalidade" />
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Masculino" textAlignment="CENTER">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="genderGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" text="Feminino" textAlignment="CENTER" toggleGroup="$genderGroup" />
+                        <RadioButton mnemonicParsing="false" text="Misto" textAlignment="CENTER" toggleGroup="$genderGroup" />
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <children>
+                  <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Times">
+                        <content>
+                          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="622.0" minWidth="1280.0">
+                                 <children>
+                                    <Label layoutX="30.0" layoutY="14.0" text="Times" AnchorPane.leftAnchor="0.0" />
+                                    <JFXButton layoutX="33.0" layoutY="203.0" style="-fx-background-color: #ddd;" text="Agrupar" AnchorPane.leftAnchor="0.0" />
+                                    <JFXTreeTableView layoutX="838.0" layoutY="60.0" prefHeight="447.0" prefWidth="419.0" AnchorPane.rightAnchor="0.0" />
+                                    <Label alignment="CENTER" layoutX="846.0" layoutY="23.0" prefHeight="17.0" prefWidth="408.0" text="Sequência de jogos:" textAlignment="CENTER" AnchorPane.rightAnchor="0.0" />
+                                    <ScrollPane layoutX="33.0" layoutY="49.0" AnchorPane.leftAnchor="0.0">
+                                       <content>
+                                          <GridPane fx:id="gridTeams" alignment="CENTER" gridLinesVisible="true" prefHeight="137.0" prefWidth="439.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="teamGroup" />
+                                                   </toggleGroup>
+                                                </JFXToggleNode>
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.rowIndex="3" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.rowIndex="2" />
+                                                <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.rowIndex="1" />
+                                             </children>
+                                          </GridPane>
+                                       </content>
+                                    </ScrollPane>
+                                    <AnchorPane layoutX="493.0" layoutY="22.0" prefHeight="139.0" prefWidth="167.0">
+                                       <children>
+                                          <JFXTextField fx:id="txtTeamName" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="106.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <JFXTextField fx:id="txtTeamTag" layoutX="14.0" layoutY="62.0" prefHeight="27.0" prefWidth="106.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+                                          <Label layoutX="5.0" layoutY="10.0" prefHeight="27.0" prefWidth="37.0" text="Nome" AnchorPane.topAnchor="5.0" />
+                                          <Label layoutX="10.0" layoutY="70.0" prefHeight="27.0" prefWidth="37.0" text="Tag" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="65.0" />
+                                          <JFXButton layoutX="4.0" layoutY="113.0" onAction="#saveTeam" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #ddd;" text="Editar Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                          <JFXButton layoutX="11.0" layoutY="156.0" onAction="#deleteTeam" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #ddd;" text="Excluir Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </AnchorPane>
+                                    <JFXTreeTableView layoutX="45.0" layoutY="311.0" prefHeight="230.0" prefWidth="471.0" AnchorPane.leftAnchor="0.0">
+                                       <columns>
+                                          <TreeTableColumn prefWidth="75.0" text="Posição" />
+                                          <TreeTableColumn prefWidth="75.0" text="Nome" />
+                                          <TreeTableColumn prefWidth="75.0" text="PP" />
+                                          <TreeTableColumn prefWidth="75.0" text="PC" />
+                                          <TreeTableColumn prefWidth="75.0" text="Saldo" />
+                                          <TreeTableColumn prefWidth="100.0" text="Penalidades" />
+                                       </columns></JFXTreeTableView>
+                                    <JFXComboBox layoutX="15.0" layoutY="271.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Selecione um grupo" AnchorPane.leftAnchor="0.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Classificação">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXTreeTableView layoutX="38.0" layoutY="98.0" prefHeight="447.0" prefWidth="602.0" AnchorPane.leftAnchor="0.0" />
+                                    <JFXTreeTableView layoutX="659.0" layoutY="98.0" prefHeight="447.0" prefWidth="602.0" AnchorPane.rightAnchor="0.0" />
+                                    <Label alignment="CENTER" layoutX="38.0" layoutY="64.0" prefHeight="17.0" prefWidth="599.0" text="Classificação do(a) " AnchorPane.leftAnchor="0.0" />
+                                    <Label alignment="CENTER" layoutX="659.0" layoutY="64.0" prefHeight="17.0" prefWidth="597.0" text="Classificação geral" AnchorPane.rightAnchor="0.0" />
+                                    <JFXButton layoutX="255.0" layoutY="560.0" text="Baixar como PDF" />
+                                    <JFXButton layoutX="903.0" layoutY="560.0" text="Baixar como PDF" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

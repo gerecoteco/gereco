@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Event;
 import services.EventService;
@@ -105,7 +106,9 @@ public class EventListController {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/event-create.fxml")));
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.centerOnScreen();
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
