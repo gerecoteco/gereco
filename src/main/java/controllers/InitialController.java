@@ -8,8 +8,10 @@ import helpers.InstitutionAuth;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import models.Institution;
 import services.InstitutionService;
@@ -56,17 +58,29 @@ public class InitialController implements Initializable {
     }
 
     private void openHomeView(){
-        Stage stage = Main.mainStage;
+        Main.mainStage.close();
+        Main.mainStage = new Stage();
+        maximizeView();
 
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/home.fxml")));
 
-            stage.setScene(scene);
-            stage.setResizable(true);
-            stage.centerOnScreen();
-            stage.show();
+            Main.mainStage .setScene(scene);
+            Main.mainStage .setResizable(true);
+            Main.mainStage .centerOnScreen();
+            Main.mainStage .show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void maximizeView(){
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        Main.mainStage.setX(bounds.getMinX());
+        Main.mainStage.setY(bounds.getMinY());
+        Main.mainStage.setWidth(bounds.getWidth());
+        Main.mainStage.setHeight(bounds.getHeight());
     }
 }
