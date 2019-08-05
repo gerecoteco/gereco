@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="720.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="720.0" styleClass="config" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ConfigController">
    <children>
     <AnchorPane layoutX="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -26,7 +27,7 @@
             </AnchorPane>
             <AnchorPane layoutY="36.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
                <children>
-                  <Label alignment="CENTER" layoutX="151.0" layoutY="14.0" text="&lt;NAME&gt;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Label fx:id="lblInstitutionName" alignment="CENTER" layoutX="151.0" layoutY="14.0" text="&lt;NAME&gt;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -48,24 +49,24 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXTextField layoutX="138.0" layoutY="212.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="132.0" />
                   <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="191.0" text="Nova Senha" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="180.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXTextField layoutX="160.0" layoutY="243.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="172.0" />
                   <Label alignment="TOP_LEFT" layoutX="24.0" layoutY="201.0" text="Confirmar Nova Senha" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="220.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXTextField layoutX="170.0" layoutY="253.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="212.0" />
                   <JFXButton layoutX="182.0" layoutY="271.0" styleClass="btnEvent" text="Salvar Senha" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="260.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
+                  <JFXPasswordField layoutX="186.0" layoutY="200.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="172.0" />
+                  <JFXPasswordField layoutX="186.0" layoutY="240.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="212.0" />
+                  <JFXPasswordField layoutX="186.0" layoutY="160.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="132.0" />
                </children>
                <padding>
                   <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />

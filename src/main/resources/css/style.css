@@ -63,6 +63,18 @@
     -fx-text-fill: white;
 }
 
+/* MATCH FORM */
+.match_form JFXTextField, JFXComboBox:focused {
+    -jfx-focus-color: #369137;
+    -fx-text-fill: black;
+}
+
+/* CONFIG */
+.config JFXPasswordField, JFXTextField, JFXComboBox:focused {
+    -jfx-focus-color: #369137;
+    -fx-text-fill: black;
+}
+
 /* OTHERS */
 .btnEvent {
     -fx-background-color: #369137;

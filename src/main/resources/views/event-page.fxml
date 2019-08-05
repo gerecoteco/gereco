@@ -79,7 +79,7 @@
                         <content>
                           <AnchorPane minWidth="1280.0">
                                  <children>
-                                    <AnchorPane layoutX="100.0" layoutY="40.0" prefHeight="195.0" prefWidth="679.0" style="-fx-border-color: #666;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane layoutX="100.0" layoutY="40.0" prefHeight="195.0" prefWidth="679.0" style="-fx-border-color: #666;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                                        <children>
                                           <Label layoutX="76.0" layoutY="14.0" text="Times participantes do(a)" AnchorPane.leftAnchor="0.0">
                                              <font>
@@ -162,7 +162,7 @@
                                           <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                        </padding>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="100.0" layoutY="282.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                                    <AnchorPane layoutX="100.0" layoutY="282.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <JFXTreeTableView fixedCellSize="30.0" layoutY="40.0" prefHeight="230.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                              <columns>
@@ -199,19 +199,24 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <JFXTreeTableView layoutY="25.0" prefWidth="450.0" sortMode="ONLY_FIRST_LEVEL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                                          <JFXTreeTableView layoutY="25.0" prefWidth="450.0" sortMode="ONLY_FIRST_LEVEL" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                              <columns>
-                                                <TreeTableColumn editable="false" minWidth="60.0" prefWidth="69.0" resizable="false" sortable="false" text="Posição" />
-                                                <TreeTableColumn editable="false" minWidth="66.0" prefWidth="66.0" resizable="false" sortable="false" text="Time" />
-                                                <TreeTableColumn editable="false" minWidth="64.0" prefWidth="77.0" resizable="false" sortable="false" text="Placar" />
-                                                <TreeTableColumn editable="false" minWidth="50.0" prefWidth="74.0" resizable="false" sortable="false" text="Versus" />
-                                                <TreeTableColumn editable="false" minWidth="72.0" prefWidth="77.0" resizable="false" sortable="false" text="Placar" />
-                                                <TreeTableColumn editable="false" minWidth="85.0" prefWidth="87.0" resizable="false" sortable="false" text="Time" />
+                                                <TreeTableColumn editable="false" minWidth="60.0" prefWidth="73.0" resizable="false" sortable="false" text="Posição" />
+                                                <TreeTableColumn editable="false" minWidth="66.0" prefWidth="73.0" resizable="false" sortable="false" text="Time" />
+                                                <TreeTableColumn editable="false" minWidth="64.0" prefWidth="73.0" resizable="false" sortable="false" text="Placar" />
+                                                <TreeTableColumn editable="false" minWidth="50.0" prefWidth="73.0" resizable="false" sortable="false" text="Versus" />
+                                                <TreeTableColumn editable="false" minWidth="72.0" prefWidth="73.0" resizable="false" sortable="false" text="Placar" />
+                                                <TreeTableColumn editable="false" minWidth="85.0" prefWidth="73.0" resizable="false" sortable="false" text="Time" />
                                              </columns>
                                              <columnResizePolicy>
                                                 <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
                                           </JFXTreeTableView>
+                                          <JFXButton layoutX="-75.0" layoutY="496.0" onAction="#openMatchFormView" prefWidth="400.0" styleClass="btnEvent" text="Editar seleção" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </JFXButton>
                                        </children>
                                     </AnchorPane>
                                  </children>
