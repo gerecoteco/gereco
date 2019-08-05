@@ -3,12 +3,23 @@ plugins {
 }
 
 group 'com.tcc-grupo7'
-version '1.0-SNAPSHOT'
+version '1.0-PROTOTYPE'
 
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+jar {
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    manifest {
+        attributes 'Main-Class': 'application.Main'
+    }
 }
 
 dependencies {
