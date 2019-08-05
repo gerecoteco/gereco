@@ -32,7 +32,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cbxModalities" layoutX="195.0" layoutY="241.0" onAction="#changeModalityAndGender" prefHeight="27.0" prefWidth="190.0" AnchorPane.leftAnchor="185.0" />
+      <JFXComboBox fx:id="cbxModalities" layoutX="195.0" layoutY="241.0" prefHeight="27.0" prefWidth="190.0" AnchorPane.leftAnchor="185.0" />
       <HBox alignment="CENTER" layoutX="20.0" layoutY="239.0" prefHeight="30.0" prefWidth="300.0" spacing="20.0" AnchorPane.rightAnchor="0.0">
          <children>
             <JFXCheckBox text="Masculino" />
