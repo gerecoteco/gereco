@@ -18,10 +18,8 @@ public class EventCreateController {
 
     @FXML
     protected void appendModalitiesOnComboBox(){
-        if(!chipModalities.getChips().isEmpty()){
+        if(!chipModalities.getChips().isEmpty())
             cbxModalities.setItems(chipModalities.getChips());
-            chipModalities.setDisable(true);
-        }
     }
 
     @FXML

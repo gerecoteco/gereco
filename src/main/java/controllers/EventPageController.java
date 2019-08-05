@@ -1,9 +1,6 @@
 package controllers;
 
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXToggleNode;
+import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +9,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Event;
@@ -30,7 +30,8 @@ public class EventPageController {
     public ToggleGroup genderGroup;
     public JFXTextField txtTeamName;
     public JFXTextField txtTeamTag;
-    public Label lblModalityAndGender0, lblModalityAndGender1, lblModalityAndGender2, lblModalityAndGender3;
+    public AnchorPane paneManager;
+    public Label lblModalityAndGender0, lblModalityAndGender1, lblModalityAndGender2;
 
     private Event event;
     private List<Team> teams;
@@ -42,8 +43,10 @@ public class EventPageController {
         lblEventName.setText(event.getName());
         genderGroup.selectToggle(genderGroup.getToggles().get(0));
 
-        setOnActionToTeamsButtons();
         appendModalitiesInComboBox();
+        cbxModalities.setValue(cbxModalities.getItems().get(0));
+        setOnActionToTeamsButtons();
+        changeModalityAndGender();
     }
 
     private void setOnActionToTeamsButtons(){
@@ -59,13 +62,10 @@ public class EventPageController {
     protected void changeModalityAndGender(){
         JFXRadioButton rdb = (JFXRadioButton) genderGroup.getSelectedToggle();
 
-        if(cbxModalities.getValue() != null){
-            String modalityAndGender = cbxModalities.getValue().toString() + " " + rdb.getText();
-            lblModalityAndGender0.setText(modalityAndGender.toLowerCase());
-            lblModalityAndGender1.setText(modalityAndGender.toLowerCase());
-            lblModalityAndGender2.setText(modalityAndGender.toLowerCase());
-            lblModalityAndGender3.setText(modalityAndGender.toLowerCase());
-        }
+        String modalityAndGender = cbxModalities.getValue().toString() + " " + rdb.getText();
+        lblModalityAndGender0.setText(modalityAndGender.toLowerCase());
+        lblModalityAndGender1.setText(modalityAndGender.toLowerCase());
+        lblModalityAndGender2.setText(modalityAndGender.toLowerCase());
     }
 
     @FXML
@@ -159,5 +159,34 @@ public class EventPageController {
     private void listTeams(){
         teams.forEach(team -> System.out.print(team.getName() + " "));
         System.out.println("\n");
+    }
+
+    @FXML
+    protected void loadGroupDialog(){
+        JFXDialogLayout content = new JFXDialogLayout();
+        HBox hbox = new HBox(5);
+        JFXDialog dialog;
+
+        JFXButton btnConfirm = new JFXButton("Sim");
+        JFXButton btnCancel = new JFXButton("Cancelar");
+
+        JFXRadioButton rdb = (JFXRadioButton) genderGroup.getSelectedToggle();
+        String modalityAndGender = cbxModalities.getValue().toString() + " " + rdb.getText();
+
+        content.setHeading(new Label("Agrupar times"));
+        content.setBody(new Text("Tem certeza que deseja agrupar os times de " + modalityAndGender + "?" +
+                "\n(você não poderá mais alterar os times de " +modalityAndGender + ")"));
+
+        hbox.getChildren().add(btnCancel);
+        hbox.getChildren().add(btnConfirm);
+        content.setActions(hbox);
+
+        btnCancel.setStyle("-fx-background-color: #369137");
+        btnConfirm.setStyle("-fx-background-color: #369137");
+
+        dialog = new JFXDialog(HomeController.staticStackPaneMain, content, JFXDialog.DialogTransition.CENTER);
+
+        btnCancel.setOnAction(action -> dialog.close());
+        dialog.show();
     }
 }

@@ -52,15 +52,15 @@
     -fx-text-fill: #666;
 }
 
-.event_create JFXToggleNode:selected {
-    -fx-background-color: #45de47;
-    -fx-text-fill: white;
-}
-
 /* EVENT PAGE */
 .event_page JFXTextField, JFXComboBox:focused {
     -jfx-focus-color: #369137;
     -fx-text-fill: black;
+}
+
+.event_page JFXToggleNode:selected {
+    -fx-background-color: #45de47;
+    -fx-text-fill: white;
 }
 
 /* MATCH FORM */

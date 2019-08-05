@@ -1,9 +1,7 @@
 package controllers;
 
 import application.Main;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import helpers.InstitutionAuth;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import models.Institution;
@@ -29,6 +30,7 @@ public class InitialController implements Initializable {
     public Label lblLoginMessage;
     public Label lblRegisterMessage;
     public JFXButton btnLogin;
+    public StackPane stackPaneLogin;
 
     private InstitutionService institutionService;
 
@@ -82,5 +84,26 @@ public class InitialController implements Initializable {
         Main.mainStage.setY(bounds.getMinY());
         Main.mainStage.setWidth(bounds.getWidth());
         Main.mainStage.setHeight(bounds.getHeight());
+    }
+
+    @FXML
+    protected void loadForgotPasswordDialog(){
+        JFXDialogLayout content = new JFXDialogLayout();
+        HBox hbox = new HBox(5);
+        JFXDialog dialog;
+
+        JFXButton btnConfirm = new JFXButton("Ok");
+
+        content.setHeading(new Label("Redefinir senha"));
+        content.setBody(new Text("Siga as instruções enviadas no seu email para redefinir sua senha"));
+
+        hbox.getChildren().add(btnConfirm);
+        content.setActions(hbox);
+
+        btnConfirm.setStyle("-fx-background-color: #369137; -fx-text-fill: white");
+        dialog = new JFXDialog(stackPaneLogin, content, JFXDialog.DialogTransition.CENTER);
+
+        btnConfirm.setOnAction(action -> dialog.close());
+        dialog.show();
     }
 }

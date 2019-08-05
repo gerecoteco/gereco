@@ -31,7 +31,7 @@
             <Font size="14.0" />
          </font>
       </JFXButton>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="181.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="181.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#loadDeleteDialog" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <image>
             <Image url="@../../img/trash-icon.png" />
          </image>
