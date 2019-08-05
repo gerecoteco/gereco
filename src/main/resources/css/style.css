@@ -58,9 +58,9 @@
 }
 
 /* EVENT PAGE */
-.event_page JFXTextField, JFXPasswordField, JFXComboBox:focused {
+.event_page JFXTextField, JFXComboBox:focused {
     -jfx-focus-color: #369137;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 /* MATCH FORM */
