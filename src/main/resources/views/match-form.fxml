@@ -30,7 +30,6 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -38,20 +37,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Pontos próprios" GridPane.columnIndex="1" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Pontos contra" GridPane.columnIndex="2" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Saldo" GridPane.columnIndex="3" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Pontuação" GridPane.columnIndex="1" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Saldo" GridPane.columnIndex="2" />
                   <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="&lt;TIME 1&gt;" GridPane.rowIndex="1" />
                   <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="&lt;TIME 2&gt;" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Penalidades" GridPane.columnIndex="4" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Penalidades" GridPane.columnIndex="3" />
                   <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXTextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <JFXTextField GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <JFXTextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <JFXTextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="&lt;BALANCE&gt;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="&lt;BALANCE&gt;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <JFXTextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <JFXTextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="&lt;BALANCE&gt;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="&lt;BALANCE&gt;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
