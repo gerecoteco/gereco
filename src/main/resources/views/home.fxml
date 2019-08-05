@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="home" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
@@ -48,9 +49,12 @@
          </padding>
       </AnchorPane>
       <ScrollPane fx:id="scrollHome" fitToWidth="true" layoutX="150.0" layoutY="50.0" prefHeight="550.0" prefWidth="650.0" styleClass="main_pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
-         <padding>
-            <Insets bottom="15.0" top="15.0" />
-         </padding>
+         <content>
+            <StackPane fx:id="stackPaneMain" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="200.0">
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding></StackPane>
+         </content>
       </ScrollPane>
    </children>
    <stylesheets>

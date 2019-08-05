@@ -71,7 +71,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="5.0" />
                </padding>
             </HBox>
-            <AnchorPane>
+            <AnchorPane fx:id="paneManager">
                <children>
                   <TabPane prefHeight="593.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
@@ -79,7 +79,7 @@
                         <content>
                           <AnchorPane minWidth="1280.0">
                                  <children>
-                                    <AnchorPane layoutX="100.0" layoutY="40.0" prefHeight="195.0" prefWidth="679.0" style="-fx-border-color: #666;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                                    <AnchorPane layoutX="100.0" layoutY="40.0" prefHeight="195.0" prefWidth="679.0" style="-fx-border-color: #666;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <Label layoutX="76.0" layoutY="14.0" text="Times participantes do(a)" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
@@ -162,7 +162,7 @@
                                           <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                        </padding>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="100.0" layoutY="282.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane layoutX="100.0" layoutY="282.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                                        <children>
                                           <JFXTreeTableView fixedCellSize="30.0" layoutY="40.0" prefHeight="230.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                              <columns>
@@ -180,7 +180,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <JFXButton layoutX="14.0" layoutY="17.0" prefWidth="157.0" styleClass="btnEvent" text="Agrupar" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <JFXButton layoutX="14.0" layoutY="17.0" onAction="#loadGroupDialog" prefWidth="157.0" styleClass="btnEvent" text="Agrupar times" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane layoutX="780.0" layoutY="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -192,7 +192,7 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="lblModalityAndGender3">
+                                                <Label fx:id="lblModalityAndGender2">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -267,12 +267,7 @@
                                        <children>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="15.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
                                              <children>
-                                                <Label alignment="CENTER" text="Classificação Geral do(a) ">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="lblModalityAndGender2">
+                                                <Label alignment="CENTER" text="Classificação Geral ">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>

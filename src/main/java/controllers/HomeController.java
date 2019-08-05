@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Institution;
@@ -17,8 +18,9 @@ import java.net.URL;
 public class HomeController {
     public Label lblInstitutionInfo;
     public ScrollPane scrollHome;
+    public StackPane stackPaneMain;
 
-    private static ScrollPane staticScrollHome;
+    static StackPane staticStackPaneMain;
     private URL eventListURL;
 
     @FXML
@@ -27,7 +29,7 @@ public class HomeController {
         lblInstitutionInfo.setText(institutionLogged.getName() + " |  " + institutionLogged.getEmail());
         eventListURL = getClass().getResource("/views/event-list.fxml");
 
-        staticScrollHome = scrollHome;
+        staticStackPaneMain = stackPaneMain;
         loadView(eventListURL);
     }
 
@@ -71,7 +73,8 @@ public class HomeController {
 
     static void loadView(URL viewURL){
         try{
-            staticScrollHome.setContent(FXMLLoader.load(viewURL));
+            staticStackPaneMain.getChildren().clear();
+            staticStackPaneMain.getChildren().add(FXMLLoader.load(viewURL));
         } catch (IOException e) {
             e.printStackTrace();
         }
