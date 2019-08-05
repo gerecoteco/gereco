@@ -23,8 +23,9 @@ public class EventListController {
 
     private List<List<Event>> eventPages;
     private int numberOfPages;
-    private List<Event> institutionEvents;
     private int pageIndex;
+
+    static List<Event> institutionEvents;
     static Event event;
 
     @FXML

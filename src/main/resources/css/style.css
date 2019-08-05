@@ -1,3 +1,4 @@
+/* TOP PANE */
 .top_pane {
     -fx-background-color: #369137;
 }
@@ -6,25 +7,23 @@
     -fx-text-fill: white;
 }
 
+/* EVENT ITEM */
 .event_item {
     -fx-background-color: #fff;
     -fx-border-color: #ddd;
 }
 
+/* MAIN PANE */
 .main_pane {
     -fx-background: #f5f5f5;
     -fx-border-color: #f5f5f5;
 }
 
-.main_pane Label, Text, Button{
+.main_pane Label, Text, Button {
     -fx-text-fill: #666;
 }
 
-.btnEvent {
-    -fx-background-color: #369137;
-    -fx-text-fill: white;
-}
-
+/* INITIAL */
 .initial Label, Text, JFXTextField, JFXPasswordField, JFXButton {
     -fx-text-fill: white;
 }
@@ -34,10 +33,54 @@
     -fx-background-size: cover;
 }
 
-.btnNav {
-    -fx-background-color: transparent;
-}
-
 .initial JFXButton {
     -fx-background-color: #369137;
+}
+
+.initial JFXTextField, JFXPasswordField, JFXComboBox:focused {
+    -jfx-focus-color: #45de47;
+    -fx-text-fill: white;
+}
+
+/* EVENT CREATE */
+.event_create {
+    -fx-text-fill: #666;
+}
+
+.event_create JFXTextField, JFXComboBox:focused  {
+    -jfx-focus-color: #369137;
+    -fx-text-fill: #666;
+}
+
+.event_create JFXToggleNode:selected {
+    -fx-background-color: #45de47;
+    -fx-text-fill: white;
+}
+
+/* EVENT PAGE */
+.event_page JFXTextField, JFXComboBox:focused {
+    -jfx-focus-color: #369137;
+    -fx-text-fill: black;
+}
+
+/* MATCH FORM */
+.match_form JFXTextField, JFXComboBox:focused {
+    -jfx-focus-color: #369137;
+    -fx-text-fill: black;
+}
+
+/* CONFIG */
+.config JFXPasswordField, JFXTextField, JFXComboBox:focused {
+    -jfx-focus-color: #369137;
+    -fx-text-fill: black;
+}
+
+/* OTHERS */
+.btnEvent {
+    -fx-background-color: #369137;
+    -fx-text-fill: white;
+}
+
+.btnNav {
+    -fx-background-color: transparent;
 }
