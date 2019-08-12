@@ -82,7 +82,7 @@ public class EventPageController {
     @FXML
     protected void openMatchFormView(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/match-form.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/external-forms/match-form.fxml")));
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);

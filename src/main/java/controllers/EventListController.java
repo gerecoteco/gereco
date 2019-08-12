@@ -96,7 +96,7 @@ public class EventListController {
 
     private void addNewEventItem(int eventCount){
         try{
-            AnchorPane eventItem = FXMLLoader.load(getClass().getResource("/views/partials/event-item.fxml"));
+            AnchorPane eventItem = FXMLLoader.load(getClass().getResource("/views/home/partials/event-item.fxml"));
             gridEvents.add(eventItem, eventCount % 3,eventCount / 3);
         } catch (Exception e){ e.printStackTrace(); }
     }
@@ -104,7 +104,7 @@ public class EventListController {
     @FXML
     protected void openEventCreateView(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/event-create.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/external-forms/event-create.fxml")));
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);

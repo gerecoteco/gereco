@@ -65,7 +65,7 @@ public class InitialController implements Initializable {
         maximizeView();
 
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/home.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/home/home.fxml")));
 
             Main.mainStage .setScene(scene);
             Main.mainStage .setResizable(true);

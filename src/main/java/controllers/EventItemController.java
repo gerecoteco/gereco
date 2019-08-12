@@ -29,7 +29,7 @@ public class EventItemController {
     @FXML
     protected void openEventPageView(){
         eventName = lblEventName.getText();
-        URL eventPageURL = getClass().getResource("/views/event-page.fxml");
+        URL eventPageURL = getClass().getResource("/views/home/event-page.fxml");
         HomeController.loadView(eventPageURL);
     }
 

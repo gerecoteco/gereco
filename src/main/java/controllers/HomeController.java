@@ -27,7 +27,7 @@ public class HomeController {
     public void initialize() {
         Institution institutionLogged = Session.getInstance().getInstitution();
         lblInstitutionInfo.setText(institutionLogged.getName() + " |  " + institutionLogged.getEmail());
-        eventListURL = getClass().getResource("/views/event-list.fxml");
+        eventListURL = getClass().getResource("/views/home/event-list.fxml");
 
         staticStackPaneMain = stackPaneMain;
         loadView(eventListURL);
@@ -41,7 +41,7 @@ public class HomeController {
     @FXML
     protected void openConfigView(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/config.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/external-forms/institution-config.fxml")));
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);

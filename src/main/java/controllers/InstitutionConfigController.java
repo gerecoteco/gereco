@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import models.Institution;
 
-public class ConfigController {
+public class InstitutionConfigController {
     public Label lblInstitutionName;
 
     @FXML
