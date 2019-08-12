@@ -13,6 +13,14 @@
     -fx-border-color: #ddd;
 }
 
+.trash-icon {
+    -fx-image: url("../img/trash-icon.png");
+}
+
+.trash-icon:hover {
+    -fx-image: url("../img/trash-open-icon.png");
+}
+
 /* MAIN PANE */
 .main_pane {
     -fx-background: #f5f5f5;

@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXComboBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class EventCreateController {
@@ -17,8 +19,8 @@ public class EventCreateController {
     }
 
     @FXML
-    protected void appendModalitiesOnComboBox(){
-        if(!chipModalities.getChips().isEmpty())
+    protected void appendModalitiesOnComboBox(KeyEvent e){
+        if(e.getCode() == KeyCode.ENTER)
             cbxModalities.setItems(chipModalities.getChips());
     }
 
