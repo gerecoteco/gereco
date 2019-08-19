@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane fx:id="stackPaneLogin" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InitialController">
+<StackPane fx:id="stackPaneLogin" stylesheets="@../css/initial.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InitialController">
    <children>
-      <AnchorPane id="initial-background" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="480.0" prefWidth="800.0" styleClass="initial" stylesheets="@../css/style.css">
+      <AnchorPane id="initial-background" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="480.0" prefWidth="800.0" styleClass="initial">
          <children>
             <AnchorPane minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="480.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>

@@ -1,0 +1,10 @@
+/* CONFIG */
+.config JFXPasswordField, JFXTextField, JFXComboBox {
+    -jfx-focus-color: #369137;
+    -fx-text-fill: black;
+}
+
+JFXButton {
+    -fx-background-color: #369137;
+    -fx-text-fill: white;
+}

@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -21,6 +22,7 @@ import models.Team;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class EventPageController {
     public Label lblEventName;
@@ -50,12 +52,15 @@ public class EventPageController {
     }
 
     private void setOnActionToTeamsButtons(){
-        for(Node nodeTeam : gridTeams.getChildren()){
-            if(nodeTeam.getClass().getTypeName().equals(JFXToggleNode.class.getTypeName())){
-                JFXToggleNode btnTeam = (JFXToggleNode) nodeTeam;
-                btnTeam.setOnAction(this::editTeam);
-            }
-        }
+        Stream<Node> toggleNodeTeams = gridTeams.getChildren().stream().filter(node ->
+                node.getClass().getTypeName().equals(JFXToggleNode.class.getTypeName()));
+
+        toggleNodeTeams.forEach(nodeTeam -> {
+            JFXToggleNode btnTeam = (JFXToggleNode) nodeTeam;
+            btnTeam.setOnAction(this::editTeam);
+            btnTeam.getStyleClass().add("team_hover");
+            btnTeam.setCursor(Cursor.HAND);
+        });
     }
 
     @FXML
@@ -82,7 +87,8 @@ public class EventPageController {
     @FXML
     protected void openMatchFormView(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/external-forms/match-form.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(
+                    "/views/external-forms/match-form.fxml")));
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
@@ -100,6 +106,7 @@ public class EventPageController {
             Team teamFound = findTeamByName();
             teams.remove(teamFound);
             getSelectedTeam().setText("");
+            getSelectedTeam().getStyleClass().add("team_hover");
             clearTextFields();
         }
     }
@@ -114,6 +121,7 @@ public class EventPageController {
             createTeam();
 
         getSelectedTeam().setText(txtTeamName.getText());
+        getSelectedTeam().getStyleClass().clear();
         listTeams();
     }
 
@@ -140,10 +148,9 @@ public class EventPageController {
     }
 
     private Team findTeamByName(){
-        if(teamGroup.getSelectedToggle() != null){
+        if(teamGroup.getSelectedToggle() != null)
             return teams.stream().filter(team ->
                     team.getName().equals(getSelectedTeam().getText())).findFirst().orElse(null);
-        }
         return null;
     }
 
@@ -175,7 +182,7 @@ public class EventPageController {
 
         content.setHeading(new Label("Agrupar times"));
         content.setBody(new Text("Tem certeza que deseja agrupar os times de " + modalityAndGender + "?" +
-                "\n(você não poderá mais alterar os times de " +modalityAndGender + ")"));
+                "\n(você não poderá mais alterar os times de " + modalityAndGender + ")"));
 
         hbox.getChildren().add(btnCancel);
         hbox.getChildren().add(btnConfirm);
