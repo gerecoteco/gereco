@@ -1,0 +1,22 @@
+/* EVENT PAGE */
+.event_page JFXTextField, JFXComboBox:focused {
+    -jfx-focus-color: #369137;
+    -fx-text-fill: black;
+}
+
+.event_page JFXToggleNode:selected {
+    -fx-background-color: #45de47;
+    -fx-text-fill: white;
+}
+
+.team_hover:hover {
+    -fx-background-image: url("../img/plus.png");
+    -fx-background-color: #369137;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+JFXButton {
+    -fx-background-color: #369137;
+    -fx-text-fill: white;
+}

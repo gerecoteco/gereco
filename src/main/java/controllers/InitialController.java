@@ -2,6 +2,7 @@ package controllers;
 
 import application.Main;
 import com.jfoenix.controls.*;
+import helpers.DialogBuilder;
 import helpers.InstitutionAuth;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -88,21 +89,12 @@ public class InitialController implements Initializable {
 
     @FXML
     protected void loadForgotPasswordDialog(){
-        JFXDialogLayout content = new JFXDialogLayout();
-        HBox hbox = new HBox(5);
-        JFXDialog dialog;
-
         JFXButton btnConfirm = new JFXButton("Ok");
+        String heading = "Redefinir senha";
+        String body = "Siga as instruções enviadas no seu email para redefinir sua senha";
+        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, btnConfirm, stackPaneLogin);
 
-        content.setHeading(new Label("Redefinir senha"));
-        content.setBody(new Text("Siga as instruções enviadas no seu email para redefinir sua senha"));
-
-        hbox.getChildren().add(btnConfirm);
-        content.setActions(hbox);
-
-        btnConfirm.setStyle("-fx-background-color: #369137; -fx-text-fill: white");
-        dialog = new JFXDialog(stackPaneLogin, content, JFXDialog.DialogTransition.CENTER);
-
+        JFXDialog dialog = dialogBuilder.createDialogAndReturn();
         btnConfirm.setOnAction(action -> dialog.close());
         dialog.show();
     }
