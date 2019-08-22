@@ -1,19 +1,17 @@
 package services;
 
+import application.Session;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.reflect.TypeToken;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Updates;
 import helpers.EventFilesManager;
 import models.Event;
+import models.Institution;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,6 +29,7 @@ public class EventService {
         eventsId.forEach(eventId ->
                 institutionEvents.add(new Gson().fromJson(requestOneEvent(eventId), Event.class)));
 
+        Collections.reverse(institutionEvents);
         return institutionEvents;
     }
 
@@ -49,12 +48,22 @@ public class EventService {
         eventsCollection.replaceOne(eq("_id", new ObjectId(eventId)), Document.parse(eventJson));
     }
 
-    public void insertEventInCollection(String eventJson, String institutionId){
+    public void insertEventInCollection(String eventJson, String institutionEmail){
         Document newEvent = Document.parse(eventJson);
         eventsCollection.insertOne(newEvent);
         String newEventId = Objects.requireNonNull(eventsCollection.find(newEvent).first()).get("_id").toString();
 
-        institutionCollection.updateOne(eq("_id", new ObjectId(institutionId)),
+        institutionCollection.updateOne(eq("email", institutionEmail),
                 Updates.addToSet("events_id", newEventId));
+
+        updateSessionInstitution();
+    }
+
+    private void updateSessionInstitution(){
+        InstitutionService institutionService = new InstitutionService();
+        String institutionEmail = Session.getInstance().getInstitution().getEmail();
+
+        Institution updatedInstitution = institutionService.findByEmail(institutionEmail);
+        Session.getInstance().setInstitution(updatedInstitution);
     }
 }

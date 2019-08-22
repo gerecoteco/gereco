@@ -1,14 +1,15 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Modality {
     private String name;
     private List<Gender> genders;
 
-    public Modality(String name, List<Gender> genders) {
+    public Modality(String name) {
         this.name = name;
-        this.genders = genders;
+        this.genders = new ArrayList<>();
     }
 
     public String getName() {

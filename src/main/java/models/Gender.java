@@ -1,18 +1,27 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Gender {
+    private String name;
     private List<Team> teams;
     private List<Match> matches;
     private List<List<String>> groups;
 
-    public Gender(List<Team> teams, List<Match> matches, List<List<String>> groups) {
-        this.teams = teams;
-        this.matches = matches;
-        this.groups = groups;
+    public Gender(String name) {
+        this.name = name;
+        this.teams = new ArrayList<>();
+        this.matches = new ArrayList<>();
+        this.groups = new ArrayList<>();
     }
 
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
     public List<Team> getTeams() {
         return teams;
     }

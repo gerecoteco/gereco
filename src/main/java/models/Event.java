@@ -1,10 +1,15 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Event {
     private String name;
     private List<Modality> modalities;
+
+    public Event(){
+        this("", new ArrayList<>());
+    }
 
     public Event(String name, List<Modality> modalities) {
         this.name = name;

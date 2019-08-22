@@ -17,7 +17,7 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <JFXTextField layoutX="116.0" layoutY="26.0" prefHeight="27.0" prefWidth="250.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0" />
+      <JFXTextField fx:id="txtName" layoutX="116.0" layoutY="26.0" prefHeight="27.0" prefWidth="250.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0" />
       <Label layoutX="319.0" layoutY="70.0" text="Modalidades" AnchorPane.leftAnchor="0.0">
          <font>
             <Font size="14.0" />
@@ -26,26 +26,27 @@
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding></JFXChipView>
-      <Label alignment="CENTER" layoutX="17.0" layoutY="200.0" text="Selecione uma modalidade" AnchorPane.leftAnchor="0.0">
+      <Label alignment="CENTER" layoutX="17.0" layoutY="200.0" text="Selecione uma modalidade" AnchorPane.rightAnchor="200.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cbxModalities" layoutX="238.0" layoutY="196.0" prefHeight="27.0" prefWidth="190.0" AnchorPane.leftAnchor="185.0" />
-      <HBox alignment="CENTER" layoutX="208.0" layoutY="245.0" prefHeight="30.0" prefWidth="300.0" spacing="20.0" AnchorPane.leftAnchor="170.0">
+      <JFXComboBox fx:id="cbxModalities" layoutX="284.0" layoutY="196.0" onAction="#changeModality" prefHeight="27.0" prefWidth="190.0" AnchorPane.rightAnchor="0.0" />
+      <HBox fx:id="paneGenders" alignment="CENTER" layoutX="208.0" layoutY="245.0" prefHeight="30.0" prefWidth="300.0" spacing="20.0" AnchorPane.leftAnchor="170.0">
          <children>
-            <JFXCheckBox text="Masculino" />
-            <JFXCheckBox text="Feminino" />
-            <JFXCheckBox text="Misto" />
+            <JFXCheckBox fx:id="chbMale" onAction="#genderChecked" text="Masculino" />
+            <JFXCheckBox fx:id="chbFemale" onAction="#genderChecked" text="Feminino" />
+            <JFXCheckBox fx:id="chbMixed" onAction="#genderChecked" text="Misto" />
          </children>
       </HBox>
       <JFXButton layoutX="371.0" layoutY="538.0" onAction="#cancelEventCreation" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Cancelar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
-      <JFXButton layoutX="491.0" layoutY="539.0" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Criar evento" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <JFXButton layoutX="491.0" layoutY="539.0" onAction="#saveEvent" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Criar evento" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Label alignment="CENTER" layoutX="20.0" layoutY="251.0" text="Gêneros participantes" AnchorPane.leftAnchor="0.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <JFXButton layoutX="12.0" layoutY="196.0" onAction="#appendModalities" text="Salvar" AnchorPane.leftAnchor="0.0" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
