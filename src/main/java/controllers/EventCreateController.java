@@ -1,6 +1,5 @@
 package controllers;
 
-import application.Session;
 import com.google.gson.Gson;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
@@ -101,7 +100,7 @@ public class EventCreateController {
     protected void saveEvent(ActionEvent event){
         newEvent.setName(txtName.getText());
         String eventJson = new Gson().toJson(newEvent);
-        eventService.insertEventInCollection(eventJson, Session.getInstance().getInstitution().getEmail());
+        eventService.insertEventInCollection(eventJson);
 
         HomeController.loadView(getClass().getResource("/views/home/event-list.fxml"));
         getActualStage(event).close();

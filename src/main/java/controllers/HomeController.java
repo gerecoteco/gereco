@@ -34,7 +34,7 @@ public class HomeController {
     }
 
     @FXML
-    protected void openEventListView(){
+    protected void loadHome(){
         loadView(eventListURL);
     }
 
@@ -62,10 +62,10 @@ public class HomeController {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/initial.fxml")));
 
-            Main.mainStage .setScene(scene);
-            Main.mainStage .setResizable(false);
-            Main.mainStage .centerOnScreen();
-            Main.mainStage .show();
+            Main.mainStage.setScene(scene);
+            Main.mainStage.setResizable(false);
+            Main.mainStage.centerOnScreen();
+            Main.mainStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

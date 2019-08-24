@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Event {
+    private String id;
     private String name;
     private List<Modality> modalities;
 
@@ -27,5 +28,11 @@ public class Event {
     }
     public void setModalities(List<Modality> modalities) {
         this.modalities = modalities;
+    }
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 }
