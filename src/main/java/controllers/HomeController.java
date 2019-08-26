@@ -21,16 +21,23 @@ public class HomeController {
     public StackPane stackPaneMain;
 
     static StackPane staticStackPaneMain;
+    private static Label staticLblInstitutionInfo;
     private URL eventListURL;
 
     @FXML
     public void initialize() {
-        Institution institutionLogged = Session.getInstance().getInstitution();
-        lblInstitutionInfo.setText(institutionLogged.getName() + " |  " + institutionLogged.getEmail());
         eventListURL = getClass().getResource("/views/home/event-list.fxml");
 
         staticStackPaneMain = stackPaneMain;
+        staticLblInstitutionInfo = lblInstitutionInfo;
+
+        loadInstitutionInfoOnLabel();
         loadView(eventListURL);
+    }
+
+    static void loadInstitutionInfoOnLabel(){
+        Institution institutionLogged = Session.getInstance().getInstitution();
+        staticLblInstitutionInfo.setText(institutionLogged.getName() + " |  " + institutionLogged.getEmail());
     }
 
     @FXML

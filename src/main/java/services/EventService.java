@@ -16,6 +16,7 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class EventService {
     private MongoConnection mongoConnection = new MongoConnection();
+    private InstitutionService institutionService = new InstitutionService();
     private MongoCollection<Document> eventsCollection = mongoConnection.getCollection("events");
     private MongoCollection<Document> institutionCollection = mongoConnection.getCollection(
             "institutions");
@@ -56,7 +57,7 @@ public class EventService {
         institutionCollection.updateOne(eq("email", Session.getInstance().getInstitution().getEmail()),
                 Updates.addToSet("events_id", newEventId));
 
-        updateSessionInstitution();
+        institutionService.updateSessionInstitution();
     }
 
     public void deleteEvent(String eventId){
@@ -64,14 +65,6 @@ public class EventService {
         institutionCollection.updateOne(eq("email", Session.getInstance().getInstitution().getEmail()),
                 Updates.pull("events_id", eventId));
 
-        updateSessionInstitution();
-    }
-
-    private void updateSessionInstitution(){
-        InstitutionService institutionService = new InstitutionService();
-        String institutionEmail = Session.getInstance().getInstitution().getEmail();
-
-        Institution updatedInstitution = institutionService.findByEmail(institutionEmail);
-        Session.getInstance().setInstitution(updatedInstitution);
+        institutionService.updateSessionInstitution();
     }
 }
