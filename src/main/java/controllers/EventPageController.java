@@ -40,7 +40,7 @@ public class EventPageController {
     @FXML
     public void initialize() {
         teams = new ArrayList<>();
-        event = findEventByName();
+        event = findEventById();
         lblEventName.setText(event.getName());
         genderGroup.selectToggle(genderGroup.getToggles().get(0));
 
@@ -131,9 +131,9 @@ public class EventPageController {
         teams.add(new Team(txtTeamName.getText(), txtTeamTag.getText()));
     }
 
-    private Event findEventByName(){
+    private Event findEventById(){
         return EventListController.institutionEvents.stream().filter(
-                event -> event.getName().equals(EventItemController.eventName)).findFirst().orElse(null);
+                event -> event.getId().equals(EventItemController.eventId)).findFirst().orElse(null);
     }
 
     private void appendModalitiesInComboBox(){

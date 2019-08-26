@@ -10,10 +10,7 @@ import models.Institution;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -26,14 +23,17 @@ public class EventService {
     public List<Event> requestAllEventsOfInstitution(List<String> eventsId){
         List<Event> institutionEvents = new ArrayList<>();
 
-        eventsId.forEach(eventId ->
-                institutionEvents.add(new Gson().fromJson(requestOneEvent(eventId), Event.class)));
+        eventsId.forEach(eventId -> {
+            Event requestedEvent = new Gson().fromJson(requestOneEvent(eventId), Event.class);
+            requestedEvent.setId(eventId);
+            institutionEvents.add(requestedEvent);
+        });
 
         Collections.reverse(institutionEvents);
         return institutionEvents;
     }
 
-    public String requestOneEvent(String eventId){
+    private String requestOneEvent(String eventId){
         return Objects.requireNonNull(eventsCollection.find(eq("_id",
                 new ObjectId(eventId))).first()).toJson();
     }
@@ -48,13 +48,21 @@ public class EventService {
         eventsCollection.replaceOne(eq("_id", new ObjectId(eventId)), Document.parse(eventJson));
     }
 
-    public void insertEventInCollection(String eventJson, String institutionEmail){
+    public void insertEventInCollection(String eventJson){
         Document newEvent = Document.parse(eventJson);
         eventsCollection.insertOne(newEvent);
         String newEventId = Objects.requireNonNull(eventsCollection.find(newEvent).first()).get("_id").toString();
 
-        institutionCollection.updateOne(eq("email", institutionEmail),
+        institutionCollection.updateOne(eq("email", Session.getInstance().getInstitution().getEmail()),
                 Updates.addToSet("events_id", newEventId));
+
+        updateSessionInstitution();
+    }
+
+    public void deleteEvent(String eventId){
+        eventsCollection.deleteOne(eq("_id", new ObjectId(eventId)));
+        institutionCollection.updateOne(eq("email", Session.getInstance().getInstitution().getEmail()),
+                Updates.pull("events_id", eventId));
 
         updateSessionInstitution();
     }

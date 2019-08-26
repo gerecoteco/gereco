@@ -6,6 +6,7 @@ import helpers.DialogBuilder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import models.Modality;
+import services.EventService;
 
 import java.net.URL;
 import java.util.List;
@@ -13,33 +14,44 @@ import java.util.List;
 public class EventItemController {
     public Label lblEventName;
     public Label lblModalities;
+    public Label lblEventId;
 
-    static String eventName;
+    static String eventId;
 
     @FXML
     public void initialize() {
+        lblEventId.setText(EventListController.event.getId());
         lblEventName.setText(EventListController.event.getName());
         listAllModalities();
     }
 
     @FXML
     protected void openEventPageView(){
-        eventName = lblEventName.getText();
+        eventId = lblEventId.getText();
         URL eventPageURL = getClass().getResource("/views/home/event-page.fxml");
         HomeController.loadView(eventPageURL);
     }
 
     @FXML
     protected void loadDeleteDialog(){
-        eventName = lblEventName.getText();
+        eventId = lblEventId.getText();
         JFXButton btnConfirm = new JFXButton("Sim");
         String heading = "Excluir evento";
-        String body = "Tem certeza que deseja excluir o evento " + eventName + "?";
+        String body = "Tem certeza que deseja excluir o evento " + lblEventName.getText() + "?";
         DialogBuilder dialogBuilder = new DialogBuilder(heading, body, btnConfirm, HomeController.staticStackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
-        btnConfirm.setOnAction(action -> dialog.close());
+        btnConfirm.setOnAction(action -> {
+            deleteEvent();
+            dialog.close();
+        });
         dialog.show();
+    }
+
+    private void deleteEvent(){
+        EventService eventService = new EventService();
+        eventService.deleteEvent(lblEventId.getText());
+        HomeController.loadView(getClass().getResource("/views/home/event-list.fxml"));
     }
 
     private void listAllModalities() {
