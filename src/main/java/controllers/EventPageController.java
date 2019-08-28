@@ -194,14 +194,13 @@ public class EventPageController {
 
     @FXML
     private void loadGroupDialog(){
-        JFXButton btnConfirm = new JFXButton("Confirmar");
         String heading = "Agrupar times";
         String body = "Tem certeza que deseja agrupar os times de " + getModalityAndGender() + "?" +
                 "\n(você não poderá mais alterar os times de " + getModalityAndGender() + ")";
-        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, btnConfirm, HomeController.staticStackPaneMain);
+        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, HomeController.staticStackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
-        btnConfirm.setOnAction(action -> dialog.close());
+        dialogBuilder.setConfirmAction(action -> dialog.close());
         dialog.show();
     }
 

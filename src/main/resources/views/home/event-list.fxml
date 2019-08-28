@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,8 +14,37 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventListController">
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventListController">
    <children>
+      <HBox alignment="CENTER">
+         <children>
+            <AnchorPane>
+               <children>
+                  <AnchorPane layoutX="100.0" layoutY="15.0" AnchorPane.leftAnchor="0.0">
+                     <children>
+                        <Label layoutY="4.0" text="Nome do Evento" AnchorPane.leftAnchor="0.0" />
+                        <JFXTextField layoutX="105.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="375.0" layoutY="14.0" AnchorPane.leftAnchor="270.0">
+                     <children>
+                        <Label layoutY="5.0" text="Eventos entre" AnchorPane.leftAnchor="0.0" />
+                        <JFXDatePicker layoutX="97.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" AnchorPane.leftAnchor="87.0" />
+                        <Label layoutX="10.0" layoutY="5.0" text="e" AnchorPane.leftAnchor="192.0" />
+                        <JFXDatePicker layoutX="107.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" AnchorPane.leftAnchor="209.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="592.0" layoutY="15.0" AnchorPane.leftAnchor="599.0">
+                     <children>
+                        <Label layoutY="4.0" text="Estado do Evento" />
+                        <JFXComboBox layoutX="108.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </AnchorPane>
+                  <JFXButton layoutX="932.0" layoutY="14.0" styleClass="btnEvent" text="Procurar" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="872.0" AnchorPane.topAnchor="15.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
       <HBox alignment="CENTER">
          <children>
             <GridPane fx:id="gridEvents" alignment="CENTER" hgap="30.0" prefHeight="280.0" prefWidth="1020.0" vgap="30.0">
@@ -28,11 +60,6 @@
          <children>
             <AnchorPane fx:id="panePageNav" minWidth="150.0" prefHeight="45.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button layoutX="585.0" layoutY="109.0" mnemonicParsing="false" onAction="#navigateNextPage" styleClass="btnNav" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
                   <Button layoutX="903.0" layoutY="149.0" mnemonicParsing="false" onAction="#navigatePreviousPage" styleClass="btnNav" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="18.0" />
@@ -43,6 +70,11 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Button layoutX="585.0" layoutY="109.0" mnemonicParsing="false" onAction="#navigateNextPage" styleClass="btnNav" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
                <padding>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

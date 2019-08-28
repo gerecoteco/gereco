@@ -89,13 +89,12 @@ public class InitialController implements Initializable {
 
     @FXML
     protected void loadForgotPasswordDialog(){
-        JFXButton btnConfirm = new JFXButton("Ok");
         String heading = "Redefinir senha";
         String body = "Siga as instruções enviadas no seu email para redefinir sua senha";
-        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, btnConfirm, stackPaneLogin);
+        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, stackPaneLogin);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
-        btnConfirm.setOnAction(action -> dialog.close());
+        dialogBuilder.setConfirmAction(action -> dialog.close());
         dialog.show();
     }
 }
