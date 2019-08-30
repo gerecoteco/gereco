@@ -9,104 +9,112 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="720.0" styleClass="config" stylesheets="@../../css/institution-config.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InstitutionConfigController">
+<StackPane fx:id="stackPaneMain" styleClass="config" stylesheets="@../../css/institution-config.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InstitutionConfigController">
    <children>
-    <AnchorPane layoutX="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="720.0">
          <children>
-            <AnchorPane prefHeight="36.0" prefWidth="300.0" style="-fx-background-color: #369137;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <AnchorPane layoutX="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label alignment="CENTER" text="Configurações da Conta" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
+                  <AnchorPane prefHeight="36.0" prefWidth="300.0" style="-fx-background-color: #369137;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label alignment="CENTER" text="Configurações da Conta" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="36.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+                     <children>
+                        <Label fx:id="lblInstitutionName" alignment="CENTER" layoutX="151.0" layoutY="14.0" text="&lt;NAME&gt;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" text="Novo Nome" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="txtInstitutionName" layoutX="156.0" layoutY="62.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0" />
+                        <JFXButton layoutX="158.0" layoutY="107.0" onAction="#updateName" text="Salvar Nome" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <Separator layoutX="14.0" layoutY="153.0" prefWidth="3.0" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0" />
+                        <Label alignment="TOP_LEFT" layoutX="-8.0" layoutY="160.0" text="Senha Atual" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="140.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="191.0" text="Nova Senha" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="180.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_LEFT" layoutX="24.0" layoutY="201.0" text="Confirmar Nova Senha" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="220.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXButton layoutX="182.0" layoutY="271.0" onAction="#updatePassword" styleClass="btnEvent" text="Salvar Senha" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="260.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXPasswordField fx:id="txtNewPassword" layoutX="186.0" layoutY="200.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="172.0" />
+                        <JFXPasswordField fx:id="txtConfirmPassword" layoutX="186.0" layoutY="240.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="212.0" />
+                        <JFXPasswordField fx:id="txtActualPassword" layoutX="186.0" layoutY="160.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="132.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                     </padding>
+                  </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="36.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+            <Separator orientation="VERTICAL" prefWidth="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="36.0" />
+          <AnchorPane layoutX="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="lblInstitutionName" alignment="CENTER" layoutX="151.0" layoutY="14.0" text="&lt;NAME&gt;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" text="Novo Nome" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <JFXTextField layoutX="156.0" layoutY="62.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0" />
-                  <JFXButton layoutX="158.0" layoutY="107.0" styleClass="btnEvent" text="Salvar Nome" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <Separator layoutX="14.0" layoutY="153.0" prefWidth="3.0" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0" />
-                  <Label alignment="TOP_LEFT" layoutX="-8.0" layoutY="160.0" text="Senha Atual" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="140.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="191.0" text="Nova Senha" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="180.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="TOP_LEFT" layoutX="24.0" layoutY="201.0" text="Confirmar Nova Senha" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="220.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <JFXButton layoutX="182.0" layoutY="271.0" styleClass="btnEvent" text="Salvar Senha" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="260.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXPasswordField layoutX="186.0" layoutY="200.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="172.0" />
-                  <JFXPasswordField layoutX="186.0" layoutY="240.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="212.0" />
-                  <JFXPasswordField layoutX="186.0" layoutY="160.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="132.0" />
+                  <AnchorPane prefHeight="36.0" prefWidth="300.0" style="-fx-background-color: #369137;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label alignment="CENTER" text="Configurações de Segurança" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <VBox alignment="CENTER" spacing="18.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="36.0">
+                     <children>
+                        <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../img/backup-up.png" />
+                           </image>
+                        </ImageView>
+                        <JFXButton styleClass="btnEvent" text="Enviar Backup" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="18.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+                     <children>
+                        <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../img/backup-down.png" />
+                           </image>
+                        </ImageView>
+                        <JFXButton styleClass="btnEvent" text="Baixar Backup" />
+                     </children>
+                  </VBox>
                </children>
-               <padding>
-                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
-               </padding>
             </AnchorPane>
          </children>
-      </AnchorPane>
-      <Separator orientation="VERTICAL" prefWidth="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="36.0" />
-    <AnchorPane layoutX="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane prefHeight="36.0" prefWidth="300.0" style="-fx-background-color: #369137;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label alignment="CENTER" text="Configurações de Segurança" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <VBox alignment="CENTER" spacing="18.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="36.0">
-               <children>
-                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../img/backup-up.png" />
-                     </image>
-                  </ImageView>
-                  <JFXButton styleClass="btnEvent" text="Enviar Backup" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="18.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
-               <children>
-                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../img/backup-down.png" />
-                     </image>
-                  </ImageView>
-                  <JFXButton styleClass="btnEvent" text="Baixar Backup" />
-               </children>
-            </VBox>
-         </children>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
       </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

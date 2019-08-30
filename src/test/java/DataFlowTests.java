@@ -26,7 +26,7 @@ public class DataFlowTests {
 
     @Test
     public void insertNewEvent(){
-        eventService.insertEventInCollection(readAndReturnJson("event"), "5d2cfa783ebf7429754f7116");
+        eventService.insertEventInCollection(readAndReturnJson("event"));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class DataFlowTests {
     @Test
     public void updateInstitution(){
         institutionService.updateInstitution(new Gson().fromJson(readAndReturnJson("institution"),
-                Institution.class), "5d2cf92efa8a5f7beaa5c2b0");
+                Institution.class));
     }
 
     private String readAndReturnJson(String path){

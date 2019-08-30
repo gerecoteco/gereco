@@ -13,7 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Modality;
+import javafx.scene.layout.HBox;
+import models.Modality;
 import javafx.stage.Stage;
 import models.Event;
 import models.Team;
@@ -29,6 +30,7 @@ public class EventPageController {
     public GridPane gridTeams;
     public ToggleGroup teamGroup;
     public ToggleGroup genderGroup;
+    public HBox paneGenders;
     public JFXTextField txtTeamName;
     public JFXTextField txtTeamTag;
     public AnchorPane paneManager;
@@ -40,13 +42,39 @@ public class EventPageController {
     @FXML
     public void initialize() {
         teams = new ArrayList<>();
+        genderGroup = new ToggleGroup();
         event = findEventById();
         lblEventName.setText(event.getName());
-        genderGroup.selectToggle(genderGroup.getToggles().get(0));
 
         appendModalitiesInComboBox();
         cbxModalities.setValue(cbxModalities.getItems().get(0));
+        generateGenderToggles();
+        genderGroup.selectToggle(genderGroup.getToggles().get(0));
+        changeModalityAndGender();
+
         setOnActionToTeamsButtons();
+    }
+
+    private void generateGenderToggles(){
+        getSelectedModality().getGenders().forEach(gender -> {
+            JFXRadioButton rdbGender = new JFXRadioButton(gender.getName());
+            rdbGender.setOnAction(e -> changeModalityAndGender());
+            rdbGender.setToggleGroup(genderGroup);
+            paneGenders.getChildren().add(rdbGender);
+        });
+    }
+
+    private Modality getSelectedModality(){
+        return event.getModalities().stream().filter(modality ->
+                modality.getName().equals(cbxModalities.getValue().toString().toLowerCase())).findAny().orElse(null);
+    }
+
+    @FXML
+    protected void changeModality(){
+        genderGroup.getToggles().clear();
+        paneGenders.getChildren().clear();
+        generateGenderToggles();
+        genderGroup.selectToggle(genderGroup.getToggles().get(0));
         changeModalityAndGender();
     }
 
@@ -89,7 +117,7 @@ public class EventPageController {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.centerOnScreen();
-            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -166,14 +194,13 @@ public class EventPageController {
 
     @FXML
     private void loadGroupDialog(){
-        JFXButton btnConfirm = new JFXButton("Confirmar");
         String heading = "Agrupar times";
         String body = "Tem certeza que deseja agrupar os times de " + getModalityAndGender() + "?" +
                 "\n(você não poderá mais alterar os times de " + getModalityAndGender() + ")";
-        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, btnConfirm, HomeController.staticStackPaneMain);
+        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, HomeController.staticStackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
-        btnConfirm.setOnAction(action -> dialog.close());
+        dialogBuilder.setConfirmAction(action -> dialog.close());
         dialog.show();
     }
 

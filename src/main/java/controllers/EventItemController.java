@@ -35,13 +35,12 @@ public class EventItemController {
     @FXML
     protected void loadDeleteDialog(){
         eventId = lblEventId.getText();
-        JFXButton btnConfirm = new JFXButton("Sim");
         String heading = "Excluir evento";
         String body = "Tem certeza que deseja excluir o evento " + lblEventName.getText() + "?";
-        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, btnConfirm, HomeController.staticStackPaneMain);
+        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, HomeController.staticStackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
-        btnConfirm.setOnAction(action -> {
+        dialogBuilder.setConfirmAction(action -> {
             deleteEvent();
             dialog.close();
         });

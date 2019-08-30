@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
@@ -26,51 +25,46 @@
    <children>
       <VBox layoutX="103.0" layoutY="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER">
+            <AnchorPane>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" left="15.0" right="15.0" top="15.0" />
-               </padding>
                <children>
-                  <Label fx:id="lblEventName" text="&lt;NAME&gt;">
+                  <Label fx:id="lblEventName" layoutX="15.0" layoutY="26.0" text="&lt;NAME&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
-                        <Font size="18.0" />
-                     </font></Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" spacing="25.0">
-               <children>
-                  <AnchorPane prefHeight="25.0" prefWidth="390.0">
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="CENTER" layoutX="121.0" layoutY="15.0" prefHeight="45.0" prefWidth="748.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label alignment="CENTER" layoutX="34.0" layoutY="3.0" text="Selecione uma modalidade" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <JFXComboBox fx:id="cbxModalities" layoutX="192.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#changeModalityAndGender" prefHeight="25.0" prefWidth="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="192.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <HBox alignment="CENTER" spacing="25.0">
+                           <children>
+                              <AnchorPane maxHeight="1.7976931348623157E308" prefHeight="48.0" prefWidth="390.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="34.0" layoutY="3.0" text="Selecione uma modalidade" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXComboBox fx:id="cbxModalities" layoutX="192.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#changeModality" prefHeight="25.0" prefWidth="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="192.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <HBox fx:id="paneGenders" alignment="CENTER" spacing="20.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="5.0" />
+                           </padding>
+                        </HBox>
                      </children>
-                  </AnchorPane>
-                  <HBox alignment="CENTER" spacing="20.0">
-                     <children>
-                        <JFXRadioButton onAction="#changeModalityAndGender" text="Masculino">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="genderGroup" />
-                           </toggleGroup>
-                        </JFXRadioButton>
-                        <JFXRadioButton onAction="#changeModalityAndGender" text="Feminino" toggleGroup="$genderGroup" />
-                        <JFXRadioButton onAction="#changeModalityAndGender" text="Misto" toggleGroup="$genderGroup" />
-                     </children>
-                  </HBox>
+                  </VBox>
                </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
                <padding>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="5.0" />
+                  <Insets left="15.0" right="15.0" />
                </padding>
-            </HBox>
+            </AnchorPane>
             <AnchorPane fx:id="paneManager">
                <children>
                   <TabPane prefHeight="593.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
