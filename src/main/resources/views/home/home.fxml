@@ -47,7 +47,7 @@
             <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
          </padding>
       </AnchorPane>
-      <ScrollPane fx:id="scrollHome" fitToWidth="true" layoutX="150.0" layoutY="50.0" prefHeight="550.0" prefWidth="650.0" styleClass="main_pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+      <ScrollPane fx:id="scrollHome" fitToHeight="true" fitToWidth="true" layoutX="150.0" layoutY="50.0" prefHeight="550.0" prefWidth="650.0" styleClass="main_pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
          <content>
             <StackPane fx:id="stackPaneMain" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="200.0">
                <padding>

@@ -35,28 +35,21 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <VBox alignment="CENTER" layoutX="121.0" layoutY="15.0" prefHeight="45.0" prefWidth="748.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox alignment="CENTER" layoutX="121.0" layoutY="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <HBox alignment="CENTER" spacing="25.0">
                            <children>
-                              <AnchorPane maxHeight="1.7976931348623157E308" prefHeight="48.0" prefWidth="390.0">
-                                 <children>
-                                    <Label alignment="CENTER" layoutX="34.0" layoutY="3.0" text="Selecione uma modalidade" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <JFXComboBox fx:id="cbxModalities" layoutX="192.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#changeModality" prefHeight="25.0" prefWidth="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="192.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
+                              <Label alignment="CENTER" text="Selecione uma modalidade">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <JFXComboBox fx:id="cbxModalities" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#changeModality" prefHeight="25.0" prefWidth="198.0" />
                               <HBox fx:id="paneGenders" alignment="CENTER" spacing="20.0" />
                            </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="5.0" />
-                           </padding>
                         </HBox>
                      </children>
                   </VBox>
@@ -65,119 +58,123 @@
                   <Insets left="15.0" right="15.0" />
                </padding>
             </AnchorPane>
-            <AnchorPane fx:id="paneManager">
+            <AnchorPane fx:id="paneManager" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
                   <TabPane prefHeight="593.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
                       <Tab closable="false" text="Times">
                         <content>
-                          <AnchorPane minWidth="1280.0">
+                              <HBox alignment="CENTER" spacing="50.0" styleClass="tab-hbox">
                                  <children>
-                                    <AnchorPane layoutX="100.0" layoutY="40.0" prefHeight="195.0" prefWidth="679.0" style="-fx-border-color: #666;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <VBox alignment="TOP_CENTER" spacing="40.0">
                                        <children>
-                                          <Label layoutX="76.0" layoutY="14.0" text="Times participantes do(a)" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="lblModalityAndGender0" layoutX="182.0" layoutY="16.0" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="0.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <ScrollPane layoutX="15.5" layoutY="41.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
-                                             <content>
-                                                <GridPane fx:id="gridTeams" alignment="CENTER" gridLinesVisible="true" prefHeight="137.0" prefWidth="439.0">
-                                                   <columnConstraints>
-                                                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                   </columnConstraints>
-                                                   <rowConstraints>
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                   </rowConstraints>
-                                                   <children>
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                                         <toggleGroup>
-                                                            <ToggleGroup fx:id="teamGroup" />
-                                                         </toggleGroup>
-                                                      </JFXToggleNode>
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.rowIndex="3" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.rowIndex="2" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.rowIndex="1" />
-                                                      <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                   </children>
-                                                </GridPane>
-                                             </content>
-                                          </ScrollPane>
-                                          <AnchorPane layoutX="486.0" layoutY="32.0" prefHeight="139.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <AnchorPane prefHeight="195.0" prefWidth="679.0" style="-fx-border-color: #666;">
                                              <children>
-                                                <Label layoutX="5.0" layoutY="10.0" text="Nome" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
+                                                <Label layoutX="76.0" layoutY="14.0" text="Times participantes do(a)" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtTeamName" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                                <Label layoutX="10.0" layoutY="70.0" text="Tag" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="65.0">
+                                                <Label fx:id="lblModalityAndGender0" layoutX="182.0" layoutY="16.0" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtTeamTag" layoutX="14.0" layoutY="62.0" prefHeight="27.0" prefWidth="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
-                                                <JFXButton layoutX="4.0" layoutY="113.0" onAction="#saveTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Salvar time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                                <JFXButton layoutX="11.0" layoutY="156.0" onAction="#deleteTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Excluir Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                                <ScrollPane layoutX="15.5" layoutY="41.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                                                   <content>
+                                                      <GridPane fx:id="gridTeams" alignment="CENTER" gridLinesVisible="true" prefHeight="137.0" prefWidth="439.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                                               <toggleGroup>
+                                                                  <ToggleGroup fx:id="teamGroup" />
+                                                               </toggleGroup>
+                                                            </JFXToggleNode>
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="3" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="2" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.rowIndex="3" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.rowIndex="2" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.rowIndex="1" />
+                                                            <JFXToggleNode maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" toggleGroup="$teamGroup" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                         </children>
+                                                      </GridPane>
+                                                   </content>
+                                                </ScrollPane>
+                                                <AnchorPane layoutX="486.0" layoutY="32.0" prefHeight="139.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <Label layoutX="5.0" layoutY="10.0" text="Nome" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXTextField fx:id="txtTeamName" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                      <Label layoutX="10.0" layoutY="70.0" text="Tag" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="65.0">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXTextField fx:id="txtTeamTag" layoutX="14.0" layoutY="62.0" prefHeight="27.0" prefWidth="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+                                                      <JFXButton layoutX="4.0" layoutY="113.0" onAction="#saveTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Salvar time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                                      <JFXButton layoutX="11.0" layoutY="156.0" onAction="#deleteTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Excluir Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <padding>
+                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                             </padding>
+                                          </AnchorPane>
+                                          <AnchorPane>
+                                             <children>
+                                                <JFXTreeTableView fixedCellSize="30.0" layoutY="40.0" prefHeight="230.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                                   <columns>
+                                                      <TreeTableColumn minWidth="60.0" prefWidth="73.0" resizable="false" text="Posição" />
+                                                      <TreeTableColumn minWidth="85.0" prefWidth="87.0" resizable="false" text="Time" />
+                                                      <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="PP" />
+                                                      <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="PC" />
+                                                      <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="Saldo" />
+                                                      <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="Penalidades" />
+                                                   </columns>
+                                                </JFXTreeTableView>
+                                                <JFXComboBox layoutX="442.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Label alignment="CENTER" layoutX="304.0" layoutY="13.0" text="Selecione um grupo" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="5.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXButton layoutX="14.0" layoutY="17.0" onAction="#loadGroupDialog" prefWidth="157.0" styleClass="btnEvent" text="Agrupar times" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <padding>
-                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                       </padding>
-                                    </AnchorPane>
-                                    <AnchorPane layoutX="100.0" layoutY="282.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
-                                       <children>
-                                          <JFXTreeTableView fixedCellSize="30.0" layoutY="40.0" prefHeight="230.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-                                             <columns>
-                                                <TreeTableColumn minWidth="60.0" prefWidth="73.0" resizable="false" text="Posição" />
-                                                <TreeTableColumn minWidth="85.0" prefWidth="87.0" resizable="false" text="Time" />
-                                                <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="PP" />
-                                                <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="PC" />
-                                                <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="Saldo" />
-                                                <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="Penalidades" />
-                                             </columns>
-                                          </JFXTreeTableView>
-                                          <JFXComboBox layoutX="442.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                          <Label alignment="CENTER" layoutX="304.0" layoutY="13.0" text="Selecione um grupo" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="5.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXButton layoutX="14.0" layoutY="17.0" onAction="#loadGroupDialog" prefWidth="157.0" styleClass="btnEvent" text="Agrupar times" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane layoutX="780.0" layoutY="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    </VBox>
+                                    <AnchorPane>
                                        <children>
                                           <HBox alignment="CENTER" layoutX="327.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
                                              <children>
@@ -215,16 +212,16 @@
                                     </AnchorPane>
                                  </children>
                                  <padding>
-                                    <Insets bottom="15.0" left="50.0" right="50.0" top="15.0" />
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                  </padding>
-                              </AnchorPane>
+                              </HBox>
                         </content>
                       </Tab>
                       <Tab closable="false" text="Classificação">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              <HBox alignment="CENTER" spacing="50.0" styleClass="tab-hbox">
                                  <children>
-                                    <AnchorPane layoutX="100.0" layoutY="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane>
                                        <children>
                                           <JFXTreeTableView layoutY="34.0" prefHeight="447.0" prefWidth="600.0" AnchorPane.bottomAnchor="30.0" AnchorPane.topAnchor="30.0">
                                              <columns>
@@ -257,7 +254,7 @@
                                           </JFXButton>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="110.0" layoutY="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane>
                                        <children>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="15.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
                                              <children>
@@ -287,9 +284,9 @@
                                     </AnchorPane>
                                  </children>
                                  <padding>
-                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                  </padding>
-                              </AnchorPane>
+                              </HBox>
                         </content>
                       </Tab>
                     </tabs>
