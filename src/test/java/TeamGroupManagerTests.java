@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static junit.framework.TestCase.*;
+
 public class TeamGroupManagerTests {
     TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
 
@@ -35,6 +37,7 @@ public class TeamGroupManagerTests {
 
         teamGroupsManager.groupAllTeamsByTag(teams,
                 Arrays.asList("1", "2", "3"));
-        teamGroupsManager.generateGroups(4, 4);
+        List<List<String>> generatedGroups = teamGroupsManager.generateGroupsAndReturn(3, 4);
+        assertEquals(6, generatedGroups.size());
     }
 }
