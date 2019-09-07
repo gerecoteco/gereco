@@ -1,12 +1,17 @@
 package controllers;
 
 import application.Session;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXToggleNode;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Event;
@@ -18,10 +23,15 @@ import java.util.List;
 
 public class EventListController {
     public GridPane gridEvents;
-    public Label lblPageIndex;
-    public AnchorPane panePageNav;
+    public GridPane gridNavigation;
+    public JFXComboBox cbxEventsPerPage;
+    public HBox paneNavigation;
+    public HBox hboxEventList;
+    public HBox hboxEventsPerPage;
 
     private List<List<Event>> eventPages;
+    private ToggleGroup navigationButtons;
+    private int eventsPerPage;
     private int numberOfPages;
     private int pageIndex;
 
@@ -30,22 +40,49 @@ public class EventListController {
 
     @FXML
     public void initialize() {
-        EventService eventService = new EventService();
         List<String> eventsId = Session.getInstance().getInstitution().getEvents_id();
-        institutionEvents = eventService.requestAllEventsOfInstitution(eventsId);
-        numberOfPages = calculateNumberOfPages();
+        cbxEventsPerPage.getItems().addAll(6, 9, 12, 15, "Todos");
+        cbxEventsPerPage.setValue(9);
+
+        institutionEvents = new EventService().requestAllEventsOfInstitution(eventsId);
+        navigationButtons = new ToggleGroup();
+        eventsPerPage = Integer.parseInt(cbxEventsPerPage.getValue().toString());
+        numberOfPages = getNumberOfPages();
         pageIndex = 0;
 
-        if(eventsId.size() > 0){
-            paginationEvents();
-            listEventsPage();
-            panePageNav.setVisible(true);
-        }
+        if(eventsId.size() > 0) showEventsOnView();
+        else showNoEventsMessage();
+    }
+
+    private void showNoEventsMessage(){
+        hboxEventsPerPage.setVisible(false);
+        paneNavigation.setVisible(false);
+
+        Label message = new Label("Você ainda não tem eventos!");
+        message.getStyleClass().add("no-events-message");
+        hboxEventList.getChildren().clear();
+        hboxEventList.getChildren().add(message);
+    }
+
+    private void showEventsOnView(){
+        paginationEvents();
+        listEventsPage();
+    }
+
+    @FXML
+    public void changeEventsPerPage(){
+        eventsPerPage = cbxEventsPerPage.getValue().equals("Todos") ? institutionEvents.size() :
+                Integer.parseInt(cbxEventsPerPage.getValue().toString());
+        numberOfPages = getNumberOfPages();
+        pageIndex = 0;
+
+        navigationButtons.getToggles().clear();
+        gridNavigation.getChildren().clear();
+        showEventsOnView();
     }
 
     private void listEventsPage() {
         List<Event> eventListPage = eventPages.get(pageIndex);
-        lblPageIndex.setText(String.valueOf(pageIndex + 1));
         gridEvents.getChildren().clear();
 
         for (int i = 0; i < eventListPage.size(); i++) {
@@ -56,16 +93,49 @@ public class EventListController {
 
     private void paginationEvents(){
         eventPages = new ArrayList<>();
+        boolean haveOnlyOnePage = numberOfPages == 1;
 
-        for(int pageIndex = 0; pageIndex < numberOfPages; pageIndex++)
+        if(haveOnlyOnePage)
+            generateOnePageNavigation();
+        else
+            generateMultiplePageNavigation();
+    }
+
+    private void generateOnePageNavigation(){
+        eventPages.add(appendEventsOnPageAndReturn(0));
+        paneNavigation.setVisible(false);
+    }
+
+    private void generateMultiplePageNavigation(){
+        for(int pageIndex = 0; pageIndex < numberOfPages; pageIndex++){
             eventPages.add(appendEventsOnPageAndReturn(pageIndex));
+            generateNavigationButton(pageIndex);
+        }
+        navigationButtons.getToggles().get(0).setSelected(true);
+        paneNavigation.setVisible(true);
+    }
+
+    private void generateNavigationButton(int pageIndex){
+        JFXToggleNode toggleNode = new JFXToggleNode();
+        toggleNode.setText(String.valueOf(pageIndex + 1));
+        toggleNode.setOnAction(this::navigateThroughThePages);
+        toggleNode.setToggleGroup(navigationButtons);
+        gridNavigation.add(toggleNode, pageIndex, 0);
+    }
+
+    private void navigateThroughThePages(ActionEvent event){
+        JFXToggleNode toggleNode = (JFXToggleNode) event.getSource();
+        if(!toggleNode.isSelected()) toggleNode.setSelected(true);
+
+        pageIndex = Integer.parseInt(toggleNode.getText()) - 1;
+        listEventsPage();
     }
 
     private List<Event> appendEventsOnPageAndReturn(int pageIndex){
         List<Event> page = new ArrayList<>();
         boolean lastPage = pageIndex == numberOfPages-1;
-        int eventIndex = 9 * pageIndex;
-        int eventLimit = lastPage ? institutionEvents.size() - eventIndex : 9;
+        int eventIndex = eventsPerPage * pageIndex;
+        int eventLimit = lastPage ? institutionEvents.size() - eventIndex : eventsPerPage;
 
         for(int eventCount = 0; eventCount < eventLimit; eventCount++){
             page.add(institutionEvents.get(eventIndex));
@@ -74,22 +144,24 @@ public class EventListController {
         return page;
     }
 
-    private int calculateNumberOfPages(){
-        return (institutionEvents.size() / 9) + (institutionEvents.size() % 9 == 0 ? 0 : 1);
+    private int getNumberOfPages(){
+        return (institutionEvents.size() / eventsPerPage) + (institutionEvents.size() % eventsPerPage == 0 ? 0 : 1);
     }
 
     @FXML
-    protected void navigatePreviousPage(){
+    protected void navigateToPreviousPage(){
         if(pageIndex > 0){
             pageIndex--;
+            navigationButtons.getToggles().get(pageIndex).setSelected(true);
             listEventsPage();
         }
     }
 
     @FXML
-    protected void navigateNextPage(){
+    protected void navigateToNextPage(){
         if(pageIndex < eventPages.size()-1){
             pageIndex++;
+            navigationButtons.getToggles().get(pageIndex).setSelected(true);
             listEventsPage();
         }
     }

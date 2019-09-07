@@ -5,86 +5,92 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventListController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../css/event-list.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventListController">
    <children>
-      <HBox alignment="CENTER">
+      <VBox alignment="CENTER" spacing="7.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane>
+            <HBox alignment="CENTER" spacing="20.0">
                <children>
-                  <AnchorPane layoutX="100.0" layoutY="15.0" AnchorPane.leftAnchor="0.0">
+                  <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label layoutY="4.0" text="Nome do Evento" AnchorPane.leftAnchor="0.0" />
-                        <JFXTextField layoutX="105.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" />
+                        <Label text="Nome do Evento" />
+                        <JFXTextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
                      </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="375.0" layoutY="14.0" AnchorPane.leftAnchor="270.0">
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label layoutY="5.0" text="Eventos entre" AnchorPane.leftAnchor="0.0" />
-                        <JFXDatePicker layoutX="97.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" AnchorPane.leftAnchor="87.0" />
-                        <Label layoutX="10.0" layoutY="5.0" text="e" AnchorPane.leftAnchor="192.0" />
-                        <JFXDatePicker layoutX="107.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" AnchorPane.leftAnchor="209.0" />
+                        <Label text="Eventos entre" />
+                        <JFXDatePicker defaultColor="#018f00" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" />
+                        <Label text="e" />
+                        <JFXDatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" />
                      </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="592.0" layoutY="15.0" AnchorPane.leftAnchor="599.0">
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label layoutY="4.0" text="Estado do Evento" />
-                        <JFXComboBox layoutX="108.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
+                        <Label text="Estado do Evento" />
+                        <JFXComboBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
                      </children>
-                  </AnchorPane>
-                  <JFXButton layoutX="932.0" layoutY="14.0" styleClass="btnEvent" text="Procurar" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="872.0" AnchorPane.topAnchor="15.0" />
+                  </HBox>
+                  <JFXButton styleClass="btnEvent" text="Procurar" />
                </children>
-            </AnchorPane>
+            </HBox>
+            <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" minViewportHeight="650.0" prefViewportHeight="900.0" VBox.vgrow="ALWAYS">
+               <content>
+                  <HBox fx:id="hboxEventList" alignment="CENTER">
+                     <children>
+                        <GridPane fx:id="gridEvents" alignment="TOP_CENTER" hgap="30.0" prefHeight="280.0" prefWidth="1020.0" vgap="30.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="320.0" percentWidth="0.0" prefWidth="320.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="320.0" percentWidth="0.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="320.0" prefWidth="100.0" />
+                           </columnConstraints>
+                        </GridPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </content>
+            </ScrollPane>
          </children>
-      </HBox>
-      <HBox alignment="CENTER">
+      </VBox>
+      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <GridPane fx:id="gridEvents" alignment="CENTER" hgap="30.0" prefHeight="280.0" prefWidth="1020.0" vgap="30.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="320.0" percentWidth="0.0" prefWidth="320.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="320.0" percentWidth="0.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="320.0" prefWidth="100.0" />
-               </columnConstraints>
-            </GridPane>
-         </children>
-      </HBox>
-      <AnchorPane>
-         <children>
-            <AnchorPane fx:id="panePageNav" minWidth="150.0" prefHeight="45.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Button layoutX="903.0" layoutY="149.0" mnemonicParsing="false" onAction="#navigatePreviousPage" styleClass="btnNav" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="lblPageIndex" alignment="CENTER" layoutX="944.0" layoutY="20.0" text="1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="585.0" layoutY="109.0" mnemonicParsing="false" onAction="#navigateNextPage" styleClass="btnNav" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </padding>
-            </AnchorPane>
             <JFXButton layoutX="932.0" layoutY="14.0" onAction="#openEventCreateView" styleClass="btnEvent" text="Criar novo evento" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
+            <HBox alignment="CENTER" layoutX="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox fx:id="paneNavigation" alignment="CENTER" spacing="5.0">
+                     <children>
+                        <JFXButton alignment="CENTER" onAction="#navigateToPreviousPage" styleClass="btn-arrow-navigation" text="&lt;" />
+                        <GridPane fx:id="gridNavigation" alignment="CENTER" hgap="5.0" prefHeight="30.0" prefWidth="0.0" styleClass="grid-navigation">
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                        <JFXButton alignment="CENTER" onAction="#navigateToNextPage" styleClass="btn-arrow-navigation" text="&gt;" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hboxEventsPerPage" alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Label text="Eventos por página" />
+                        <JFXComboBox fx:id="cbxEventsPerPage" onAction="#changeEventsPerPage" prefHeight="27.0" prefWidth="90.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets left="100.0" right="100.0" />
          </padding>
       </AnchorPane>
    </children>
-</VBox>
+</AnchorPane>
