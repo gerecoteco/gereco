@@ -153,14 +153,14 @@
                                           </AnchorPane>
                                           <AnchorPane>
                                              <children>
-                                                <JFXTreeTableView fixedCellSize="30.0" layoutY="40.0" prefHeight="230.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                                <JFXTreeTableView fx:id="groupTableView" fixedCellSize="30.0" layoutY="40.0" prefHeight="230.0" prefWidth="560.0" showRoot="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                                    <columns>
-                                                      <TreeTableColumn minWidth="60.0" prefWidth="73.0" resizable="false" text="Posição" />
-                                                      <TreeTableColumn minWidth="85.0" prefWidth="87.0" resizable="false" text="Time" />
-                                                      <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="PP" />
-                                                      <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="PC" />
-                                                      <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="Saldo" />
-                                                      <TreeTableColumn minWidth="100.0" prefWidth="100.0" resizable="false" text="Penalidades" />
+                                                      <TreeTableColumn fx:id="positionGroupColumn" minWidth="60.0" prefWidth="73.0" resizable="false" text="Posição" />
+                                                      <TreeTableColumn fx:id="teamCollumn" minWidth="85.0" prefWidth="87.0" resizable="false" text="Time" />
+                                                      <TreeTableColumn fx:id="ownPointsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="PP" />
+                                                      <TreeTableColumn fx:id="againstPointsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="PC" />
+                                                      <TreeTableColumn fx:id="balanceColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Saldo" />
+                                                      <TreeTableColumn fx:id="foulsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Penalidades" />
                                                    </columns>
                                                 </JFXTreeTableView>
                                                 <JFXComboBox layoutX="442.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -190,14 +190,14 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <JFXTreeTableView layoutY="25.0" prefWidth="450.0" sortMode="ONLY_FIRST_LEVEL" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                                          <JFXTreeTableView fx:id="matchTableView" layoutY="25.0" prefWidth="450.0" showRoot="false" sortMode="ONLY_FIRST_LEVEL" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                              <columns>
-                                                <TreeTableColumn editable="false" minWidth="60.0" prefWidth="73.0" resizable="false" sortable="false" text="Posição" />
-                                                <TreeTableColumn editable="false" minWidth="66.0" prefWidth="73.0" resizable="false" sortable="false" text="Time" />
-                                                <TreeTableColumn editable="false" minWidth="64.0" prefWidth="73.0" resizable="false" sortable="false" text="Placar" />
-                                                <TreeTableColumn editable="false" minWidth="50.0" prefWidth="73.0" resizable="false" sortable="false" text="Versus" />
-                                                <TreeTableColumn editable="false" minWidth="72.0" prefWidth="73.0" resizable="false" sortable="false" text="Placar" />
-                                                <TreeTableColumn editable="false" minWidth="85.0" prefWidth="73.0" resizable="false" sortable="false" text="Time" />
+                                                <TreeTableColumn fx:id="positionMatchColumn" editable="false" minWidth="60.0" prefWidth="73.0" resizable="false" sortable="false" text="Posição" />
+                                                <TreeTableColumn fx:id="teamAColumn" editable="false" minWidth="66.0" prefWidth="73.0" resizable="false" sortable="false" text="Time" />
+                                                <TreeTableColumn fx:id="scoreboardAColumn" editable="false" minWidth="64.0" prefWidth="73.0" resizable="false" sortable="false" text="Placar" />
+                                                <TreeTableColumn fx:id="versusColumn" editable="false" minWidth="50.0" prefWidth="73.0" resizable="false" sortable="false" text="Versus" />
+                                                <TreeTableColumn fx:id="scoreboardBColumn" editable="false" minWidth="72.0" prefWidth="73.0" resizable="false" sortable="false" text="Placar" />
+                                                <TreeTableColumn fx:id="teamBColumn" editable="false" minWidth="85.0" prefWidth="73.0" resizable="false" sortable="false" text="Time" />
                                              </columns>
                                              <columnResizePolicy>
                                                 <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

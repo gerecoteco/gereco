@@ -2,7 +2,8 @@ package controllers;
 
 import com.jfoenix.controls.*;
 import helpers.DialogBuilder;
-import helpers.TeamGroupsManager;
+import helpers.groupTable.GroupTableView;
+import helpers.matchTable.MatchTableView;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -36,6 +39,18 @@ public class EventPageController {
     public JFXTextField txtTeamTag;
     public AnchorPane paneManager;
     public Label lblModalityAndGender0, lblModalityAndGender1, lblModalityAndGender2;
+    public JFXTreeTableView matchTableView;
+    public TreeTableColumn<MatchTableView, String> versusColumn, teamAColumn, teamBColumn;
+    public TreeTableColumn<MatchTableView, Number> positionMatchColumn, scoreboardAColumn, scoreboardBColumn;
+    public JFXTreeTableView groupTableView;
+    public TreeTableColumn<GroupTableView, String> teamCollumn;
+    public TreeTableColumn<GroupTableView, Number> positionGroupColumn, ownPointsColumn, againstPointsColumn, balanceColumn, foulsColumn;
+
+    private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
+    private TreeItem<GroupTableView> rootGroup = new TreeItem<>(new GroupTableView());
+
+    private List<TreeItem<MatchTableView>> treeItemsMatch = new ArrayList<>();
+    private List<TreeItem<GroupTableView>> treeItemsGroup = new ArrayList<>();
 
     private Event event;
     private List<Team> teams;
@@ -54,6 +69,27 @@ public class EventPageController {
         changeModalityAndGender();
 
         setOnActionToTeamsButtons();
+
+        generateColumns();
+
+        matchTableView.setRoot(rootMatch);
+        groupTableView.setRoot(rootGroup);
+    }
+
+    private void generateColumns(){
+        positionMatchColumn.setCellValueFactory(param -> param.getValue().getValue().positionProperty());
+        versusColumn.setCellValueFactory(param -> param.getValue().getValue().versusProperty());
+        teamAColumn.setCellValueFactory(param -> param.getValue().getValue().teamAProperty());
+        teamBColumn.setCellValueFactory(param -> param.getValue().getValue().teamBProperty());
+        scoreboardAColumn.setCellValueFactory(param -> param.getValue().getValue().scoreAProperty());
+        scoreboardBColumn.setCellValueFactory(param -> param.getValue().getValue().scoreBProperty());
+
+        positionGroupColumn.setCellValueFactory(param -> param.getValue().getValue().positionProperty());
+        teamCollumn.setCellValueFactory(param -> param.getValue().getValue().teamProperty());
+        ownPointsColumn.setCellValueFactory(param -> param.getValue().getValue().ownPointsProperty());
+        againstPointsColumn.setCellValueFactory(param -> param.getValue().getValue().againstPointsProperty());
+        balanceColumn.setCellValueFactory(param -> param.getValue().getValue().balanceProperty());
+        foulsColumn.setCellValueFactory(param -> param.getValue().getValue().foulsProperty());
     }
 
     private void generateGenderToggles(){
@@ -201,27 +237,8 @@ public class EventPageController {
         DialogBuilder dialogBuilder = new DialogBuilder(heading, body, HomeController.staticStackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
-        dialogBuilder.setConfirmAction(action -> {
-            generateGroups();
-            dialog.close();
-        });
-
+        dialogBuilder.setConfirmAction(action -> dialog.close());
         dialog.show();
-    }
-
-    private void generateGroups(){
-        TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
-
-        teamGroupsManager.groupAllTeamsByTag(teams, getTeamTags());
-        System.out.println(teamGroupsManager.generateGroupsAndReturn(3, 4));
-    }
-
-    private List<String> getTeamTags(){
-        List<String> tags = new ArrayList<>();
-        teams.forEach(team -> {
-            if(!tags.contains(team.getTag())) tags.add(team.getTag());
-        });
-        return tags;
     }
 
     private String getModalityAndGender(){
