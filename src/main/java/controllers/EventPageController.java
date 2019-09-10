@@ -2,6 +2,7 @@ package controllers;
 
 import com.jfoenix.controls.*;
 import helpers.DialogBuilder;
+import helpers.TeamGroupsManager;
 import helpers.groupTable.GroupTableView;
 import helpers.matchTable.MatchTableView;
 import javafx.collections.FXCollections;
@@ -44,7 +45,8 @@ public class EventPageController {
     public TreeTableColumn<MatchTableView, Number> positionMatchColumn, scoreboardAColumn, scoreboardBColumn;
     public JFXTreeTableView groupTableView;
     public TreeTableColumn<GroupTableView, String> teamCollumn;
-    public TreeTableColumn<GroupTableView, Number> positionGroupColumn, ownPointsColumn, againstPointsColumn, balanceColumn, foulsColumn;
+    public TreeTableColumn<GroupTableView, Number> positionGroupColumn, ownPointsColumn,
+            againstPointsColumn, balanceColumn, foulsColumn;
 
     private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
     private TreeItem<GroupTableView> rootGroup = new TreeItem<>(new GroupTableView());
@@ -71,7 +73,6 @@ public class EventPageController {
         setOnActionToTeamsButtons();
 
         generateColumns();
-
         matchTableView.setRoot(rootMatch);
         groupTableView.setRoot(rootGroup);
     }
@@ -237,8 +238,26 @@ public class EventPageController {
         DialogBuilder dialogBuilder = new DialogBuilder(heading, body, HomeController.staticStackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
-        dialogBuilder.setConfirmAction(action -> dialog.close());
+        dialogBuilder.setConfirmAction(action -> {
+            generateGroups();
+            dialog.close();
+        });
         dialog.show();
+    }
+
+    private void generateGroups(){
+        TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
+
+        teamGroupsManager.groupAllTeamsByTag(teams, getTeamTags());
+        System.out.println(teamGroupsManager.generateGroupsAndReturn(3, 4));
+    }
+
+    private List<String> getTeamTags(){
+        List<String> tags = new ArrayList<>();
+        teams.forEach(team -> {
+            if(!tags.contains(team.getTag())) tags.add(team.getTag());
+        });
+        return tags;
     }
 
     private String getModalityAndGender(){

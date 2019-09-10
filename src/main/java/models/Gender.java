@@ -7,13 +7,11 @@ public class Gender {
     private String name;
     private List<Team> teams;
     private List<Match> matches;
-    private List<List<String>> groups;
 
     public Gender(String name) {
         this.name = name;
         this.teams = new ArrayList<>();
         this.matches = new ArrayList<>();
-        this.groups = new ArrayList<>();
     }
 
     public String getName() {
@@ -33,11 +31,5 @@ public class Gender {
     }
     public void setMatches(List<Match> matches) {
         this.matches = matches;
-    }
-    public List<List<String>> getGroups() {
-        return groups;
-    }
-    public void setGroups(List<List<String>> groups) {
-        this.groups = groups;
     }
 }
