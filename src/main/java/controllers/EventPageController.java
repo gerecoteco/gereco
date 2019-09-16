@@ -249,7 +249,7 @@ public class EventPageController {
         TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
 
         teamGroupsManager.groupAllTeamsByTag(teams, getTeamTags());
-        System.out.println(teamGroupsManager.generateGroupsAndReturn(3, 4));
+        System.out.println(teamGroupsManager.generateGroupsAndReturn(4));
     }
 
     private List<String> getTeamTags(){

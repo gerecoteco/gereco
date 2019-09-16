@@ -1,7 +1,9 @@
+import com.google.gson.Gson;
 import helpers.TeamGroupsManager;
 import models.Team;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,10 +15,14 @@ public class TeamGroupManagerTests {
 
     @Test
     public void createGroups(){
-        teamGroupsManager.groupAllTeamsByTag(generateGroupAndReturn(Arrays.asList("1", "2", "3"), 6),
+        teamGroupsManager.groupAllTeamsByTag(generateGroupAndReturn(Arrays.asList("1", "2", "3"), 22),
                 Arrays.asList("1", "2", "3"));
-        List<List<Team>> generatedGroups = teamGroupsManager.generateGroupsAndReturn(3, 4);
-        assertEquals(6, generatedGroups.size());
+        List<List<Team>> generatedGroups = teamGroupsManager.generateGroupsAndReturn(4);
+
+        generatedGroups.forEach(group -> {
+            group.forEach(team -> System.out.print(team.getName() + " "));
+            System.out.println();
+        });
     }
 
     private List<Team> generateGroupAndReturn(List<String> tags, int groupLength){
