@@ -85,7 +85,6 @@ public class EventPageController {
         scoreboardAColumn.setCellValueFactory(param -> param.getValue().getValue().scoreAProperty());
         scoreboardBColumn.setCellValueFactory(param -> param.getValue().getValue().scoreBProperty());
 
-        positionGroupColumn.setCellValueFactory(param -> param.getValue().getValue().positionProperty());
         teamCollumn.setCellValueFactory(param -> param.getValue().getValue().teamProperty());
         ownPointsColumn.setCellValueFactory(param -> param.getValue().getValue().ownPointsProperty());
         againstPointsColumn.setCellValueFactory(param -> param.getValue().getValue().againstPointsProperty());
@@ -249,7 +248,16 @@ public class EventPageController {
         TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
 
         teamGroupsManager.groupAllTeamsByTag(teams, getTeamTags());
-        System.out.println(teamGroupsManager.generateGroupsAndReturn(4));
+        showGroupsOnTable(teamGroupsManager.generateGroupsAndReturn(3));
+    }
+
+    private void showGroupsOnTable(List<List<Team>> generatedGroups){
+        generatedGroups.forEach(generatedGroup -> {
+            generatedGroup.forEach(team -> {
+                rootGroup.getChildren().add(new GroupTableView(team.getName(), team.getScore().getOwnPoints(),
+                        team.getScore().getAgainstPoints(), team.getScore().getBalance(), team.getScore().getFouls()));
+            });
+        });
     }
 
     private List<String> getTeamTags(){

@@ -2,9 +2,9 @@ package helpers.groupTable;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.TreeItem;
 
-public class GroupTableView {
-    private SimpleIntegerProperty position;
+public class GroupTableView extends TreeItem<GroupTableView> {
     private SimpleStringProperty team;
     private SimpleIntegerProperty ownPoints;
     private SimpleIntegerProperty againstPoints;
@@ -14,17 +14,12 @@ public class GroupTableView {
     public GroupTableView() {
     }
 
-    public GroupTableView(int position, String team, int ownPoints, int againstPoints, int balance, int fouls) {
-        this.position = new SimpleIntegerProperty(position);
+    public GroupTableView(String team, int ownPoints, int againstPoints, int balance, int fouls) {
         this.team = new SimpleStringProperty(team);
         this.ownPoints = new SimpleIntegerProperty(ownPoints);
         this.againstPoints = new SimpleIntegerProperty(againstPoints);
         this.balance = new SimpleIntegerProperty(balance);
         this.fouls = new SimpleIntegerProperty(fouls);
-    }
-
-    public SimpleIntegerProperty positionProperty() {
-        return position;
     }
 
     public SimpleStringProperty teamProperty() {

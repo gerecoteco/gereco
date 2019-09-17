@@ -1,7 +1,6 @@
 package helpers;
 
 import models.Team;
-import sun.plugin.javascript.navig.Array;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,12 +10,14 @@ public class TeamGroupsManager {
     private List<Team> teams;
     private List<List<Team>> groupsByTag;
     private List<List<Team>> groups;
+    private int maxLength;
 
     public void groupAllTeamsByTag(List<Team> teams, List<String> tags){
         groupsByTag = new ArrayList<>();
         this.teams = teams;
 
-        tags.forEach(tag -> groupsByTag.add(filterTeamsByTagAndReturn(tag)));
+        if(!tags.isEmpty()) tags.forEach(tag -> groupsByTag.add(filterTeamsByTagAndReturn(tag)));
+        else groupsByTag.add(teams);
     }
 
     private List<Team> filterTeamsByTagAndReturn(String tag){
@@ -26,26 +27,37 @@ public class TeamGroupsManager {
 
     public List<List<Team>> generateGroupsAndReturn(int maxLength){
         groups = new ArrayList<>();
+        this.maxLength = maxLength;
 
-        for(List<Team> group : groupsByTag){
-            int numberOfGroups = group.size() % maxLength == 0 ?
-                    group.size() / maxLength : group.size() / maxLength + 1;
-            List<List<Team>> newGroups = intitializeListAndReturn(numberOfGroups);
-            int z = 0;
-
-            for(int x = 0; x < maxLength; x++){
-                for(int y = 0; y < numberOfGroups && z < group.size() ; y++){
-                    newGroups.get(y).add(x, group.get(z));
-                    z++;
-                }
-            }
-            groups.addAll(newGroups);
-        }
+        groupsByTag.forEach(this::splitGroups);
+        showGroups();
         return groups;
+    }
+
+    private void splitGroups(List<Team> group){
+        int numberOfGroups = group.size() % maxLength == 0 ? group.size() / maxLength : group.size() / maxLength + 1;
+        List<List<Team>> newGroups = intitializeListAndReturn(numberOfGroups);
+        int teamIndex = 0;
+
+        Collections.shuffle(group);
+        for(int lengthIndex = 0; lengthIndex < maxLength; lengthIndex++){
+            for(int groupIndex = 0; groupIndex < numberOfGroups && teamIndex < group.size(); groupIndex++){
+                newGroups.get(groupIndex).add(lengthIndex, group.get(teamIndex));
+                teamIndex++;
+            }
+        }
+        groups.addAll(newGroups);
     }
 
     private List<List<Team>> intitializeListAndReturn(int numberOfGroups){
         return IntStream.range(0, numberOfGroups)
                 .<List<Team>>mapToObj(x -> new ArrayList<>()).collect(Collectors.toList());
+    }
+
+    private void showGroups(){
+        groups.forEach(group -> {
+            group.forEach(team -> System.out.print(team.getName() + " "));
+            System.out.println();
+        });
     }
 }
