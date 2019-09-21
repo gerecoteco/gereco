@@ -31,6 +31,8 @@ public class TeamGroupManagerTests {
         teams = generateGroupsForTests();
         List<List<Team>> generatedGroups = createOrderedGroupsAndReturn();
 
+        teamGroupsManager.getOrderedTeams();
+
         assertEquals(4, generatedGroups.get(0).size());
         assertEquals(4, generatedGroups.get(1).size());
         assertEquals(3, generatedGroups.get(2).size());

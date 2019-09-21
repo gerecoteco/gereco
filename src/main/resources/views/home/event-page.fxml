@@ -68,7 +68,7 @@
                                  <children>
                                     <VBox alignment="TOP_CENTER" spacing="40.0">
                                        <children>
-                                          <AnchorPane prefHeight="195.0" prefWidth="679.0" style="-fx-border-color: #666;">
+                                          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #666;">
                                              <children>
                                                 <Label layoutX="76.0" layoutY="14.0" text="Times participantes do(a)" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
@@ -125,24 +125,40 @@
                                                       </GridPane>
                                                    </content>
                                                 </ScrollPane>
-                                                <AnchorPane layoutX="486.0" layoutY="32.0" prefHeight="139.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <VBox alignment="CENTER" layoutX="493.0" layoutY="16.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Label layoutX="5.0" layoutY="10.0" text="Nome" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <JFXTextField fx:id="txtTeamName" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                                      <Label layoutX="10.0" layoutY="70.0" text="Tag" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="65.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <JFXTextField fx:id="txtTeamTag" layoutX="14.0" layoutY="62.0" prefHeight="27.0" prefWidth="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
-                                                      <JFXButton layoutX="4.0" layoutY="113.0" onAction="#saveTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Salvar time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                                      <JFXButton layoutX="11.0" layoutY="156.0" onAction="#deleteTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Excluir Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                                      <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0">
+                                                         <children>
+                                                            <VBox alignment="CENTER" spacing="27.0">
+                                                               <children>
+                                                                  <Label maxWidth="1.7976931348623157E308" text="Nome">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label maxWidth="1.7976931348623157E308" text="Tag">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox alignment="CENTER" spacing="20.0">
+                                                               <children>
+                                                                  <JFXTextField fx:id="txtTeamName" prefHeight="27.0" prefWidth="120.0" />
+                                                                  <JFXTextField fx:id="txtTeamTag" prefHeight="27.0" prefWidth="120.0" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <VBox fx:id="vBoxTeamButtons" prefHeight="64.0" prefWidth="177.0" spacing="10.0">
+                                                         <children>
+                                                            <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#saveTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Salvar time" />
+                                                            <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#deleteTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Excluir Time" />
+                                                         </children>
+                                                      </VBox>
                                                    </children>
-                                                </AnchorPane>
+                                                </VBox>
                                              </children>
                                              <opaqueInsets>
                                                 <Insets />
@@ -153,17 +169,16 @@
                                           </AnchorPane>
                                           <AnchorPane>
                                              <children>
-                                                <JFXTreeTableView fx:id="groupTableView" fixedCellSize="30.0" layoutY="40.0" prefHeight="230.0" prefWidth="560.0" showRoot="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                                <JFXTreeTableView fx:id="groupTableView" fixedCellSize="40.0" layoutY="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="40.0">
                                                    <columns>
-                                                      <TreeTableColumn fx:id="positionGroupColumn" minWidth="60.0" prefWidth="73.0" resizable="false" text="Posição" />
-                                                      <TreeTableColumn fx:id="teamCollumn" minWidth="85.0" prefWidth="87.0" resizable="false" text="Time" />
-                                                      <TreeTableColumn fx:id="ownPointsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="PP" />
-                                                      <TreeTableColumn fx:id="againstPointsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="PC" />
-                                                      <TreeTableColumn fx:id="balanceColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Saldo" />
-                                                      <TreeTableColumn fx:id="foulsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Penalidades" />
+                                                      <TreeTableColumn fx:id="teamCollumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="Time" />
+                                                      <TreeTableColumn fx:id="ownPointsColumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="PP" />
+                                                      <TreeTableColumn fx:id="againstPointsColumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="PC" />
+                                                      <TreeTableColumn fx:id="balanceColumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="Saldo" />
+                                                      <TreeTableColumn fx:id="foulsColumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="Penalidades" />
                                                    </columns>
                                                 </JFXTreeTableView>
-                                                <JFXComboBox layoutX="442.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <JFXComboBox fx:id="cbxGroups" layoutX="442.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#showGroupsOnTable" prefHeight="25.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <Label alignment="CENTER" layoutX="304.0" layoutY="13.0" text="Selecione um grupo" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="5.0">
                                                    <font>
                                                       <Font size="14.0" />

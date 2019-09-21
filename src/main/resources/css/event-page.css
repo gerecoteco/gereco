@@ -1,5 +1,5 @@
 /* EVENT PAGE */
-.event_page JFXTextField, JFXComboBox:focused {
+.event_page JFXTextField, JFXComboBox {
     -jfx-focus-color: #369137;
     -fx-text-fill: black;
 }
@@ -66,4 +66,13 @@ JFXButton {
 .tab:selected .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: white;
+}
+
+/* tree table view */
+.table-column {
+    -fx-alignment: CENTER;
+}
+
+.tree-table-cell {
+    -fx-font-size: 15;
 }

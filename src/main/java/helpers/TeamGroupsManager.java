@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 public class TeamGroupsManager {
     private List<Team> teams;
+    private List<Team> orderedTeams;
     private List<List<Team>> groupsByTag;
     private List<List<Team>> groups;
     private int maxLength;
@@ -47,6 +48,20 @@ public class TeamGroupsManager {
             }
         }
         groups.addAll(newGroups);
+    }
+
+    public List<Team> getOrderedTeams() {
+        orderedTeams = new ArrayList<>();
+
+        for (int x = 0; x < groups.size(); x++){
+            int actualGroup = x;
+            groups.get(x).forEach(team -> {
+                team.setGroup(actualGroup);
+                orderedTeams.add(team);
+            });
+        }
+
+        return orderedTeams;
     }
 
     private List<List<Team>> intitializeListAndReturn(int numberOfGroups){

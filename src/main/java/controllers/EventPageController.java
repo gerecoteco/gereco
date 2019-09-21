@@ -19,14 +19,18 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import models.Gender;
 import models.Modality;
 import javafx.stage.Stage;
 import models.Event;
 import models.Team;
+import services.EventService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class EventPageController {
@@ -36,25 +40,25 @@ public class EventPageController {
     public ToggleGroup teamGroup;
     public ToggleGroup genderGroup;
     public HBox paneGenders;
+    public VBox vBoxTeamButtons;
     public JFXTextField txtTeamName;
     public JFXTextField txtTeamTag;
     public AnchorPane paneManager;
+    public JFXComboBox cbxGroups;
     public Label lblModalityAndGender0, lblModalityAndGender1, lblModalityAndGender2;
     public JFXTreeTableView matchTableView;
     public TreeTableColumn<MatchTableView, String> versusColumn, teamAColumn, teamBColumn;
     public TreeTableColumn<MatchTableView, Number> positionMatchColumn, scoreboardAColumn, scoreboardBColumn;
     public JFXTreeTableView groupTableView;
     public TreeTableColumn<GroupTableView, String> teamCollumn;
-    public TreeTableColumn<GroupTableView, Number> positionGroupColumn, ownPointsColumn,
+    public TreeTableColumn<GroupTableView, Number> ownPointsColumn,
             againstPointsColumn, balanceColumn, foulsColumn;
 
     private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
     private TreeItem<GroupTableView> rootGroup = new TreeItem<>(new GroupTableView());
 
-    private List<TreeItem<MatchTableView>> treeItemsMatch = new ArrayList<>();
-    private List<TreeItem<GroupTableView>> treeItemsGroup = new ArrayList<>();
-
     private Event event;
+    private List<List<Team>> groups;
     private List<Team> teams;
 
     @FXML
@@ -104,6 +108,12 @@ public class EventPageController {
     private Modality getSelectedModality(){
         return event.getModalities().stream().filter(modality ->
                 modality.getName().equals(cbxModalities.getValue().toString().toLowerCase())).findAny().orElse(null);
+    }
+
+    private Gender getSelectedGender(){
+        return getSelectedModality().getGenders().stream().filter(gender ->
+                gender.getName().equals(((JFXRadioButton) genderGroup.getSelectedToggle()).getText()))
+                .findAny().orElse(null);
     }
 
     @FXML
@@ -183,7 +193,6 @@ public class EventPageController {
 
         getSelectedTeam().setText(txtTeamName.getText());
         getSelectedTeam().getStyleClass().clear();
-        listTeams();
     }
 
     private void updateTeam(Team teamFound){
@@ -224,11 +233,6 @@ public class EventPageController {
         return (JFXToggleNode) teamGroup.getSelectedToggle();
     }
 
-    private void listTeams(){
-        teams.forEach(team -> System.out.print(team.getName() + " "));
-        System.out.println("\n");
-    }
-
     @FXML
     private void loadGroupDialog(){
         String heading = "Agrupar times";
@@ -248,16 +252,30 @@ public class EventPageController {
         TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
 
         teamGroupsManager.groupAllTeamsByTag(teams, getTeamTags());
-        showGroupsOnTable(teamGroupsManager.generateGroupsAndReturn(3));
+        groups = teamGroupsManager.generateGroupsAndReturn(3);
+        getSelectedGender().setTeams(teamGroupsManager.getOrderedTeams());
+
+        new EventService().updateEvent(EventItemController.eventId, event);
+        generateCbxGroupsItens();
+        cbxGroups.setValue(1);
+        vBoxTeamButtons.getChildren().clear();
     }
 
-    private void showGroupsOnTable(List<List<Team>> generatedGroups){
-        generatedGroups.forEach(generatedGroup -> {
-            generatedGroup.forEach(team -> {
-                rootGroup.getChildren().add(new GroupTableView(team.getName(), team.getScore().getOwnPoints(),
-                        team.getScore().getAgainstPoints(), team.getScore().getBalance(), team.getScore().getFouls()));
-            });
+    @FXML
+    protected void showGroupsOnTable(){
+        int groupIndex = (int) cbxGroups.getValue() - 1;
+        rootGroup.getChildren().clear();
+
+        groups.get(groupIndex).forEach(team -> {
+            TreeItem<GroupTableView> teamRow = new TreeItem<>(new GroupTableView(team.getName(),
+                    team.getScore().getOwnPoints(), team.getScore().getAgainstPoints(),
+                    team.getScore().getBalance(), team.getScore().getFouls()));
+            rootGroup.getChildren().add(teamRow);
         });
+    }
+
+    private void generateCbxGroupsItens(){
+        IntStream.range(0, groups.size()).forEachOrdered(x -> cbxGroups.getItems().add(x + 1));
     }
 
     private List<String> getTeamTags(){
