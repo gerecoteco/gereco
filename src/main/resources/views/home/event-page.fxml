@@ -68,7 +68,7 @@
                                           <AnchorPane fx:id="paneGroupTable" />
                                        </children>
                                     </VBox>
-                                    <AnchorPane fx:id="paneMatchTable" />
+                                    <AnchorPane fx:id="paneMatchTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                                  </children>
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

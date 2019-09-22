@@ -16,7 +16,7 @@ public class MatchTableView {
 
     public MatchTableView(int position, String teamA, String teamB, int scoreA, int scoreB) {
         this.position = new SimpleIntegerProperty(position);
-        this.versus = new SimpleStringProperty("Versus");
+        this.versus = new SimpleStringProperty("X");
         this.teamA = new SimpleStringProperty(teamA);
         this.teamB = new SimpleStringProperty(teamB);
         this.scoreA = new SimpleIntegerProperty(scoreA);

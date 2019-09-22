@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTreeTableView;
 import helpers.DialogBuilder;
+import helpers.MatchesGenerator;
 import helpers.TeamGroupsManager;
 import helpers.groupTable.GroupTableView;
 import javafx.fxml.FXML;
@@ -34,12 +35,17 @@ public class GroupTableController {
         generateGroupTableColumns();
         groupTableView.setRoot(rootGroup);
 
-        if(!groups.isEmpty()){
-            generateCbxGroupsItens();
-            cbxGroups.setValue(cbxGroups.getItems().get(0));
+        if(!groups.isEmpty()) {
+            changeNodeStates();
             showGroupsOnTable();
-            btnGroupTeams.setDisable(true);
         }
+    }
+
+    private void changeNodeStates(){
+        generateCbxGroupsItens();
+        cbxGroups.setValue(cbxGroups.getItems().get(0));
+        TeamsGridController.hideButtons();
+        btnGroupTeams.setDisable(true);
     }
 
     @FXML
@@ -72,15 +78,15 @@ public class GroupTableController {
 
     private void generateGroups(){
         TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
+        MatchesGenerator matchesGenerator = new MatchesGenerator();
 
         teamGroupsManager.groupAllTeamsByTag(TeamsGridController.teams, getTeamTags());
         groups = teamGroupsManager.generateGroupsAndReturn(3);
         actualGender.setTeams(teamGroupsManager.getOrderedTeams());
+        actualGender.setMatches(matchesGenerator.generateMatchesAndReturn(groups));
 
         new EventService().updateEvent(EventItemController.eventId, event);
-        generateCbxGroupsItens();
-        cbxGroups.setValue(1);
-        TeamsGridController.hideButtons();
+        changeNodeStates();
     }
 
     private void generateCbxGroupsItens(){

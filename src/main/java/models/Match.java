@@ -1,6 +1,6 @@
 package models;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Match {
@@ -9,7 +9,7 @@ public class Match {
 
     public Match(List<String> teams) {
         this.teams = teams;
-        this.scores = new ArrayList<>();
+        this.scores = Arrays.asList(new Score(), new Score());
     }
 
     public List<String> getTeams() {

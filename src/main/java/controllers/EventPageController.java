@@ -49,6 +49,10 @@ public class EventPageController {
         actualGender = getSelectedGender();
         changeModalityAndGender();
 
+        loadEventManagerViews();
+    }
+
+    private void loadEventManagerViews(){
         loadTeamGridView();
         loadGroupTableView();
         loadMatchTableView();
@@ -81,12 +85,18 @@ public class EventPageController {
         generateGenderToggles();
         genderGroup.selectToggle(genderGroup.getToggles().get(0));
         changeModalityAndGender();
+
+        actualGender = getSelectedGender();
+        loadEventManagerViews();
     }
 
     @FXML
     protected void changeModalityAndGender(){
         lblModalityAndGender1.setText(getModalityAndGender().toLowerCase());
         modalityAndGender = getModalityAndGender();
+
+        actualGender = getSelectedGender();
+        loadEventManagerViews();
     }
 
     private Event findEventById(){
@@ -107,6 +117,7 @@ public class EventPageController {
     }
 
     private void loadTeamGridView(){
+        paneTeamGrid.getChildren().clear();
         try{
             URL viewURL = getClass().getResource("/views/home/team-grid.fxml");
             paneTeamGrid.getChildren().add(FXMLLoader.load(viewURL));
@@ -119,6 +130,7 @@ public class EventPageController {
         GroupTableController.groups = actualGender.getTeams().isEmpty() ?
                 new ArrayList<>() : getGenderGroups();
 
+        paneGroupTable.getChildren().clear();
         try{
             URL viewURL = getClass().getResource("/views/home/group-table.fxml");
             paneGroupTable.getChildren().add(FXMLLoader.load(viewURL));
@@ -128,9 +140,15 @@ public class EventPageController {
     }
 
     private void loadMatchTableView(){
+        paneMatchTable.getChildren().clear();
         try{
             URL viewURL = getClass().getResource("/views/home/match-table.fxml");
             paneMatchTable.getChildren().add(FXMLLoader.load(viewURL));
+
+            paneMatchTable.setBottomAnchor(paneMatchTable.getChildren().get(0), 0.0);
+            paneMatchTable.setTopAnchor(paneMatchTable.getChildren().get(0), 0.0);
+            paneMatchTable.setRightAnchor(paneMatchTable.getChildren().get(0), 0.0);
+            paneMatchTable.setRightAnchor(paneMatchTable.getChildren().get(0), 0.0);
         } catch (IOException e) {
             e.printStackTrace();
         }
