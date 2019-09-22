@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GroupTableController">
    <children>
       <JFXTreeTableView fx:id="groupTableView" fixedCellSize="40.0" layoutY="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="40.0">
          <columns>
@@ -25,6 +25,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXButton layoutX="14.0" layoutY="17.0" onAction="#loadGroupDialog" prefWidth="157.0" styleClass="btnEvent" text="Agrupar times" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXButton fx:id="btnGroupTeams" layoutX="14.0" layoutY="17.0" onAction="#loadGroupDialog" prefWidth="157.0" styleClass="btnEvent" text="Agrupar times" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

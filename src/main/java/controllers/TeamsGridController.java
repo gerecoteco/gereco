@@ -11,8 +11,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import models.Team;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TeamsGridController {
@@ -22,12 +22,32 @@ public class TeamsGridController {
     public JFXTextField txtTeamName;
     public JFXTextField txtTeamTag;
 
+    private static VBox staticVBoxTeamButtons;
     static List<Team> teams;
 
     @FXML
     public void initialize() {
-        teams = new ArrayList<>();
+        teams = EventPageController.actualGender.getTeams();
+        staticVBoxTeamButtons = vBoxTeamButtons;
+
+        if(!teams.isEmpty()) hideButtons();
+
         setOnActionToTeamsButtons();
+        listTeamsOnGrid();
+    }
+
+    static void hideButtons(){
+        staticVBoxTeamButtons.setVisible(false);
+    }
+
+    private void listTeamsOnGrid(){
+        List<Node> toggleNodeTeams = gridTeams.getChildren().stream().filter(node ->
+                node.getClass().getTypeName().equals(JFXToggleNode.class.getTypeName())).collect(Collectors.toList());
+
+        for(int x=0; x < teams.size(); x++){
+            JFXToggleNode btnTeam = (JFXToggleNode) toggleNodeTeams.get(x);
+            btnTeam.setText(teams.get(x).getName());
+        }
     }
 
     private void setOnActionToTeamsButtons(){
