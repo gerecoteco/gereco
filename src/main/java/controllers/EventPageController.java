@@ -1,20 +1,15 @@
 package controllers;
 
 import com.jfoenix.controls.*;
-import helpers.matchTable.MatchTableView;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import models.Gender;
 import models.Modality;
-import javafx.stage.Stage;
 import models.Event;
 import models.Team;
 
@@ -33,11 +28,8 @@ public class EventPageController {
     public AnchorPane paneManager;
     public AnchorPane paneTeamGrid;
     public AnchorPane paneGroupTable;
-    public Label lblModalityAndGender1, lblModalityAndGender2;
-    public JFXTreeTableView matchTableView;
-    public TreeTableColumn<MatchTableView, String> versusColumn, teamAColumn, teamBColumn;
-    public TreeTableColumn<MatchTableView, Number> positionMatchColumn, scoreboardAColumn, scoreboardBColumn;
-    private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
+    public AnchorPane paneMatchTable;
+    public Label lblModalityAndGender1;
     private ToggleGroup genderGroup;
 
     static Event event;
@@ -57,20 +49,9 @@ public class EventPageController {
         actualGender = getSelectedGender();
         changeModalityAndGender();
 
-        generateColumns();
-        matchTableView.setRoot(rootMatch);
-
         loadTeamGridView();
         loadGroupTableView();
-    }
-
-    private void generateColumns(){
-        positionMatchColumn.setCellValueFactory(param -> param.getValue().getValue().positionProperty());
-        versusColumn.setCellValueFactory(param -> param.getValue().getValue().versusProperty());
-        teamAColumn.setCellValueFactory(param -> param.getValue().getValue().teamAProperty());
-        teamBColumn.setCellValueFactory(param -> param.getValue().getValue().teamBProperty());
-        scoreboardAColumn.setCellValueFactory(param -> param.getValue().getValue().scoreAProperty());
-        scoreboardBColumn.setCellValueFactory(param -> param.getValue().getValue().scoreBProperty());
+        loadMatchTableView();
     }
 
     private void generateGenderToggles(){
@@ -105,24 +86,7 @@ public class EventPageController {
     @FXML
     protected void changeModalityAndGender(){
         lblModalityAndGender1.setText(getModalityAndGender().toLowerCase());
-        lblModalityAndGender2.setText(getModalityAndGender().toLowerCase());
         modalityAndGender = getModalityAndGender();
-    }
-
-    @FXML
-    protected void openMatchFormView(){
-        try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/match-form.fxml")));
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.centerOnScreen();
-            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private Event findEventById(){
@@ -158,6 +122,15 @@ public class EventPageController {
         try{
             URL viewURL = getClass().getResource("/views/home/group-table.fxml");
             paneGroupTable.getChildren().add(FXMLLoader.load(viewURL));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadMatchTableView(){
+        try{
+            URL viewURL = getClass().getResource("/views/home/match-table.fxml");
+            paneMatchTable.getChildren().add(FXMLLoader.load(viewURL));
         } catch (IOException e) {
             e.printStackTrace();
         }
