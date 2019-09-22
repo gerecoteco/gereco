@@ -1,24 +1,27 @@
 package models;
 
-public class Match {
-    private String[] teams;
-    private Score[] scores;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Match(String[] teams, Score[] scores) {
+public class Match {
+    private List<String> teams;
+    private List<Score> scores;
+
+    public Match(List<String> teams) {
         this.teams = teams;
-        this.scores = scores;
+        this.scores = new ArrayList<>();
     }
 
-    public String[] getTeams() {
+    public List<String> getTeams() {
         return teams;
     }
-    public void setTeams(String[] teams) {
+    public void setTeams(List<String> teams) {
         this.teams = teams;
     }
-    public Score[] getScores() {
+    public List<Score> getScores() {
         return scores;
     }
-    public void setScores(Score[] scores) {
+    public void setScores(List<Score> scores) {
         this.scores = scores;
     }
 }

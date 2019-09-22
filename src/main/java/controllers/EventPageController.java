@@ -29,7 +29,6 @@ import java.util.stream.IntStream;
 public class EventPageController {
     public Label lblEventName;
     public JFXComboBox cbxModalities;
-    public ToggleGroup genderGroup;
     public HBox paneGenders;
     public AnchorPane paneManager;
     public AnchorPane paneTeamGrid;
@@ -39,6 +38,7 @@ public class EventPageController {
     public TreeTableColumn<MatchTableView, String> versusColumn, teamAColumn, teamBColumn;
     public TreeTableColumn<MatchTableView, Number> positionMatchColumn, scoreboardAColumn, scoreboardBColumn;
     private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
+    private ToggleGroup genderGroup;
 
     static Event event;
     static Gender actualGender;
