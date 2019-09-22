@@ -2,55 +2,77 @@ package helpers;
 
 import models.Team;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TeamGroupsManager {
     private List<Team> teams;
-    private List<List<String>> groupsByTag;
-    private List<List<String>> groups;
+    private List<Team> orderedTeams;
+    private List<List<Team>> groupsByTag;
+    private List<List<Team>> groups;
+    private int maxLength;
 
     public void groupAllTeamsByTag(List<Team> teams, List<String> tags){
         groupsByTag = new ArrayList<>();
         this.teams = teams;
 
-        tags.forEach(tag -> groupsByTag.add(filterTeamsByTagAndReturn(tag)));
+        if(!tags.isEmpty()) tags.forEach(tag -> groupsByTag.add(filterTeamsByTagAndReturn(tag)));
+        else groupsByTag.add(teams);
     }
 
-    private List<String> filterTeamsByTagAndReturn(String tag){
+    private List<Team> filterTeamsByTagAndReturn(String tag){
         return teams.stream().filter(team ->
-                team.getTag().equals(tag)).map(Team::getName).collect(Collectors.toList());
+                team.getTag().equals(tag)).collect(Collectors.toList());
     }
 
-    public List<List<String>> generateGroupsAndReturn(int minLength, int maxLength){
+    public List<List<Team>> generateGroupsAndReturn(int maxLength){
         groups = new ArrayList<>();
+        this.maxLength = maxLength;
 
-        groupsByTag.forEach(group -> {
-            int restOfDivisionByMax = group.size() % maxLength;
-            int restOfDivisionByMin = group.size() % minLength;
-            boolean createGroupWithMaxLength = (restOfDivisionByMax > restOfDivisionByMin
-                    && restOfDivisionByMin != 0) || restOfDivisionByMax == 0;
-
-            splitIntoSmallerGroups(group, createGroupWithMaxLength ? maxLength : minLength);
-        });
-
-        System.out.println(groups);
+        groupsByTag.forEach(this::splitGroups);
+        showGroups();
         return groups;
     }
 
-    private void splitIntoSmallerGroups(List<String> group, int groupsLength){
-        int numberOfGroups = group.size() / groupsLength + (group.size() % groupsLength != 0 ? 1 : 0);
+    private void splitGroups(List<Team> group){
+        int numberOfGroups = group.size() % maxLength == 0 ? group.size() / maxLength : group.size() / maxLength + 1;
+        List<List<Team>> newGroups = intitializeListAndReturn(numberOfGroups);
+        int teamIndex = 0;
 
         Collections.shuffle(group);
-        for(int x = 0; x < numberOfGroups; x++) {
-            List<String> newGroup = new ArrayList<>();
-            int initialIndex = x * groupsLength;
-            int lastIndex = x == (numberOfGroups - 1) ? group.size() : initialIndex + groupsLength;
-
-            for (int y = initialIndex; y < lastIndex; y++) newGroup.add(group.get(y));
-            groups.add(newGroup);
+        for(int lengthIndex = 0; lengthIndex < maxLength; lengthIndex++){
+            for(int groupIndex = 0; groupIndex < numberOfGroups && teamIndex < group.size(); groupIndex++){
+                newGroups.get(groupIndex).add(lengthIndex, group.get(teamIndex));
+                teamIndex++;
+            }
         }
+        groups.addAll(newGroups);
+    }
+
+    public List<Team> getOrderedTeams() {
+        orderedTeams = new ArrayList<>();
+
+        for (int x = 0; x < groups.size(); x++){
+            int actualGroup = x;
+            groups.get(x).forEach(team -> {
+                team.setGroup(actualGroup);
+                orderedTeams.add(team);
+            });
+        }
+
+        return orderedTeams;
+    }
+
+    private List<List<Team>> intitializeListAndReturn(int numberOfGroups){
+        return IntStream.range(0, numberOfGroups)
+                .<List<Team>>mapToObj(x -> new ArrayList<>()).collect(Collectors.toList());
+    }
+
+    private void showGroups(){
+        groups.forEach(group -> {
+            group.forEach(team -> System.out.print(team.getName() + " "));
+            System.out.println();
+        });
     }
 }

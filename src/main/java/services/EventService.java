@@ -6,7 +6,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Updates;
 import helpers.EventFilesManager;
 import models.Event;
-import models.Institution;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -44,9 +43,9 @@ public class EventService {
         EventFilesManager.write(eventId, eventJson);
     }
 
-    public void updateEvent(String eventId){
-        String eventJson = EventFilesManager.read(eventId);
-        eventsCollection.replaceOne(eq("_id", new ObjectId(eventId)), Document.parse(eventJson));
+    public void updateEvent(String eventId, Event updatedEvent){
+        eventsCollection.replaceOne(eq("_id", new ObjectId(eventId)),
+                Document.parse(new Gson().toJson(updatedEvent)));
     }
 
     public void insertEventInCollection(String eventJson){

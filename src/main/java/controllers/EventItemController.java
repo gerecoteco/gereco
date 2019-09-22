@@ -1,6 +1,5 @@
 package controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import helpers.DialogBuilder;
 import javafx.fxml.FXML;
