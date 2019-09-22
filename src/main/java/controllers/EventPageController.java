@@ -6,20 +6,15 @@ import helpers.TeamGroupsManager;
 import helpers.groupTable.GroupTableView;
 import helpers.matchTable.MatchTableView;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import models.Gender;
 import models.Modality;
 import javafx.stage.Stage;
@@ -28,24 +23,20 @@ import models.Team;
 import services.EventService;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class EventPageController {
     public Label lblEventName;
     public JFXComboBox cbxModalities;
-    public GridPane gridTeams;
-    public ToggleGroup teamGroup;
     public ToggleGroup genderGroup;
     public HBox paneGenders;
-    public VBox vBoxTeamButtons;
-    public JFXTextField txtTeamName;
-    public JFXTextField txtTeamTag;
     public AnchorPane paneManager;
+    public AnchorPane paneTeamGrid;
     public JFXComboBox cbxGroups;
-    public Label lblModalityAndGender0, lblModalityAndGender1, lblModalityAndGender2;
+    public Label lblModalityAndGender1, lblModalityAndGender2;
     public JFXTreeTableView matchTableView;
     public TreeTableColumn<MatchTableView, String> versusColumn, teamAColumn, teamBColumn;
     public TreeTableColumn<MatchTableView, Number> positionMatchColumn, scoreboardAColumn, scoreboardBColumn;
@@ -59,11 +50,9 @@ public class EventPageController {
 
     private Event event;
     private List<List<Team>> groups;
-    private List<Team> teams;
 
     @FXML
     public void initialize() {
-        teams = new ArrayList<>();
         genderGroup = new ToggleGroup();
         event = findEventById();
         lblEventName.setText(event.getName());
@@ -74,11 +63,10 @@ public class EventPageController {
         genderGroup.selectToggle(genderGroup.getToggles().get(0));
         changeModalityAndGender();
 
-        setOnActionToTeamsButtons();
-
         generateColumns();
         matchTableView.setRoot(rootMatch);
         groupTableView.setRoot(rootGroup);
+        loadTeamGridView();
     }
 
     private void generateColumns(){
@@ -125,34 +113,10 @@ public class EventPageController {
         changeModalityAndGender();
     }
 
-    private void setOnActionToTeamsButtons(){
-        Stream<Node> toggleNodeTeams = gridTeams.getChildren().stream().filter(node ->
-                node.getClass().getTypeName().equals(JFXToggleNode.class.getTypeName()));
-
-        toggleNodeTeams.forEach(nodeTeam -> {
-            JFXToggleNode btnTeam = (JFXToggleNode) nodeTeam;
-            btnTeam.setOnAction(this::editTeam);
-            btnTeam.getStyleClass().add("team_hover");
-            btnTeam.setCursor(Cursor.HAND);
-        });
-    }
-
     @FXML
     protected void changeModalityAndGender(){
-        lblModalityAndGender0.setText(getModalityAndGender().toLowerCase());
         lblModalityAndGender1.setText(getModalityAndGender().toLowerCase());
         lblModalityAndGender2.setText(getModalityAndGender().toLowerCase());
-    }
-
-    @FXML
-    private void editTeam(ActionEvent event){
-        clearTextFields();
-        Team teamFound = findTeamByName();
-
-        if(teamFound != null){
-            txtTeamName.setText(teamFound.getName());
-            txtTeamTag.setText(teamFound.getTag());
-        }
     }
 
     @FXML
@@ -171,40 +135,6 @@ public class EventPageController {
         }
     }
 
-    @FXML
-    protected void deleteTeam(){
-        if(findTeamByName() != null) {
-            Team teamFound = findTeamByName();
-            teams.remove(teamFound);
-            getSelectedTeam().setText("");
-            getSelectedTeam().getStyleClass().add("team_hover");
-            clearTextFields();
-        }
-    }
-
-    @FXML
-    protected void saveTeam(){
-        Team teamFound = findTeamByName();
-
-        if(teamFound != null)
-            updateTeam(teamFound);
-        else
-            createTeam();
-
-        getSelectedTeam().setText(txtTeamName.getText());
-        getSelectedTeam().getStyleClass().clear();
-    }
-
-    private void updateTeam(Team teamFound){
-        int teamIndex = teams.indexOf(teamFound);
-        teams.get(teamIndex).setName(txtTeamName.getText());
-        teams.get(teamIndex).setTag(txtTeamTag.getText());
-    }
-
-    private void createTeam(){
-        teams.add(new Team(txtTeamName.getText(), txtTeamTag.getText()));
-    }
-
     private Event findEventById(){
         return EventListController.institutionEvents.stream().filter(
                 event -> event.getId().equals(EventItemController.eventId)).findFirst().orElse(null);
@@ -215,22 +145,6 @@ public class EventPageController {
         event.getModalities().forEach(modality -> modalities.add(modality.getName()));
 
         cbxModalities.setItems(FXCollections.observableList(modalities));
-    }
-
-    private Team findTeamByName(){
-        if(getSelectedTeam() != null)
-            return teams.stream().filter(team ->
-                    team.getName().equals(getSelectedTeam().getText())).findFirst().orElse(null);
-        return null;
-    }
-
-    private void clearTextFields(){
-        txtTeamName.clear();
-        txtTeamTag.clear();
-    }
-
-    private JFXToggleNode getSelectedTeam(){
-        return (JFXToggleNode) teamGroup.getSelectedToggle();
     }
 
     @FXML
@@ -251,14 +165,13 @@ public class EventPageController {
     private void generateGroups(){
         TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
 
-        teamGroupsManager.groupAllTeamsByTag(teams, getTeamTags());
+        teamGroupsManager.groupAllTeamsByTag(TeamsGridController.teams, getTeamTags());
         groups = teamGroupsManager.generateGroupsAndReturn(3);
         getSelectedGender().setTeams(teamGroupsManager.getOrderedTeams());
 
         new EventService().updateEvent(EventItemController.eventId, event);
         generateCbxGroupsItens();
         cbxGroups.setValue(1);
-        vBoxTeamButtons.getChildren().clear();
     }
 
     @FXML
@@ -280,7 +193,7 @@ public class EventPageController {
 
     private List<String> getTeamTags(){
         List<String> tags = new ArrayList<>();
-        teams.forEach(team -> {
+        TeamsGridController.teams.forEach(team -> {
             if(!tags.contains(team.getTag())) tags.add(team.getTag());
         });
         return tags;
@@ -289,5 +202,14 @@ public class EventPageController {
     private String getModalityAndGender(){
         JFXRadioButton rdb = (JFXRadioButton) genderGroup.getSelectedToggle();
         return cbxModalities.getValue().toString() + " " + rdb.getText();
+    }
+
+    private void loadTeamGridView(){
+        try{
+            URL viewURL = getClass().getResource("/views/home/team-grid.fxml");
+            paneTeamGrid.getChildren().add(FXMLLoader.load(viewURL));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
