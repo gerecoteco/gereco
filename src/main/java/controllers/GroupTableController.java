@@ -45,7 +45,7 @@ public class GroupTableController {
     private void changeNodeStates(){
         generateCbxGroupsItens();
         cbxGroups.setValue(cbxGroups.getItems().get(0));
-        btnGroupTeams.setDisable(true);
+        btnGroupTeams.setVisible(false);
     }
 
     @FXML
