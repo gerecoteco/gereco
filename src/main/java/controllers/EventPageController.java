@@ -29,7 +29,7 @@ public class EventPageController {
     public AnchorPane paneTeamGrid;
     public AnchorPane paneGroupTable;
     public AnchorPane paneMatchTable;
-    public Label lblModalityAndGender1;
+    public AnchorPane paneLeaderBoard;
     private ToggleGroup genderGroup;
 
     static Event event;
@@ -56,6 +56,7 @@ public class EventPageController {
         loadTeamGridView();
         loadGroupTableView();
         loadMatchTableView();
+        loadLoaderBoardView();
     }
 
     private void generateGenderToggles(){
@@ -92,7 +93,6 @@ public class EventPageController {
 
     @FXML
     protected void changeModalityAndGender(){
-        lblModalityAndGender1.setText(getModalityAndGender().toLowerCase());
         modalityAndGender = getModalityAndGender();
 
         actualGender = getSelectedGender();
@@ -139,6 +139,21 @@ public class EventPageController {
         }
     }
 
+    private void loadLoaderBoardView(){
+        paneLeaderBoard.getChildren().clear();
+        try{
+            URL viewURL = getClass().getResource("/views/home/leaderboard.fxml");
+            paneLeaderBoard.getChildren().add(FXMLLoader.load(viewURL));
+
+            paneLeaderBoard.setBottomAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
+            paneLeaderBoard.setTopAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
+            paneLeaderBoard.setRightAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
+            paneLeaderBoard.setRightAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void loadMatchTableView(){
         paneMatchTable.getChildren().clear();
         try{
@@ -154,7 +169,7 @@ public class EventPageController {
         }
     }
 
-    private List<List<Team>> getGenderGroups(){
+    public static List<List<Team>> getGenderGroups(){
         int lastGroupIndex = actualGender.getTeams().stream()
                 .max(Comparator.comparing(Team::getGroup))
                 .get().getGroup();

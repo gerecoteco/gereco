@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbarLayout;
 import com.jfoenix.controls.JFXTreeTableView;
 import helpers.MatchTableView;
+import helpers.MatchesGenerator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,11 +18,13 @@ import models.Score;
 import models.Team;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import static controllers.EventPageController.actualGender;
+import static controllers.EventPageController.getGenderGroups;
 
 public class MatchTableController {
     public JFXTreeTableView matchTableView;
@@ -77,10 +80,18 @@ public class MatchTableController {
 
     @FXML
     protected void generateFinalMatches(){
-        actualGender.getTeams().sort(Comparator.comparing((Team team) -> team.getScore().getPoints())
-                .thenComparing((Team team) -> team.getScore().getOwnPoints())
-                .thenComparing((Team team) -> team.getScore().getBalance())
-                .thenComparing((Team team) -> team.getScore().getFouls()).reversed());
+        List<Team> finalGroup = new ArrayList<>();
+
+        getGenderGroups().forEach(teams -> {
+            teams.sort(Comparator.comparing((Team team) -> team.getScore().getPoints())
+                    .thenComparing((Team team) -> team.getScore().getOwnPoints())
+                    .thenComparing((Team team) -> team.getScore().getBalance())
+                    .thenComparing((Team team) -> team.getScore().getFouls()).reversed());
+
+            finalGroup.add(teams.get(0));
+        });
+
+        new MatchesGenerator().generateGroupMatches(finalGroup);
     }
 
     private void generateColumns(){

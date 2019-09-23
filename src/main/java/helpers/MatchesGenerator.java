@@ -17,7 +17,7 @@ public class MatchesGenerator {
         return matches;
     }
 
-    private List<Match> generateGroupMatches(List<Team> group){
+    public List<Match> generateGroupMatches(List<Team> group){
         List<Match> groupMatches = new ArrayList<>();
 
         for(int initialIndex = 0; initialIndex < group.size(); initialIndex++){
