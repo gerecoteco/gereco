@@ -7,11 +7,13 @@ public class Gender {
     private String name;
     private List<Team> teams;
     private List<Match> matches;
+    private boolean finalRound;
 
     public Gender(String name) {
         this.name = name;
         this.teams = new ArrayList<>();
         this.matches = new ArrayList<>();
+        this.finalRound = false;
     }
 
     public String getName() {
@@ -31,5 +33,11 @@ public class Gender {
     }
     public void setMatches(List<Match> matches) {
         this.matches = matches;
+    }
+    public boolean isFinalRound() {
+        return finalRound;
+    }
+    public void setFinalRound(boolean finalRound) {
+        this.finalRound = finalRound;
     }
 }

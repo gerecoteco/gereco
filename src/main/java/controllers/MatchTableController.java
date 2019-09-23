@@ -1,5 +1,6 @@
 package controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbarLayout;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -11,23 +12,25 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import models.Match;
 import models.Score;
 import models.Team;
+import services.EventService;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static controllers.EventPageController.actualGender;
-import static controllers.EventPageController.getGenderGroups;
+import static controllers.EventPageController.*;
 
 public class MatchTableController {
     public JFXTreeTableView matchTableView;
+    public HBox hboxButtons;
+    public JFXButton btnFinalMatches;
     public TreeTableColumn<MatchTableView, String> versusColumn, teamAColumn, teamBColumn;
     public TreeTableColumn<MatchTableView, Number> positionMatchColumn, scoreboardAColumn, scoreboardBColumn;
     public Label lblModalityAndGender2;
@@ -39,8 +42,8 @@ public class MatchTableController {
     public void initialize() {
         matchTableView.setRoot(rootMatch);
         generateColumns();
-
         if(!actualGender.getMatches().isEmpty()) listMatchesOnTable();
+        if(actualGender.isFinalRound()) hboxButtons.getChildren().remove(btnFinalMatches);
     }
 
     private void listMatchesOnTable(){
@@ -91,7 +94,11 @@ public class MatchTableController {
             finalGroup.add(teams.get(0));
         });
 
-        new MatchesGenerator().generateGroupMatches(finalGroup);
+        actualGender.getMatches().addAll(new MatchesGenerator().generateGroupMatches(finalGroup));
+        actualGender.setFinalRound(true);
+        new EventService().updateEvent(EventItemController.eventId, event);
+
+        HomeController.loadView(getClass().getResource("/views/home/event-page.fxml"));
     }
 
     private void generateColumns(){

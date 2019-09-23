@@ -38,14 +38,14 @@
             <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </JFXTreeTableView>
-      <HBox alignment="CENTER" spacing="15.0">
+      <HBox fx:id="hboxButtons" alignment="CENTER" spacing="15.0">
          <children>
             <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openMatchFormView" styleClass="btnEvent" text="Editar seleção" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#generateFinalMatches" styleClass="btnEvent" text="Gerar finais" HBox.hgrow="ALWAYS">
+            <JFXButton fx:id="btnFinalMatches" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#generateFinalMatches" styleClass="btnEvent" text="Gerar finais" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>
