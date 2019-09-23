@@ -46,7 +46,7 @@ public class MatchTableController {
             List<Score> scores = matches.get(x).getScores();
 
             TreeItem<MatchTableView> matchRow = new TreeItem<>(new MatchTableView(x+1, teamsName.get(0),
-                    teamsName.get(1),  scores.get(0).getOwnPoints(), scores.get(1).getOwnPoints()));
+                    teamsName.get(1), scores.get(0).getOwnPoints(), scores.get(1).getOwnPoints()));
             rootMatch.getChildren().add(matchRow);
         }
     }

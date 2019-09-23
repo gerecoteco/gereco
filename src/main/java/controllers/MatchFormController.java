@@ -6,11 +6,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import models.Match;
-import models.Team;
+import models.Score;
 import services.EventService;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static controllers.EventPageController.actualGender;
 import static controllers.EventPageController.event;
@@ -80,27 +82,24 @@ public class MatchFormController {
     }
 
     private void addMatchScoreOnTeam(){
-        Team teamA = findTeamByName(lblTeamA.getText());
-        Team teamB = findTeamByName(lblTeamB.getText());
+        actualGender.getTeams().forEach(team -> {
+            team.setScore(new Score());
+            findTeamMatches(team.getName()).forEach(match -> {
+                Score matchScore = match.getScores().get(match.getTeams().indexOf(team.getName()));
 
-        teamA.getScore().setPoints(teamAPoints);
-        teamB.getScore().setPoints(teamBPoints);
-
-        teamA.getScore().setOwnPoints(teamA.getScore().getOwnPoints() + teamAOwnPoints);
-        teamB.getScore().setOwnPoints(teamB.getScore().getOwnPoints() + teamBOwnPoints);
-
-        teamA.getScore().setAgainstPoints(teamA.getScore().getAgainstPoints() + teamBOwnPoints);
-        teamB.getScore().setAgainstPoints(teamB.getScore().getAgainstPoints() + teamAOwnPoints);
-
-        teamA.getScore().setBalance(teamA.getScore().getBalance() + (teamAOwnPoints - teamBOwnPoints));
-        teamB.getScore().setBalance(teamB.getScore().getBalance() + (teamBOwnPoints - teamAOwnPoints));
-
-        teamA.getScore().setFouls(teamA.getScore().getFouls() + Integer.parseInt(txtFoulsA.getText()));
-        teamB.getScore().setFouls(teamB.getScore().getFouls() + Integer.parseInt(txtFoulsB.getText()));
+                team.getScore().setPoints(team.getScore().getPoints() + matchScore.getPoints());
+                team.getScore().setOwnPoints(team.getScore().getOwnPoints() + matchScore.getOwnPoints());
+                team.getScore().setAgainstPoints(team.getScore().getAgainstPoints() + matchScore.getAgainstPoints());
+                team.getScore().setBalance(team.getScore().getBalance() +
+                        (matchScore.getOwnPoints() - matchScore.getAgainstPoints()));
+                team.getScore().setFouls(team.getScore().getFouls() + matchScore.getFouls());
+            });
+        });
     }
 
-    private Team findTeamByName(String teamName){
-        return actualGender.getTeams().stream().filter(team -> team.getName().equals(teamName)).findAny().get();
+    private List<Match> findTeamMatches(String teamName){
+        return actualGender.getMatches().stream().filter(match ->
+                match.getTeams().contains(teamName)).collect(Collectors.toList());
     }
 
     private Match getActualMatch(){

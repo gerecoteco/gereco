@@ -54,10 +54,11 @@ public class TeamsGridController {
         Stream<Node> toggleNodeTeams = gridTeams.getChildren().stream().filter(node ->
                 node.getClass().getTypeName().equals(JFXToggleNode.class.getTypeName()));
 
+        String styleClass = teams.isEmpty() ? "add_team" : "hover_team";
         toggleNodeTeams.forEach(nodeTeam -> {
             JFXToggleNode btnTeam = (JFXToggleNode) nodeTeam;
             btnTeam.setOnAction(this::editTeam);
-            btnTeam.getStyleClass().add("team_hover");
+            btnTeam.getStyleClass().add(styleClass);
             btnTeam.setCursor(Cursor.HAND);
         });
     }
@@ -79,7 +80,7 @@ public class TeamsGridController {
             Team teamFound = findTeamByName();
             teams.remove(teamFound);
             getSelectedTeam().setText("");
-            getSelectedTeam().getStyleClass().add("team_hover");
+            getSelectedTeam().getStyleClass().add("add_team");
             clearTextFields();
         }
     }
@@ -95,6 +96,7 @@ public class TeamsGridController {
 
         getSelectedTeam().setText(txtTeamName.getText());
         getSelectedTeam().getStyleClass().clear();
+        getSelectedTeam().getStyleClass().add("hover_team");
     }
 
     private void updateTeam(Team teamFound){

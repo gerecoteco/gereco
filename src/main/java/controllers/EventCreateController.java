@@ -59,14 +59,6 @@ public class EventCreateController {
            findModalityByName().getGenders().add(newGender);
         else
             removeGender(checkBox.getText());
-
-        listGenders();
-    }
-
-    private void listGenders(){
-        System.out.print(cbxModalities.getValue() + " -> ");
-        findModalityByName().getGenders().forEach(gender -> System.out.print(gender.getName() + " "));
-        System.out.println();
     }
 
     private Modality findModalityByName(){
