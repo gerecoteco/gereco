@@ -12,7 +12,8 @@
    <children>
       <JFXTreeTableView fx:id="groupTableView" fixedCellSize="40.0" layoutY="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="40.0">
          <columns>
-            <TreeTableColumn fx:id="teamCollumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="Time" />
+            <TreeTableColumn fx:id="teamColumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="Time" />
+            <TreeTableColumn fx:id="pointsColumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="Pontos" />
             <TreeTableColumn fx:id="ownPointsColumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="PP" />
             <TreeTableColumn fx:id="againstPointsColumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="PC" />
             <TreeTableColumn fx:id="balanceColumn" editable="false" minWidth="100.0" prefWidth="100.0" resizable="false" text="Saldo" />

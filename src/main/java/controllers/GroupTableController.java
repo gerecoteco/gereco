@@ -24,8 +24,9 @@ public class GroupTableController {
     public JFXComboBox cbxGroups;
     public JFXButton btnGroupTeams;
     public JFXTreeTableView groupTableView;
-    public TreeTableColumn<GroupTableView, String> teamCollumn;
-    public TreeTableColumn<GroupTableView, Number> ownPointsColumn, againstPointsColumn, balanceColumn, foulsColumn;
+    public TreeTableColumn<GroupTableView, String> teamColumn;
+    public TreeTableColumn<GroupTableView, Number> pointsColumn, ownPointsColumn, againstPointsColumn,
+            balanceColumn, foulsColumn;
     private TreeItem<GroupTableView> rootGroup = new TreeItem<>(new GroupTableView());
 
     static List<List<Team>> groups;
@@ -54,9 +55,9 @@ public class GroupTableController {
         rootGroup.getChildren().clear();
 
         groups.get(groupIndex).forEach(team -> {
-            TreeItem<GroupTableView> teamRow = new TreeItem<>(new GroupTableView(team.getName(),
-                    team.getScore().getOwnPoints(), team.getScore().getAgainstPoints(),
-                    team.getScore().getBalance(), team.getScore().getFouls()));
+            TreeItem<GroupTableView> teamRow = new TreeItem<>(new GroupTableView(
+                    team.getName(), team.getScore().getPoints(), team.getScore().getOwnPoints(),
+                    team.getScore().getAgainstPoints(), team.getScore().getBalance(), team.getScore().getFouls()));
             rootGroup.getChildren().add(teamRow);
         });
     }
@@ -94,7 +95,8 @@ public class GroupTableController {
     }
 
     private void generateGroupTableColumns(){
-        teamCollumn.setCellValueFactory(param -> param.getValue().getValue().teamProperty());
+        teamColumn.setCellValueFactory(param -> param.getValue().getValue().teamProperty());
+        pointsColumn.setCellValueFactory(param -> param.getValue().getValue().pointsProperty());
         ownPointsColumn.setCellValueFactory(param -> param.getValue().getValue().ownPointsProperty());
         againstPointsColumn.setCellValueFactory(param -> param.getValue().getValue().againstPointsProperty());
         balanceColumn.setCellValueFactory(param -> param.getValue().getValue().balanceProperty());
