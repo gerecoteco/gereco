@@ -22,22 +22,20 @@ public class TeamsGridController {
     public JFXTextField txtTeamName;
     public JFXTextField txtTeamTag;
 
-    private static VBox staticVBoxTeamButtons;
     static List<Team> teams;
 
     @FXML
     public void initialize() {
         teams = EventPageController.actualGender.getTeams();
-        staticVBoxTeamButtons = vBoxTeamButtons;
 
-        if(!teams.isEmpty()) hideButtons();
+        if(!teams.isEmpty()) {
+           vBoxTeamButtons.setVisible(false);
+           txtTeamName.setEditable(false);
+           txtTeamTag.setEditable(false);
+        }
 
         setOnActionToTeamsButtons();
         listTeamsOnGrid();
-    }
-
-    static void hideButtons(){
-        staticVBoxTeamButtons.setVisible(false);
     }
 
     private void listTeamsOnGrid(){
@@ -89,14 +87,17 @@ public class TeamsGridController {
     protected void saveTeam(){
         Team teamFound = findTeamByName();
 
-        if(teamFound != null)
+        if(teamFound == null){
+            if(!txtTeamName.getText().equals("")){
+                createTeam();
+                getSelectedTeam().getStyleClass().clear();
+                getSelectedTeam().getStyleClass().add("hover_team");
+            } else
+                HomeController.showToastMessage("O time deve conter um nome!");
+        } else
             updateTeam(teamFound);
-        else
-            createTeam();
 
         getSelectedTeam().setText(txtTeamName.getText());
-        getSelectedTeam().getStyleClass().clear();
-        getSelectedTeam().getStyleClass().add("hover_team");
     }
 
     private void updateTeam(Team teamFound){

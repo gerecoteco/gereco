@@ -7,7 +7,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import helpers.DialogBuilder;
 import helpers.MatchesGenerator;
 import helpers.TeamGroupsManager;
-import helpers.groupTable.GroupTableView;
+import helpers.GroupTableView;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -45,7 +45,6 @@ public class GroupTableController {
     private void changeNodeStates(){
         generateCbxGroupsItens();
         cbxGroups.setValue(cbxGroups.getItems().get(0));
-        TeamsGridController.hideButtons();
         btnGroupTeams.setDisable(true);
     }
 
@@ -87,7 +86,7 @@ public class GroupTableController {
         actualGender.setMatches(matchesGenerator.generateMatchesAndReturn(groups));
 
         new EventService().updateEvent(EventItemController.eventId, event);
-        changeNodeStates();
+        HomeController.loadView(getClass().getResource("/views/home/event-page.fxml"));
     }
 
     private void generateCbxGroupsItens(){

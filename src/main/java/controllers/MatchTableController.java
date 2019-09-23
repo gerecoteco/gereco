@@ -3,7 +3,7 @@ package controllers;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbarLayout;
 import com.jfoenix.controls.JFXTreeTableView;
-import helpers.matchTable.MatchTableView;
+import helpers.MatchTableView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,8 +14,11 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import models.Match;
 import models.Score;
+import models.Team;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static controllers.EventPageController.actualGender;
@@ -70,6 +73,14 @@ public class MatchTableController {
             }
         } else
             showToastMessage("Selecione uma partida primeiramente");
+    }
+
+    @FXML
+    protected void generateFinalMatches(){
+        actualGender.getTeams().sort(Comparator.comparing((Team team) -> team.getScore().getPoints())
+                .thenComparing((Team team) -> team.getScore().getOwnPoints())
+                .thenComparing((Team team) -> team.getScore().getBalance())
+                .thenComparing((Team team) -> team.getScore().getFouls()).reversed());
     }
 
     private void generateColumns(){

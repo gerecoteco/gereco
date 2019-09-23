@@ -50,6 +50,7 @@ public class EventItemController {
         EventService eventService = new EventService();
         eventService.deleteEvent(lblEventId.getText());
         HomeController.loadView(getClass().getResource("/views/home/event-list.fxml"));
+        HomeController.showToastMessage("Evento excluído com sucesso!");
     }
 
     private void listAllModalities() {

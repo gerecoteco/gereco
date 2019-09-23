@@ -1,10 +1,11 @@
 package controllers;
 
-import helpers.matchTable.MatchTableView;
+import helpers.MatchTableView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
+import javafx.stage.Stage;
 import models.Match;
 import models.Score;
 import services.EventService;
@@ -26,8 +27,6 @@ public class MatchFormController {
     public TextField txtFoulsB;
 
     private TreeItem<MatchTableView> selectedMatch;
-    private int teamAPoints, teamBPoints;
-    private int teamAOwnPoints, teamBOwnPoints;
 
     @FXML
     public void initialize() {
@@ -45,9 +44,10 @@ public class MatchFormController {
     @FXML
     protected void saveMatch(){
         Match actualMatch = getActualMatch();
-        teamAOwnPoints = Integer.parseInt(txtOwnPointsA.getText());
-        teamBOwnPoints = Integer.parseInt(txtOwnPointsB.getText());
+        int teamAOwnPoints = Integer.parseInt(txtOwnPointsA.getText());
+        int teamBOwnPoints = Integer.parseInt(txtOwnPointsB.getText());
 
+        int teamAPoints, teamBPoints;
         if(teamAOwnPoints == teamBOwnPoints){
             teamAPoints = 1; teamBPoints = 1;
         } else if(teamAOwnPoints > teamBOwnPoints){
@@ -77,6 +77,8 @@ public class MatchFormController {
     }
 
     private void reloadEventPage(){
+        ((Stage) lblTeamA.getScene().getWindow()).close();
+
         URL eventPageURL = getClass().getResource("/views/home/event-page.fxml");
         HomeController.loadView(eventPageURL);
     }

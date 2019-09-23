@@ -52,6 +52,7 @@ public class InstitutionConfigController {
         dialogBuilder.setConfirmAction(action -> {
             updateInstitutionName();
             HomeController.loadInstitutionInfoOnLabel();
+            HomeController.showToastMessage("Nome alterado com sucesso!");
             closeStage();
         });
         dialog.show();
@@ -92,6 +93,7 @@ public class InstitutionConfigController {
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
         dialogBuilder.setConfirmAction(action -> {
             updateInstitutionPassword();
+            HomeController.showToastMessage("Senha alterada com sucesso!");
             closeStage();
         });
         dialog.show();
@@ -114,7 +116,7 @@ public class InstitutionConfigController {
         snackbar.getStylesheets().add(getClass().getResource("/css/snackbar.css").toString());
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
                 new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
-                Duration.INDEFINITE, null));
+                Duration.millis(3000), null));
     }
 
     private void closeStage(){
