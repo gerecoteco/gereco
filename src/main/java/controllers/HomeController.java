@@ -65,12 +65,16 @@ public class HomeController {
 
     @FXML
     protected void logout(){
+       returnToInitialView();
+    }
+
+    static void returnToInitialView(){
         Session.getInstance().setInstitution(null);
         Main.mainStage.close();
         Main.mainStage = new Stage();
 
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/initial.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(HomeController.class.getResource("/views/initial.fxml")));
 
             Main.mainStage.setScene(scene);
             Main.mainStage.setResizable(false);

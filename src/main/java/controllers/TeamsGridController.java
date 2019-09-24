@@ -79,30 +79,31 @@ public class TeamsGridController {
 
     @FXML
     protected void deleteTeam(){
-        if(findTeamByName() != null) {
+        if(getSelectedTeam() != null && findTeamByName() != null) {
             Team teamFound = findTeamByName();
             teams.remove(teamFound);
             getSelectedTeam().setText("");
             getSelectedTeam().getStyleClass().add("add_team");
             clearTextFields();
-        }
+        } else HomeController.showToastMessage("Selecione um time primeiro!");
     }
 
     @FXML
     protected void saveTeam(){
         Team teamFound = findTeamByName();
 
-        if(teamFound == null){
-            if(!txtTeamName.getText().equals("")){
-                createTeam();
-                getSelectedTeam().getStyleClass().clear();
-                getSelectedTeam().getStyleClass().add("hover_team");
-            } else
-                HomeController.showToastMessage("O time deve conter um nome!");
-        } else
-            updateTeam(teamFound);
+        if(getSelectedTeam() != null){
+            if(teamFound == null){
+                if(!txtTeamName.getText().equals("")){
+                    createTeam();
+                    getSelectedTeam().getStyleClass().clear();
+                    getSelectedTeam().getStyleClass().add("hover_team");
+                } else
+                    HomeController.showToastMessage("O time deve conter um nome!");
+            } else updateTeam(teamFound);
 
-        getSelectedTeam().setText(txtTeamName.getText());
+            getSelectedTeam().setText(txtTeamName.getText());
+        } else HomeController.showToastMessage("Selecione um time primeiro!");
     }
 
     private void updateTeam(Team teamFound){
