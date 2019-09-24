@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class MatchTableView {
-    private SimpleIntegerProperty position;
+    private SimpleIntegerProperty stage;
     private SimpleStringProperty versus;
     private SimpleStringProperty teamA;
     private SimpleStringProperty teamB;
@@ -14,17 +14,13 @@ public class MatchTableView {
     public MatchTableView() {
     }
 
-    public MatchTableView(int position, String teamA, String teamB, int scoreA, int scoreB) {
-        this.position = new SimpleIntegerProperty(position);
+    public MatchTableView(int stage, String teamA, String teamB, int scoreA, int scoreB) {
+        this.stage = new SimpleIntegerProperty(stage);
         this.versus = new SimpleStringProperty("X");
         this.teamA = new SimpleStringProperty(teamA);
         this.teamB = new SimpleStringProperty(teamB);
         this.scoreA = new SimpleIntegerProperty(scoreA);
         this.scoreB = new SimpleIntegerProperty(scoreB);
-    }
-
-    public SimpleIntegerProperty positionProperty() {
-        return position;
     }
 
     public SimpleStringProperty versusProperty() {
@@ -45,5 +41,9 @@ public class MatchTableView {
 
     public SimpleIntegerProperty scoreBProperty() {
         return scoreB;
+    }
+
+    public SimpleIntegerProperty stageProperty() {
+        return stage;
     }
 }

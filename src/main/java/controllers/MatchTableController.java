@@ -32,7 +32,7 @@ public class MatchTableController {
     public HBox hboxButtons;
     public JFXButton btnFinalMatches;
     public TreeTableColumn<MatchTableView, String> versusColumn, teamAColumn, teamBColumn;
-    public TreeTableColumn<MatchTableView, Number> positionMatchColumn, scoreboardAColumn, scoreboardBColumn;
+    public TreeTableColumn<MatchTableView, Number> stageColumn, scoreboardAColumn, scoreboardBColumn;
     public Label lblModalityAndGender2;
     private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
 
@@ -43,21 +43,27 @@ public class MatchTableController {
         matchTableView.setRoot(rootMatch);
         generateColumns();
         if(!actualGender.getMatches().isEmpty()) listMatchesOnTable();
-        if(actualGender.isFinalRound()) hboxButtons.getChildren().remove(btnFinalMatches);
+        if(isFinalRound()) hboxButtons.getChildren().remove(btnFinalMatches);
+    }
+
+    private boolean isFinalRound(){
+        return actualGender.getMatches().stream().filter(
+                match -> match.getStage() == 2).findAny().orElse(null) != null;
     }
 
     private void listMatchesOnTable(){
         rootMatch.getChildren().clear();
         List<Match> matches = actualGender.getMatches();
 
-        for(int x=0; x < matches.size(); x++){
-            List<String> teamsName = matches.get(x).getTeams();
-            List<Score> scores = matches.get(x).getScores();
+        matches.forEach(match -> {
+            List<String> teamsName = match.getTeams();
+            List<Score> scores = match.getScores();
+            TreeItem<MatchTableView> matchRow = new TreeItem<>(new MatchTableView(
+                    match.getStage(), teamsName.get(0), teamsName.get(1),
+                    scores.get(0).getOwnPoints(), scores.get(1).getOwnPoints()));
 
-            TreeItem<MatchTableView> matchRow = new TreeItem<>(new MatchTableView(x+1, teamsName.get(0),
-                    teamsName.get(1), scores.get(0).getOwnPoints(), scores.get(1).getOwnPoints()));
             rootMatch.getChildren().add(matchRow);
-        }
+        });
     }
 
     @FXML
@@ -65,20 +71,27 @@ public class MatchTableController {
         selectedMatch = (TreeItem<MatchTableView>) matchTableView.getSelectionModel().getSelectedItem();
 
         if(!matchTableView.getSelectionModel().isEmpty()){
-            try {
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource(
-                        "/views/external-forms/match-form.fxml")));
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.setResizable(false);
-                stage.centerOnScreen();
-                stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            if(isFinalRound() && selectedMatch.getValue().stageProperty().get() == 1)
+                showToastMessage("Você não pode alterar partidas da primeira etapa");
+            else
+                loadMatchForm();
         } else
             showToastMessage("Selecione uma partida primeiramente");
+    }
+
+    private void loadMatchForm(){
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(
+                    "/views/external-forms/match-form.fxml")));
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.centerOnScreen();
+            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -94,15 +107,17 @@ public class MatchTableController {
             finalGroup.add(teams.get(0));
         });
 
-        actualGender.getMatches().addAll(new MatchesGenerator().generateGroupMatches(finalGroup));
-        actualGender.setFinalRound(true);
+        List<Match> matches = new MatchesGenerator().generateGroupMatches(finalGroup);
+        matches.forEach(match -> match.setStage(2));
+
+        actualGender.getMatches().addAll(matches);
         new EventService().updateEvent(EventItemController.eventId, event);
 
         HomeController.loadView(getClass().getResource("/views/home/event-page.fxml"));
     }
 
     private void generateColumns(){
-        positionMatchColumn.setCellValueFactory(param -> param.getValue().getValue().positionProperty());
+        stageColumn.setCellValueFactory(param -> param.getValue().getValue().stageProperty());
         versusColumn.setCellValueFactory(param -> param.getValue().getValue().versusProperty());
         teamAColumn.setCellValueFactory(param -> param.getValue().getValue().teamAProperty());
         teamBColumn.setCellValueFactory(param -> param.getValue().getValue().teamBProperty());
