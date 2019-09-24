@@ -9,10 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import models.Institution;
 import services.InstitutionService;
 
@@ -26,8 +26,6 @@ public class InitialController implements Initializable {
     public JFXPasswordField txtRegisterPassword;
     public JFXTextField txtLoginEmail;
     public JFXPasswordField txtLoginPassword;
-    public Label lblLoginMessage;
-    public Label lblRegisterMessage;
     public JFXButton btnLogin;
     public StackPane stackPaneLogin;
 
@@ -44,7 +42,7 @@ public class InitialController implements Initializable {
         boolean validLogin = institutionAuth.login(txtLoginEmail.getText(), txtLoginPassword.getText());
 
         if(!validLogin)
-            lblLoginMessage.setText("Falha ao efetuar login");
+            showToastMessage("Falha ao efetuar login");
         else
             openHomeView();
     }
@@ -53,9 +51,16 @@ public class InitialController implements Initializable {
     protected void efetuateInstitutionRegister() {
         Institution newInstitution = new Institution(txtRegisterName.getText(), txtRegisterEmail.getText(),
                 txtRegisterPassword.getText());
-        boolean validRegister = institutionService.insertInstitution(newInstitution);
 
-        lblRegisterMessage.setText(validRegister ? "Cadastro efetuado com sucesso" : "Falha ao efetuar o cadastro");
+        String warning = InstitutionAuth.validatePasswordAndReturnMessage(
+                txtRegisterPassword.getText(), txtRegisterPassword.getText());
+        warning = txtRegisterName.getText().length() < 3 ? "O nome deve conter ao menos 3 caracteres" : warning;
+
+        if(warning == null){
+            boolean validRegister = institutionService.insertInstitution(newInstitution);
+            showToastMessage(validRegister ? "Cadastro efetuado com sucesso" : "Falha ao efetuar o cadastro");
+        } else
+            showToastMessage(warning);
     }
 
     private void openHomeView(){
@@ -66,10 +71,10 @@ public class InitialController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/home/home.fxml")));
 
-            Main.mainStage .setScene(scene);
-            Main.mainStage .setResizable(true);
-            Main.mainStage .centerOnScreen();
-            Main.mainStage .show();
+            Main.mainStage.setScene(scene);
+            Main.mainStage.setResizable(true);
+            Main.mainStage.centerOnScreen();
+            Main.mainStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -94,5 +99,13 @@ public class InitialController implements Initializable {
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
         dialogBuilder.setConfirmAction(action -> dialog.close());
         dialog.show();
+    }
+
+    private void showToastMessage(String messsage) {
+        JFXSnackbar snackbar = new JFXSnackbar(stackPaneLogin);
+        snackbar.getStylesheets().add(getClass().getResource("/css/snackbar.css").toString());
+        snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
+                new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
+                Duration.millis(3000), null));
     }
 }

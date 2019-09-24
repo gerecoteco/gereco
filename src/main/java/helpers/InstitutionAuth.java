@@ -10,6 +10,10 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InstitutionAuth {
     private InstitutionService institutionService = new InstitutionService();
@@ -44,5 +48,41 @@ public class InstitutionAuth {
             throw new RuntimeException(e);
         }
         return hashedPassword;
+    }
+
+    public static String validatePasswordAndReturnMessage(String password, String confirmPassword){
+        String warning = null;
+
+        if(!password.isEmpty() && !confirmPassword.isEmpty()){
+            if(password.length() < 6)
+                warning = "A Senha deve conter ao menos 6 caracteres!";
+            else if(!passwordContainsSpecialCharacter(password))
+                warning = "A Senha deve conter caracter especial!";
+            else if(!passwordContainsUpperCase(password))
+                warning = "A Senha deve conter letra maiúscula!";
+            else if(!passwordContainsNumber(password))
+                warning = "A senha deve conter número!";
+            else if(!password.equals(confirmPassword))
+                warning = "As senhas estão diferentes!";
+        } else
+            warning = "Preencha os campos!";
+
+        return warning;
+    }
+
+    private static boolean passwordContainsSpecialCharacter(String password){
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
+        Matcher matcher = pattern.matcher(password);
+        return !matcher.matches();
+    }
+
+    private static boolean passwordContainsNumber(String password){
+        Pattern pattern = Pattern.compile("([0-9])");
+        Matcher matcher = pattern.matcher(password);
+        return !matcher.matches();
+    }
+
+    private static boolean passwordContainsUpperCase(String password){
+        return !password.toLowerCase().equals(password);
     }
 }
