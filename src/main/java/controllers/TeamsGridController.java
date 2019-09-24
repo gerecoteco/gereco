@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -15,18 +16,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static controllers.EventPageController.modalityAndGender;
+
 public class TeamsGridController {
     public GridPane gridTeams;
     public ToggleGroup teamGroup;
     public VBox vBoxTeamButtons;
     public JFXTextField txtTeamName;
     public JFXTextField txtTeamTag;
+    public Label lblModalityAndGender;
 
     static List<Team> teams;
 
     @FXML
     public void initialize() {
         teams = EventPageController.actualGender.getTeams();
+        lblModalityAndGender.setText(modalityAndGender);
 
         if(!teams.isEmpty()) {
            vBoxTeamButtons.setVisible(false);

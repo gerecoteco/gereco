@@ -1,19 +1,24 @@
 package controllers;
 
+import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.JFXTreeTableView;
 import helpers.LeaderBoardView;
+import helpers.PdfTableGenerator;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import models.Team;
 
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
-import static controllers.EventPageController.actualGender;
+import static controllers.EventPageController.*;
 
 public class LeaderBoardController {
     public JFXTreeTableView leaderBoardTableView;
+    public Label lblModalityAndGender;
     public TreeTableColumn<LeaderBoardView, String> nameColumn;
     public TreeTableColumn<LeaderBoardView, Number> positionColumn, pointsColumn, ownPointsColumn,
             againstPoinstColumn, balanceColumn, foulsColumn;
@@ -21,6 +26,8 @@ public class LeaderBoardController {
 
     @FXML
     public void initialize(){
+        lblModalityAndGender.setText(modalityAndGender);
+
         leaderBoardTableView.setRoot(rootLeaderBoard);
         generateColumns();
 
@@ -43,6 +50,15 @@ public class LeaderBoardController {
                     teams.get(x).getScore().getBalance(), teams.get(x).getScore().getFouls()));
             rootLeaderBoard.getChildren().add(teamRow);
         }
+    }
+
+    @FXML
+    protected void exportLeaderBoardToPdf() throws IOException, DocumentException {
+        PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
+        String title = "Classificação do " + modalityAndGender + " do " + event.getName();
+        pdfTableGenerator.createPdf(title, "../../../classificacao-gereco.pdf", rootLeaderBoard.getChildren());
+
+        HomeController.showToastMessage("A classificação foi salva com sucesso!");
     }
 
     private void generateColumns(){

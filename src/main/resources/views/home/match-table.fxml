@@ -19,7 +19,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblModalityAndGender2">
+            <Label fx:id="lblModalityAndGender">
                <font>
                   <Font size="14.0" />
                </font>

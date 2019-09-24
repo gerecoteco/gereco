@@ -33,13 +33,15 @@ public class MatchTableController {
     public JFXButton btnFinalMatches;
     public TreeTableColumn<MatchTableView, String> versusColumn, teamAColumn, teamBColumn;
     public TreeTableColumn<MatchTableView, Number> stageColumn, scoreboardAColumn, scoreboardBColumn;
-    public Label lblModalityAndGender2;
+    public Label lblModalityAndGender;
     private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
 
     static TreeItem<MatchTableView> selectedMatch;
 
     @FXML
     public void initialize() {
+        lblModalityAndGender.setText(modalityAndGender);
+
         matchTableView.setRoot(rootMatch);
         generateColumns();
         if(!actualGender.getMatches().isEmpty()) listMatchesOnTable();

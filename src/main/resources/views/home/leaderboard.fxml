@@ -17,7 +17,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblModalityAndGender1">
+            <Label fx:id="lblModalityAndGender">
                <font>
                   <Font size="14.0" />
                </font>
@@ -35,7 +35,7 @@
             <TreeTableColumn fx:id="foulsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Penalidades" />
          </columns>
       </JFXTreeTableView>
-      <JFXButton maxWidth="1.7976931348623157E308" styleClass="btnEvent" text="Baixar como PDF">
+      <JFXButton maxWidth="1.7976931348623157E308" onAction="#exportLeaderBoardToPdf" styleClass="btnEvent" text="Baixar como PDF">
          <font>
             <Font size="14.0" />
          </font>
