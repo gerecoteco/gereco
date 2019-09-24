@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
 import models.Institution;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import static com.mongodb.client.model.Filters.eq;
 import static helpers.InstitutionAuth.encryptPassword;

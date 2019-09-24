@@ -1,4 +1,6 @@
+import helpers.MatchesGenerator;
 import helpers.TeamGroupsManager;
+import models.Match;
 import models.Team;
 import org.junit.Before;
 import org.junit.Test;
@@ -76,6 +78,18 @@ public class TeamGroupManagerTests {
         assertEquals(4, generatedGroups.get(0).size());
         assertEquals(3, generatedGroups.get(1).size());
         assertEquals(2, generatedGroups.get(2).size());
+    }
+
+    @Test
+    public void generateMatchs(){
+        numberOfTeams = 5;
+        teams = generateGroupsForTests();
+        List<Match> matches = new MatchesGenerator().generateMatchesAndReturn(createOrderedGroupsAndReturn());
+
+        matches.forEach(match -> {
+            String message = match.getTeams().get(0) + " X " + match.getTeams().get(1);
+            System.out.println(message);
+        });
     }
 
     private List<List<Team>> createOrderedGroupsAndReturn(){

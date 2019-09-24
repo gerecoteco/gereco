@@ -48,11 +48,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <Label fx:id="lblRegisterMessage" alignment="CENTER" layoutX="-35.0" layoutY="62.0" prefHeight="17.0" prefWidth="0.0" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
                </children>
                <padding>
                   <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
@@ -86,11 +81,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <Label fx:id="lblLoginMessage" alignment="CENTER" layoutX="60.0" prefHeight="17.0" prefWidth="0.0" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
                   <Label layoutX="221.0" layoutY="371.0" onMouseClicked="#loadForgotPasswordDialog" text="Esqueci minha senha" textFill="WHITE" underline="true" AnchorPane.rightAnchor="0.0">
                      <font>
                         <Font size="16.0" />

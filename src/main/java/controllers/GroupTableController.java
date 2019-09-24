@@ -5,8 +5,9 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTreeTableView;
 import helpers.DialogBuilder;
+import helpers.MatchesGenerator;
 import helpers.TeamGroupsManager;
-import helpers.groupTable.GroupTableView;
+import helpers.GroupTableView;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -23,8 +24,9 @@ public class GroupTableController {
     public JFXComboBox cbxGroups;
     public JFXButton btnGroupTeams;
     public JFXTreeTableView groupTableView;
-    public TreeTableColumn<GroupTableView, String> teamCollumn;
-    public TreeTableColumn<GroupTableView, Number> ownPointsColumn, againstPointsColumn, balanceColumn, foulsColumn;
+    public TreeTableColumn<GroupTableView, String> teamColumn;
+    public TreeTableColumn<GroupTableView, Number> pointsColumn, ownPointsColumn, againstPointsColumn,
+            balanceColumn, foulsColumn;
     private TreeItem<GroupTableView> rootGroup = new TreeItem<>(new GroupTableView());
 
     static List<List<Team>> groups;
@@ -34,12 +36,16 @@ public class GroupTableController {
         generateGroupTableColumns();
         groupTableView.setRoot(rootGroup);
 
-        if(!groups.isEmpty()){
-            generateCbxGroupsItens();
-            cbxGroups.setValue(cbxGroups.getItems().get(0));
+        if(!groups.isEmpty()) {
+            changeNodeStates();
             showGroupsOnTable();
-            btnGroupTeams.setDisable(true);
         }
+    }
+
+    private void changeNodeStates(){
+        generateCbxGroupsItens();
+        cbxGroups.setValue(cbxGroups.getItems().get(0));
+        btnGroupTeams.setVisible(false);
     }
 
     @FXML
@@ -48,9 +54,9 @@ public class GroupTableController {
         rootGroup.getChildren().clear();
 
         groups.get(groupIndex).forEach(team -> {
-            TreeItem<GroupTableView> teamRow = new TreeItem<>(new GroupTableView(team.getName(),
-                    team.getScore().getOwnPoints(), team.getScore().getAgainstPoints(),
-                    team.getScore().getBalance(), team.getScore().getFouls()));
+            TreeItem<GroupTableView> teamRow = new TreeItem<>(new GroupTableView(
+                    team.getName(), team.getScore().getPoints(), team.getScore().getOwnPoints(),
+                    team.getScore().getAgainstPoints(), team.getScore().getBalance(), team.getScore().getFouls()));
             rootGroup.getChildren().add(teamRow);
         });
     }
@@ -72,15 +78,15 @@ public class GroupTableController {
 
     private void generateGroups(){
         TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
+        MatchesGenerator matchesGenerator = new MatchesGenerator();
 
         teamGroupsManager.groupAllTeamsByTag(TeamsGridController.teams, getTeamTags());
         groups = teamGroupsManager.generateGroupsAndReturn(3);
         actualGender.setTeams(teamGroupsManager.getOrderedTeams());
+        actualGender.setMatches(matchesGenerator.generateMatchesAndReturn(groups));
 
         new EventService().updateEvent(EventItemController.eventId, event);
-        generateCbxGroupsItens();
-        cbxGroups.setValue(1);
-        TeamsGridController.hideButtons();
+        HomeController.loadView(getClass().getResource("/views/home/event-page.fxml"));
     }
 
     private void generateCbxGroupsItens(){
@@ -88,7 +94,8 @@ public class GroupTableController {
     }
 
     private void generateGroupTableColumns(){
-        teamCollumn.setCellValueFactory(param -> param.getValue().getValue().teamProperty());
+        teamColumn.setCellValueFactory(param -> param.getValue().getValue().teamProperty());
+        pointsColumn.setCellValueFactory(param -> param.getValue().getValue().pointsProperty());
         ownPointsColumn.setCellValueFactory(param -> param.getValue().getValue().ownPointsProperty());
         againstPointsColumn.setCellValueFactory(param -> param.getValue().getValue().againstPointsProperty());
         balanceColumn.setCellValueFactory(param -> param.getValue().getValue().balanceProperty());

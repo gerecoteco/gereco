@@ -35,9 +35,12 @@ public class EventCreateController {
 
     @FXML
     protected void appendModalities(){
-        chipModalities.setDisable(true);
-        cbxModalities.setItems(chipModalities.getChips());
-        generateModalities();
+        if(!chipModalities.getChips().isEmpty()){
+            chipModalities.setDisable(true);
+            cbxModalities.setItems(chipModalities.getChips());
+            generateModalities();
+        } else
+            HomeController.showToastMessage("Insira as modalidades primeiro!");
     }
 
     private void generateModalities(){
@@ -59,14 +62,6 @@ public class EventCreateController {
            findModalityByName().getGenders().add(newGender);
         else
             removeGender(checkBox.getText());
-
-        listGenders();
-    }
-
-    private void listGenders(){
-        System.out.print(cbxModalities.getValue() + " -> ");
-        findModalityByName().getGenders().forEach(gender -> System.out.print(gender.getName() + " "));
-        System.out.println();
     }
 
     private Modality findModalityByName(){
@@ -98,12 +93,25 @@ public class EventCreateController {
 
     @FXML
     protected void saveEvent(ActionEvent event){
-        newEvent.setName(txtName.getText());
-        String eventJson = new Gson().toJson(newEvent);
-        eventService.insertEventInCollection(eventJson);
+        boolean validEvent = !txtName.getText().isEmpty() && chipModalities.isDisable()
+                && !modalitiesWithEmptyGenders();
 
-        HomeController.loadView(getClass().getResource("/views/home/event-list.fxml"));
-        getActualStage(event).close();
+        if(validEvent){
+            newEvent.setName(txtName.getText());
+            String eventJson = new Gson().toJson(newEvent);
+            eventService.insertEventInCollection(eventJson);
+
+            HomeController.loadView(getClass().getResource("/views/home/event-list.fxml"));
+            getActualStage(event).close();
+            HomeController.showToastMessage("Evento criado com sucesso!");
+        } else
+            HomeController.showToastMessage("Preencha todas as informações!");
+    }
+
+    private boolean modalitiesWithEmptyGenders(){
+        for (Modality modality : newEvent.getModalities())
+            if(modality.getGenders().isEmpty()) return true;
+        return false;
     }
 
     @FXML

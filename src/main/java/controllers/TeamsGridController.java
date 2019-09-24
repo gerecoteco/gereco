@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -15,29 +16,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static controllers.EventPageController.modalityAndGender;
+
 public class TeamsGridController {
     public GridPane gridTeams;
     public ToggleGroup teamGroup;
     public VBox vBoxTeamButtons;
     public JFXTextField txtTeamName;
     public JFXTextField txtTeamTag;
+    public Label lblModalityAndGender;
 
-    private static VBox staticVBoxTeamButtons;
     static List<Team> teams;
 
     @FXML
     public void initialize() {
         teams = EventPageController.actualGender.getTeams();
-        staticVBoxTeamButtons = vBoxTeamButtons;
+        lblModalityAndGender.setText(modalityAndGender);
 
-        if(!teams.isEmpty()) hideButtons();
+        if(!teams.isEmpty()) {
+           vBoxTeamButtons.setVisible(false);
+           txtTeamName.setEditable(false);
+           txtTeamTag.setEditable(false);
+        }
 
         setOnActionToTeamsButtons();
         listTeamsOnGrid();
-    }
-
-    static void hideButtons(){
-        staticVBoxTeamButtons.setVisible(false);
     }
 
     private void listTeamsOnGrid(){
@@ -54,10 +57,11 @@ public class TeamsGridController {
         Stream<Node> toggleNodeTeams = gridTeams.getChildren().stream().filter(node ->
                 node.getClass().getTypeName().equals(JFXToggleNode.class.getTypeName()));
 
+        String styleClass = teams.isEmpty() ? "add_team" : "hover_team";
         toggleNodeTeams.forEach(nodeTeam -> {
             JFXToggleNode btnTeam = (JFXToggleNode) nodeTeam;
             btnTeam.setOnAction(this::editTeam);
-            btnTeam.getStyleClass().add("team_hover");
+            btnTeam.getStyleClass().add(styleClass);
             btnTeam.setCursor(Cursor.HAND);
         });
     }
@@ -79,7 +83,7 @@ public class TeamsGridController {
             Team teamFound = findTeamByName();
             teams.remove(teamFound);
             getSelectedTeam().setText("");
-            getSelectedTeam().getStyleClass().add("team_hover");
+            getSelectedTeam().getStyleClass().add("add_team");
             clearTextFields();
         }
     }
@@ -88,13 +92,17 @@ public class TeamsGridController {
     protected void saveTeam(){
         Team teamFound = findTeamByName();
 
-        if(teamFound != null)
+        if(teamFound == null){
+            if(!txtTeamName.getText().equals("")){
+                createTeam();
+                getSelectedTeam().getStyleClass().clear();
+                getSelectedTeam().getStyleClass().add("hover_team");
+            } else
+                HomeController.showToastMessage("O time deve conter um nome!");
+        } else
             updateTeam(teamFound);
-        else
-            createTeam();
 
         getSelectedTeam().setText(txtTeamName.getText());
-        getSelectedTeam().getStyleClass().clear();
     }
 
     private void updateTeam(Team teamFound){

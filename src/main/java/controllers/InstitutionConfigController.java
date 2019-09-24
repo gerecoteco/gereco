@@ -11,10 +11,8 @@ import javafx.util.Duration;
 import models.Institution;
 import services.InstitutionService;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import static helpers.InstitutionAuth.encryptPassword;
+import static helpers.InstitutionAuth.validatePasswordAndReturnMessage;
 
 public class InstitutionConfigController {
     public Label lblInstitutionName;
@@ -52,6 +50,7 @@ public class InstitutionConfigController {
         dialogBuilder.setConfirmAction(action -> {
             updateInstitutionName();
             HomeController.loadInstitutionInfoOnLabel();
+            HomeController.showToastMessage("Nome alterado com sucesso!");
             closeStage();
         });
         dialog.show();
@@ -60,28 +59,13 @@ public class InstitutionConfigController {
     @FXML
     protected void updatePassword(){
         String actualPassword = encryptPassword(txtActualPassword.getText());
+        String warning = validatePasswordAndReturnMessage(txtNewPassword.getText(), txtConfirmPassword.getText());
 
         if(!actualPassword.equals(institutionLogged.getPassword()))
-            showToastMessage("Senha atual incorreta!");
-        else if(txtNewPassword.getText().isEmpty())
-            showToastMessage("Preencha o campo!");
-        else if(txtNewPassword.getText().length() < 6)
-            showToastMessage("A Senha deve conter ao menos 6 caracteres!");
-        else if(!passwordContainsSpecialCharacter())
-            showToastMessage("A Senha deve conter caracter especial!");
-        else if(!txtNewPassword.getText().equals(txtConfirmPassword.getText()))
-            showToastMessage("As senhas estão diferentes!");
-        else
-            loadUpdatePasswordDialog();
-    }
+            warning = "Senha atual incorreta!";
 
-    private boolean passwordContainsSpecialCharacter(){
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
-
-        String newPassword = txtNewPassword.getText();
-        Matcher matcher = pattern.matcher(newPassword);
-
-        return !matcher.matches();
+        if(warning == null) loadUpdatePasswordDialog();
+        else showToastMessage(warning);
     }
 
     private void loadUpdatePasswordDialog(){
@@ -92,6 +76,7 @@ public class InstitutionConfigController {
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
         dialogBuilder.setConfirmAction(action -> {
             updateInstitutionPassword();
+            HomeController.showToastMessage("Senha alterada com sucesso!");
             closeStage();
         });
         dialog.show();
@@ -114,7 +99,7 @@ public class InstitutionConfigController {
         snackbar.getStylesheets().add(getClass().getResource("/css/snackbar.css").toString());
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
                 new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
-                Duration.INDEFINITE, null));
+                Duration.millis(3000), null));
     }
 
     private void closeStage(){

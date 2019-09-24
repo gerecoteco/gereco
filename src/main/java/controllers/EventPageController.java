@@ -1,20 +1,15 @@
 package controllers;
 
 import com.jfoenix.controls.*;
-import helpers.matchTable.MatchTableView;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import models.Gender;
 import models.Modality;
-import javafx.stage.Stage;
 import models.Event;
 import models.Team;
 
@@ -29,16 +24,13 @@ import java.util.stream.IntStream;
 public class EventPageController {
     public Label lblEventName;
     public JFXComboBox cbxModalities;
-    public ToggleGroup genderGroup;
     public HBox paneGenders;
     public AnchorPane paneManager;
     public AnchorPane paneTeamGrid;
     public AnchorPane paneGroupTable;
-    public Label lblModalityAndGender1, lblModalityAndGender2;
-    public JFXTreeTableView matchTableView;
-    public TreeTableColumn<MatchTableView, String> versusColumn, teamAColumn, teamBColumn;
-    public TreeTableColumn<MatchTableView, Number> positionMatchColumn, scoreboardAColumn, scoreboardBColumn;
-    private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
+    public AnchorPane paneMatchTable;
+    public AnchorPane paneLeaderBoard;
+    private ToggleGroup genderGroup;
 
     static Event event;
     static Gender actualGender;
@@ -57,20 +49,14 @@ public class EventPageController {
         actualGender = getSelectedGender();
         changeModalityAndGender();
 
-        generateColumns();
-        matchTableView.setRoot(rootMatch);
-
-        loadTeamGridView();
-        loadGroupTableView();
+        loadEventManagerViews();
     }
 
-    private void generateColumns(){
-        positionMatchColumn.setCellValueFactory(param -> param.getValue().getValue().positionProperty());
-        versusColumn.setCellValueFactory(param -> param.getValue().getValue().versusProperty());
-        teamAColumn.setCellValueFactory(param -> param.getValue().getValue().teamAProperty());
-        teamBColumn.setCellValueFactory(param -> param.getValue().getValue().teamBProperty());
-        scoreboardAColumn.setCellValueFactory(param -> param.getValue().getValue().scoreAProperty());
-        scoreboardBColumn.setCellValueFactory(param -> param.getValue().getValue().scoreBProperty());
+    private void loadEventManagerViews(){
+        loadTeamGridView();
+        loadGroupTableView();
+        loadMatchTableView();
+        loadLoaderBoardView();
     }
 
     private void generateGenderToggles(){
@@ -100,29 +86,17 @@ public class EventPageController {
         generateGenderToggles();
         genderGroup.selectToggle(genderGroup.getToggles().get(0));
         changeModalityAndGender();
+
+        actualGender = getSelectedGender();
+        loadEventManagerViews();
     }
 
     @FXML
     protected void changeModalityAndGender(){
-        lblModalityAndGender1.setText(getModalityAndGender().toLowerCase());
-        lblModalityAndGender2.setText(getModalityAndGender().toLowerCase());
         modalityAndGender = getModalityAndGender();
-    }
 
-    @FXML
-    protected void openMatchFormView(){
-        try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/match-form.fxml")));
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.centerOnScreen();
-            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        actualGender = getSelectedGender();
+        loadEventManagerViews();
     }
 
     private Event findEventById(){
@@ -143,6 +117,7 @@ public class EventPageController {
     }
 
     private void loadTeamGridView(){
+        paneTeamGrid.getChildren().clear();
         try{
             URL viewURL = getClass().getResource("/views/home/team-grid.fxml");
             paneTeamGrid.getChildren().add(FXMLLoader.load(viewURL));
@@ -155,6 +130,7 @@ public class EventPageController {
         GroupTableController.groups = actualGender.getTeams().isEmpty() ?
                 new ArrayList<>() : getGenderGroups();
 
+        paneGroupTable.getChildren().clear();
         try{
             URL viewURL = getClass().getResource("/views/home/group-table.fxml");
             paneGroupTable.getChildren().add(FXMLLoader.load(viewURL));
@@ -163,7 +139,37 @@ public class EventPageController {
         }
     }
 
-    private List<List<Team>> getGenderGroups(){
+    private void loadLoaderBoardView(){
+        paneLeaderBoard.getChildren().clear();
+        try{
+            URL viewURL = getClass().getResource("/views/home/leaderboard.fxml");
+            paneLeaderBoard.getChildren().add(FXMLLoader.load(viewURL));
+
+            paneLeaderBoard.setBottomAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
+            paneLeaderBoard.setTopAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
+            paneLeaderBoard.setRightAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
+            paneLeaderBoard.setRightAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadMatchTableView(){
+        paneMatchTable.getChildren().clear();
+        try{
+            URL viewURL = getClass().getResource("/views/home/match-table.fxml");
+            paneMatchTable.getChildren().add(FXMLLoader.load(viewURL));
+
+            paneMatchTable.setBottomAnchor(paneMatchTable.getChildren().get(0), 0.0);
+            paneMatchTable.setTopAnchor(paneMatchTable.getChildren().get(0), 0.0);
+            paneMatchTable.setRightAnchor(paneMatchTable.getChildren().get(0), 0.0);
+            paneMatchTable.setRightAnchor(paneMatchTable.getChildren().get(0), 0.0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<List<Team>> getGenderGroups(){
         int lastGroupIndex = actualGender.getTeams().stream()
                 .max(Comparator.comparing(Team::getGroup))
                 .get().getGroup();

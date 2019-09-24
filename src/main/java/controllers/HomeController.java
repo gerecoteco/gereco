@@ -2,6 +2,8 @@ package controllers;
 
 import application.Main;
 import application.Session;
+import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXSnackbarLayout;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +12,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import models.Institution;
 
 import java.io.IOException;
@@ -85,5 +88,13 @@ public class HomeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    static void showToastMessage(String messsage) {
+        JFXSnackbar snackbar = new JFXSnackbar(staticStackPaneMain);
+        snackbar.getStylesheets().add(HomeController.class.getResource("/css/snackbar.css").toString());
+        snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
+                new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
+                Duration.millis(3000), null));
     }
 }
