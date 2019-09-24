@@ -8,3 +8,9 @@ JFXButton {
     -fx-background-color: #369137;
     -fx-text-fill: white;
 }
+
+.btnDelete {
+    -fx-background-color: white;
+    -fx-border-color: #ff454a;
+    -fx-text-fill: #ff454a;
+}

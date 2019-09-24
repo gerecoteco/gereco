@@ -35,6 +35,15 @@ public class InstitutionService {
                 null : new Gson().fromJson(institutionDocument.toJson(), Institution.class);
     }
 
+    public void deleteInstitution(){
+        EventService eventService = new EventService();
+        Session.getInstance().getInstitution().getEvents_id().forEach(eventService::deleteEvent);
+
+        institutionCollection.deleteOne(eq("email", Session.getInstance().getInstitution().getEmail()));
+
+        Session.getInstance().setInstitution(null);
+    }
+
     void updateSessionInstitution(){
         String institutionEmail = Session.getInstance().getInstitution().getEmail();
 

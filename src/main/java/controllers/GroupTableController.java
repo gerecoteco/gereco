@@ -73,7 +73,9 @@ public class GroupTableController {
             generateGroups();
             dialog.close();
         });
-        dialog.show();
+
+        if(!TeamsGridController.teams.isEmpty()) dialog.show();
+        else HomeController.showToastMessage("Adicione times primeiro!");
     }
 
     private void generateGroups(){

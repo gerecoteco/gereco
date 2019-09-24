@@ -45,7 +45,7 @@ public class MatchTableController {
         matchTableView.setRoot(rootMatch);
         generateColumns();
         if(!actualGender.getMatches().isEmpty()) listMatchesOnTable();
-        if(isFinalRound()) hboxButtons.getChildren().remove(btnFinalMatches);
+        if(isFinalRound() || actualGender.getMatches().isEmpty()) hboxButtons.getChildren().remove(btnFinalMatches);
     }
 
     private boolean isFinalRound(){
