@@ -10,8 +10,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,21 +50,22 @@ public class InstitutionAuth {
     }
 
     public static String validatePasswordAndReturnMessage(String password, String confirmPassword){
+        ResourceBundle strings = ResourceBundle.getBundle("bundles.lang");
         String warning = null;
 
         if(!password.isEmpty() && !confirmPassword.isEmpty()){
             if(password.length() < 6)
-                warning = "A Senha deve conter ao menos 6 caracteres!";
+                warning = strings.getString("error.sixCharsPassword");
             else if(!passwordContainsSpecialCharacter(password))
-                warning = "A Senha deve conter caracter especial!";
+                warning = strings.getString("error.specialCharPassword");
             else if(!passwordContainsUpperCase(password))
-                warning = "A Senha deve conter letra maiúscula!";
+                warning = strings.getString("error.upperCaseCharPassword");
             else if(!passwordContainsNumber(password))
-                warning = "A senha deve conter número!";
+                warning = strings.getString("error.numberCharPassword");
             else if(!password.equals(confirmPassword))
-                warning = "As senhas estão diferentes!";
+                warning = strings.getString("error.differentPasswords");
         } else
-            warning = "Preencha os campos!";
+            warning = strings.getString("error.emptyFields");
 
         return warning;
     }

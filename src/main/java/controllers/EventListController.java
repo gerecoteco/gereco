@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXToggleNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
@@ -20,6 +21,7 @@ import services.EventService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class EventListController {
     public GridPane gridEvents;
@@ -168,7 +170,10 @@ public class EventListController {
 
     private void addNewEventItem(int eventCount){
         try{
-            AnchorPane eventItem = FXMLLoader.load(getClass().getResource("/views/home/partials/event-item.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/partials/event-item.fxml"),
+                    ResourceBundle.getBundle("bundles.lang"));
+
+            AnchorPane eventItem = (AnchorPane) root;
             gridEvents.add(eventItem, eventCount % 3,eventCount / 3);
         } catch (Exception e){ e.printStackTrace(); }
     }
@@ -176,7 +181,10 @@ public class EventListController {
     @FXML
     protected void openEventCreateView(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/external-forms/event-create.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource(
+                    "/views/external-forms/event-create.fxml"), ResourceBundle.getBundle("bundles.lang"));
+            Scene scene = new Scene(root);
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
