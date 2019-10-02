@@ -7,12 +7,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import services.MongoConnection;
 
+import java.util.ResourceBundle;
+
 public class Main extends Application {
     public static Stage mainStage;
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/initial.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/initial.fxml"),
+                ResourceBundle.getBundle("bundles.lang"));
         Scene scene = new Scene(root);
         mainStage = stage;
 

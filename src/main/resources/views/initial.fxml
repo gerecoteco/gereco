@@ -81,7 +81,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <Label layoutX="221.0" layoutY="371.0" onMouseClicked="#loadForgotPasswordDialog" text="Esqueci minha senha" textFill="WHITE" underline="true" AnchorPane.rightAnchor="0.0">
+                  <Label layoutX="221.0" layoutY="371.0" onMouseClicked="#loadForgotPasswordDialog" text="%forgot_psw" textFill="WHITE" underline="true" AnchorPane.rightAnchor="0.0">
                      <font>
                         <Font size="16.0" />
                      </font>

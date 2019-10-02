@@ -30,9 +30,11 @@ public class InitialController implements Initializable {
     public StackPane stackPaneLogin;
 
     private InstitutionService institutionService;
+    private ResourceBundle strings;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         institutionService = new InstitutionService();
     }
 
