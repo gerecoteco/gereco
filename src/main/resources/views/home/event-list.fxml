@@ -22,25 +22,25 @@
                <children>
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label text="Nome do Evento" />
+                        <Label text="%searchEvent.eventName" />
                         <JFXTextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label text="Eventos entre" />
+                        <Label text="%searchEvent.eventsBetween" />
                         <JFXDatePicker defaultColor="#018f00" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" />
-                        <Label text="e" />
+                        <Label text="%searchEvent.and" />
                         <JFXDatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label text="Estado do Evento" />
+                        <Label text="%searchEvent.eventStatus" />
                         <JFXComboBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
                      </children>
                   </HBox>
-                  <JFXButton styleClass="btnEvent" text="Procurar" />
+                  <JFXButton styleClass="btnEvent" text="%btnSearch" />
                </children>
             </HBox>
             <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" minViewportHeight="650.0" prefViewportHeight="900.0" VBox.vgrow="ALWAYS">
@@ -65,7 +65,7 @@
       </VBox>
       <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <JFXButton layoutX="932.0" layoutY="14.0" onAction="#openEventCreateView" styleClass="btnEvent" text="Criar novo evento" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
+            <JFXButton layoutX="932.0" layoutY="14.0" onAction="#openEventCreateView" styleClass="btnEvent" text="%btnCreateNewEvent" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
             <HBox alignment="CENTER" layoutX="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <HBox fx:id="paneNavigation" alignment="CENTER" spacing="5.0">
@@ -81,8 +81,8 @@
                   </HBox>
                   <HBox fx:id="hboxEventsPerPage" alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label text="Eventos por página" />
-                        <JFXComboBox fx:id="cbxEventsPerPage" onAction="#changeEventsPerPage" prefHeight="27.0" prefWidth="90.0" />
+                        <Label text="%eventsPerPage" />
+                        <JFXComboBox fx:id="cbxEventsPerPage" onAction="#changeNumberOfEventsPerPage" prefHeight="27.0" prefWidth="90.0" />
                      </children>
                   </HBox>
                </children>

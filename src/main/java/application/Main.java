@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import services.MongoConnection;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
@@ -29,6 +30,7 @@ public class Main extends Application {
         MongoConnection mongoConnection = new MongoConnection();
         mongoConnection.createConnection();
 
+        Locale.setDefault(Locale.ENGLISH);
         launch(args);
     }
 }

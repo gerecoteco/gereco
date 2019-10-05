@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbarLayout;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -17,6 +18,7 @@ import models.Institution;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 public class HomeController {
     public Label lblInstitutionInfo;
@@ -51,7 +53,10 @@ public class HomeController {
     @FXML
     protected void openConfigView(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/external-forms/institution-config.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/external-forms/institution-config.fxml"),
+                    ResourceBundle.getBundle("bundles.lang"));
+            Scene scene = new Scene(root);
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
@@ -74,7 +79,9 @@ public class HomeController {
         Main.mainStage = new Stage();
 
         try {
-            Scene scene = new Scene(FXMLLoader.load(HomeController.class.getResource("/views/initial.fxml")));
+            Parent root = FXMLLoader.load(HomeController.class.getResource("/views/initial.fxml"),
+                    ResourceBundle.getBundle("bundles.lang"));
+            Scene scene = new Scene(root);
 
             Main.mainStage.setScene(scene);
             Main.mainStage.setResizable(false);
@@ -87,8 +94,10 @@ public class HomeController {
 
     static void loadView(URL viewURL){
         try{
+            Parent root = FXMLLoader.load(viewURL, ResourceBundle.getBundle("bundles.lang"));
+
             staticStackPaneMain.getChildren().clear();
-            staticStackPaneMain.getChildren().add(FXMLLoader.load(viewURL));
+            staticStackPaneMain.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
