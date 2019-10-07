@@ -19,7 +19,7 @@
                <children>
                   <HBox alignment="CENTER" style="-fx-background-color: #369137;">
                      <children>
-                        <Label alignment="CENTER" text="Configurações da Conta" textFill="WHITE">
+                        <Label alignment="CENTER" text="%accountConfig" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -40,7 +40,7 @@
                               </Label>
                               <HBox spacing="20.0">
                                  <children>
-                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308" text="Novo Nome">
+                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308" text="%newName">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -48,12 +48,12 @@
                                     <JFXTextField fx:id="txtInstitutionName" />
                                  </children>
                               </HBox>
-                              <JFXButton onAction="#updateName" text="Salvar Nome">
+                              <JFXButton onAction="#updateName" text="%saveName">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#deleteInstitution" styleClass="btnDelete" text="Excluir conta">
+                              <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#deleteInstitution" styleClass="btnDelete" text="%deleteAccount">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -67,17 +67,17 @@
                                  <children>
                                     <VBox spacing="23.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Senha Atual" VBox.vgrow="ALWAYS">
+                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="%actualPassword" VBox.vgrow="ALWAYS">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" text="Nova Senha" VBox.vgrow="ALWAYS">
+                                          <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" text="%newPassword" VBox.vgrow="ALWAYS">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Confirmar Nova Senha" VBox.vgrow="ALWAYS">
+                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="%confirmNewPassword" VBox.vgrow="ALWAYS">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -93,7 +93,7 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <JFXButton onAction="#updatePassword" styleClass="btnEvent" text="Salvar Senha">
+                              <JFXButton onAction="#updatePassword" styleClass="btnEvent" text="%savePassword">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

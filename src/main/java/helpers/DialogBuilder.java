@@ -9,6 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
+import java.util.ResourceBundle;
+
 public class DialogBuilder {
     private String headingText;
     private String bodyText;
@@ -33,9 +35,11 @@ public class DialogBuilder {
     }
 
     public JFXDialog createDialogAndReturn(){
+        ResourceBundle strings = ResourceBundle.getBundle("bundles.lang", new UTF8Control());
+
         JFXDialogLayout content = new JFXDialogLayout();
-        btnConfirm = new JFXButton("Confirmar");
-        JFXButton btnCancel = new JFXButton("Cancelar");
+        btnConfirm = new JFXButton(strings.getString("confirm"));
+        JFXButton btnCancel = new JFXButton(strings.getString("cancel"));
         HBox hbox = new HBox(5);
         JFXDialog dialog;
 
