@@ -10,7 +10,6 @@ import models.Match;
 import models.Score;
 import services.EventService;
 
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

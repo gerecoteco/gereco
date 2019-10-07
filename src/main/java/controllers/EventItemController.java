@@ -2,6 +2,7 @@ package controllers;
 
 import com.jfoenix.controls.JFXDialog;
 import helpers.DialogBuilder;
+import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +13,6 @@ import models.Modality;
 import services.EventService;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -58,7 +58,8 @@ public class EventItemController {
     private void loadPasswordValidationView(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/password-validation.fxml"), ResourceBundle.getBundle("bundles.lang"));
+                    "/views/external-forms/password-validation.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();

@@ -4,10 +4,12 @@ import application.Main;
 import com.jfoenix.controls.*;
 import helpers.DialogBuilder;
 import helpers.InstitutionAuth;
+import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
@@ -72,7 +74,9 @@ public class InitialController implements Initializable {
         maximizeView();
 
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/home/home.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/home.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            Scene scene = new Scene(root);
 
             Main.mainStage.setScene(scene);
             Main.mainStage.setResizable(true);

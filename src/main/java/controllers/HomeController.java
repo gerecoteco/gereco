@@ -4,6 +4,7 @@ import application.Main;
 import application.Session;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbarLayout;
+import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -51,7 +52,7 @@ public class HomeController {
     protected void openConfigView(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/views/external-forms/institution-config.fxml"),
-                    ResourceBundle.getBundle("bundles.lang"));
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();
@@ -77,7 +78,7 @@ public class HomeController {
 
         try {
             Parent root = FXMLLoader.load(HomeController.class.getResource("/views/initial.fxml"),
-                    ResourceBundle.getBundle("bundles.lang"));
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             Scene scene = new Scene(root);
 
             Main.mainStage.setScene(scene);
@@ -101,7 +102,8 @@ public class HomeController {
 
     private static void loadView(URL viewURL){
         try{
-            Parent root = FXMLLoader.load(viewURL, ResourceBundle.getBundle("bundles.lang"));
+            Parent root = FXMLLoader.load(viewURL,
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
 
             staticStackPaneMain.getChildren().clear();
             staticStackPaneMain.getChildren().add(root);

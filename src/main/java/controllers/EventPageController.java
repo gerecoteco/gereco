@@ -1,10 +1,12 @@
 package controllers;
 
 import com.jfoenix.controls.*;
+import helpers.UTF8Control;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -122,8 +124,9 @@ public class EventPageController implements Initializable {
     private void loadTeamGridView(){
         paneTeamGrid.getChildren().clear();
         try{
-            URL viewURL = getClass().getResource("/views/home/team-grid.fxml");
-            paneTeamGrid.getChildren().add(FXMLLoader.load(viewURL));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/team-grid.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            paneTeamGrid.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -135,8 +138,9 @@ public class EventPageController implements Initializable {
 
         paneGroupTable.getChildren().clear();
         try{
-            URL viewURL = getClass().getResource("/views/home/group-table.fxml");
-            paneGroupTable.getChildren().add(FXMLLoader.load(viewURL));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/group-table.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            paneGroupTable.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -145,13 +149,11 @@ public class EventPageController implements Initializable {
     private void loadLoaderBoardView(){
         paneLeaderBoard.getChildren().clear();
         try{
-            URL viewURL = getClass().getResource("/views/home/leaderboard.fxml");
-            paneLeaderBoard.getChildren().add(FXMLLoader.load(viewURL));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/leaderboard.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            paneLeaderBoard.getChildren().add(root);
 
-            paneLeaderBoard.setBottomAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
-            paneLeaderBoard.setTopAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
-            paneLeaderBoard.setRightAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
-            paneLeaderBoard.setRightAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
+            setPaneAnchorsToZero(paneLeaderBoard);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -160,16 +162,21 @@ public class EventPageController implements Initializable {
     private void loadMatchTableView(){
         paneMatchTable.getChildren().clear();
         try{
-            URL viewURL = getClass().getResource("/views/home/match-table.fxml");
-            paneMatchTable.getChildren().add(FXMLLoader.load(viewURL));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/match-table.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            paneMatchTable.getChildren().add(root);
 
-            paneMatchTable.setBottomAnchor(paneMatchTable.getChildren().get(0), 0.0);
-            paneMatchTable.setTopAnchor(paneMatchTable.getChildren().get(0), 0.0);
-            paneMatchTable.setRightAnchor(paneMatchTable.getChildren().get(0), 0.0);
-            paneMatchTable.setRightAnchor(paneMatchTable.getChildren().get(0), 0.0);
+            setPaneAnchorsToZero(paneMatchTable);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setPaneAnchorsToZero(AnchorPane pane){
+        AnchorPane.setBottomAnchor(pane.getChildren().get(0), 0.0);
+        AnchorPane.setTopAnchor(pane.getChildren().get(0), 0.0);
+        AnchorPane.setRightAnchor(pane.getChildren().get(0), 0.0);
+        AnchorPane.setRightAnchor(pane.getChildren().get(0), 0.0);
     }
 
     static List<List<Team>> getGenderGroups(){

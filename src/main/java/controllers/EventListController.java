@@ -3,6 +3,7 @@ package controllers;
 import application.Session;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXToggleNode;
+import helpers.UTF8Control;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -180,7 +181,7 @@ public class EventListController implements Initializable {
     private void loadNewEventItem(int eventCount){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/views/home/partials/event-item.fxml"),
-                    ResourceBundle.getBundle("bundles.lang"));
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
 
             AnchorPane eventItem = (AnchorPane) root;
             gridEvents.add(eventItem, eventCount % 3,eventCount / 3);
@@ -191,7 +192,8 @@ public class EventListController implements Initializable {
     protected void openEventCreateView(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/event-create.fxml"), ResourceBundle.getBundle("bundles.lang"));
+                    "/views/external-forms/event-create.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();

@@ -3,8 +3,10 @@ package controllers;
 import application.Session;
 import com.jfoenix.controls.*;
 import helpers.DialogBuilder;
+import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -14,6 +16,7 @@ import models.Institution;
 import services.InstitutionService;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import static controllers.PasswordValidationController.deleteInstitution;
 import static helpers.InstitutionAuth.encryptPassword;
@@ -63,7 +66,7 @@ public class InstitutionConfigController {
 
     @FXML
     protected void deleteInstitution(){
-        String heading = "Excluir cibta";
+        String heading = "Excluir conta";
         String body = "Tem certeza que deseja excluir a conta " +
                 Session.getInstance().getInstitution().getName() + "? Você perderá todas as informações cadastradas." ;
         DialogBuilder dialogBuilder = new DialogBuilder(heading, body, stackPaneMain);
@@ -93,8 +96,11 @@ public class InstitutionConfigController {
         deleteInstitution = true;
 
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/password-validation.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource(
+                    "/views/external-forms/password-validation.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            Scene scene = new Scene(root);
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);

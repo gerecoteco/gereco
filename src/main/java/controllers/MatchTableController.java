@@ -6,8 +6,10 @@ import com.jfoenix.controls.JFXSnackbarLayout;
 import com.jfoenix.controls.JFXTreeTableView;
 import helpers.MatchTableView;
 import helpers.MatchesGenerator;
+import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
@@ -24,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static controllers.EventPageController.*;
 
@@ -83,8 +86,11 @@ public class MatchTableController {
 
     private void loadMatchForm(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/match-form.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource(
+                    "/views/external-forms/match-form.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            Scene scene = new Scene(root);
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
