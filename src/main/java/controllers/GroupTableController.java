@@ -88,7 +88,7 @@ public class GroupTableController {
         actualGender.setMatches(matchesGenerator.generateMatchesAndReturn(groups));
 
         new EventService().updateEvent(EventItemController.eventId, event);
-        HomeController.loadView(getClass().getResource("/views/home/event-page.fxml"));
+        HomeController.loadEventPageView();
     }
 
     private void generateCbxGroupsItens(){

@@ -35,8 +35,7 @@ public class EventItemController {
     @FXML
     protected void openEventPageView(){
         eventId = lblEventId.getText();
-        URL eventPageURL = getClass().getResource("/views/home/event-page.fxml");
-        HomeController.loadView(eventPageURL);
+        HomeController.loadEventPageView();
     }
 
     @FXML
@@ -76,7 +75,7 @@ public class EventItemController {
     static void deleteEvent(){
         EventService eventService = new EventService();
         eventService.deleteEvent(eventId);
-        HomeController.loadView(EventItemController.class.getResource("/views/home/event-list.fxml"));
+        HomeController.loadEventListView();
         HomeController.showToastMessage("Evento excluído com sucesso!");
     }
 

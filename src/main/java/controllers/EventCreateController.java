@@ -107,7 +107,7 @@ public class EventCreateController implements Initializable {
             String eventJson = new Gson().toJson(newEvent);
             eventService.insertEventInCollection(eventJson);
 
-            HomeController.loadView(getClass().getResource("/views/home/event-list.fxml"));
+            HomeController.loadEventListView();
             getActualStage(event).close();
             HomeController.showToastMessage(strings.getString("successEventCreation"));
         } else

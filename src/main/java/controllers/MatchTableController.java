@@ -115,7 +115,7 @@ public class MatchTableController {
         actualGender.getMatches().addAll(matches);
         new EventService().updateEvent(EventItemController.eventId, event);
 
-        HomeController.loadView(getClass().getResource("/views/home/event-page.fxml"));
+        HomeController.loadEventPageView();
     }
 
     private void generateColumns(){

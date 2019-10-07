@@ -78,9 +78,7 @@ public class MatchFormController {
 
     private void reloadEventPage(){
         ((Stage) lblTeamA.getScene().getWindow()).close();
-
-        URL eventPageURL = getClass().getResource("/views/home/event-page.fxml");
-        HomeController.loadView(eventPageURL);
+        HomeController.loadEventPageView();
     }
 
     private void addMatchScoreOnTeam(){

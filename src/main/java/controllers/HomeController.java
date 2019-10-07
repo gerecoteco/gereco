@@ -27,17 +27,14 @@ public class HomeController {
 
     static StackPane staticStackPaneMain;
     private static Label staticLblInstitutionInfo;
-    private URL eventListURL;
 
     @FXML
     public void initialize() {
-        eventListURL = getClass().getResource("/views/home/event-list.fxml");
-
         staticStackPaneMain = stackPaneMain;
         staticLblInstitutionInfo = lblInstitutionInfo;
 
         loadInstitutionInfoOnLabel();
-        loadView(eventListURL);
+        loadEventListView();
     }
 
     static void loadInstitutionInfoOnLabel(){
@@ -47,7 +44,7 @@ public class HomeController {
 
     @FXML
     protected void loadHome(){
-        loadView(eventListURL);
+        loadEventListView();
     }
 
     @FXML
@@ -92,7 +89,17 @@ public class HomeController {
         }
     }
 
-    static void loadView(URL viewURL){
+    static void loadEventListView(){
+        final URL EVENT_LIST_URL = HomeController.class.getResource("/views/home/event-list.fxml");
+        loadView(EVENT_LIST_URL);
+    }
+
+    static void loadEventPageView(){
+        final URL EVENT_PAGE_URL = HomeController.class.getResource("/views/home/event-page.fxml");
+        loadView(EVENT_PAGE_URL);
+    }
+
+    private static void loadView(URL viewURL){
         try{
             Parent root = FXMLLoader.load(viewURL, ResourceBundle.getBundle("bundles.lang"));
 

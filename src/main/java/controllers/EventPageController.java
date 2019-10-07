@@ -172,7 +172,7 @@ public class EventPageController implements Initializable {
         }
     }
 
-    public static List<List<Team>> getGenderGroups(){
+    static List<List<Team>> getGenderGroups(){
         int lastGroupIndex = actualGender.getTeams().stream()
                 .max(Comparator.comparing(Team::getGroup))
                 .get().getGroup();
