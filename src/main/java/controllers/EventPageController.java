@@ -118,7 +118,7 @@ public class EventPageController implements Initializable {
     }
 
     private String getModalityAndGender(){
-        return cbxModalities.getValue().toString() + " " + strings.getString(actualGender.getName());
+        return cbxModalities.getValue().toString() + " (" + strings.getString(actualGender.getName()) + ")";
     }
 
     private void loadTeamGridView(){
