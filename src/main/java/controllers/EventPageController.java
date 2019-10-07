@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -18,10 +19,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class EventPageController {
+public class EventPageController implements Initializable {
     public Label lblEventName;
     public JFXComboBox cbxModalities;
     public HBox paneGenders;
@@ -35,9 +37,11 @@ public class EventPageController {
     static Event event;
     static Gender actualGender;
     static String modalityAndGender;
+    private ResourceBundle strings;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         genderGroup = new ToggleGroup();
         event = findEventById();
         lblEventName.setText(event.getName());
@@ -61,7 +65,7 @@ public class EventPageController {
 
     private void generateGenderToggles(){
         getSelectedModality().getGenders().forEach(gender -> {
-            JFXRadioButton rdbGender = new JFXRadioButton(gender.getName());
+            JFXRadioButton rdbGender = new JFXRadioButton(strings.getString(gender.getName()));
             rdbGender.setOnAction(e -> changeModalityAndGender());
             rdbGender.setToggleGroup(genderGroup);
             paneGenders.getChildren().add(rdbGender);
@@ -70,13 +74,16 @@ public class EventPageController {
 
     private Modality getSelectedModality(){
         return event.getModalities().stream().filter(modality ->
-                modality.getName().equals(cbxModalities.getValue().toString().toLowerCase())).findAny().orElse(null);
+                modality.getName().equals(cbxModalities.getValue().toString())).findAny().orElse(null);
     }
 
     private Gender getSelectedGender(){
+        String rdbText = ((JFXRadioButton) genderGroup.getSelectedToggle()).getText();
+        String genderName = rdbText.equals(strings.getString("male")) ? "male" :
+                rdbText.equals(strings.getString("female")) ? "female" : "mixed";
+
         return getSelectedModality().getGenders().stream().filter(gender ->
-                gender.getName().equals(((JFXRadioButton) genderGroup.getSelectedToggle()).getText()))
-                .findAny().orElse(null);
+                gender.getName().equals(genderName)).findAny().orElse(null);
     }
 
     @FXML
@@ -85,17 +92,14 @@ public class EventPageController {
         paneGenders.getChildren().clear();
         generateGenderToggles();
         genderGroup.selectToggle(genderGroup.getToggles().get(0));
-        changeModalityAndGender();
 
-        actualGender = getSelectedGender();
-        loadEventManagerViews();
+        changeModalityAndGender();
     }
 
-    @FXML
-    protected void changeModalityAndGender(){
+    private void changeModalityAndGender(){
+        actualGender = getSelectedGender();
         modalityAndGender = getModalityAndGender();
 
-        actualGender = getSelectedGender();
         loadEventManagerViews();
     }
 
@@ -112,8 +116,7 @@ public class EventPageController {
     }
 
     private String getModalityAndGender(){
-        JFXRadioButton rdb = (JFXRadioButton) genderGroup.getSelectedToggle();
-        return cbxModalities.getValue().toString() + " " + rdb.getText();
+        return cbxModalities.getValue().toString() + " " + strings.getString(actualGender.getName());
     }
 
     private void loadTeamGridView(){

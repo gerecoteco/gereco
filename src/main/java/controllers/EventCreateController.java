@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -12,10 +13,13 @@ import models.Gender;
 import models.Modality;
 import services.EventService;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
+import java.util.stream.IntStream;
 
-public class EventCreateController {
+public class EventCreateController implements Initializable {
     public JFXChipView chipModalities;
     public JFXComboBox cbxModalities;
     public JFXCheckBox chbMale;
@@ -26,9 +30,11 @@ public class EventCreateController {
 
     private Event newEvent;
     private EventService eventService;
+    private ResourceBundle strings;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         newEvent = new Event();
         eventService = new EventService();
     }
@@ -40,7 +46,7 @@ public class EventCreateController {
             cbxModalities.setItems(chipModalities.getChips());
             generateModalities();
         } else
-            HomeController.showToastMessage("Insira as modalidades primeiro!");
+            HomeController.showToastMessage(strings.getString("modalitiesFirst"));
     }
 
     private void generateModalities(){
@@ -56,10 +62,10 @@ public class EventCreateController {
     @FXML
     protected void genderChecked(ActionEvent event){
         JFXCheckBox checkBox = (JFXCheckBox) event.getSource();
-        Gender newGender = new Gender(checkBox.getText());
+        String genderName = checkBox.equals(chbMale) ? "male" : checkBox.equals(chbFemale) ? "female" : "mixed";
 
         if(checkBox.isSelected())
-           findModalityByName().getGenders().add(newGender);
+            findModalityByName().getGenders().add(new Gender(genderName));
         else
             removeGender(checkBox.getText());
     }
@@ -75,15 +81,15 @@ public class EventCreateController {
     }
 
     private void checkGenderState(){
-        for(int x = 0; x < 3; x++)
-           selectGender(x);
+        final int NUMBER_OF_GENDERS = 3;
+        IntStream.range(0, NUMBER_OF_GENDERS).forEach(this::selectGender);
     }
 
     private void selectGender(int genderNameIndex){
-        List<String> genderNames = Arrays.asList("Masculino", "Feminino", "Misto");
+        final List<String> GENDER_NAMES = Arrays.asList("male", "female", "mixed");
 
         JFXCheckBox chbGender = (JFXCheckBox) paneGenders.getChildren().get(genderNameIndex);
-        chbGender.setSelected(findGenderByName(genderNames.get(genderNameIndex)) != null);
+        chbGender.setSelected(findGenderByName(GENDER_NAMES.get(genderNameIndex)) != null);
     }
 
     private Gender findGenderByName(String genderName){
@@ -103,9 +109,9 @@ public class EventCreateController {
 
             HomeController.loadView(getClass().getResource("/views/home/event-list.fxml"));
             getActualStage(event).close();
-            HomeController.showToastMessage("Evento criado com sucesso!");
+            HomeController.showToastMessage(strings.getString("successEventCreation"));
         } else
-            HomeController.showToastMessage("Preencha todas as informações!");
+            HomeController.showToastMessage(strings.getString("error.emptyFields"));
     }
 
     private boolean modalitiesWithEmptyGenders(){
