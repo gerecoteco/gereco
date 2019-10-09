@@ -12,7 +12,7 @@
    <children>
       <HBox alignment="CENTER" spacing="5.0">
          <children>
-            <Label alignment="CENTER" text="Classificação do(a) ">
+            <Label alignment="CENTER" text="%leaderboard">
                <font>
                   <Font size="14.0" />
                </font>
@@ -26,16 +26,16 @@
       </HBox>
       <JFXTreeTableView fx:id="leaderBoardTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" VBox.vgrow="SOMETIMES">
          <columns>
-            <TreeTableColumn fx:id="positionColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Posição" />
-            <TreeTableColumn fx:id="nameColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Nome" />
-            <TreeTableColumn fx:id="pointsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Pontos" />
-            <TreeTableColumn fx:id="ownPointsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="PP" />
-            <TreeTableColumn fx:id="againstPoinstColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="PC" />
-            <TreeTableColumn fx:id="balanceColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Saldo" />
-            <TreeTableColumn fx:id="foulsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="Penalidades" />
+            <TreeTableColumn fx:id="positionColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%position" />
+            <TreeTableColumn fx:id="nameColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%team" />
+            <TreeTableColumn fx:id="pointsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%points" />
+            <TreeTableColumn fx:id="ownPointsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%ownPoints" />
+            <TreeTableColumn fx:id="againstPoinstColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%againstPoints" />
+            <TreeTableColumn fx:id="balanceColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%balance" />
+            <TreeTableColumn fx:id="foulsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%fouls" />
          </columns>
       </JFXTreeTableView>
-      <JFXButton maxWidth="1.7976931348623157E308" onAction="#exportLeaderBoardToPdf" styleClass="btnEvent" text="Baixar como PDF">
+      <JFXButton maxWidth="1.7976931348623157E308" onAction="#exportLeaderBoardToPdf" styleClass="btnEvent" text="%downloadPDF">
          <font>
             <Font size="14.0" />
          </font>

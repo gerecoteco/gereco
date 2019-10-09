@@ -5,18 +5,22 @@ import com.jfoenix.controls.JFXTreeTableView;
 import helpers.LeaderBoardView;
 import helpers.PdfTableGenerator;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import models.Team;
 
 import java.io.IOException;
+import java.net.URL;
+import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static controllers.EventPageController.*;
 
-public class LeaderBoardController {
+public class LeaderBoardController implements Initializable {
     public JFXTreeTableView leaderBoardTableView;
     public Label lblModalityAndGender;
     public TreeTableColumn<LeaderBoardView, String> nameColumn;
@@ -24,8 +28,11 @@ public class LeaderBoardController {
             againstPoinstColumn, balanceColumn, foulsColumn;
     private TreeItem<LeaderBoardView> rootLeaderBoard = new TreeItem<>(new LeaderBoardView());
 
-    @FXML
-    public void initialize(){
+    private ResourceBundle strings;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         lblModalityAndGender.setText(modalityAndGender);
 
         leaderBoardTableView.setRoot(rootLeaderBoard);
@@ -55,10 +62,11 @@ public class LeaderBoardController {
     @FXML
     protected void exportLeaderBoardToPdf() throws IOException, DocumentException {
         PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
-        String title = "Classificação do " + modalityAndGender + " do " + event.getName();
+        String title = MessageFormat.format(strings.getString("leaderboardTitle"),
+                modalityAndGender, event.getName());
         pdfTableGenerator.createPdf(title, "../../../classificacao-gereco.pdf", rootLeaderBoard.getChildren());
 
-        HomeController.showToastMessage("A classificação foi salva com sucesso!");
+        HomeController.showToastMessage(strings.getString("successDownloadPDF"));
     }
 
     private void generateColumns(){

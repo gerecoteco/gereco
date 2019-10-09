@@ -9,9 +9,11 @@ import javafx.scene.control.TreeItem;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class PdfTableGenerator {
     private BaseColor backgrounColor;
+    private ResourceBundle strings = ResourceBundle.getBundle("bundles.lang", new UTF8Control());
 
     public void createPdf(String title, String dest, ObservableList<TreeItem<LeaderBoardView>> leaderBoardViews)
             throws IOException, DocumentException {
@@ -20,15 +22,15 @@ public class PdfTableGenerator {
         document.open();
 
         PdfPTable table = new PdfPTable(7);
-        table.setWidths(new int[]{3, 5, 2, 2, 2, 2, 4});
         backgrounColor = BaseColor.LIGHT_GRAY;
-        table.addCell(createCell("Posição"));
-        table.addCell(createCell("Nome"));
-        table.addCell(createCell("Pontos"));
-        table.addCell(createCell("PP"));
-        table.addCell(createCell("PC"));
-        table.addCell(createCell("Saldo"));
-        table.addCell(createCell("Penalidades"));
+
+        table.addCell(createCell(strings.getString("position")));
+        table.addCell(createCell(strings.getString("team")));
+        table.addCell(createCell(strings.getString("points")));
+        table.addCell(createCell(strings.getString("ownPoints")));
+        table.addCell(createCell(strings.getString("againstPoints")));
+        table.addCell(createCell(strings.getString("balance")));
+        table.addCell(createCell(strings.getString("fouls")));
 
         backgrounColor = BaseColor.WHITE;
         for (TreeItem<LeaderBoardView> leaderBoardView : leaderBoardViews) {
