@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import services.MongoConnection;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
