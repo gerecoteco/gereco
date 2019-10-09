@@ -3,9 +3,12 @@ package controllers;
 import application.Session;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXToggleNode;
+import helpers.UTF8Control;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
@@ -18,10 +21,12 @@ import models.Event;
 import services.EventService;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class EventListController {
+public class EventListController implements Initializable {
     public GridPane gridEvents;
     public GridPane gridNavigation;
     public JFXComboBox cbxEventsPerPage;
@@ -35,14 +40,15 @@ public class EventListController {
     private int numberOfPages;
     private int pageIndex;
 
+    private ResourceBundle strings;
     static List<Event> institutionEvents;
     static Event event;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         List<String> eventsId = Session.getInstance().getInstitution().getEvents_id();
-        cbxEventsPerPage.getItems().addAll(6, 9, 12, 15, "Todos");
-        cbxEventsPerPage.setValue(9);
+        generateCbxEventsPerPageItems();
 
         institutionEvents = new EventService().requestAllEventsOfInstitution(eventsId);
         navigationButtons = new ToggleGroup();
@@ -54,11 +60,17 @@ public class EventListController {
         else showNoEventsMessage();
     }
 
+    private void generateCbxEventsPerPageItems(){
+        Object[] EVENTS_PER_PAGE_OPTIONS = {6, 9, 12, 15, strings.getString("eventsPerPage.all")};
+        cbxEventsPerPage.getItems().addAll(EVENTS_PER_PAGE_OPTIONS);
+        cbxEventsPerPage.setValue(9);
+    }
+
     private void showNoEventsMessage(){
         hboxEventsPerPage.setVisible(false);
         paneNavigation.setVisible(false);
 
-        Label message = new Label("Você ainda não tem eventos!");
+        Label message = new Label(strings.getString("noEvent"));
         message.getStyleClass().add("no-events-message");
         hboxEventList.getChildren().clear();
         hboxEventList.getChildren().add(message);
@@ -70,9 +82,9 @@ public class EventListController {
     }
 
     @FXML
-    public void changeEventsPerPage(){
-        eventsPerPage = cbxEventsPerPage.getValue().equals("Todos") ? institutionEvents.size() :
-                Integer.parseInt(cbxEventsPerPage.getValue().toString());
+    public void changeNumberOfEventsPerPage(){
+        eventsPerPage = cbxEventsPerPage.getValue().equals(strings.getString("eventsPerPage.all")) ?
+                institutionEvents.size() : Integer.parseInt(cbxEventsPerPage.getValue().toString());
         numberOfPages = getNumberOfPages();
         pageIndex = 0;
 
@@ -87,7 +99,7 @@ public class EventListController {
 
         for (int i = 0; i < eventListPage.size(); i++) {
             event = eventListPage.get(i);
-            addNewEventItem(i);
+            loadNewEventItem(i);
         }
     }
 
@@ -133,9 +145,9 @@ public class EventListController {
 
     private List<Event> appendEventsOnPageAndReturn(int pageIndex){
         List<Event> page = new ArrayList<>();
-        boolean lastPage = pageIndex == numberOfPages-1;
+        boolean isLastPage = pageIndex == numberOfPages-1;
         int eventIndex = eventsPerPage * pageIndex;
-        int eventLimit = lastPage ? institutionEvents.size() - eventIndex : eventsPerPage;
+        int eventLimit = isLastPage ? institutionEvents.size() - eventIndex : eventsPerPage;
 
         for(int eventCount = 0; eventCount < eventLimit; eventCount++){
             page.add(institutionEvents.get(eventIndex));
@@ -166,9 +178,12 @@ public class EventListController {
         }
     }
 
-    private void addNewEventItem(int eventCount){
+    private void loadNewEventItem(int eventCount){
         try{
-            AnchorPane eventItem = FXMLLoader.load(getClass().getResource("/views/home/partials/event-item.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/partials/event-item.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+
+            AnchorPane eventItem = (AnchorPane) root;
             gridEvents.add(eventItem, eventCount % 3,eventCount / 3);
         } catch (Exception e){ e.printStackTrace(); }
     }
@@ -176,7 +191,11 @@ public class EventListController {
     @FXML
     protected void openEventCreateView(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/external-forms/event-create.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource(
+                    "/views/external-forms/event-create.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            Scene scene = new Scene(root);
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);

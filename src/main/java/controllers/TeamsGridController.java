@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -12,13 +13,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import models.Team;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static controllers.EventPageController.modalityAndGender;
 
-public class TeamsGridController {
+public class TeamsGridController implements Initializable {
     public GridPane gridTeams;
     public ToggleGroup teamGroup;
     public VBox vBoxTeamButtons;
@@ -27,9 +30,11 @@ public class TeamsGridController {
     public Label lblModalityAndGender;
 
     static List<Team> teams;
+    private ResourceBundle strings;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         teams = EventPageController.actualGender.getTeams();
         lblModalityAndGender.setText(modalityAndGender);
 
@@ -85,7 +90,7 @@ public class TeamsGridController {
             getSelectedTeam().setText("");
             getSelectedTeam().getStyleClass().add("add_team");
             clearTextFields();
-        } else HomeController.showToastMessage("Selecione um time primeiro!");
+        } else HomeController.showToastMessage(strings.getString("error.selectTeamFirst"));
     }
 
     @FXML
@@ -99,11 +104,11 @@ public class TeamsGridController {
                     getSelectedTeam().getStyleClass().clear();
                     getSelectedTeam().getStyleClass().add("hover_team");
                 } else
-                    HomeController.showToastMessage("O time deve conter um nome!");
+                    HomeController.showToastMessage(strings.getString("error.teamMustContainName"));
             } else updateTeam(teamFound);
 
             getSelectedTeam().setText(txtTeamName.getText());
-        } else HomeController.showToastMessage("Selecione um time primeiro!");
+        } else HomeController.showToastMessage(strings.getString("error.selectTeamFirst"));
     }
 
     private void updateTeam(Team teamFound){

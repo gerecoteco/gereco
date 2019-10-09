@@ -2,6 +2,7 @@ package controllers;
 
 import helpers.MatchTableView;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
@@ -13,12 +14,13 @@ import services.EventService;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import static controllers.EventPageController.actualGender;
 import static controllers.EventPageController.event;
 
-public class MatchFormController {
+public class MatchFormController implements Initializable {
     public Label lblTeamA;
     public Label lblTeamB;
     public TextField txtOwnPointsA;
@@ -28,8 +30,8 @@ public class MatchFormController {
 
     private TreeItem<MatchTableView> selectedMatch;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         selectedMatch = MatchTableController.selectedMatch;
         Match actualMatch = getActualMatch();
 
@@ -78,9 +80,7 @@ public class MatchFormController {
 
     private void reloadEventPage(){
         ((Stage) lblTeamA.getScene().getWindow()).close();
-
-        URL eventPageURL = getClass().getResource("/views/home/event-page.fxml");
-        HomeController.loadView(eventPageURL);
+        HomeController.loadEventPageView();
     }
 
     private void addMatchScoreOnTeam(){

@@ -1,9 +1,12 @@
 package controllers;
 
 import com.jfoenix.controls.*;
+import helpers.UTF8Control;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -18,10 +21,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class EventPageController {
+public class EventPageController implements Initializable {
     public Label lblEventName;
     public JFXComboBox cbxModalities;
     public HBox paneGenders;
@@ -35,9 +39,11 @@ public class EventPageController {
     static Event event;
     static Gender actualGender;
     static String modalityAndGender;
+    private ResourceBundle strings;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         genderGroup = new ToggleGroup();
         event = findEventById();
         lblEventName.setText(event.getName());
@@ -61,7 +67,7 @@ public class EventPageController {
 
     private void generateGenderToggles(){
         getSelectedModality().getGenders().forEach(gender -> {
-            JFXRadioButton rdbGender = new JFXRadioButton(gender.getName());
+            JFXRadioButton rdbGender = new JFXRadioButton(strings.getString(gender.getName()));
             rdbGender.setOnAction(e -> changeModalityAndGender());
             rdbGender.setToggleGroup(genderGroup);
             paneGenders.getChildren().add(rdbGender);
@@ -70,13 +76,16 @@ public class EventPageController {
 
     private Modality getSelectedModality(){
         return event.getModalities().stream().filter(modality ->
-                modality.getName().equals(cbxModalities.getValue().toString().toLowerCase())).findAny().orElse(null);
+                modality.getName().equals(cbxModalities.getValue().toString())).findAny().orElse(null);
     }
 
     private Gender getSelectedGender(){
+        String rdbText = ((JFXRadioButton) genderGroup.getSelectedToggle()).getText();
+        String genderName = rdbText.equals(strings.getString("male")) ? "male" :
+                rdbText.equals(strings.getString("female")) ? "female" : "mixed";
+
         return getSelectedModality().getGenders().stream().filter(gender ->
-                gender.getName().equals(((JFXRadioButton) genderGroup.getSelectedToggle()).getText()))
-                .findAny().orElse(null);
+                gender.getName().equals(genderName)).findAny().orElse(null);
     }
 
     @FXML
@@ -85,17 +94,14 @@ public class EventPageController {
         paneGenders.getChildren().clear();
         generateGenderToggles();
         genderGroup.selectToggle(genderGroup.getToggles().get(0));
-        changeModalityAndGender();
 
-        actualGender = getSelectedGender();
-        loadEventManagerViews();
+        changeModalityAndGender();
     }
 
-    @FXML
-    protected void changeModalityAndGender(){
+    private void changeModalityAndGender(){
+        actualGender = getSelectedGender();
         modalityAndGender = getModalityAndGender();
 
-        actualGender = getSelectedGender();
         loadEventManagerViews();
     }
 
@@ -112,15 +118,15 @@ public class EventPageController {
     }
 
     private String getModalityAndGender(){
-        JFXRadioButton rdb = (JFXRadioButton) genderGroup.getSelectedToggle();
-        return cbxModalities.getValue().toString() + " " + rdb.getText();
+        return cbxModalities.getValue().toString() + " (" + strings.getString(actualGender.getName()) + ")";
     }
 
     private void loadTeamGridView(){
         paneTeamGrid.getChildren().clear();
         try{
-            URL viewURL = getClass().getResource("/views/home/team-grid.fxml");
-            paneTeamGrid.getChildren().add(FXMLLoader.load(viewURL));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/team-grid.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            paneTeamGrid.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,8 +138,9 @@ public class EventPageController {
 
         paneGroupTable.getChildren().clear();
         try{
-            URL viewURL = getClass().getResource("/views/home/group-table.fxml");
-            paneGroupTable.getChildren().add(FXMLLoader.load(viewURL));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/group-table.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            paneGroupTable.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -142,13 +149,11 @@ public class EventPageController {
     private void loadLoaderBoardView(){
         paneLeaderBoard.getChildren().clear();
         try{
-            URL viewURL = getClass().getResource("/views/home/leaderboard.fxml");
-            paneLeaderBoard.getChildren().add(FXMLLoader.load(viewURL));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/leaderboard.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            paneLeaderBoard.getChildren().add(root);
 
-            paneLeaderBoard.setBottomAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
-            paneLeaderBoard.setTopAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
-            paneLeaderBoard.setRightAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
-            paneLeaderBoard.setRightAnchor(paneLeaderBoard.getChildren().get(0), 0.0);
+            setPaneAnchorsToZero(paneLeaderBoard);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -157,19 +162,24 @@ public class EventPageController {
     private void loadMatchTableView(){
         paneMatchTable.getChildren().clear();
         try{
-            URL viewURL = getClass().getResource("/views/home/match-table.fxml");
-            paneMatchTable.getChildren().add(FXMLLoader.load(viewURL));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/match-table.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            paneMatchTable.getChildren().add(root);
 
-            paneMatchTable.setBottomAnchor(paneMatchTable.getChildren().get(0), 0.0);
-            paneMatchTable.setTopAnchor(paneMatchTable.getChildren().get(0), 0.0);
-            paneMatchTable.setRightAnchor(paneMatchTable.getChildren().get(0), 0.0);
-            paneMatchTable.setRightAnchor(paneMatchTable.getChildren().get(0), 0.0);
+            setPaneAnchorsToZero(paneMatchTable);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static List<List<Team>> getGenderGroups(){
+    private void setPaneAnchorsToZero(AnchorPane pane){
+        AnchorPane.setBottomAnchor(pane.getChildren().get(0), 0.0);
+        AnchorPane.setTopAnchor(pane.getChildren().get(0), 0.0);
+        AnchorPane.setRightAnchor(pane.getChildren().get(0), 0.0);
+        AnchorPane.setRightAnchor(pane.getChildren().get(0), 0.0);
+    }
+
+    static List<List<Team>> getGenderGroups(){
         int lastGroupIndex = actualGender.getTeams().stream()
                 .max(Comparator.comparing(Team::getGroup))
                 .get().getGroup();

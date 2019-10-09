@@ -4,8 +4,10 @@ import application.Main;
 import application.Session;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbarLayout;
+import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -17,6 +19,7 @@ import models.Institution;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 public class HomeController {
     public Label lblInstitutionInfo;
@@ -25,17 +28,14 @@ public class HomeController {
 
     static StackPane staticStackPaneMain;
     private static Label staticLblInstitutionInfo;
-    private URL eventListURL;
 
     @FXML
     public void initialize() {
-        eventListURL = getClass().getResource("/views/home/event-list.fxml");
-
         staticStackPaneMain = stackPaneMain;
         staticLblInstitutionInfo = lblInstitutionInfo;
 
         loadInstitutionInfoOnLabel();
-        loadView(eventListURL);
+        loadEventListView();
     }
 
     static void loadInstitutionInfoOnLabel(){
@@ -45,13 +45,16 @@ public class HomeController {
 
     @FXML
     protected void loadHome(){
-        loadView(eventListURL);
+        loadEventListView();
     }
 
     @FXML
     protected void openConfigView(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/external-forms/institution-config.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/external-forms/institution-config.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            Scene scene = new Scene(root);
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
@@ -74,7 +77,9 @@ public class HomeController {
         Main.mainStage = new Stage();
 
         try {
-            Scene scene = new Scene(FXMLLoader.load(HomeController.class.getResource("/views/initial.fxml")));
+            Parent root = FXMLLoader.load(HomeController.class.getResource("/views/initial.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            Scene scene = new Scene(root);
 
             Main.mainStage.setScene(scene);
             Main.mainStage.setResizable(false);
@@ -85,10 +90,23 @@ public class HomeController {
         }
     }
 
-    static void loadView(URL viewURL){
+    static void loadEventListView(){
+        final URL EVENT_LIST_URL = HomeController.class.getResource("/views/home/event-list.fxml");
+        loadView(EVENT_LIST_URL);
+    }
+
+    static void loadEventPageView(){
+        final URL EVENT_PAGE_URL = HomeController.class.getResource("/views/home/event-page.fxml");
+        loadView(EVENT_PAGE_URL);
+    }
+
+    private static void loadView(URL viewURL){
         try{
+            Parent root = FXMLLoader.load(viewURL,
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+
             staticStackPaneMain.getChildren().clear();
-            staticStackPaneMain.getChildren().add(FXMLLoader.load(viewURL));
+            staticStackPaneMain.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
         }

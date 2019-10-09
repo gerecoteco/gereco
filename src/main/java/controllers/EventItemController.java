@@ -2,8 +2,10 @@ package controllers;
 
 import com.jfoenix.controls.JFXDialog;
 import helpers.DialogBuilder;
+import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -11,8 +13,8 @@ import models.Modality;
 import services.EventService;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static controllers.PasswordValidationController.deleteInstitution;
 
@@ -33,8 +35,7 @@ public class EventItemController {
     @FXML
     protected void openEventPageView(){
         eventId = lblEventId.getText();
-        URL eventPageURL = getClass().getResource("/views/home/event-page.fxml");
-        HomeController.loadView(eventPageURL);
+        HomeController.loadEventPageView();
     }
 
     @FXML
@@ -56,8 +57,11 @@ public class EventItemController {
 
     private void loadPasswordValidationView(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/password-validation.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource(
+                    "/views/external-forms/password-validation.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            Scene scene = new Scene(root);
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
@@ -72,7 +76,7 @@ public class EventItemController {
     static void deleteEvent(){
         EventService eventService = new EventService();
         eventService.deleteEvent(eventId);
-        HomeController.loadView(EventItemController.class.getResource("/views/home/event-list.fxml"));
+        HomeController.loadEventListView();
         HomeController.showToastMessage("Evento excluído com sucesso!");
     }
 

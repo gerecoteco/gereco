@@ -3,8 +3,11 @@ package controllers;
 import application.Session;
 import com.jfoenix.controls.*;
 import helpers.DialogBuilder;
+import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -14,12 +17,14 @@ import models.Institution;
 import services.InstitutionService;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static controllers.PasswordValidationController.deleteInstitution;
 import static helpers.InstitutionAuth.encryptPassword;
 import static helpers.InstitutionAuth.validatePasswordAndReturnMessage;
 
-public class InstitutionConfigController {
+public class InstitutionConfigController implements Initializable {
     public Label lblInstitutionName;
     public StackPane stackPaneMain;
     public JFXTextField txtInstitutionName;
@@ -28,9 +33,11 @@ public class InstitutionConfigController {
     public JFXPasswordField txtActualPassword;
 
     private Institution institutionLogged;
+    private ResourceBundle strings;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         institutionLogged = Session.getInstance().getInstitution();
         lblInstitutionName.setText(institutionLogged.getName());
     }
@@ -38,24 +45,24 @@ public class InstitutionConfigController {
     @FXML
     protected void updateName(){
         if(txtInstitutionName.getText().isEmpty())
-            showToastMessage("Preencha o campo corretamente!");
+            showToastMessage(strings.getString("error.emptyFields"));
         else if(txtInstitutionName.getText().length() < 3)
-            showToastMessage("O nome deve conter pelo menos 3 caracteres!");
+            showToastMessage(strings.getString("error.threeCharsName"));
         else
             loadUpdateNameDialog();
     }
 
     private void loadUpdateNameDialog(){
-        String heading = "Alterar nome";
-        String body = "Tem certeza que deseja mudar o nome da instituição de \"" + institutionLogged.getName() +
-                "\" para \"" + txtInstitutionName.getText() + "\"?";
+        String heading = strings.getString("updateNameDialog.heading");
+        String body = strings.getString("updateNameDialog.body") +
+                "\n(" + institutionLogged.getName() + " -> " + txtInstitutionName.getText() + ")";
         DialogBuilder dialogBuilder = new DialogBuilder(heading, body, stackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
         dialogBuilder.setConfirmAction(action -> {
             updateInstitutionName();
             HomeController.loadInstitutionInfoOnLabel();
-            HomeController.showToastMessage("Nome alterado com sucesso!");
+            HomeController.showToastMessage(strings.getString("successNameUpdate"));
             closeStage();
         });
         dialog.show();
@@ -63,9 +70,8 @@ public class InstitutionConfigController {
 
     @FXML
     protected void deleteInstitution(){
-        String heading = "Excluir cibta";
-        String body = "Tem certeza que deseja excluir a conta " +
-                Session.getInstance().getInstitution().getName() + "? Você perderá todas as informações cadastradas." ;
+        String heading = strings.getString("deleteAccount");
+        String body = strings.getString("deleteInstitutionDialog.body");
         DialogBuilder dialogBuilder = new DialogBuilder(heading, body, stackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
@@ -93,8 +99,11 @@ public class InstitutionConfigController {
         deleteInstitution = true;
 
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/password-validation.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource(
+                    "/views/external-forms/password-validation.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            Scene scene = new Scene(root);
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
@@ -107,14 +116,14 @@ public class InstitutionConfigController {
     }
 
     private void loadUpdatePasswordDialog(){
-        String heading = "Alterar senha";
-        String body = "Tem certeza que deseja alterar sua senha?";
+        String heading = strings.getString("updatePasswordDialog.heading");
+        String body = strings.getString("updatePasswordDialog.body");
         DialogBuilder dialogBuilder = new DialogBuilder(heading, body, stackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
         dialogBuilder.setConfirmAction(action -> {
             updateInstitutionPassword();
-            HomeController.showToastMessage("Senha alterada com sucesso!");
+            HomeController.showToastMessage(strings.getString("successPasswordUpdate"));
             closeStage();
         });
         dialog.show();

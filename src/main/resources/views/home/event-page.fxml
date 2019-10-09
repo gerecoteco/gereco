@@ -28,7 +28,7 @@
                      <children>
                         <HBox alignment="CENTER" spacing="25.0">
                            <children>
-                              <Label alignment="CENTER" text="Selecione uma modalidade">
+                              <Label alignment="CENTER" text="%selectModality">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -51,7 +51,7 @@
                <children>
                   <TabPane prefHeight="593.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
-                      <Tab closable="false" text="Times">
+                      <Tab closable="false" text="%teams">
                         <content>
                               <HBox alignment="CENTER" spacing="50.0" styleClass="tab-hbox">
                                  <children>
@@ -73,7 +73,7 @@
                               </HBox>
                         </content>
                       </Tab>
-                      <Tab closable="false" text="Classificação">
+                      <Tab closable="false" text="%leaderBoard">
                         <content>
                               <HBox alignment="CENTER" spacing="50.0" styleClass="tab-hbox">
                                  <children>

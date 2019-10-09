@@ -9,18 +9,22 @@ import helpers.MatchesGenerator;
 import helpers.TeamGroupsManager;
 import helpers.GroupTableView;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import models.Team;
 import services.EventService;
 
+import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.IntStream;
 
 import static controllers.EventPageController.*;
 
-public class GroupTableController {
+public class GroupTableController implements Initializable {
     public JFXComboBox cbxGroups;
     public JFXButton btnGroupTeams;
     public JFXTreeTableView groupTableView;
@@ -30,9 +34,11 @@ public class GroupTableController {
     private TreeItem<GroupTableView> rootGroup = new TreeItem<>(new GroupTableView());
 
     static List<List<Team>> groups;
+    private ResourceBundle strings;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         generateGroupTableColumns();
         groupTableView.setRoot(rootGroup);
 
@@ -63,9 +69,9 @@ public class GroupTableController {
 
     @FXML
     protected void loadGroupDialog(){
-        String heading = "Agrupar times";
-        String body = "Tem certeza que deseja agrupar os times de " + modalityAndGender + "?" +
-                "\n(você não poderá mais alterar os times de " + modalityAndGender + ")";
+        String heading = strings.getString("groupTeams");
+        String body = strings.getString("groupDialog.body1") +
+                "\n" + MessageFormat.format(strings.getString("groupDialog.body2"), modalityAndGender);
         DialogBuilder dialogBuilder = new DialogBuilder(heading, body, HomeController.staticStackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
@@ -75,7 +81,7 @@ public class GroupTableController {
         });
 
         if(!TeamsGridController.teams.isEmpty()) dialog.show();
-        else HomeController.showToastMessage("Adicione times primeiro!");
+        else HomeController.showToastMessage(strings.getString("error.addTeamsFirst"));
     }
 
     private void generateGroups(){
@@ -88,7 +94,7 @@ public class GroupTableController {
         actualGender.setMatches(matchesGenerator.generateMatchesAndReturn(groups));
 
         new EventService().updateEvent(EventItemController.eventId, event);
-        HomeController.loadView(getClass().getResource("/views/home/event-page.fxml"));
+        HomeController.loadEventPageView();
     }
 
     private void generateCbxGroupsItens(){

@@ -4,10 +4,12 @@ import application.Main;
 import com.jfoenix.controls.*;
 import helpers.DialogBuilder;
 import helpers.InstitutionAuth;
+import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
@@ -30,9 +32,11 @@ public class InitialController implements Initializable {
     public StackPane stackPaneLogin;
 
     private InstitutionService institutionService;
+    private ResourceBundle strings;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         institutionService = new InstitutionService();
     }
 
@@ -42,7 +46,7 @@ public class InitialController implements Initializable {
         boolean validLogin = institutionAuth.login(txtLoginEmail.getText(), txtLoginPassword.getText());
 
         if(!validLogin)
-            showToastMessage("Falha ao efetuar login");
+            showToastMessage(strings.getString("error.login"));
         else
             openHomeView();
     }
@@ -54,11 +58,12 @@ public class InitialController implements Initializable {
 
         String warning = InstitutionAuth.validatePasswordAndReturnMessage(
                 txtRegisterPassword.getText(), txtRegisterPassword.getText());
-        warning = txtRegisterName.getText().length() < 3 ? "O nome deve conter ao menos 3 caracteres" : warning;
+        warning = txtRegisterName.getText().length() < 3 ? strings.getString("error.threeCharsName") : warning;
 
         if(warning == null){
             boolean validRegister = institutionService.insertInstitution(newInstitution);
-            showToastMessage(validRegister ? "Cadastro efetuado com sucesso" : "Falha ao efetuar o cadastro");
+            showToastMessage(validRegister ?
+                    strings.getString("successRegister") : strings.getString("error.register"));
         } else
             showToastMessage(warning);
     }
@@ -69,7 +74,9 @@ public class InitialController implements Initializable {
         maximizeView();
 
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/views/home/home.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/home.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            Scene scene = new Scene(root);
 
             Main.mainStage.setScene(scene);
             Main.mainStage.setResizable(true);
@@ -92,8 +99,8 @@ public class InitialController implements Initializable {
 
     @FXML
     protected void loadForgotPasswordDialog(){
-        String heading = "Redefinir senha";
-        String body = "Siga as instruções enviadas no seu email para redefinir sua senha";
+        String heading = strings.getString("resetPassword");
+        String body = strings.getString("forgotPasswordDialogBody");
         DialogBuilder dialogBuilder = new DialogBuilder(heading, body, stackPaneLogin);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();

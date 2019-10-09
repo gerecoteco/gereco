@@ -4,7 +4,6 @@ import application.Session;
 import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Updates;
-import helpers.EventFilesManager;
 import models.Event;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -36,11 +35,6 @@ public class EventService {
     private String requestOneEvent(String eventId){
         return Objects.requireNonNull(eventsCollection.find(eq("_id",
                 new ObjectId(eventId))).first()).toJson();
-    }
-
-    public void writeEvent(String eventId){
-        String eventJson = requestOneEvent(eventId);
-        EventFilesManager.write(eventId, eventJson);
     }
 
     public void updateEvent(String eventId, Event updatedEvent){

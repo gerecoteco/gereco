@@ -23,7 +23,7 @@
                <children>
                   <HBox spacing="5.0">
                      <children>
-                        <Label text="Times participantes do(a)">
+                        <Label text="%participatingTeams">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -88,12 +88,12 @@
                      <children>
                         <VBox alignment="CENTER" spacing="27.0">
                            <children>
-                              <Label maxWidth="1.7976931348623157E308" text="Nome">
+                              <Label maxWidth="1.7976931348623157E308" text="%name">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label maxWidth="1.7976931348623157E308" text="Etiqueta">
+                              <Label maxWidth="1.7976931348623157E308" text="%tag">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -110,8 +110,8 @@
                   </HBox>
                   <VBox fx:id="vBoxTeamButtons" prefHeight="64.0" prefWidth="177.0" spacing="10.0">
                      <children>
-                        <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#saveTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Salvar time" />
-                        <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#deleteTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="Excluir Time" />
+                        <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#saveTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="%saveTeam" />
+                        <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#deleteTeam" prefHeight="27.0" prefWidth="157.0" styleClass="btnEvent" text="%deleteTeam" />
                      </children>
                   </VBox>
                </children>

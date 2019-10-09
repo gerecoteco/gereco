@@ -6,8 +6,11 @@ import com.jfoenix.controls.JFXSnackbarLayout;
 import com.jfoenix.controls.JFXTreeTableView;
 import helpers.MatchTableView;
 import helpers.MatchesGenerator;
+import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
@@ -21,13 +24,15 @@ import models.Team;
 import services.EventService;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static controllers.EventPageController.*;
 
-public class MatchTableController {
+public class MatchTableController implements Initializable {
     public JFXTreeTableView matchTableView;
     public HBox hboxButtons;
     public JFXButton btnFinalMatches;
@@ -37,9 +42,11 @@ public class MatchTableController {
     private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
 
     static TreeItem<MatchTableView> selectedMatch;
+    private ResourceBundle strings;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
         lblModalityAndGender.setText(modalityAndGender);
 
         matchTableView.setRoot(rootMatch);
@@ -74,17 +81,20 @@ public class MatchTableController {
 
         if(!matchTableView.getSelectionModel().isEmpty()){
             if(isFinalRound() && selectedMatch.getValue().stageProperty().get() == 1)
-                showToastMessage("Você não pode alterar partidas da primeira etapa");
+                showToastMessage(strings.getString("cantChangeMatches"));
             else
                 loadMatchForm();
         } else
-            showToastMessage("Selecione uma partida primeiramente");
+            showToastMessage(strings.getString("selectMatchFirst"));
     }
 
     private void loadMatchForm(){
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/match-form.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource(
+                    "/views/external-forms/match-form.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            Scene scene = new Scene(root);
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
@@ -115,7 +125,7 @@ public class MatchTableController {
         actualGender.getMatches().addAll(matches);
         new EventService().updateEvent(EventItemController.eventId, event);
 
-        HomeController.loadView(getClass().getResource("/views/home/event-page.fxml"));
+        HomeController.loadEventPageView();
     }
 
     private void generateColumns(){
