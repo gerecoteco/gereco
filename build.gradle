@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.tcc-grupo7'
-version '1.0-PROTOTYPE'
+version '2.0'
 
 sourceCompatibility = 1.8
 
@@ -12,14 +12,13 @@ repositories {
 }
 
 jar {
-    from {
-        configurations.compile.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
+    doFirst {
+        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     }
     manifest {
         attributes 'Main-Class': 'application.Main'
     }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
 }
 
 dependencies {
