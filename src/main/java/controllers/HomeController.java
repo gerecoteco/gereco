@@ -92,6 +92,8 @@ public class HomeController {
 
     static void loadEventListView(){
         final URL EVENT_LIST_URL = HomeController.class.getResource("/views/home/event-list.fxml");
+        EventPageController.actualGender = null;
+        GroupTableController.groupIndex = 0;
         loadView(EVENT_LIST_URL);
     }
 

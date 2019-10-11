@@ -5,8 +5,6 @@ import com.jfoenix.controls.JFXToggleNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
@@ -16,15 +14,14 @@ import models.Team;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static controllers.EventPageController.modalityAndGender;
 
 public class TeamsGridController implements Initializable {
     public GridPane gridTeams;
-    public ToggleGroup teamGroup;
+    private ToggleGroup teamGroup;
     public VBox vBoxTeamButtons;
+    public VBox vboxTeamOptions;
     public JFXTextField txtTeamName;
     public JFXTextField txtTeamTag;
     public Label lblModalityAndGender;
@@ -37,38 +34,39 @@ public class TeamsGridController implements Initializable {
         strings = resources;
         teams = EventPageController.actualGender.getTeams();
         lblModalityAndGender.setText(modalityAndGender);
+        teamGroup = new ToggleGroup();
 
         if(!teams.isEmpty()) {
-           vBoxTeamButtons.setVisible(false);
+           vboxTeamOptions.getChildren().remove(vBoxTeamButtons);
            txtTeamName.setEditable(false);
            txtTeamTag.setEditable(false);
         }
 
-        setOnActionToTeamsButtons();
-        listTeamsOnGrid();
+        generateTeamToggles();
     }
 
-    private void listTeamsOnGrid(){
-        List<Node> toggleNodeTeams = gridTeams.getChildren().stream().filter(node ->
-                node.getClass().getTypeName().equals(JFXToggleNode.class.getTypeName())).collect(Collectors.toList());
+    private void generateTeamToggles(){
+        final int COLUMNS = 5, ROWS = 4;
+        int teamIndex = 0;
 
-        for(int x=0; x < teams.size(); x++){
-            JFXToggleNode btnTeam = (JFXToggleNode) toggleNodeTeams.get(x);
-            btnTeam.setText(teams.get(x).getName());
+        for(int x = 0; x < ROWS; x++){
+            for(int y = 0; y < COLUMNS; y++){
+                if(teams.isEmpty() || teamIndex < teams.size()){
+                    gridTeams.add(createToggleTeamAndReturn(teamIndex), y, x);
+                    teamIndex++;
+                } else return;
+            }
         }
     }
 
-    private void setOnActionToTeamsButtons(){
-        Stream<Node> toggleNodeTeams = gridTeams.getChildren().stream().filter(node ->
-                node.getClass().getTypeName().equals(JFXToggleNode.class.getTypeName()));
+    private JFXToggleNode createToggleTeamAndReturn(int teamIndex){
+        JFXToggleNode toggleTeam = new JFXToggleNode();
+        toggleTeam.setOnAction(this::editTeam);
+        toggleTeam.setToggleGroup(teamGroup);
+        toggleTeam.setText(teamIndex < teams.size() ? teams.get(teamIndex).getName() : "");
+        toggleTeam.getStyleClass().add(teams.isEmpty() ? "add_team" : "hover_team");
 
-        String styleClass = teams.isEmpty() ? "add_team" : "hover_team";
-        toggleNodeTeams.forEach(nodeTeam -> {
-            JFXToggleNode btnTeam = (JFXToggleNode) nodeTeam;
-            btnTeam.setOnAction(this::editTeam);
-            btnTeam.getStyleClass().add(styleClass);
-            btnTeam.setCursor(Cursor.HAND);
-        });
+        return toggleTeam;
     }
 
     @FXML

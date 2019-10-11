@@ -39,6 +39,9 @@ public class EventPageController implements Initializable {
     static Event event;
     static Gender actualGender;
     static String modalityAndGender;
+
+    private static Modality actualModality;
+    private static int genderIndex;
     private ResourceBundle strings;
 
     @Override
@@ -49,12 +52,17 @@ public class EventPageController implements Initializable {
         lblEventName.setText(event.getName());
 
         appendModalitiesInComboBox();
-        cbxModalities.setValue(cbxModalities.getItems().get(0));
-        generateGenderToggles();
-        genderGroup.selectToggle(genderGroup.getToggles().get(0));
-        actualGender = getSelectedGender();
-        changeModalityAndGender();
+        if(actualGender != null){
+            cbxModalities.setValue(actualModality.getName());
+            generateGenderToggles();
+            genderGroup.selectToggle(genderGroup.getToggles().get(genderIndex));
+        } else {
+            cbxModalities.setValue(cbxModalities.getItems().get(0));
+            generateGenderToggles();
+            genderGroup.selectToggle(genderGroup.getToggles().get(0));
+        }
 
+        changeModalityAndGender();
         loadEventManagerViews();
     }
 
@@ -90,6 +98,9 @@ public class EventPageController implements Initializable {
 
     @FXML
     protected void changeModality(){
+        actualModality = getSelectedModality();
+        GroupTableController.groupIndex = 0;
+
         genderGroup.getToggles().clear();
         paneGenders.getChildren().clear();
         generateGenderToggles();
@@ -100,7 +111,9 @@ public class EventPageController implements Initializable {
 
     private void changeModalityAndGender(){
         actualGender = getSelectedGender();
+        actualModality = getSelectedModality();
         modalityAndGender = getModalityAndGender();
+        genderIndex = genderGroup.getToggles().indexOf(genderGroup.getSelectedToggle());
 
         loadEventManagerViews();
     }

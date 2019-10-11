@@ -6,11 +6,19 @@
 
 .event_page JFXToggleNode {
     -fx-background-color: white;
+    -fx-border-color: #666;
+    -fx-max-height: Infinity;
+    -fx-max-width: Infinity;
+    -fx-cursor: HAND;
 }
 
 .event_page JFXToggleNode:selected {
     -fx-background-color: #45de47;
     -fx-text-fill: white;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
 }
 
 .add_team:hover {
