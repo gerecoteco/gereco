@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import models.Team;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,14 +33,15 @@ public class TeamsGridController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         strings = resources;
-        teams = EventPageController.actualGender.getTeams();
+        teams = new ArrayList<>();
         lblModalityAndGender.setText(modalityAndGender);
         teamGroup = new ToggleGroup();
 
-        if(!teams.isEmpty()) {
-           vboxTeamOptions.getChildren().remove(vBoxTeamButtons);
-           txtTeamName.setEditable(false);
-           txtTeamTag.setEditable(false);
+        if(!EventPageController.actualGender.getTeams().isEmpty()) {
+            teams = EventPageController.actualGender.getTeams();
+            vboxTeamOptions.getChildren().remove(vBoxTeamButtons);
+            txtTeamName.setEditable(false);
+            txtTeamTag.setEditable(false);
         }
 
         generateTeamToggles();
@@ -93,9 +95,9 @@ public class TeamsGridController implements Initializable {
 
     @FXML
     protected void saveTeam(){
-        Team teamFound = findTeamByName();
-
         if(getSelectedTeam() != null){
+            Team teamFound = findTeamByName();
+
             if(teamFound == null){
                 if(!txtTeamName.getText().equals("")){
                     createTeam();

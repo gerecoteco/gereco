@@ -99,7 +99,6 @@ public class EventPageController implements Initializable {
     @FXML
     protected void changeModality(){
         actualModality = getSelectedModality();
-        GroupTableController.groupIndex = 0;
 
         genderGroup.getToggles().clear();
         paneGenders.getChildren().clear();
@@ -114,6 +113,7 @@ public class EventPageController implements Initializable {
         actualModality = getSelectedModality();
         modalityAndGender = getModalityAndGender();
         genderIndex = genderGroup.getToggles().indexOf(genderGroup.getSelectedToggle());
+        GroupTableController.groupIndex = 0;
 
         loadEventManagerViews();
     }

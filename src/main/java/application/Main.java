@@ -31,6 +31,7 @@ public class Main extends Application {
         MongoConnection mongoConnection = new MongoConnection();
         mongoConnection.createConnection();
 
+        Locale.setDefault(Locale.ENGLISH);
         launch(args);
     }
 }
