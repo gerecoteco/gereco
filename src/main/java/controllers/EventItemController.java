@@ -5,6 +5,7 @@ import helpers.DialogBuilder;
 import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,20 +14,27 @@ import models.Modality;
 import services.EventService;
 
 import java.io.IOException;
+import java.net.URL;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static controllers.PasswordValidationController.deleteInstitution;
 
-public class EventItemController {
+public class EventItemController implements Initializable {
     public Label lblEventName;
     public Label lblModalities;
     public Label lblEventId;
 
+    private static String successEventDelete;
     static String eventId;
+    private ResourceBundle strings;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        strings = resources;
+        successEventDelete = strings.getString("successEventDelete");
+
         lblEventId.setText(EventListController.event.getId());
         lblEventName.setText(EventListController.event.getName());
         listAllModalities();
@@ -43,8 +51,8 @@ public class EventItemController {
         eventId = lblEventId.getText();
         deleteInstitution = false;
 
-        String heading = "Excluir evento";
-        String body = "Tem certeza que deseja excluir o evento " + lblEventName.getText() + "?";
+        String heading = strings.getString("deleteEventDialog.heading");
+        String body = MessageFormat.format(strings.getString("deleteEventDialog.body"), lblEventName.getText());
         DialogBuilder dialogBuilder = new DialogBuilder(heading, body, HomeController.staticStackPaneMain);
 
         JFXDialog dialog = dialogBuilder.createDialogAndReturn();
@@ -77,7 +85,7 @@ public class EventItemController {
         EventService eventService = new EventService();
         eventService.deleteEvent(eventId);
         HomeController.loadEventListView();
-        HomeController.showToastMessage("Evento excluído com sucesso!");
+        HomeController.showToastMessage(successEventDelete);
     }
 
     private void listAllModalities() {
