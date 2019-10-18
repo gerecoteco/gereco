@@ -34,6 +34,7 @@ public class GroupTableController implements Initializable {
     private TreeItem<GroupTableView> rootGroup = new TreeItem<>(new GroupTableView());
 
     static List<List<Team>> groups;
+    static Integer groupIndex;
     private ResourceBundle strings;
 
     @Override
@@ -50,13 +51,13 @@ public class GroupTableController implements Initializable {
 
     private void changeNodeStates(){
         generateCbxGroupsItens();
-        cbxGroups.setValue(cbxGroups.getItems().get(0));
+        cbxGroups.setValue(cbxGroups.getItems().get(groupIndex != null ? groupIndex : 0));
         btnGroupTeams.setVisible(false);
     }
 
     @FXML
     protected void showGroupsOnTable(){
-        int groupIndex = (int) cbxGroups.getValue() - 1;
+        groupIndex = (int) cbxGroups.getValue() - 1;
         rootGroup.getChildren().clear();
 
         groups.get(groupIndex).forEach(team -> {
