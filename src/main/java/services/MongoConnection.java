@@ -14,7 +14,7 @@ public class MongoConnection {
 
     public void createConnection(){
         defineMongoLoggerLevel();
-        mongoClient = MongoClients.create();
+        mongoClient = MongoClients.create("mongodb+srv://user:user@clustergereco-rhvgo.mongodb.net");
     }
 
     MongoCollection<Document> getCollection(String collectionName){
