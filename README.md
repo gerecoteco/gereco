@@ -1,41 +1,58 @@
 <h1 align="center">
-    <img src="https://i.imgur.com/NzIDvNA.png" width="275"/>
+    <img src="https://i.imgur.com/NzIDvNA.png" width="500"/>
 </h1>
 
 <p align="center">
 <sup>
-<b>
-Projeto de TCC do grupo 7 do ETIM de informática (turma de 2017) da 
-<a href="http://www.etecjoaobelarmino.com.br/joomla/">ETEC João Belarmino</a>
-</b>
+Gereco is a competitive events manager written in Java using JavaFX
 </sup>
 </p>
 
 ![GitHub license](https://img.shields.io/github/license/pedrogneri/gereco.svg)
 ![Github commits](https://img.shields.io/github/commit-activity/m/pedrogneri/gereco.svg)
+![GitHub forks](https://img.shields.io/github/forks/pedrogneri/gereco?style=social)
 
+## Features 
+- Login / register
+- Event CRUD
+- Institution configs
+- Team grid
+- Group teams with draw
+- Generate first stage matches
+- Generate final matches
+- Generate Leader board
+- Generate Leader board as PDF
 
-## Objetivo
-Facilitar a organização de eventos competitivos, proporcionando uma forma mais ágil de gerenciamento e possibilitando
-a visualização e disponibilização dos dados durante a ocorrência das partidas do evento, permitindo alterações 
-imprevistas, devido à grande flexibilidade nas configurações dentro do software, facilitando o trabalho dos 
-responsáveis envolvidos.
+## Dependencies
+- [JFoeniX](https://github.com/jfoenixadmin/JFoenix)
+- [itextpdf](https://itextpdf.com/en)
+- [Gson](https://github.com/google/gson)
+- [Commons codec](https://commons.apache.org/proper/commons-codec/)
+- [Mongodb java driver](https://mongodb.github.io/mongo-java-driver/)
 
-## Justificativa
-Um evento competitivo, como qualquer outro, necessita de uma boa organização e gerenciamento para fluir conforme a 
-expectativa, por isso, o responsável pelo evento deve estar sempre preocupado em evitar a ocorrência de erros e a perda 
-de informações, com o intuito de não retardar o seu desenvolvimento, e isso é algo que se torna muito difícil quando 
-esse gerenciamento é todo manual.
+## Contribution
+Check out the issues to find out how you can contribute to development,
+or if you want, create your own issue and submit a PR.
 
-Muitos eventos competitivos são prejudicados pela perda de informações, pela demora do processo e pela falta de 
-organização – por ser manual. Por isso o software foi criado, para resolver todos esses problemas.
+To contribute, you will need:
+- Gradle 
+- JFoenix
+- Java 1.8
+- SceneBuilder (or you can edit FXML directly on Intellij)
 
-## Planejamento
-O programa foi planejado pelo levantamento de requisitos através da entrevista de um profissional de Educação Física e 
-responsável por gerenciamento de eventos competitivos, além de pesquisas bibliográfica sobre organização e gerenciamento
-de torneios.
+Gereco uses a free service to host the database, so if you want to test faster, 
+just remove the connection string in 
+[MongoConnection.java](https://github.com/pedrogneri/gereco/blob/master/src/main/java/services/MongoConnection.java), 
+but you will need to have mongoDB installed.
 
-## Integrantes
+## Members
+Gereco is a computer course term paper of ETEC João Belarmino. And these are the members who developed 
+this software:
+
 | <img src="https://avatars.githubusercontent.com/luizgustavo234" width=115> | <img src="https://avatars.githubusercontent.com/MatheusGualtieri" width=115> | <img src="https://avatars.githubusercontent.com/pedrogneri" width=115> | <img src="https://avatars.githubusercontent.com/ryteck" width=115> | <img src="https://avatars.githubusercontent.com/ThomasRibeiro" width=115> |  
 |---|---|---|---|---|
 | <a href="https://github.com/luizgustavo234">@luizgustavo234</a> | <a href="https://github.com/MatheusGualtieri">@MatheusGualtieri</a> | <a href="https://github.com/pedrogneri">@pedrogneri</a> | <a href="https://github.com/ryteck">@ryteck</a> | <a href="https://github.com/ThomasRibeiro">@ThomasRibeiro</a> |
+
+## License
+Gereco is released under the MIT license. [Click here](https://github.com/pedrogneri/gereco/blob/master/LICENSE) 
+for details.
