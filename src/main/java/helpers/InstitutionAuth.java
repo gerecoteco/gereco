@@ -15,7 +15,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InstitutionAuth {
-    private InstitutionService institutionService = new InstitutionService();
+    private InstitutionService institutionService;
+
+    public InstitutionAuth(){
+        institutionService = new InstitutionService();
+    }
+
+    public InstitutionAuth(InstitutionService institutionService) {
+        this.institutionService = institutionService;
+    }
 
     public boolean login(String email, String password) {
         Institution requestedInstitution = institutionService.findByEmail(email);
