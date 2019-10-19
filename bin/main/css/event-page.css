@@ -1,0 +1,91 @@
+/* EVENT PAGE */
+.event_page JFXTextField, JFXComboBox {
+    -jfx-focus-color: #369137;
+    -fx-text-fill: black;
+}
+
+.event_page JFXToggleNode {
+    -fx-background-color: white;
+    -fx-border-color: #666;
+    -fx-max-height: Infinity;
+    -fx-max-width: Infinity;
+    -fx-cursor: HAND;
+}
+
+.event_page JFXToggleNode:selected {
+    -fx-background-color: #45de47;
+    -fx-text-fill: white;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.add_team:hover {
+    -fx-background-image: url("../img/plus.png");
+    -fx-background-color: #369137;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.hover_team:hover {
+    -fx-background-color: #369137;
+    -fx-text-fill: white;
+}
+
+JFXButton {
+    -fx-background-color: #369137;
+    -fx-text-fill: white;
+}
+
+.jfx-combo-box .list-cell:selected, .list-cell:hover {
+    -fx-background-color: #369137;
+    -fx-text-fill: white;
+}
+
+/* tab pane */
+.tab-hbox {
+    -fx-border-color: #ddd #f5f5f5 #f5f5f5 #f5f5f5;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane {
+    -fx-tab-min-width:90px;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1,0,0;
+    -fx-focus-color: transparent;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #e6e6e6;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #369137;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+}
+
+/* tree table view */
+.table-column {
+    -fx-alignment: CENTER;
+}
+
+.tree-table-cell {
+    -fx-font-size: 15;
+}

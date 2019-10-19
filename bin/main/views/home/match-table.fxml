@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MatchTableController">
+   <children>
+      <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0">
+         <children>
+            <Label alignment="CENTER" text="%matchTable">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblModalityAndGender">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <JFXTreeTableView fx:id="matchTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" sortMode="ONLY_FIRST_LEVEL" VBox.vgrow="ALWAYS">
+         <columns>
+            <TreeTableColumn fx:id="stageColumn" editable="false" minWidth="60.0" prefWidth="73.0" resizable="false" sortable="false" text="%stage" />
+            <TreeTableColumn fx:id="teamAColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%team" />
+            <TreeTableColumn fx:id="scoreboardAColumn" editable="false" minWidth="64.0" prefWidth="73.0" resizable="false" sortable="false" text="%score" />
+            <TreeTableColumn fx:id="versusColumn" editable="false" minWidth="-Infinity" prefWidth="35.0" resizable="false" sortable="false" text="X" />
+            <TreeTableColumn fx:id="scoreboardBColumn" editable="false" minWidth="72.0" prefWidth="73.0" resizable="false" sortable="false" text="%score" />
+            <TreeTableColumn fx:id="teamBColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%team" />
+         </columns>
+         <columnResizePolicy>
+            <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </JFXTreeTableView>
+      <HBox fx:id="hboxButtons" alignment="CENTER" spacing="15.0">
+         <children>
+            <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openMatchFormView" styleClass="btnEvent" text="%editSelected" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnFinalMatches" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#generateFinalMatches" styleClass="btnEvent" text="%generateFinals" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</VBox>
