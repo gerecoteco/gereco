@@ -85,9 +85,9 @@ public class InstitutionAuth {
     }
 
     private static boolean passwordContainsNumber(String password){
-        Pattern pattern = Pattern.compile("([0-9])");
+        Pattern pattern = Pattern.compile("(.)*(\\d)(.)*");
         Matcher matcher = pattern.matcher(password);
-        return !matcher.matches();
+        return matcher.matches();
     }
 
     private static boolean passwordContainsUpperCase(String password){
