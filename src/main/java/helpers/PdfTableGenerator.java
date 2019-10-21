@@ -7,6 +7,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -17,8 +18,8 @@ public class PdfTableGenerator {
 
     public void createPdf(String title, String dest, ObservableList<TreeItem<LeaderBoardView>> leaderBoardViews)
             throws IOException, DocumentException {
-        Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(dest));
+
+        Document document = createDocument(dest);
         document.open();
 
         PdfPTable table = new PdfPTable(7);
@@ -46,6 +47,16 @@ public class PdfTableGenerator {
         document.add(new Phrase(title));
         document.add(table);
         document.close();
+    }
+
+    Document createDocument(String dest) throws DocumentException, FileNotFoundException {
+        Document document = new Document();
+        initializePDFWriter(dest, document);
+        return document;
+    }
+
+    PdfWriter initializePDFWriter(String dest, Document document) throws DocumentException, FileNotFoundException {
+        return PdfWriter.getInstance(document,new FileOutputStream(dest));
     }
 
     private PdfPCell createCell(String content) {
