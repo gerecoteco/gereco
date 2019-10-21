@@ -45,7 +45,14 @@ just remove the connection string in
 [MongoConnection.java](https://github.com/pedrogneri/gereco/blob/master/src/main/java/services/MongoConnection.java), 
 but you will need to have mongoDB installed.
 
-## Members
+## All contributors
+<a href="https://github.com/pedrogneri/gereco/graphs/contributors">
+  <img src="https://contributors-img.firebaseapp.com/image?repo=pedrogneri/gereco" />
+</a>
+
+Made with [contributors-img](https://contributors-img.firebaseapp.com)
+
+## Members of project
 Gereco is a computer course term paper of ETEC João Belarmino. And these are the members who developed 
 this software:
 
