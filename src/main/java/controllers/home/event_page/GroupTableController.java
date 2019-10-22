@@ -9,7 +9,7 @@ import controllers.home.HomeController;
 import helpers.DialogBuilder;
 import helpers.MatchesGenerator;
 import helpers.TeamGroupsManager;
-import helpers.GroupTableView;
+import helpers.GroupTableModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
@@ -30,10 +30,10 @@ public class GroupTableController implements Initializable {
     public JFXComboBox cbxGroups;
     public JFXButton btnGroupTeams;
     public JFXTreeTableView groupTableView;
-    public TreeTableColumn<GroupTableView, String> teamColumn;
-    public TreeTableColumn<GroupTableView, Number> pointsColumn, ownPointsColumn, againstPointsColumn,
+    public TreeTableColumn<GroupTableModel, String> teamColumn;
+    public TreeTableColumn<GroupTableModel, Number> pointsColumn, ownPointsColumn, againstPointsColumn,
             balanceColumn, foulsColumn;
-    private TreeItem<GroupTableView> rootGroup = new TreeItem<>(new GroupTableView());
+    private TreeItem<GroupTableModel> rootGroup = new TreeItem<>(new GroupTableModel());
 
     public static List<List<Team>> groups;
     public static Integer groupIndex;
@@ -63,7 +63,7 @@ public class GroupTableController implements Initializable {
         rootGroup.getChildren().clear();
 
         groups.get(groupIndex).forEach(team -> {
-            TreeItem<GroupTableView> teamRow = new TreeItem<>(new GroupTableView(
+            TreeItem<GroupTableModel> teamRow = new TreeItem<>(new GroupTableModel(
                     team.getName(), team.getScore().getPoints(), team.getScore().getOwnPoints(),
                     team.getScore().getAgainstPoints(), team.getScore().getBalance(), team.getScore().getFouls()));
             rootGroup.getChildren().add(teamRow);

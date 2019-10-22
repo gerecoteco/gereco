@@ -16,7 +16,7 @@ public class PdfTableGenerator {
     private BaseColor backgrounColor;
     private ResourceBundle strings = ResourceBundle.getBundle("bundles.lang", new UTF8Control());
 
-    public void createPdf(String title, String dest, ObservableList<TreeItem<LeaderBoardView>> leaderBoardViews)
+    public void createPdf(String title, String dest, ObservableList<TreeItem<LeaderBoardModel>> leaderBoardViews)
             throws IOException, DocumentException {
 
         Document document = createDocument(dest);
@@ -34,7 +34,7 @@ public class PdfTableGenerator {
         table.addCell(createCell(strings.getString("fouls")));
 
         backgrounColor = BaseColor.WHITE;
-        for (TreeItem<LeaderBoardView> leaderBoardView : leaderBoardViews) {
+        for (TreeItem<LeaderBoardModel> leaderBoardView : leaderBoardViews) {
             table.addCell(createCell(String.valueOf(leaderBoardView.getValue().positionProperty().get())));
             table.addCell(createCell(leaderBoardView.getValue().nameProperty().get()));
             table.addCell(createCell(String.valueOf(leaderBoardView.getValue().pointsProperty().get())));
