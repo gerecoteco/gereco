@@ -1,4 +1,4 @@
-package controllers;
+package controllers.home.event_list;
 
 import application.Session;
 import com.jfoenix.controls.JFXComboBox;
@@ -41,8 +41,8 @@ public class EventListController implements Initializable {
     private int pageIndex;
 
     private ResourceBundle strings;
-    static List<Event> institutionEvents;
-    static Event event;
+    public static List<Event> institutionEvents;
+    public static Event event;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

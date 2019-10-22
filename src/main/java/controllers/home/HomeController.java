@@ -1,9 +1,11 @@
-package controllers;
+package controllers.home;
 
 import application.Main;
 import application.Session;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbarLayout;
+import controllers.home.event_page.EventPageController;
+import controllers.home.event_page.GroupTableController;
 import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +28,7 @@ public class HomeController {
     public ScrollPane scrollHome;
     public StackPane stackPaneMain;
 
-    static StackPane staticStackPaneMain;
+    public static StackPane staticStackPaneMain;
     private static Label staticLblInstitutionInfo;
 
     @FXML
@@ -38,7 +40,7 @@ public class HomeController {
         loadEventListView();
     }
 
-    static void loadInstitutionInfoOnLabel(){
+    public static void loadInstitutionInfoOnLabel(){
         Institution institutionLogged = Session.getInstance().getInstitution();
         staticLblInstitutionInfo.setText(institutionLogged.getName() + " |  " + institutionLogged.getEmail());
     }
@@ -71,7 +73,7 @@ public class HomeController {
        returnToInitialView();
     }
 
-    static void returnToInitialView(){
+    public static void returnToInitialView(){
         Session.getInstance().setInstitution(null);
         Main.mainStage.close();
         Main.mainStage = new Stage();
@@ -90,14 +92,14 @@ public class HomeController {
         }
     }
 
-    static void loadEventListView(){
+    public static void loadEventListView(){
         final URL EVENT_LIST_URL = HomeController.class.getResource("/views/home/event-list.fxml");
         EventPageController.actualGender = null;
         GroupTableController.groupIndex = 0;
         loadView(EVENT_LIST_URL);
     }
 
-    static void loadEventPageView(){
+    public static void loadEventPageView(){
         final URL EVENT_PAGE_URL = HomeController.class.getResource("/views/home/event-page.fxml");
         loadView(EVENT_PAGE_URL);
     }
@@ -114,7 +116,7 @@ public class HomeController {
         }
     }
 
-    static void showToastMessage(String messsage) {
+    public static void showToastMessage(String messsage) {
         JFXSnackbar snackbar = new JFXSnackbar(staticStackPaneMain);
         snackbar.getStylesheets().add(HomeController.class.getResource("/css/snackbar.css").toString());
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(

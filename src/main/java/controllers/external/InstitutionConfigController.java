@@ -1,7 +1,8 @@
-package controllers;
+package controllers.external;
 
 import application.Session;
 import com.jfoenix.controls.*;
+import controllers.home.HomeController;
 import helpers.DialogBuilder;
 import helpers.UTF8Control;
 import javafx.fxml.FXML;
@@ -20,7 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static controllers.PasswordValidationController.deleteInstitution;
+import static controllers.external.PasswordValidationController.deleteInstitution;
 import static helpers.InstitutionAuth.encryptPassword;
 import static helpers.InstitutionAuth.validatePasswordAndReturnMessage;
 

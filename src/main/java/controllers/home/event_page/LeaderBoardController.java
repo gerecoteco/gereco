@@ -1,7 +1,8 @@
-package controllers;
+package controllers.home.event_page;
 
 import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.JFXTreeTableView;
+import controllers.home.HomeController;
 import helpers.LeaderBoardView;
 import helpers.PdfTableGenerator;
 import javafx.fxml.FXML;
@@ -18,7 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static controllers.EventPageController.*;
+import static controllers.home.event_page.EventPageController.*;
 
 public class LeaderBoardController implements Initializable {
     public JFXTreeTableView leaderBoardTableView;

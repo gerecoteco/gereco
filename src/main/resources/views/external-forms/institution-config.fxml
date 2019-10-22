@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPaneMain" styleClass="config" stylesheets="@../../css/institution-config.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InstitutionConfigController">
+<StackPane fx:id="stackPaneMain" styleClass="config" stylesheets="@../../css/institution-config.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.external.InstitutionConfigController">
    <children>
       <HBox>
          <children>

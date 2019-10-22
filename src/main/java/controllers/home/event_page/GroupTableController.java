@@ -1,9 +1,11 @@
-package controllers;
+package controllers.home.event_page;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTreeTableView;
+import controllers.home.event_list.EventItemController;
+import controllers.home.HomeController;
 import helpers.DialogBuilder;
 import helpers.MatchesGenerator;
 import helpers.TeamGroupsManager;
@@ -22,7 +24,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
 
-import static controllers.EventPageController.*;
+import static controllers.home.event_page.EventPageController.*;
 
 public class GroupTableController implements Initializable {
     public JFXComboBox cbxGroups;
@@ -33,8 +35,8 @@ public class GroupTableController implements Initializable {
             balanceColumn, foulsColumn;
     private TreeItem<GroupTableView> rootGroup = new TreeItem<>(new GroupTableView());
 
-    static List<List<Team>> groups;
-    static Integer groupIndex;
+    public static List<List<Team>> groups;
+    public static Integer groupIndex;
     private ResourceBundle strings;
 
     @Override

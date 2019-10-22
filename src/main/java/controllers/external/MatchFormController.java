@@ -1,5 +1,8 @@
-package controllers;
+package controllers.external;
 
+import controllers.home.event_list.EventItemController;
+import controllers.home.HomeController;
+import controllers.home.event_page.MatchTableController;
 import helpers.MatchTableView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,8 +20,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-import static controllers.EventPageController.actualGender;
-import static controllers.EventPageController.event;
+import static controllers.home.event_page.EventPageController.actualGender;
+import static controllers.home.event_page.EventPageController.event;
 
 public class MatchFormController implements Initializable {
     public Label lblTeamA;

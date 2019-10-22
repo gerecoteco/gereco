@@ -1,20 +1,21 @@
-package controllers;
+package controllers.external;
 
 import application.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
+import controllers.home.HomeController;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import services.InstitutionService;
 
-import static controllers.EventItemController.deleteEvent;
+import static controllers.home.event_list.EventItemController.deleteEvent;
 import static helpers.InstitutionAuth.encryptPassword;
 
 public class PasswordValidationController {
     public JFXPasswordField txtPassword;
     public JFXButton btnConfirm;
 
-    static boolean deleteInstitution;
+    public static boolean deleteInstitution;
 
     @FXML
     public void initialize(){

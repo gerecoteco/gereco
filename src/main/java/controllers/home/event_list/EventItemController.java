@@ -1,6 +1,7 @@
-package controllers;
+package controllers.home.event_list;
 
 import com.jfoenix.controls.JFXDialog;
+import controllers.home.HomeController;
 import helpers.DialogBuilder;
 import helpers.UTF8Control;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static controllers.PasswordValidationController.deleteInstitution;
+import static controllers.external.PasswordValidationController.deleteInstitution;
 
 public class EventItemController implements Initializable {
     public Label lblEventName;
@@ -27,7 +28,7 @@ public class EventItemController implements Initializable {
     public Label lblEventId;
 
     private static String successEventDelete;
-    static String eventId;
+    public static String eventId;
     private ResourceBundle strings;
 
     @Override
@@ -81,7 +82,7 @@ public class EventItemController implements Initializable {
         }
     }
 
-    static void deleteEvent(){
+    public static void deleteEvent(){
         EventService eventService = new EventService();
         eventService.deleteEvent(eventId);
         HomeController.loadEventListView();
