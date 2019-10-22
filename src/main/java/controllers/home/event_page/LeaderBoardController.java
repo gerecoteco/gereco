@@ -1,8 +1,9 @@
-package controllers;
+package controllers.home.event_page;
 
 import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.JFXTreeTableView;
-import helpers.LeaderBoardView;
+import controllers.home.HomeController;
+import helpers.LeaderBoardModel;
 import helpers.PdfTableGenerator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,15 +19,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static controllers.EventPageController.*;
+import static controllers.home.event_page.EventPageController.*;
 
 public class LeaderBoardController implements Initializable {
     public JFXTreeTableView leaderBoardTableView;
     public Label lblModalityAndGender;
-    public TreeTableColumn<LeaderBoardView, String> nameColumn;
-    public TreeTableColumn<LeaderBoardView, Number> positionColumn, pointsColumn, ownPointsColumn,
+    public TreeTableColumn<LeaderBoardModel, String> nameColumn;
+    public TreeTableColumn<LeaderBoardModel, Number> positionColumn, pointsColumn, ownPointsColumn,
             againstPoinstColumn, balanceColumn, foulsColumn;
-    private TreeItem<LeaderBoardView> rootLeaderBoard = new TreeItem<>(new LeaderBoardView());
+    private TreeItem<LeaderBoardModel> rootLeaderBoard = new TreeItem<>(new LeaderBoardModel());
 
     private ResourceBundle strings;
 
@@ -51,7 +52,7 @@ public class LeaderBoardController implements Initializable {
                 .thenComparing((Team team) -> team.getScore().getFouls()).reversed());
 
         for(int x=0; x < teams.size(); x++){
-            TreeItem<LeaderBoardView> teamRow = new TreeItem<>(new LeaderBoardView(
+            TreeItem<LeaderBoardModel> teamRow = new TreeItem<>(new LeaderBoardModel(
                     x+1, teams.get(x).getName(), teams.get(x).getScore().getPoints(),
                     teams.get(x).getScore().getOwnPoints(), teams.get(x).getScore().getAgainstPoints(),
                     teams.get(x).getScore().getBalance(), teams.get(x).getScore().getFouls()));

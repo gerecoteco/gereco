@@ -1,13 +1,15 @@
-package controllers;
+package controllers.home.event_page;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTreeTableView;
+import controllers.home.event_list.EventItemController;
+import controllers.home.HomeController;
 import helpers.DialogBuilder;
 import helpers.MatchesGenerator;
 import helpers.TeamGroupsManager;
-import helpers.GroupTableView;
+import helpers.GroupTableModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
@@ -22,19 +24,19 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
 
-import static controllers.EventPageController.*;
+import static controllers.home.event_page.EventPageController.*;
 
 public class GroupTableController implements Initializable {
     public JFXComboBox cbxGroups;
     public JFXButton btnGroupTeams;
     public JFXTreeTableView groupTableView;
-    public TreeTableColumn<GroupTableView, String> teamColumn;
-    public TreeTableColumn<GroupTableView, Number> pointsColumn, ownPointsColumn, againstPointsColumn,
+    public TreeTableColumn<GroupTableModel, String> teamColumn;
+    public TreeTableColumn<GroupTableModel, Number> pointsColumn, ownPointsColumn, againstPointsColumn,
             balanceColumn, foulsColumn;
-    private TreeItem<GroupTableView> rootGroup = new TreeItem<>(new GroupTableView());
+    private TreeItem<GroupTableModel> rootGroup = new TreeItem<>(new GroupTableModel());
 
-    static List<List<Team>> groups;
-    static Integer groupIndex;
+    public static List<List<Team>> groups;
+    public static Integer groupIndex;
     private ResourceBundle strings;
 
     @Override
@@ -61,7 +63,7 @@ public class GroupTableController implements Initializable {
         rootGroup.getChildren().clear();
 
         groups.get(groupIndex).forEach(team -> {
-            TreeItem<GroupTableView> teamRow = new TreeItem<>(new GroupTableView(
+            TreeItem<GroupTableModel> teamRow = new TreeItem<>(new GroupTableModel(
                     team.getName(), team.getScore().getPoints(), team.getScore().getOwnPoints(),
                     team.getScore().getAgainstPoints(), team.getScore().getBalance(), team.getScore().getFouls()));
             rootGroup.getChildren().add(teamRow);

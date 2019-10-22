@@ -2,21 +2,22 @@ package helpers;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.TreeItem;
 
-public class GroupTableView extends TreeItem<GroupTableView> {
-    private SimpleStringProperty team;
+public class LeaderBoardModel {
+    private SimpleIntegerProperty position;
+    private SimpleStringProperty name;
     private SimpleIntegerProperty points;
     private SimpleIntegerProperty ownPoints;
     private SimpleIntegerProperty againstPoints;
     private SimpleIntegerProperty balance;
     private SimpleIntegerProperty fouls;
 
-    public GroupTableView() {
-    }
+    public LeaderBoardModel(){}
 
-    public GroupTableView(String team, int points, int ownPoints, int againstPoints, int balance, int fouls) {
-        this.team = new SimpleStringProperty(team);
+    public LeaderBoardModel(int position, String name, int points, int ownPoints,
+                            int againstPoints, int balance, int fouls) {
+        this.position = new SimpleIntegerProperty(position);
+        this.name = new SimpleStringProperty(name);
         this.points = new SimpleIntegerProperty(points);
         this.ownPoints = new SimpleIntegerProperty(ownPoints);
         this.againstPoints = new SimpleIntegerProperty(againstPoints);
@@ -24,8 +25,11 @@ public class GroupTableView extends TreeItem<GroupTableView> {
         this.fouls = new SimpleIntegerProperty(fouls);
     }
 
-    public SimpleStringProperty teamProperty() {
-        return team;
+    public SimpleIntegerProperty positionProperty() {
+        return position;
+    }
+    public SimpleStringProperty nameProperty() {
+        return name;
     }
     public SimpleIntegerProperty pointsProperty() {
         return points;

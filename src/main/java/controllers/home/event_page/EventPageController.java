@@ -1,6 +1,8 @@
-package controllers;
+package controllers.home.event_page;
 
 import com.jfoenix.controls.*;
+import controllers.home.event_list.EventItemController;
+import controllers.home.event_list.EventListController;
 import helpers.UTF8Control;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -36,9 +38,9 @@ public class EventPageController implements Initializable {
     public AnchorPane paneLeaderBoard;
     private ToggleGroup genderGroup;
 
-    static Event event;
-    static Gender actualGender;
-    static String modalityAndGender;
+    public static Event event;
+    public static Gender actualGender;
+    public static String modalityAndGender;
 
     private static Modality actualModality;
     private static int genderIndex;

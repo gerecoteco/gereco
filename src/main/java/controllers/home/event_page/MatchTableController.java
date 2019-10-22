@@ -1,9 +1,11 @@
-package controllers;
+package controllers.home.event_page;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbarLayout;
 import com.jfoenix.controls.JFXTreeTableView;
+import controllers.home.event_list.EventItemController;
+import controllers.home.HomeController;
 import helpers.MatchTableView;
 import helpers.MatchesGenerator;
 import helpers.UTF8Control;
@@ -30,7 +32,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static controllers.EventPageController.*;
+import static controllers.home.event_page.EventPageController.*;
 
 public class MatchTableController implements Initializable {
     public JFXTreeTableView matchTableView;
@@ -41,7 +43,7 @@ public class MatchTableController implements Initializable {
     public Label lblModalityAndGender;
     private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
 
-    static TreeItem<MatchTableView> selectedMatch;
+    public static TreeItem<MatchTableView> selectedMatch;
     private ResourceBundle strings;
 
     @Override

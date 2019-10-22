@@ -1,7 +1,8 @@
-package controllers;
+package controllers.home.event_page;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleNode;
+import controllers.home.HomeController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static controllers.EventPageController.modalityAndGender;
+import static controllers.home.event_page.EventPageController.modalityAndGender;
 
 public class TeamsGridController implements Initializable {
     public GridPane gridTeams;

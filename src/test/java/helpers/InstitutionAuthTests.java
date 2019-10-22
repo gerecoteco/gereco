@@ -1,8 +1,11 @@
-import helpers.InstitutionAuth;
+package helpers;
+
 import models.Institution;
 import org.junit.Test;
 import org.mockito.Mockito;
 import services.InstitutionService;
+
+import java.util.ResourceBundle;
 
 import static helpers.InstitutionAuth.encryptPassword;
 import static junit.framework.TestCase.*;
@@ -13,8 +16,9 @@ public class InstitutionAuthTests {
             "dd36aa3f4eb4404c02a29454fb47632d68f16e26ffeb7bed42";
 
     private InstitutionService institutionService = Mockito.mock(InstitutionService.class);
-
     private InstitutionAuth institutionAuth = new InstitutionAuth(institutionService);
+
+    private ResourceBundle strings = ResourceBundle.getBundle("bundles.lang", new UTF8Control());
 
     @Test
     public void encyptPassword(){
@@ -45,7 +49,7 @@ public class InstitutionAuthTests {
         String password = "";
         String confirmPassword = "1234";
 
-        assertEquals("Fill in the fields!"
+        assertEquals(strings.getString("error.emptyFields")
                 ,InstitutionAuth.validatePasswordAndReturnMessage(password, confirmPassword));
     }
 
@@ -54,7 +58,7 @@ public class InstitutionAuthTests {
         String password = "123";
         String confirmPassword = "";
 
-        assertEquals("Fill in the fields!"
+        assertEquals(strings.getString("error.emptyFields")
                 ,InstitutionAuth.validatePasswordAndReturnMessage(password, confirmPassword));
     }
 
@@ -63,7 +67,7 @@ public class InstitutionAuthTests {
         String password = "123";
         String confirmPassword = "123";
 
-        assertEquals("Password must contain at least 6 characters!"
+        assertEquals(strings.getString("error.sixCharsPassword")
                 ,InstitutionAuth.validatePasswordAndReturnMessage(password, confirmPassword));
     }
 
@@ -72,7 +76,7 @@ public class InstitutionAuthTests {
         String password = "123567";
         String confirmPassword = "123567";
 
-        assertEquals("Password must contain a special character!"
+        assertEquals(strings.getString("error.specialCharPassword")
                 ,InstitutionAuth.validatePasswordAndReturnMessage(password, confirmPassword));
     }
 
@@ -81,7 +85,7 @@ public class InstitutionAuthTests {
         String password = "123567!";
         String confirmPassword = "123567!";
 
-        assertEquals("Password must contain a uppercase letter!"
+        assertEquals(strings.getString("error.upperCaseCharPassword")
                 ,InstitutionAuth.validatePasswordAndReturnMessage(password, confirmPassword));
     }
 
@@ -90,7 +94,7 @@ public class InstitutionAuthTests {
         String password = "ThisIsATestPassword!";
         String confirmPassword = "ThisIsATestPassword!";
 
-        assertEquals("Password must contain a number!"
+        assertEquals(strings.getString("error.numberCharPassword")
                 ,InstitutionAuth.validatePasswordAndReturnMessage(password, confirmPassword));
     }
 
@@ -99,7 +103,7 @@ public class InstitutionAuthTests {
         String password = "ThisIsATestPassword1!";
         String confirmPassword = "ThisIsATestPassword2";
 
-        assertEquals("The passwords are different!"
+        assertEquals(strings.getString("error.differentPasswords")
                 ,InstitutionAuth.validatePasswordAndReturnMessage(password, confirmPassword));
     }
 

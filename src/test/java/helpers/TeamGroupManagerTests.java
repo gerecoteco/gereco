@@ -1,5 +1,5 @@
-import helpers.MatchesGenerator;
-import helpers.TeamGroupsManager;
+package helpers;
+
 import models.Match;
 import models.Team;
 import org.junit.Before;

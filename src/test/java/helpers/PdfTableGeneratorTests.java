@@ -24,7 +24,7 @@ public class PdfTableGeneratorTests {
 
     private static final String TITLE = "example";
     private static final String DESTINATION = "it_does_not_matter";
-    private static final ObservableList<TreeItem<LeaderBoardView>> LEADER_BOARD_VIEWS = FXCollections.observableArrayList();
+    private static final ObservableList<TreeItem<LeaderBoardModel>> LEADER_BOARD_VIEWS = FXCollections.observableArrayList();
 
     @Mock
     Document document;

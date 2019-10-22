@@ -1,7 +1,8 @@
-package controllers;
+package controllers.external;
 
 import com.google.gson.Gson;
 import com.jfoenix.controls.*;
+import controllers.home.HomeController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
