@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-
+<?import com.jfoenix.controls.JFXComboBox?>
 <StackPane fx:id="stackPaneLogin" stylesheets="@../css/initial.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InitialController">
    <children>
       <AnchorPane id="initial-background" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="480.0" prefWidth="800.0" styleClass="initial">
@@ -89,6 +89,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
+                  <JFXComboBox fx:id="comboBoxLang" onAction="#updateLanguage" focusColor="#2f96f3" layoutX="114.0" layoutY="440.0" unFocusColor="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
                <padding>
                   <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />

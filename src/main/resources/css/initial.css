@@ -1,5 +1,5 @@
 /* INITIAL */
-.initial Label, Text, JFXTextField, JFXPasswordField, JFXButton {
+.initial Label, Text, JFXTextField, JFXPasswordField, JFXButton, .initial JFXComboBox .list-cell {
     -fx-text-fill: white;
 }
 
@@ -8,7 +8,7 @@
     -fx-background-size: cover;
 }
 
-.initial JFXButton {
+.initial JFXButton, .initial JFXComboBox .list-cell {
     -fx-background-color: #369137;
 }
 

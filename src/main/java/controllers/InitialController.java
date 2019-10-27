@@ -4,7 +4,9 @@ import application.Main;
 import com.jfoenix.controls.*;
 import helpers.DialogBuilder;
 import helpers.InstitutionAuth;
+import helpers.LocaleHelper;
 import helpers.UTF8Control;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +22,7 @@ import services.InstitutionService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class InitialController implements Initializable {
@@ -30,6 +33,7 @@ public class InitialController implements Initializable {
     public JFXPasswordField txtLoginPassword;
     public JFXButton btnLogin;
     public StackPane stackPaneLogin;
+    public JFXComboBox<Locale> comboBoxLang;
 
     private InstitutionService institutionService;
     private ResourceBundle strings;
@@ -38,6 +42,13 @@ public class InitialController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         strings = resources;
         institutionService = new InstitutionService();
+
+        comboBoxLang.setItems(FXCollections.observableArrayList(LocaleHelper.getImplementedLocales()).sorted());
+        comboBoxLang.setConverter(LocaleHelper.getLocaleStringConverter());
+
+        // Fallback language (English in this case) has no Display Name by default
+        LocaleHelper.updateDefaultLang();
+        comboBoxLang.setValue(Locale.getDefault());
     }
 
     @FXML
@@ -114,5 +125,13 @@ public class InitialController implements Initializable {
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
                 new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
                 Duration.millis(3000), null));
+    }
+
+    @FXML
+    private void updateLanguage() throws IOException {
+        Locale.setDefault(comboBoxLang.getValue());
+        strings = ResourceBundle.getBundle("bundles.lang", new UTF8Control());
+        Parent root = FXMLLoader.load(getClass().getResource("/views/initial.fxml"), strings);
+        Main.mainStage.getScene().setRoot(root);
     }
 }
