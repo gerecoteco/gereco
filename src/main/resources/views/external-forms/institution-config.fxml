@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <StackPane fx:id="stackPaneMain" styleClass="config" stylesheets="@../../css/institution-config.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.external.InstitutionConfigController">
    <children>
       <HBox>
@@ -105,6 +106,7 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding>
                   </HBox>
+                  <JFXComboBox fx:id="comboBoxLang" onAction="#updateLanguage" focusColor="#2f96f3" layoutX="114.0" layoutY="440.0" unFocusColor="WHITE" />
                </children>
             </VBox>
          </children>

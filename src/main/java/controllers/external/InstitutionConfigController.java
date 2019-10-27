@@ -1,10 +1,13 @@
 package controllers.external;
 
+import application.Main;
 import application.Session;
 import com.jfoenix.controls.*;
 import controllers.home.HomeController;
 import helpers.DialogBuilder;
+import helpers.LocaleHelper;
 import helpers.UTF8Control;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +22,7 @@ import services.InstitutionService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static controllers.external.PasswordValidationController.deleteInstitution;
@@ -32,6 +36,7 @@ public class InstitutionConfigController implements Initializable {
     public JFXPasswordField txtNewPassword;
     public JFXPasswordField txtConfirmPassword;
     public JFXPasswordField txtActualPassword;
+    public JFXComboBox<Locale> comboBoxLang;
 
     private Institution institutionLogged;
     private ResourceBundle strings;
@@ -41,6 +46,10 @@ public class InstitutionConfigController implements Initializable {
         strings = resources;
         institutionLogged = Session.getInstance().getInstitution();
         lblInstitutionName.setText(institutionLogged.getName());
+
+        comboBoxLang.setItems(FXCollections.observableArrayList(LocaleHelper.getImplementedLocales()).sorted());
+        comboBoxLang.setConverter(LocaleHelper.getLocaleStringConverter());
+        comboBoxLang.setValue(Locale.getDefault());
     }
 
     @FXML
@@ -153,5 +162,16 @@ public class InstitutionConfigController implements Initializable {
     private void closeStage(){
         Stage actualStage = (Stage) stackPaneMain.getScene().getWindow();
         actualStage.close();
+    }
+
+    @FXML
+    void updateLanguage() throws IOException {
+        Locale.setDefault(comboBoxLang.getValue());
+        strings = ResourceBundle.getBundle("bundles.lang", new UTF8Control());
+
+        Parent root = FXMLLoader.load(getClass().getResource("/views/external-forms/institution-config.fxml"), strings);
+        Parent stageRoot = FXMLLoader.load(getClass().getResource("/views/home/home.fxml"), strings);
+        stackPaneMain.getScene().setRoot(root);
+        Main.mainStage.getScene().setRoot(stageRoot);
     }
 }
