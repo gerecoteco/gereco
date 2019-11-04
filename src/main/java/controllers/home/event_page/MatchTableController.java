@@ -93,7 +93,7 @@ public class MatchTableController implements Initializable {
     private void loadMatchForm(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/match-form.fxml"),
+                    "/views/external/match-form.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             Scene scene = new Scene(root);
 
@@ -141,7 +141,7 @@ public class MatchTableController implements Initializable {
 
     private void showToastMessage(String messsage) {
         JFXSnackbar snackbar = new JFXSnackbar(HomeController.staticStackPaneMain);
-        snackbar.getStylesheets().add(getClass().getResource("/css/snackbar.css").toString());
+        snackbar.getStylesheets().add(getClass().getResource("/css/external/snackbar.css").toString());
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
                 new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
                 Duration.INDEFINITE, null));

@@ -67,7 +67,7 @@ public class EventItemController implements Initializable {
     private void loadPasswordValidationView(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/password-validation.fxml"),
+                    "/views/external/password-validation.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             Scene scene = new Scene(root);
 

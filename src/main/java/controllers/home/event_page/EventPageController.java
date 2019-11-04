@@ -139,7 +139,7 @@ public class EventPageController implements Initializable {
     private void loadTeamGridView(){
         paneTeamGrid.getChildren().clear();
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/views/home/team-grid.fxml"),
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/event_page/teams-grid.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             paneTeamGrid.getChildren().add(root);
         } catch (IOException e) {
@@ -153,7 +153,7 @@ public class EventPageController implements Initializable {
 
         paneGroupTable.getChildren().clear();
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/views/home/group-table.fxml"),
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/event_page/group-table.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             paneGroupTable.getChildren().add(root);
         } catch (IOException e) {
@@ -164,7 +164,7 @@ public class EventPageController implements Initializable {
     private void loadLoaderBoardView(){
         paneLeaderBoard.getChildren().clear();
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/views/home/leaderboard.fxml"),
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/event_page/leaderboard.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             paneLeaderBoard.getChildren().add(root);
 
@@ -177,7 +177,7 @@ public class EventPageController implements Initializable {
     private void loadMatchTableView(){
         paneMatchTable.getChildren().clear();
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/views/home/match-table.fxml"),
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/event_page/match-table.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             paneMatchTable.getChildren().add(root);
 

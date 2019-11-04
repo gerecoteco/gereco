@@ -5,11 +5,11 @@
 }
 
 .trash-icon {
-    -fx-image: url("../img/trash-icon.png");
+    -fx-image: url("../../../img/trash-icon.png");
 }
 
 .trash-icon:hover {
-    -fx-image: url("../img/trash-open-icon.png");
+    -fx-image: url("../../../img/trash-open-icon.png");
 }
 
 JFXButton {

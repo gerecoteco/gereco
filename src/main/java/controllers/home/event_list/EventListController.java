@@ -180,7 +180,7 @@ public class EventListController implements Initializable {
 
     private void loadNewEventItem(int eventCount){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/views/home/partials/event-item.fxml"),
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/event_list/event-item.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
 
             AnchorPane eventItem = (AnchorPane) root;
@@ -192,7 +192,7 @@ public class EventListController implements Initializable {
     protected void openEventCreateView(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/event-create.fxml"),
+                    "/views/external/event-create.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             Scene scene = new Scene(root);
 

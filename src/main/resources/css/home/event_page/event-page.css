@@ -22,7 +22,7 @@
 }
 
 .add_team:hover {
-    -fx-background-image: url("../img/plus.png");
+    -fx-background-image: url("../../../img/plus.png");
     -fx-background-color: #369137;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
