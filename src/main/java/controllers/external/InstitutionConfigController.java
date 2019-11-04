@@ -1,6 +1,5 @@
 package controllers.external;
 
-import application.Main;
 import application.Session;
 import com.jfoenix.controls.*;
 import controllers.home.HomeController;
@@ -165,13 +164,9 @@ public class InstitutionConfigController implements Initializable {
     }
 
     @FXML
-    void updateLanguage() throws IOException {
+    void updateLanguage() {
         Locale.setDefault(comboBoxLang.getValue());
-        strings = ResourceBundle.getBundle("bundles.lang", new UTF8Control());
-
-        Parent root = FXMLLoader.load(getClass().getResource("/views/external/institution-config.fxml"), strings);
-        Parent stageRoot = FXMLLoader.load(getClass().getResource("/views/home/home.fxml"), strings);
-        stackPaneMain.getScene().setRoot(root);
-        Main.mainStage.getScene().setRoot(stageRoot);
+        closeStage();
+        HomeController.loadEventListView();
     }
 }
