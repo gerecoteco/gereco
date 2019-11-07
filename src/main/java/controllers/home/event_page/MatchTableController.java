@@ -9,14 +9,15 @@ import controllers.home.HomeController;
 import helpers.MatchTableView;
 import helpers.MatchesGenerator;
 import helpers.UTF8Control;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -27,10 +28,7 @@ import services.EventService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static controllers.home.event_page.EventPageController.*;
 
@@ -42,6 +40,11 @@ public class MatchTableController implements Initializable {
     public TreeTableColumn<MatchTableView, Number> stageColumn, scoreboardAColumn, scoreboardBColumn;
     public Label lblModalityAndGender;
     private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
+
+    private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
+    private int rowIndex = 0;
+    private TreeItem<MatchTableView> draggedItem;
+    private ObservableList<TreeItem<MatchTableView>> nextItems;
 
     public static TreeItem<MatchTableView> selectedMatch;
     private ResourceBundle strings;
@@ -55,6 +58,8 @@ public class MatchTableController implements Initializable {
         generateColumns();
         if(!actualGender.getMatches().isEmpty()) listMatchesOnTable();
         if(isFinalRound() || actualGender.getMatches().isEmpty()) hboxButtons.getChildren().remove(btnFinalMatches);
+
+        setRowFactoryOfTable();
     }
 
     private boolean isFinalRound(){
@@ -145,5 +150,81 @@ public class MatchTableController implements Initializable {
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
                 new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
                 Duration.INDEFINITE, null));
+    }
+
+    private void setRowFactoryOfTable(){
+        matchTableView.setRowFactory(tv -> {
+            TreeTableRow<MatchTableView> row = new TreeTableRow<>();
+
+            row.setOnDragDetected(event -> {
+                if (!row.isEmpty()) {
+                    int index = row.getIndex();
+                    draggedItem = rootMatch.getChildren().get(index);
+
+                    Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
+                    db.setDragView(row.snapshot(null, null));
+                    ClipboardContent cc = new ClipboardContent();
+                    cc.put(SERIALIZED_MIME_TYPE, index);
+                    db.setContent(cc);
+                    rootMatch.getChildren().remove(draggedItem);
+                    event.consume();
+                }
+            });
+
+            row.setOnDragOver(event -> {
+                Dragboard db = event.getDragboard();
+
+                if(rowIndex == row.getIndex())
+                    rootMatch.getChildren().removeIf(item -> item.getValue().stageProperty() == null);
+
+                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+                    if (row.getIndex() != (Integer) db.getContent(SERIALIZED_MIME_TYPE)) {
+                        nextItems = FXCollections.observableArrayList();
+
+                        for(int x = row.getIndex(); x < rootMatch.getChildren().size(); x++)
+                            nextItems.add(rootMatch.getChildren().get(x));
+
+                        resetMatchTableItens();
+
+                        rowIndex = row.getIndex();
+                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                        event.consume();
+                    }
+                }
+            });
+
+            row.setOnDragDropped(event -> {
+                Dragboard db = event.getDragboard();
+
+                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+                    int dropIndex;
+
+                    if (row.isEmpty()) {
+                        dropIndex = rootMatch.getChildren().size();
+                        System.out.println("errado");
+                    } else{
+                        dropIndex = row.getIndex();
+                    }
+
+                    if(dropIndex != rootMatch.getChildren().size()){
+                        rootMatch.getChildren().get(rowIndex).setValue(draggedItem.getValue());
+                        matchTableView.getSelectionModel().select(dropIndex);
+                    } else {
+                        rootMatch.getChildren().add(draggedItem);
+                        matchTableView.getSelectionModel().select(rootMatch.getChildren().size()-1);
+                    }
+
+                    event.setDropCompleted(true);
+                    event.consume();
+                }
+            });
+            return row ;
+        });
+    }
+
+    private void resetMatchTableItens(){
+        rootMatch.getChildren().removeAll(nextItems);
+        rootMatch.getChildren().add(new TreeItem<>(new MatchTableView()));
+        rootMatch.getChildren().addAll(nextItems);
     }
 }

@@ -89,3 +89,8 @@ JFXButton {
 .tree-table-cell {
     -fx-font-size: 15;
 }
+
+/* match table */
+.empty-row .tree-table-row-cell {
+    -fx-background-color: #45de47;
+}
