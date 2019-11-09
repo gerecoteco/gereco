@@ -3,7 +3,7 @@ package helpers;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class MatchTableView {
+public class MatchTableModel {
     private SimpleIntegerProperty stage;
     private SimpleStringProperty versus;
     private SimpleStringProperty teamA;
@@ -11,10 +11,10 @@ public class MatchTableView {
     private SimpleIntegerProperty scoreA;
     private SimpleIntegerProperty scoreB;
 
-    public MatchTableView() {
+    public MatchTableModel() {
     }
 
-    public MatchTableView(int stage, String teamA, String teamB, int scoreA, int scoreB) {
+    public MatchTableModel(int stage, String teamA, String teamB, int scoreA, int scoreB) {
         this.stage = new SimpleIntegerProperty(stage);
         this.versus = new SimpleStringProperty("X");
         this.teamA = new SimpleStringProperty(teamA);
