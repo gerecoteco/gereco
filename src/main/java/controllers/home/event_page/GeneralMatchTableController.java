@@ -1,9 +1,6 @@
 package controllers.home.event_page;
 
-import com.jfoenix.controls.JFXSnackbar;
-import com.jfoenix.controls.JFXSnackbarLayout;
 import com.jfoenix.controls.JFXTreeTableView;
-import controllers.home.HomeController;
 import helpers.MatchTableModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +13,6 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +21,7 @@ import static controllers.home.event_page.EventPageController.modalityAndGender;
 
 public class GeneralMatchTableController implements Initializable {
     public JFXTreeTableView matchTableView;
-    public TreeTableColumn<MatchTableModel, String> versusColumn, teamAColumn, teamBColumn;
+    public TreeTableColumn<MatchTableModel, String> modalityColumn, genderColumn,versusColumn, teamAColumn, teamBColumn;
     public TreeTableColumn<MatchTableModel, Number> stageColumn;
     public Label lblModalityAndGender;
     private TreeItem<MatchTableModel> rootMatch = new TreeItem<>(new MatchTableModel());
@@ -48,18 +44,12 @@ public class GeneralMatchTableController implements Initializable {
     }
 
     private void generateColumns(){
+        modalityColumn.setCellValueFactory(param -> param.getValue().getValue().modalityProperty());
+        genderColumn.setCellValueFactory(param -> param.getValue().getValue().genderProperty());
         stageColumn.setCellValueFactory(param -> param.getValue().getValue().stageProperty());
         versusColumn.setCellValueFactory(param -> param.getValue().getValue().versusProperty());
         teamAColumn.setCellValueFactory(param -> param.getValue().getValue().teamAProperty());
         teamBColumn.setCellValueFactory(param -> param.getValue().getValue().teamBProperty());
-    }
-
-    private void showToastMessage(String messsage) {
-        JFXSnackbar snackbar = new JFXSnackbar(HomeController.staticStackPaneMain);
-        snackbar.getStylesheets().add(getClass().getResource("/css/external/snackbar.css").toString());
-        snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
-                new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
-                Duration.INDEFINITE, null));
     }
 
     private void setRowFactoryOfTable(){

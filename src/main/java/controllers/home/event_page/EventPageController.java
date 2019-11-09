@@ -35,6 +35,7 @@ public class EventPageController implements Initializable {
     public AnchorPane paneTeamGrid;
     public AnchorPane paneGroupTable;
     public AnchorPane paneMatchTable;
+    public AnchorPane paneGeneralMatchTable;
     public AnchorPane paneLeaderBoard;
     private ToggleGroup genderGroup;
 
@@ -72,6 +73,7 @@ public class EventPageController implements Initializable {
         loadTeamGridView();
         loadGroupTableView();
         loadMatchTableView();
+        loadGeneralMatchTableView();
         loadLoaderBoardView();
     }
 
@@ -182,6 +184,19 @@ public class EventPageController implements Initializable {
             paneMatchTable.getChildren().add(root);
 
             setPaneAnchorsToZero(paneMatchTable);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadGeneralMatchTableView(){
+        paneGeneralMatchTable.getChildren().clear();
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/event_page/general-match-table.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+            paneGeneralMatchTable.getChildren().add(root);
+
+            setPaneAnchorsToZero(paneGeneralMatchTable);
         } catch (IOException e) {
             e.printStackTrace();
         }

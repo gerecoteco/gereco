@@ -78,6 +78,7 @@
                               <HBox alignment="CENTER" spacing="50.0" styleClass="tab-hbox">
                                  <children>
                                     <AnchorPane fx:id="paneMatchTable" />
+                                    <AnchorPane fx:id="paneGeneralMatchTable" />
                                  </children>
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
