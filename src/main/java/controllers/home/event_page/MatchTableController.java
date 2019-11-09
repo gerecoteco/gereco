@@ -173,23 +173,21 @@ public class MatchTableController implements Initializable {
 
             row.setOnDragOver(event -> {
                 Dragboard db = event.getDragboard();
+                matchTableView.getSelectionModel().clearSelection();
 
-                if(rowIndex == row.getIndex())
-                    rootMatch.getChildren().removeIf(item -> item.getValue().stageProperty() == null);
+                rootMatch.getChildren().removeIf(item -> item.getValue().stageProperty() == null);
 
                 if (db.hasContent(SERIALIZED_MIME_TYPE)) {
-                    if (row.getIndex() != (Integer) db.getContent(SERIALIZED_MIME_TYPE)) {
-                        nextItems = FXCollections.observableArrayList();
+                    nextItems = FXCollections.observableArrayList();
 
-                        for(int x = row.getIndex(); x < rootMatch.getChildren().size(); x++)
-                            nextItems.add(rootMatch.getChildren().get(x));
+                    for (int x = row.getIndex(); x < rootMatch.getChildren().size(); x++)
+                        nextItems.add(rootMatch.getChildren().get(x));
 
-                        resetMatchTableItens();
+                    resetMatchTableItens();
 
-                        rowIndex = row.getIndex();
-                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                        event.consume();
-                    }
+                    rowIndex = row.getIndex();
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                    event.consume();
                 }
             });
 
@@ -197,14 +195,7 @@ public class MatchTableController implements Initializable {
                 Dragboard db = event.getDragboard();
 
                 if (db.hasContent(SERIALIZED_MIME_TYPE)) {
-                    int dropIndex;
-
-                    if (row.isEmpty()) {
-                        dropIndex = rootMatch.getChildren().size();
-                        System.out.println("errado");
-                    } else{
-                        dropIndex = row.getIndex();
-                    }
+                    int dropIndex = row.isEmpty() ? rootMatch.getChildren().size() : row.getIndex();
 
                     if(dropIndex != rootMatch.getChildren().size()){
                         rootMatch.getChildren().get(rowIndex).setValue(draggedItem.getValue());
