@@ -91,6 +91,6 @@ JFXButton {
 }
 
 /* match table */
-.empty-row .tree-table-row-cell {
+.tree-table-row-cell:selected {
     -fx-background-color: #45de47;
 }

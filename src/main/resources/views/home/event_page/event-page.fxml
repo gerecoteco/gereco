@@ -73,7 +73,7 @@
                               </HBox>
                         </content>
                       </Tab>
-                      <Tab closable="false" text="%leaderBoard">
+                      <Tab closable="false" text="%matches">
                         <content>
                               <HBox alignment="CENTER" spacing="50.0" styleClass="tab-hbox">
                                  <children>

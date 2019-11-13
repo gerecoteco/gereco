@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.HBox?>
@@ -18,28 +20,48 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblModalityAndGender">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
          </children>
       </HBox>
-      <JFXTreeTableView fx:id="matchTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" sortMode="ONLY_FIRST_LEVEL" VBox.vgrow="ALWAYS">
-         <columns>
-            <TreeTableColumn fx:id="modalityColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%modality" />
-            <TreeTableColumn fx:id="genderColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%gender" />
-            <TreeTableColumn fx:id="stageColumn" editable="false" minWidth="60.0" prefWidth="73.0" resizable="false" sortable="false" text="%stage" />
-            <TreeTableColumn fx:id="teamAColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%team" />
-            <TreeTableColumn fx:id="versusColumn" editable="false" minWidth="-Infinity" prefWidth="35.0" resizable="false" sortable="false" text="X" />
-            <TreeTableColumn fx:id="teamBColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%team" />
-         </columns>
-         <columnResizePolicy>
-            <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
+      <TabPane VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets />
          </VBox.margin>
-      </JFXTreeTableView>
+         <tabs>
+            <Tab closable="false" text="1">
+               <content>
+                  <JFXTreeTableView fx:id="matchTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" sortMode="ONLY_FIRST_LEVEL">
+                     <columns>
+                        <TreeTableColumn fx:id="modalityColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%modality" />
+                        <TreeTableColumn fx:id="genderColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%gender" />
+                        <TreeTableColumn fx:id="stageColumn" editable="false" minWidth="60.0" prefWidth="73.0" resizable="false" sortable="false" text="%stage" />
+                        <TreeTableColumn fx:id="teamAColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%team" />
+                        <TreeTableColumn fx:id="versusColumn" editable="false" minWidth="-Infinity" prefWidth="35.0" resizable="false" sortable="false" text="X" />
+                        <TreeTableColumn fx:id="teamBColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%team" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </JFXTreeTableView>
+               </content>
+            </Tab>
+            <Tab closable="false" text="2">
+               <content>
+                  <JFXTreeTableView fx:id="matchTableView1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" sortMode="ONLY_FIRST_LEVEL">
+                     <columns>
+                        <TreeTableColumn fx:id="modalityColumn1" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%modality" />
+                        <TreeTableColumn fx:id="genderColumn1" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%gender" />
+                        <TreeTableColumn fx:id="stageColumn1" editable="false" minWidth="60.0" prefWidth="73.0" resizable="false" sortable="false" text="%stage" />
+                        <TreeTableColumn fx:id="teamAColumn1" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%team" />
+                        <TreeTableColumn fx:id="versusColumn1" editable="false" minWidth="-Infinity" prefWidth="35.0" resizable="false" sortable="false" text="X" />
+                        <TreeTableColumn fx:id="teamBColumn1" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%team" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </JFXTreeTableView>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
    </children>
 </VBox>

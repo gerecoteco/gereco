@@ -5,7 +5,6 @@ import helpers.MatchTableModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableRow;
@@ -17,13 +16,12 @@ import javafx.scene.input.TransferMode;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static controllers.home.event_page.EventPageController.modalityAndGender;
+import static controllers.home.event_page.EventPageController.event;
 
 public class GeneralMatchTableController implements Initializable {
     public JFXTreeTableView matchTableView;
     public TreeTableColumn<MatchTableModel, String> modalityColumn, genderColumn,versusColumn, teamAColumn, teamBColumn;
     public TreeTableColumn<MatchTableModel, Number> stageColumn;
-    public Label lblModalityAndGender;
     private TreeItem<MatchTableModel> rootMatch = new TreeItem<>(new MatchTableModel());
 
     private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
@@ -36,11 +34,23 @@ public class GeneralMatchTableController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         strings = resources;
-        lblModalityAndGender.setText(modalityAndGender);
 
         matchTableView.setRoot(rootMatch);
         generateColumns();
         setRowFactoryOfTable();
+        loadAllEventMatches();
+    }
+
+    private void loadAllEventMatches(){
+        event.getModalities().forEach(modality ->
+            modality.getGenders().forEach(gender ->
+                gender.getMatches().forEach(match ->
+                    rootMatch.getChildren().add(new TreeItem<>(
+                            new MatchTableModel(modality.getName(), strings.getString(gender.getName()),
+                            match.getStage(), match.getTeams().get(0), match.getTeams().get(1))))
+                )
+            )
+        );
     }
 
     private void generateColumns(){
@@ -84,6 +94,7 @@ public class GeneralMatchTableController implements Initializable {
                         nextItems.add(rootMatch.getChildren().get(x));
 
                     resetMatchTableItens();
+                    matchTableView.getSelectionModel().select(row.getIndex());
 
                     rowIndex = row.getIndex();
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
