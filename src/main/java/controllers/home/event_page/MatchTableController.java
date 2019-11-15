@@ -20,6 +20,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import models.GeneralMatch;
 import models.Match;
 import models.Score;
 import models.Team;
@@ -125,9 +126,16 @@ public class MatchTableController implements Initializable {
         matches.forEach(match -> match.setStage(2));
 
         actualGender.getMatches().addAll(matches);
+        addFinalMatchesToEvent(matches);
         new EventService().updateEvent(EventItemController.eventId, event);
 
         HomeController.loadEventPageView();
+    }
+
+    private void addFinalMatchesToEvent(List<Match> finalMatches){
+        for (Match match : finalMatches)
+            event.getMatches().add(new GeneralMatch(actualModality.getName(),
+                    actualGender.getName(), match.getStage(), match.getTeams().get(0), match.getTeams().get(1)));
     }
 
     private void generateColumns(){

@@ -4,16 +4,14 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTreeTableView;
-import controllers.home.event_list.EventItemController;
 import controllers.home.HomeController;
-import helpers.DialogBuilder;
-import helpers.MatchesGenerator;
-import helpers.TeamGroupsManager;
-import helpers.GroupTableModel;
+import helpers.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import models.GeneralMatch;
+import models.Match;
 import models.Team;
 import services.EventService;
 
@@ -89,15 +87,26 @@ public class GroupTableController implements Initializable {
 
     private void generateGroups(){
         TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
-        MatchesGenerator matchesGenerator = new MatchesGenerator();
 
         teamGroupsManager.groupAllTeamsByTag(TeamsGridController.teams, getTeamTags());
         groups = teamGroupsManager.generateGroupsAndReturn(3);
         actualGender.setTeams(teamGroupsManager.getOrderedTeams());
-        actualGender.setMatches(matchesGenerator.generateMatchesAndReturn(groups));
+        generateMatches();
 
-        new EventService().updateEvent(EventItemController.eventId, event);
+        new EventService().updateEvent(event.getId(), event);
         HomeController.loadEventPageView();
+    }
+
+    private void generateMatches(){
+        List<Match> newMatches = new MatchesGenerator().generateMatchesAndReturn(groups);
+        actualGender.setMatches(newMatches);
+        addMatchesToEvent(newMatches);
+    }
+
+    private void addMatchesToEvent(List<Match> newMatches){
+        for (Match match : newMatches)
+            event.getMatches().add(new GeneralMatch(actualModality.getName(),
+                    actualGender.getName(), match.getStage(), match.getTeams().get(0), match.getTeams().get(1)));
     }
 
     private void generateCbxGroupsItens(){

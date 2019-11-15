@@ -43,7 +43,7 @@ public class EventPageController implements Initializable {
     public static Gender actualGender;
     public static String modalityAndGender;
 
-    private static Modality actualModality;
+    static Modality actualModality;
     private static int genderIndex;
     private ResourceBundle strings;
 

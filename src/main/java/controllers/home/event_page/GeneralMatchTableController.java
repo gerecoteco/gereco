@@ -1,7 +1,8 @@
 package controllers.home.event_page;
 
 import com.jfoenix.controls.JFXTreeTableView;
-import helpers.MatchTableModel;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -12,6 +13,8 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import models.GeneralMatch;
+import services.EventService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,14 +23,14 @@ import static controllers.home.event_page.EventPageController.event;
 
 public class GeneralMatchTableController implements Initializable {
     public JFXTreeTableView matchTableView;
-    public TreeTableColumn<MatchTableModel, String> modalityColumn, genderColumn,versusColumn, teamAColumn, teamBColumn;
-    public TreeTableColumn<MatchTableModel, Number> stageColumn;
-    private TreeItem<MatchTableModel> rootMatch = new TreeItem<>(new MatchTableModel());
+    public TreeTableColumn<GeneralMatch, String> modalityColumn, genderColumn,versusColumn, teamAColumn, teamBColumn;
+    public TreeTableColumn<GeneralMatch, Number> stageColumn;
+    private TreeItem<GeneralMatch> rootMatch = new TreeItem<>(new GeneralMatch());
 
     private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
     private int rowIndex = 0;
-    private TreeItem<MatchTableModel> draggedItem;
-    private ObservableList<TreeItem<MatchTableModel>> nextItems;
+    private TreeItem<GeneralMatch> draggedItem;
+    private ObservableList<TreeItem<GeneralMatch>> nextItems;
 
     private ResourceBundle strings;
 
@@ -42,29 +45,27 @@ public class GeneralMatchTableController implements Initializable {
     }
 
     private void loadAllEventMatches(){
-        event.getModalities().forEach(modality ->
-            modality.getGenders().forEach(gender ->
-                gender.getMatches().forEach(match ->
-                    rootMatch.getChildren().add(new TreeItem<>(
-                            new MatchTableModel(modality.getName(), strings.getString(gender.getName()),
-                            match.getStage(), match.getTeams().get(0), match.getTeams().get(1))))
-                )
-            )
-        );
+        event.getMatches().forEach(match -> rootMatch.getChildren().add(new TreeItem<>(match)));
     }
 
     private void generateColumns(){
-        modalityColumn.setCellValueFactory(param -> param.getValue().getValue().modalityProperty());
-        genderColumn.setCellValueFactory(param -> param.getValue().getValue().genderProperty());
-        stageColumn.setCellValueFactory(param -> param.getValue().getValue().stageProperty());
-        versusColumn.setCellValueFactory(param -> param.getValue().getValue().versusProperty());
-        teamAColumn.setCellValueFactory(param -> param.getValue().getValue().teamAProperty());
-        teamBColumn.setCellValueFactory(param -> param.getValue().getValue().teamBProperty());
+        modalityColumn.setCellValueFactory(param ->
+                new SimpleStringProperty(param.getValue().getValue().getModality()));
+        genderColumn.setCellValueFactory(param ->
+                new SimpleStringProperty(param.getValue().getValue().getGender()));
+        stageColumn.setCellValueFactory(param ->
+                new SimpleIntegerProperty(param.getValue().getValue().getStage()));
+        versusColumn.setCellValueFactory(param ->
+                new SimpleStringProperty("X"));
+        teamAColumn.setCellValueFactory(param ->
+                new SimpleStringProperty(param.getValue().getValue().getTeamA()));
+        teamBColumn.setCellValueFactory(param ->
+                new SimpleStringProperty(param.getValue().getValue().getTeamB()));
     }
 
     private void setRowFactoryOfTable(){
         matchTableView.setRowFactory(tv -> {
-            TreeTableRow<MatchTableModel> row = new TreeTableRow<>();
+            TreeTableRow<GeneralMatch> row = new TreeTableRow<>();
 
             row.setOnDragDetected(event -> {
                 if (!row.isEmpty()) {
@@ -85,7 +86,7 @@ public class GeneralMatchTableController implements Initializable {
                 Dragboard db = event.getDragboard();
                 matchTableView.getSelectionModel().clearSelection();
 
-                rootMatch.getChildren().removeIf(item -> item.getValue().stageProperty() == null);
+                rootMatch.getChildren().removeIf(item -> item.getValue().getModality() == null);
 
                 if (db.hasContent(SERIALIZED_MIME_TYPE)) {
                     nextItems = FXCollections.observableArrayList();
@@ -102,8 +103,8 @@ public class GeneralMatchTableController implements Initializable {
                 }
             });
 
-            row.setOnDragDropped(event -> {
-                Dragboard db = event.getDragboard();
+            row.setOnDragDropped(e -> {
+                Dragboard db = e.getDragboard();
 
                 if (db.hasContent(SERIALIZED_MIME_TYPE)) {
                     int dropIndex = row.isEmpty() ? rootMatch.getChildren().size() : row.getIndex();
@@ -116,17 +117,43 @@ public class GeneralMatchTableController implements Initializable {
                         matchTableView.getSelectionModel().select(rootMatch.getChildren().size()-1);
                     }
 
-                    event.setDropCompleted(true);
-                    event.consume();
+                    e.setDropCompleted(true);
+                    e.consume();
                 }
             });
+
+            row.setOnDragDone(e -> handleOnDragDone());
+
             return row ;
         });
     }
 
+    private void handleOnDragDone(){
+        int selectedIndex = matchTableView.getSelectionModel().getSelectedIndex();
+        boolean invalidDrop = event.getMatches().size() != rootMatch.getChildren().size() ||
+                rootMatch.getChildren().stream().anyMatch(item -> item.getValue().getModality() == null);
+
+        if(invalidDrop){
+            rootMatch.getChildren().clear();
+            loadAllEventMatches();
+            matchTableView.getSelectionModel().select(selectedIndex);
+        } else
+            updateEventMatches();
+    }
+
+    private void updateEventMatches(){
+        event.getMatches().clear();
+        rootMatch.getChildren().forEach(match -> {
+            GeneralMatch generalMatch = match.getValue();
+            event.getMatches().add(generalMatch);
+        });
+
+        new EventService().updateEventMatches(event.getId(), event.getMatches());
+    }
+
     private void resetMatchTableItens(){
         rootMatch.getChildren().removeAll(nextItems);
-        rootMatch.getChildren().add(new TreeItem<>(new MatchTableModel()));
+        rootMatch.getChildren().add(new TreeItem<>(new GeneralMatch()));
         rootMatch.getChildren().addAll(nextItems);
     }
 }

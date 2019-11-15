@@ -2,9 +2,13 @@ package services;
 
 import application.Session;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Updates;
+import helpers.MatchTableModel;
 import models.Event;
+import models.GeneralMatch;
+import org.bson.BsonArray;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -40,6 +44,11 @@ public class EventService {
     public void updateEvent(String eventId, Event updatedEvent){
         eventsCollection.replaceOne(eq("_id", new ObjectId(eventId)),
                 Document.parse(new Gson().toJson(updatedEvent)));
+    }
+
+    public void updateEventMatches(String eventId, List<GeneralMatch> matches){
+        eventsCollection.updateOne(eq("_id", new ObjectId(eventId)), Updates.set("matches",
+                BsonArray.parse(new Gson().toJson(matches, new TypeToken<ArrayList<GeneralMatch>>(){}.getType()))));
     }
 
     public void insertEventInCollection(String eventJson){

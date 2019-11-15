@@ -7,6 +7,7 @@ public class Event {
     private String id;
     private String name;
     private List<Modality> modalities;
+    private List<GeneralMatch> matches;
 
     public Event(){
         this("", new ArrayList<>());
@@ -15,8 +16,15 @@ public class Event {
     public Event(String name, List<Modality> modalities) {
         this.name = name;
         this.modalities = modalities;
+        this.matches = new ArrayList<>();
     }
 
+    public List<GeneralMatch> getMatches() {
+        return matches;
+    }
+    public void setMatches(List<GeneralMatch> matches) {
+        this.matches = matches;
+    }
     public String getName() {
         return name;
     }
