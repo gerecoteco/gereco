@@ -33,6 +33,7 @@ public class EventListController implements Initializable {
     public HBox paneNavigation;
     public HBox hboxEventList;
     public HBox hboxEventsPerPage;
+    public HBox hboxSearchEvent;
 
     private List<List<Event>> eventPages;
     private ToggleGroup navigationButtons;
@@ -56,8 +57,19 @@ public class EventListController implements Initializable {
         numberOfPages = getNumberOfPages();
         pageIndex = 0;
 
+        loadEventSearchView();
         if(eventsId.size() > 0) showEventsOnView();
         else showNoEventsMessage();
+    }
+
+    private void loadEventSearchView(){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/event_list/event-search.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+
+            HBox eventSearch = (HBox) root;
+            hboxSearchEvent.getChildren().add(eventSearch);
+        } catch (Exception e){ e.printStackTrace(); }
     }
 
     private void generateCbxEventsPerPageItems(){
