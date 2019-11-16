@@ -31,7 +31,7 @@
                   <JFXToggleNode fx:id="btnTab2" minWidth="-Infinity" onAction="#changeTab" prefWidth="100.0" text="2" />
                </children>
             </HBox>
-            <JFXButton onAction="#changeMatchToAnotherTab" text="%changeMatchToAnotherTab" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <JFXButton onAction="#handleBtnChangeMatchToAnotherTab" text="%changeMatchToAnotherTab" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
       <JFXTreeTableView fx:id="matchTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" sortMode="ONLY_FIRST_LEVEL" VBox.vgrow="ALWAYS">

@@ -9,10 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableRow;
+import javafx.scene.control.*;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
@@ -21,6 +18,7 @@ import models.GeneralMatch;
 import services.EventService;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static controllers.home.event_page.EventPageController.event;
@@ -61,18 +59,24 @@ public class GeneralMatchTableController implements Initializable {
     }
 
     @FXML
-    protected void changeMatchToAnotherTab(){
-        if(!matchTableView.getSelectionModel().isEmpty()) {
-            int selectedIndex = matchTableView.getSelectionModel().getSelectedIndex();
-            GeneralMatch selectedMatch = rootMatch.getChildren().get(selectedIndex).getValue();
+    protected void handleBtnChangeMatchToAnotherTab(){
+        if(!matchTableView.getSelectionModel().isEmpty()) changeMatchToAnotherTab();
+        else HomeController.showToastMessage(strings.getString("selectMatchFirst"));
+    }
 
-            event.getMatches().get(tabIndex).remove(selectedIndex);
-            event.getMatches().get(tabIndex == 0 ? 1 : 0).add(selectedMatch);
-            loadAllEventMatches();
+    private void changeMatchToAnotherTab(){
+        int selectedIndex = matchTableView.getSelectionModel().getSelectedIndex();
+        GeneralMatch selectedMatch = rootMatch.getChildren().get(selectedIndex).getValue();
 
-            new EventService().updateEventMatches(event.getId(), event.getMatches());
-        } else
-            HomeController.showToastMessage(strings.getString("selectMatchFirst"));
+        event.getMatches().get(tabIndex).remove(selectedIndex);
+        tabIndex = tabIndex == 0 ? 1 : 0;
+        event.getMatches().get(tabIndex).add(selectedMatch);
+
+        tabGroup.selectToggle(tabGroup.getToggles().get(tabIndex));
+        loadAllEventMatches();
+        matchTableView.getSelectionModel().select(rootMatch.getChildren().size() - 1);
+
+        new EventService().updateEventMatches(event.getId(), event.getMatches());
     }
 
     private void loadAllEventMatches(){
@@ -85,10 +89,17 @@ public class GeneralMatchTableController implements Initializable {
                 new SimpleStringProperty(param.getValue().getValue().getModality()));
         genderColumn.setCellValueFactory(param ->
                 new SimpleStringProperty(param.getValue().getValue().getGender()));
-        stageColumn.setCellValueFactory(param ->
-                new SimpleIntegerProperty(param.getValue().getValue().getStage()));
         versusColumn.setCellValueFactory(param ->
                 new SimpleStringProperty("X"));
+        stageColumn.setCellValueFactory(param ->
+                new SimpleIntegerProperty(param.getValue().getValue().getStage()));
+        stageColumn.setCellFactory(tc -> new TreeTableCell<GeneralMatch, Number>() {
+            @Override
+            protected void updateItem(Number item, boolean empty) {
+                super.updateItem(item, empty) ;
+                setText(empty || item.intValue() == 0 ? null : Integer.toString(item.intValue()));
+            }
+        });
         teamAColumn.setCellValueFactory(param ->
                 new SimpleStringProperty(param.getValue().getValue().getTeamA()));
         teamBColumn.setCellValueFactory(param ->
