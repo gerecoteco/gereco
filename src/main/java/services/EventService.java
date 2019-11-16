@@ -46,9 +46,10 @@ public class EventService {
                 Document.parse(new Gson().toJson(updatedEvent)));
     }
 
-    public void updateEventMatches(String eventId, List<GeneralMatch> matches){
+    public void updateEventMatches(String eventId, List<List<GeneralMatch>> matches){
         eventsCollection.updateOne(eq("_id", new ObjectId(eventId)), Updates.set("matches",
-                BsonArray.parse(new Gson().toJson(matches, new TypeToken<ArrayList<GeneralMatch>>(){}.getType()))));
+                BsonArray.parse(new Gson().toJson(matches,
+                        new TypeToken<ArrayList<ArrayList<GeneralMatch>>>(){}.getType()))));
     }
 
     public void insertEventInCollection(String eventJson){

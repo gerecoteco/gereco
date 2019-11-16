@@ -134,7 +134,7 @@ public class MatchTableController implements Initializable {
 
     private void addFinalMatchesToEvent(List<Match> finalMatches){
         for (Match match : finalMatches)
-            event.getMatches().add(new GeneralMatch(actualModality.getName(),
+            event.getMatches().get(0).add(new GeneralMatch(actualModality.getName(),
                     actualGender.getName(), match.getStage(), match.getTeams().get(0), match.getTeams().get(1)));
     }
 

@@ -94,3 +94,21 @@ JFXButton {
 .tree-table-row-cell:selected {
     -fx-background-color: #45de47;
 }
+
+/* general match table */
+.general-match-tab {
+    -fx-border-color: #f5f5f5 #f5f5f5 #ddd #F5F5F5 ;
+}
+
+.general-match-tab JFXToggleNode {
+    -fx-background-color: #e6e6e6;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+}
+
+.general-match-tab JFXToggleNode:selected {
+    -fx-background-color: #369137;
+    -fx-text-fill: white;
+}

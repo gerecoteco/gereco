@@ -105,7 +105,7 @@ public class GroupTableController implements Initializable {
 
     private void addMatchesToEvent(List<Match> newMatches){
         for (Match match : newMatches)
-            event.getMatches().add(new GeneralMatch(actualModality.getName(),
+            event.getMatches().get(0).add(new GeneralMatch(actualModality.getName(),
                     actualGender.getName(), match.getStage(), match.getTeams().get(0), match.getTeams().get(1)));
     }
 

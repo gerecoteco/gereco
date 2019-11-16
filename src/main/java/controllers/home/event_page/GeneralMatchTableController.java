@@ -1,11 +1,15 @@
 package controllers.home.event_page;
 
+import com.jfoenix.controls.JFXToggleNode;
 import com.jfoenix.controls.JFXTreeTableView;
+import controllers.home.HomeController;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableRow;
@@ -25,10 +29,13 @@ public class GeneralMatchTableController implements Initializable {
     public JFXTreeTableView matchTableView;
     public TreeTableColumn<GeneralMatch, String> modalityColumn, genderColumn,versusColumn, teamAColumn, teamBColumn;
     public TreeTableColumn<GeneralMatch, Number> stageColumn;
+    public JFXToggleNode btnTab1, btnTab2;
+    private ToggleGroup tabGroup;
     private TreeItem<GeneralMatch> rootMatch = new TreeItem<>(new GeneralMatch());
 
     private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
     private int rowIndex = 0;
+    private int tabIndex = 0;
     private TreeItem<GeneralMatch> draggedItem;
     private ObservableList<TreeItem<GeneralMatch>> nextItems;
 
@@ -37,6 +44,9 @@ public class GeneralMatchTableController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         strings = resources;
+        tabGroup = new ToggleGroup();
+        tabGroup.getToggles().addAll(btnTab1, btnTab2);
+        tabGroup.selectToggle(tabGroup.getToggles().get(tabIndex));
 
         matchTableView.setRoot(rootMatch);
         generateColumns();
@@ -44,8 +54,30 @@ public class GeneralMatchTableController implements Initializable {
         loadAllEventMatches();
     }
 
+    @FXML
+    protected void changeTab(){
+        tabIndex = tabGroup.getToggles().indexOf(tabGroup.getSelectedToggle());
+        loadAllEventMatches();
+    }
+
+    @FXML
+    protected void changeMatchToAnotherTab(){
+        if(!matchTableView.getSelectionModel().isEmpty()) {
+            int selectedIndex = matchTableView.getSelectionModel().getSelectedIndex();
+            GeneralMatch selectedMatch = rootMatch.getChildren().get(selectedIndex).getValue();
+
+            event.getMatches().get(tabIndex).remove(selectedIndex);
+            event.getMatches().get(tabIndex == 0 ? 1 : 0).add(selectedMatch);
+            loadAllEventMatches();
+
+            new EventService().updateEventMatches(event.getId(), event.getMatches());
+        } else
+            HomeController.showToastMessage(strings.getString("selectMatchFirst"));
+    }
+
     private void loadAllEventMatches(){
-        event.getMatches().forEach(match -> rootMatch.getChildren().add(new TreeItem<>(match)));
+        rootMatch.getChildren().clear();
+        event.getMatches().get(tabIndex).forEach(match -> rootMatch.getChildren().add(new TreeItem<>(match)));
     }
 
     private void generateColumns(){
@@ -130,11 +162,10 @@ public class GeneralMatchTableController implements Initializable {
 
     private void handleOnDragDone(){
         int selectedIndex = matchTableView.getSelectionModel().getSelectedIndex();
-        boolean invalidDrop = event.getMatches().size() != rootMatch.getChildren().size() ||
+        boolean invalidDrop = event.getMatches().get(tabIndex).size() != rootMatch.getChildren().size() ||
                 rootMatch.getChildren().stream().anyMatch(item -> item.getValue().getModality() == null);
 
         if(invalidDrop){
-            rootMatch.getChildren().clear();
             loadAllEventMatches();
             matchTableView.getSelectionModel().select(selectedIndex);
         } else
@@ -142,10 +173,10 @@ public class GeneralMatchTableController implements Initializable {
     }
 
     private void updateEventMatches(){
-        event.getMatches().clear();
+        event.getMatches().get(tabIndex).clear();
         rootMatch.getChildren().forEach(match -> {
             GeneralMatch generalMatch = match.getValue();
-            event.getMatches().add(generalMatch);
+            event.getMatches().get(tabIndex).add(generalMatch);
         });
 
         new EventService().updateEventMatches(event.getId(), event.getMatches());
