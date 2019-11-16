@@ -53,7 +53,7 @@ public class LocaleHelper {
 
     private static String getLocaleDisplayName(Locale locale) {
         if(locale.getCountry().equals(""))
-            return String.format("%s", locale.getDisplayLanguage());
-        return String.format("%s (%s)", locale.getDisplayLanguage(), locale.getDisplayCountry());
+            return String.format("%s", locale.getDisplayLanguage(locale));
+        return String.format("%s (%s)", locale.getDisplayLanguage(locale), locale.getDisplayCountry(locale));
     }
 }

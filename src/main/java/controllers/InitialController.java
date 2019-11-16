@@ -121,7 +121,7 @@ public class InitialController implements Initializable {
 
     private void showToastMessage(String messsage) {
         JFXSnackbar snackbar = new JFXSnackbar(stackPaneLogin);
-        snackbar.getStylesheets().add(getClass().getResource("/css/snackbar.css").toString());
+        snackbar.getStylesheets().add(getClass().getResource("/css/external/snackbar.css").toString());
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
                 new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
                 Duration.millis(3000), null));

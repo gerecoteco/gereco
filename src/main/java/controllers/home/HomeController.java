@@ -53,7 +53,7 @@ public class HomeController {
     @FXML
     protected void openConfigView(){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/views/external-forms/institution-config.fxml"),
+            Parent root = FXMLLoader.load(getClass().getResource("/views/external/institution-config.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             Scene scene = new Scene(root);
 
@@ -93,14 +93,14 @@ public class HomeController {
     }
 
     public static void loadEventListView(){
-        final URL EVENT_LIST_URL = HomeController.class.getResource("/views/home/event-list.fxml");
+        final URL EVENT_LIST_URL = HomeController.class.getResource("/views/home/event_list/event-list.fxml");
         EventPageController.actualGender = null;
         GroupTableController.groupIndex = 0;
         loadView(EVENT_LIST_URL);
     }
 
     public static void loadEventPageView(){
-        final URL EVENT_PAGE_URL = HomeController.class.getResource("/views/home/event-page.fxml");
+        final URL EVENT_PAGE_URL = HomeController.class.getResource("/views/home/event_page/event-page.fxml");
         loadView(EVENT_PAGE_URL);
     }
 
@@ -118,7 +118,7 @@ public class HomeController {
 
     public static void showToastMessage(String messsage) {
         JFXSnackbar snackbar = new JFXSnackbar(staticStackPaneMain);
-        snackbar.getStylesheets().add(HomeController.class.getResource("/css/snackbar.css").toString());
+        snackbar.getStylesheets().add(HomeController.class.getResource("/css/external/snackbar.css").toString());
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
                 new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
                 Duration.millis(3000), null));

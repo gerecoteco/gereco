@@ -26,13 +26,13 @@
       </HBox>
       <JFXTreeTableView fx:id="leaderBoardTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" VBox.vgrow="SOMETIMES">
          <columns>
-            <TreeTableColumn fx:id="positionColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%position" />
-            <TreeTableColumn fx:id="nameColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%team" />
-            <TreeTableColumn fx:id="pointsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%points" />
-            <TreeTableColumn fx:id="ownPointsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%ownPoints" />
-            <TreeTableColumn fx:id="againstPoinstColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%againstPoints" />
-            <TreeTableColumn fx:id="balanceColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%balance" />
-            <TreeTableColumn fx:id="foulsColumn" minWidth="100.0" prefWidth="100.0" resizable="false" text="%fouls" />
+            <TreeTableColumn fx:id="positionColumn" minWidth="92.0" prefWidth="92.0" resizable="false" text="%position" />
+            <TreeTableColumn fx:id="nameColumn" minWidth="100.0" prefWidth="108.0" resizable="false" text="%team" />
+            <TreeTableColumn fx:id="pointsColumn" minWidth="75.0" prefWidth="75.0" resizable="false" text="%points" />
+            <TreeTableColumn fx:id="ownPointsColumn" minWidth="75.0" prefWidth="75.0" resizable="false" text="%ownPoints" />
+            <TreeTableColumn fx:id="againstPoinstColumn" minWidth="75.0" prefWidth="75.0" resizable="false" text="%againstPoints" />
+            <TreeTableColumn fx:id="balanceColumn" minWidth="75.0" prefWidth="75.0" resizable="false" text="%balance" />
+            <TreeTableColumn fx:id="foulsColumn" minWidth="100.0" prefWidth="115.0" resizable="false" text="%fouls" />
          </columns>
       </JFXTreeTableView>
       <JFXButton maxWidth="1.7976931348623157E308" onAction="#exportLeaderBoardToPdf" styleClass="btnEvent" text="%downloadPDF">

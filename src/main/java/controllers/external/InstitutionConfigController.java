@@ -1,6 +1,5 @@
 package controllers.external;
 
-import application.Main;
 import application.Session;
 import com.jfoenix.controls.*;
 import controllers.home.HomeController;
@@ -110,7 +109,7 @@ public class InstitutionConfigController implements Initializable {
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/password-validation.fxml"),
+                    "/views/external/password-validation.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             Scene scene = new Scene(root);
 
@@ -153,7 +152,7 @@ public class InstitutionConfigController implements Initializable {
 
     private void showToastMessage(String messsage) {
         JFXSnackbar snackbar = new JFXSnackbar(stackPaneMain);
-        snackbar.getStylesheets().add(getClass().getResource("/css/snackbar.css").toString());
+        snackbar.getStylesheets().add(getClass().getResource("/css/external/snackbar.css").toString());
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
                 new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
                 Duration.millis(3000), null));
@@ -165,13 +164,9 @@ public class InstitutionConfigController implements Initializable {
     }
 
     @FXML
-    void updateLanguage() throws IOException {
+    void updateLanguage() {
         Locale.setDefault(comboBoxLang.getValue());
-        strings = ResourceBundle.getBundle("bundles.lang", new UTF8Control());
-
-        Parent root = FXMLLoader.load(getClass().getResource("/views/external-forms/institution-config.fxml"), strings);
-        Parent stageRoot = FXMLLoader.load(getClass().getResource("/views/home/home.fxml"), strings);
-        stackPaneMain.getScene().setRoot(root);
-        Main.mainStage.getScene().setRoot(stageRoot);
+        closeStage();
+        HomeController.loadEventListView();
     }
 }

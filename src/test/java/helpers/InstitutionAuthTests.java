@@ -21,7 +21,7 @@ public class InstitutionAuthTests {
     private ResourceBundle strings = ResourceBundle.getBundle("bundles.lang", new UTF8Control());
 
     @Test
-    public void encyptPassword(){
+    public void encryptPasswordTest(){
         assertEquals(ENCRYPTED_PASSWORD, encryptPassword(PASSWORD));
     }
 

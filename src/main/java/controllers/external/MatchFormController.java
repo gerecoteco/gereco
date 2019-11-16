@@ -3,7 +3,7 @@ package controllers.external;
 import controllers.home.event_list.EventItemController;
 import controllers.home.HomeController;
 import controllers.home.event_page.MatchTableController;
-import helpers.MatchTableView;
+import helpers.MatchTableModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -31,7 +31,7 @@ public class MatchFormController implements Initializable {
     public TextField txtFoulsA;
     public TextField txtFoulsB;
 
-    private TreeItem<MatchTableView> selectedMatch;
+    private TreeItem<MatchTableModel> selectedMatch;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

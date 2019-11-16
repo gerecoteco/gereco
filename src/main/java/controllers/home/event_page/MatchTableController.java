@@ -4,9 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbarLayout;
 import com.jfoenix.controls.JFXTreeTableView;
-import controllers.home.event_list.EventItemController;
 import controllers.home.HomeController;
-import helpers.MatchTableView;
+import controllers.home.event_list.EventItemController;
+import helpers.MatchTableModel;
 import helpers.MatchesGenerator;
 import helpers.UTF8Control;
 import javafx.fxml.FXML;
@@ -20,6 +20,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import models.GeneralMatch;
 import models.Match;
 import models.Score;
 import models.Team;
@@ -38,12 +39,12 @@ public class MatchTableController implements Initializable {
     public JFXTreeTableView matchTableView;
     public HBox hboxButtons;
     public JFXButton btnFinalMatches;
-    public TreeTableColumn<MatchTableView, String> versusColumn, teamAColumn, teamBColumn;
-    public TreeTableColumn<MatchTableView, Number> stageColumn, scoreboardAColumn, scoreboardBColumn;
+    public TreeTableColumn<MatchTableModel, String> versusColumn, teamAColumn, teamBColumn;
+    public TreeTableColumn<MatchTableModel, Number> stageColumn, scoreboardAColumn, scoreboardBColumn;
     public Label lblModalityAndGender;
-    private TreeItem<MatchTableView> rootMatch = new TreeItem<>(new MatchTableView());
+    private TreeItem<MatchTableModel> rootMatch = new TreeItem<>(new MatchTableModel());
 
-    public static TreeItem<MatchTableView> selectedMatch;
+    public static TreeItem<MatchTableModel> selectedMatch;
     private ResourceBundle strings;
 
     @Override
@@ -69,7 +70,7 @@ public class MatchTableController implements Initializable {
         matches.forEach(match -> {
             List<String> teamsName = match.getTeams();
             List<Score> scores = match.getScores();
-            TreeItem<MatchTableView> matchRow = new TreeItem<>(new MatchTableView(
+            TreeItem<MatchTableModel> matchRow = new TreeItem<>(new MatchTableModel(
                     match.getStage(), teamsName.get(0), teamsName.get(1),
                     scores.get(0).getOwnPoints(), scores.get(1).getOwnPoints()));
 
@@ -79,7 +80,7 @@ public class MatchTableController implements Initializable {
 
     @FXML
     protected void openMatchFormView(){
-        selectedMatch = (TreeItem<MatchTableView>) matchTableView.getSelectionModel().getSelectedItem();
+        selectedMatch = (TreeItem<MatchTableModel>) matchTableView.getSelectionModel().getSelectedItem();
 
         if(!matchTableView.getSelectionModel().isEmpty()){
             if(isFinalRound() && selectedMatch.getValue().stageProperty().get() == 1)
@@ -93,7 +94,7 @@ public class MatchTableController implements Initializable {
     private void loadMatchForm(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource(
-                    "/views/external-forms/match-form.fxml"),
+                    "/views/external/match-form.fxml"),
                     ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
             Scene scene = new Scene(root);
 
@@ -125,9 +126,16 @@ public class MatchTableController implements Initializable {
         matches.forEach(match -> match.setStage(2));
 
         actualGender.getMatches().addAll(matches);
+        addFinalMatchesToEvent(matches);
         new EventService().updateEvent(EventItemController.eventId, event);
 
         HomeController.loadEventPageView();
+    }
+
+    private void addFinalMatchesToEvent(List<Match> finalMatches){
+        for (Match match : finalMatches)
+            event.getMatches().get(0).add(new GeneralMatch(actualModality.getName(),
+                    actualGender.getName(), match.getStage(), match.getTeams().get(0), match.getTeams().get(1)));
     }
 
     private void generateColumns(){
@@ -141,7 +149,7 @@ public class MatchTableController implements Initializable {
 
     private void showToastMessage(String messsage) {
         JFXSnackbar snackbar = new JFXSnackbar(HomeController.staticStackPaneMain);
-        snackbar.getStylesheets().add(getClass().getResource("/css/snackbar.css").toString());
+        snackbar.getStylesheets().add(getClass().getResource("/css/external/snackbar.css").toString());
         snackbar.fireEvent(new JFXSnackbar.SnackbarEvent(
                 new JFXSnackbarLayout(messsage, "OK", action -> snackbar.close()),
                 Duration.INDEFINITE, null));
