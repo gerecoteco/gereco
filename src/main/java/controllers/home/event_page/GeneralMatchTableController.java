@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -18,7 +19,6 @@ import models.GeneralMatch;
 import services.EventService;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static controllers.home.event_page.EventPageController.event;
@@ -53,7 +53,10 @@ public class GeneralMatchTableController implements Initializable {
     }
 
     @FXML
-    protected void changeTab(){
+    protected void changeTab(ActionEvent event){
+        JFXToggleNode toggleNode = (JFXToggleNode) event.getSource();
+        if(!toggleNode.isSelected()) toggleNode.setSelected(true);
+
         tabIndex = tabGroup.getToggles().indexOf(tabGroup.getSelectedToggle());
         loadAllEventMatches();
     }
@@ -88,9 +91,10 @@ public class GeneralMatchTableController implements Initializable {
         modalityColumn.setCellValueFactory(param ->
                 new SimpleStringProperty(param.getValue().getValue().getModality()));
         genderColumn.setCellValueFactory(param ->
-                new SimpleStringProperty(param.getValue().getValue().getGender()));
+                new SimpleStringProperty(param.getValue().getValue().getModality() != null ?
+                        strings.getString(param.getValue().getValue().getGender()) : ""));
         versusColumn.setCellValueFactory(param ->
-                new SimpleStringProperty("X"));
+                new SimpleStringProperty(param.getValue().getValue().getModality() != null ? "X" : ""));
         stageColumn.setCellValueFactory(param ->
                 new SimpleIntegerProperty(param.getValue().getValue().getStage()));
         stageColumn.setCellFactory(tc -> new TreeTableCell<GeneralMatch, Number>() {

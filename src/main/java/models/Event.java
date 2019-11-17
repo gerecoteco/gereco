@@ -1,5 +1,6 @@
 package models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.List;
 public class Event {
     private String id;
     private String name;
+    private LocalDate date;
+    private EventStatus eventStatus;
     private List<Modality> modalities;
     private List<List<GeneralMatch>> matches;
 
@@ -16,10 +19,21 @@ public class Event {
 
     public Event(String name, List<Modality> modalities) {
         this.name = name;
+        this.date = LocalDate.now();
+        this.eventStatus = EventStatus.PLANNING;
         this.modalities = modalities;
         this.matches = Arrays.asList(new ArrayList<>(), new ArrayList<>());
     }
 
+    public EventStatus getEventStatus() {
+        return eventStatus;
+    }
+    public void setEventStatus(EventStatus eventStatus) {
+        this.eventStatus = eventStatus;
+    }
+    public LocalDate getDate() {
+        return date;
+    }
     public List<List<GeneralMatch>> getMatches() {
         return matches;
     }

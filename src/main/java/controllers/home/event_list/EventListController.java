@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static controllers.home.event_list.EventSearchController.filteredEvents;
+
 public class EventListController implements Initializable {
     public GridPane gridEvents;
     public GridPane gridNavigation;
@@ -33,6 +35,7 @@ public class EventListController implements Initializable {
     public HBox paneNavigation;
     public HBox hboxEventList;
     public HBox hboxEventsPerPage;
+    public HBox hboxSearchEvent;
 
     private List<List<Event>> eventPages;
     private ToggleGroup navigationButtons;
@@ -50,18 +53,30 @@ public class EventListController implements Initializable {
         List<String> eventsId = Session.getInstance().getInstitution().getEvents_id();
         generateCbxEventsPerPageItems();
 
-        institutionEvents = new EventService().requestAllEventsOfInstitution(eventsId);
+        institutionEvents = filteredEvents == null ?
+                new EventService().requestAllEventsOfInstitution(eventsId) : filteredEvents;
         navigationButtons = new ToggleGroup();
         eventsPerPage = Integer.parseInt(cbxEventsPerPage.getValue().toString());
         numberOfPages = getNumberOfPages();
         pageIndex = 0;
 
-        if(eventsId.size() > 0) showEventsOnView();
+        loadEventSearchView();
+        if(institutionEvents.size() > 0) showEventsOnView();
         else showNoEventsMessage();
     }
 
+    private void loadEventSearchView(){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/views/home/event_list/event-search.fxml"),
+                    ResourceBundle.getBundle("bundles.lang", new UTF8Control()));
+
+            HBox eventSearch = (HBox) root;
+            hboxSearchEvent.getChildren().add(eventSearch);
+        } catch (Exception e){ e.printStackTrace(); }
+    }
+
     private void generateCbxEventsPerPageItems(){
-        Object[] EVENTS_PER_PAGE_OPTIONS = {6, 9, 12, 15, strings.getString("eventsPerPage.all")};
+        Object[] EVENTS_PER_PAGE_OPTIONS = {6, 9, 12, 15, strings.getString("all")};
         cbxEventsPerPage.getItems().addAll(EVENTS_PER_PAGE_OPTIONS);
         cbxEventsPerPage.setValue(9);
     }
@@ -83,7 +98,7 @@ public class EventListController implements Initializable {
 
     @FXML
     public void changeNumberOfEventsPerPage(){
-        eventsPerPage = cbxEventsPerPage.getValue().equals(strings.getString("eventsPerPage.all")) ?
+        eventsPerPage = cbxEventsPerPage.getValue().equals(strings.getString("all")) ?
                 institutionEvents.size() : Integer.parseInt(cbxEventsPerPage.getValue().toString());
         numberOfPages = getNumberOfPages();
         pageIndex = 0;
