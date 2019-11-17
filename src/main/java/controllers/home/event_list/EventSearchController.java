@@ -76,7 +76,8 @@ public class EventSearchController implements Initializable {
                     event.getName().toLowerCase().contains(eventName.toLowerCase())).collect(Collectors.toList());
         } if(date1 != null && date2 != null){
             filteredEvents = filteredEvents.stream().filter(event ->
-                    event.getDate().isAfter(date1) && event.getDate().isBefore(date2)).collect(Collectors.toList());
+                    (event.getDate().isAfter(date1) || event.getDate().equals(date1)) &&
+                    (event.getDate().isBefore(date2) || event.getDate().equals(date2))).collect(Collectors.toList());
         } if(!eventStatus.equals(strings.getString("all"))){
             filteredEvents = filteredEvents.stream().filter(event ->
                     event.getEventStatus().getText().equals(eventStatus)).collect(Collectors.toList());
