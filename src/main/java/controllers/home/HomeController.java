@@ -48,11 +48,7 @@ public class HomeController {
 
     @FXML
     protected void loadHome(){
-        EventSearchController.filteredEvents = null;
-        EventSearchController.eventName = null;
-        EventSearchController.eventStatus = null;
-        EventSearchController.date1 = null;
-        EventSearchController.date2 = null;
+        EventSearchController.resetFilters();
         loadEventListView();
     }
 

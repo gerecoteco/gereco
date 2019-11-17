@@ -13,10 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import models.Gender;
-import models.Modality;
-import models.Event;
-import models.Team;
+import models.*;
+import services.EventService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,7 +27,7 @@ import java.util.stream.IntStream;
 
 public class EventPageController implements Initializable {
     public Label lblEventName;
-    public Label lblEventStatus;
+    public JFXComboBox cbxEventStatus;
     public JFXComboBox cbxModalities;
     public HBox paneGenders;
     public AnchorPane paneManager;
@@ -54,9 +52,9 @@ public class EventPageController implements Initializable {
         genderGroup = new ToggleGroup();
         event = findEventById();
         lblEventName.setText(event.getName() + " |");
-        lblEventStatus.setText(event.getEventStatus().getText());
-
+        initializeEventStatusComboBox();
         appendModalitiesInComboBox();
+
         if(actualGender != null){
             cbxModalities.setValue(actualModality.getName());
             generateGenderToggles();
@@ -69,6 +67,27 @@ public class EventPageController implements Initializable {
 
         changeModalityAndGender();
         loadEventManagerViews();
+    }
+
+    private void initializeEventStatusComboBox(){
+        final Object[] EVENT_STATUS_ITEMS = {EventStatus.PLANNING.getText(), EventStatus.IN_PROGRESS.getText(),
+                EventStatus.FINISHED.getText(), EventStatus.CANCELED.getText()};
+        cbxEventStatus.getItems().addAll(EVENT_STATUS_ITEMS);
+        cbxEventStatus.setValue(event.getEventStatus().getText());
+
+        cbxEventStatus.setOnAction(e -> handleOnChangeEventStatus());
+    }
+
+    @FXML
+    private void handleOnChangeEventStatus(){
+        for(EventStatus e : EventStatus.values()){
+            if(cbxEventStatus.getValue().equals(e.getText())){
+                event.setEventStatus(e);
+                new EventService().updateEvent(event.getId(), event);
+                loadEventManagerViews();
+                return;
+            }
+        }
     }
 
     private void loadEventManagerViews(){

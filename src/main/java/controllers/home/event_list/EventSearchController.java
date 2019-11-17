@@ -62,6 +62,14 @@ public class EventSearchController implements Initializable {
             HomeController.showToastMessage(strings.getString("searchEvent.noEventsFound"));
     }
 
+    public static void resetFilters(){
+        EventSearchController.filteredEvents = null;
+        EventSearchController.eventName = null;
+        EventSearchController.eventStatus = null;
+        EventSearchController.date1 = null;
+        EventSearchController.date2 = null;
+    }
+
     private void filterEvents(){
         if(eventName != null) {
             filteredEvents = filteredEvents.stream().filter(event ->

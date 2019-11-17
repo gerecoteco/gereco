@@ -26,11 +26,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblEventStatus" alignment="CENTER" maxHeight="1.7976931348623157E308" text="&lt;STATUS&gt;" textAlignment="CENTER" textFill="#666666">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
+                        <JFXComboBox fx:id="cbxEventStatus" />
                      </children>
                   </HBox>
                   <VBox alignment="CENTER" layoutX="121.0" layoutY="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

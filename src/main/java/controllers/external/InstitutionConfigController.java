@@ -3,6 +3,7 @@ package controllers.external;
 import application.Session;
 import com.jfoenix.controls.*;
 import controllers.home.HomeController;
+import controllers.home.event_list.EventSearchController;
 import helpers.DialogBuilder;
 import helpers.LocaleHelper;
 import helpers.UTF8Control;
@@ -167,6 +168,7 @@ public class InstitutionConfigController implements Initializable {
     void updateLanguage() {
         Locale.setDefault(comboBoxLang.getValue());
         closeStage();
+        EventSearchController.resetFilters();
         HomeController.loadEventListView();
     }
 }
