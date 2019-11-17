@@ -19,11 +19,20 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <Label fx:id="lblEventName" layoutX="15.0" layoutY="26.0" text="&lt;NAME&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
+                  <HBox layoutX="15.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="lblEventName" text="&lt;NAME&gt;">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblEventStatus" alignment="CENTER" maxHeight="1.7976931348623157E308" text="&lt;STATUS&gt;" textAlignment="CENTER" textFill="#666666">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                   <VBox alignment="CENTER" layoutX="121.0" layoutY="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <HBox alignment="CENTER" spacing="25.0">

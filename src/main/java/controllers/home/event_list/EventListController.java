@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static controllers.home.event_list.EventSearchController.filteredEvents;
+
 public class EventListController implements Initializable {
     public GridPane gridEvents;
     public GridPane gridNavigation;
@@ -51,14 +53,15 @@ public class EventListController implements Initializable {
         List<String> eventsId = Session.getInstance().getInstitution().getEvents_id();
         generateCbxEventsPerPageItems();
 
-        institutionEvents = new EventService().requestAllEventsOfInstitution(eventsId);
+        institutionEvents = filteredEvents == null ?
+                new EventService().requestAllEventsOfInstitution(eventsId) : filteredEvents;
         navigationButtons = new ToggleGroup();
         eventsPerPage = Integer.parseInt(cbxEventsPerPage.getValue().toString());
         numberOfPages = getNumberOfPages();
         pageIndex = 0;
 
         loadEventSearchView();
-        if(eventsId.size() > 0) showEventsOnView();
+        if(institutionEvents.size() > 0) showEventsOnView();
         else showNoEventsMessage();
     }
 
@@ -73,7 +76,7 @@ public class EventListController implements Initializable {
     }
 
     private void generateCbxEventsPerPageItems(){
-        Object[] EVENTS_PER_PAGE_OPTIONS = {6, 9, 12, 15, strings.getString("eventsPerPage.all")};
+        Object[] EVENTS_PER_PAGE_OPTIONS = {6, 9, 12, 15, strings.getString("all")};
         cbxEventsPerPage.getItems().addAll(EVENTS_PER_PAGE_OPTIONS);
         cbxEventsPerPage.setValue(9);
     }
@@ -95,7 +98,7 @@ public class EventListController implements Initializable {
 
     @FXML
     public void changeNumberOfEventsPerPage(){
-        eventsPerPage = cbxEventsPerPage.getValue().equals(strings.getString("eventsPerPage.all")) ?
+        eventsPerPage = cbxEventsPerPage.getValue().equals(strings.getString("all")) ?
                 institutionEvents.size() : Integer.parseInt(cbxEventsPerPage.getValue().toString());
         numberOfPages = getNumberOfPages();
         pageIndex = 0;

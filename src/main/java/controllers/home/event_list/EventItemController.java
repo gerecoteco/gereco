@@ -26,6 +26,8 @@ public class EventItemController implements Initializable {
     public Label lblEventName;
     public Label lblModalities;
     public Label lblEventId;
+    public Label lblDate;
+    public Label lblEventStatus;
 
     private static String successEventDelete;
     public static String eventId;
@@ -38,6 +40,9 @@ public class EventItemController implements Initializable {
 
         lblEventId.setText(EventListController.event.getId());
         lblEventName.setText(EventListController.event.getName());
+        lblDate.setText(EventListController.event.getDate().toString());
+        lblEventStatus.setText(EventListController.event.getEventStatus().getText());
+
         listAllModalities();
     }
 

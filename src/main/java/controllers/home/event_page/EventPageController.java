@@ -29,6 +29,7 @@ import java.util.stream.IntStream;
 
 public class EventPageController implements Initializable {
     public Label lblEventName;
+    public Label lblEventStatus;
     public JFXComboBox cbxModalities;
     public HBox paneGenders;
     public AnchorPane paneManager;
@@ -52,7 +53,8 @@ public class EventPageController implements Initializable {
         strings = resources;
         genderGroup = new ToggleGroup();
         event = findEventById();
-        lblEventName.setText(event.getName());
+        lblEventName.setText(event.getName() + " |");
+        lblEventStatus.setText(event.getEventStatus().getText());
 
         appendModalitiesInComboBox();
         if(actualGender != null){

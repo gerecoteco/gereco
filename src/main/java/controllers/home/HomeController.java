@@ -4,6 +4,7 @@ import application.Main;
 import application.Session;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbarLayout;
+import controllers.home.event_list.EventSearchController;
 import controllers.home.event_page.EventPageController;
 import controllers.home.event_page.GroupTableController;
 import helpers.UTF8Control;
@@ -47,6 +48,11 @@ public class HomeController {
 
     @FXML
     protected void loadHome(){
+        EventSearchController.filteredEvents = null;
+        EventSearchController.eventName = null;
+        EventSearchController.eventStatus = null;
+        EventSearchController.date1 = null;
+        EventSearchController.date2 = null;
         loadEventListView();
     }
 

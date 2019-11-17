@@ -15,8 +15,8 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label alignment="CENTER" layoutX="126.0" layoutY="188.0" text="Em andamento" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label layoutX="9.0" layoutY="14.0" text="00/00/00" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="lblEventStatus" alignment="CENTER" layoutX="126.0" layoutY="188.0" text="Em andamento" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="lblDate" layoutX="9.0" layoutY="14.0" text="00/00/00" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Label fx:id="lblModalities" alignment="CENTER" layoutX="40.0" layoutY="112.0" text="&lt;MODALITIES&gt;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <JFXButton layoutX="268.0" layoutY="177.0" onAction="#openEventPageView" text="&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="14.0" layoutY="181.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#loadDeleteDialog" pickOnBounds="true" preserveRatio="true" styleClass="trash-icon" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
