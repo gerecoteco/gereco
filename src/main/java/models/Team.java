@@ -6,6 +6,13 @@ public class Team {
     private int group;
     private Score score;
 
+    public Team(String name) {
+        this.name = name;
+        this.tag = "";
+        this.group = 0;
+        this.score = new Score();
+    }
+
     public Team(String name, String tag) {
         this.name = name;
         this.tag = tag;

@@ -1,40 +1,44 @@
 package controllers.home.event_page;
 
 import com.itextpdf.text.DocumentException;
+import com.jfoenix.controls.JFXToggleNode;
 import com.jfoenix.controls.JFXTreeTableView;
 import controllers.home.HomeController;
 import helpers.LeaderBoardModel;
 import helpers.PdfTableGenerator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import models.Score;
 import models.Team;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static controllers.home.event_page.EventPageController.*;
 
 public class LeaderBoardController implements Initializable {
     public JFXTreeTableView leaderBoardTableView;
-    public Label lblModalityAndGender;
+    public JFXToggleNode tabModalityAndGender;
+    public JFXToggleNode tabGeneral;
     public TreeTableColumn<LeaderBoardModel, String> nameColumn;
     public TreeTableColumn<LeaderBoardModel, Number> positionColumn, pointsColumn, ownPointsColumn,
             againstPoinstColumn, balanceColumn, foulsColumn;
     private TreeItem<LeaderBoardModel> rootLeaderBoard = new TreeItem<>(new LeaderBoardModel());
+    private ToggleGroup leaderBoardTabs;
 
     private ResourceBundle strings;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         strings = resources;
-        lblModalityAndGender.setText(modalityAndGender);
+        tabModalityAndGender.setText(modalityAndGender);
+        initializeLeaderBoardTabs();
 
         leaderBoardTableView.setRoot(rootLeaderBoard);
         generateColumns();
@@ -42,9 +46,62 @@ public class LeaderBoardController implements Initializable {
         if(!actualGender.getTeams().isEmpty()) listTeamsOnTable();
     }
 
+    @FXML
+    protected void changeTab(ActionEvent event){
+        JFXToggleNode toggleNode = (JFXToggleNode) event.getSource();
+        if(!toggleNode.isSelected()) toggleNode.setSelected(true);
+        listTeamsOnTable();
+    }
+
+    private void initializeLeaderBoardTabs(){
+        leaderBoardTabs = new ToggleGroup();
+        leaderBoardTabs.getToggles().addAll(tabModalityAndGender, tabGeneral);
+        leaderBoardTabs.selectToggle(tabModalityAndGender);
+    }
+
+    private List<Team> calculateGeneralTeamsScoreAndReturn(){
+        List<String> allTeamNames = new ArrayList<>();
+        List<Team> allTeams = new ArrayList<>();
+        List<Team> generalTeams = new ArrayList<>();
+
+        generateAllEventTeams(allTeamNames, allTeams);
+        allTeamNames.forEach(teamName -> {
+            Team generalTeam = new Team(teamName);
+            Score generalTeamScore = generalTeam.getScore();
+            allTeams.forEach(team -> {
+                Score actualTeamScore = team.getScore();
+                if(team.getName().equals(generalTeam.getName())){
+                    generalTeamScore.setPoints(generalTeamScore.getPoints() + actualTeamScore.getPoints());
+                    generalTeamScore.setOwnPoints(generalTeamScore.getOwnPoints() + actualTeamScore.getOwnPoints());
+                    generalTeamScore.setAgainstPoints(generalTeamScore.getAgainstPoints() + actualTeamScore.getAgainstPoints());
+                    generalTeamScore.setBalance(generalTeamScore.getOwnPoints() - generalTeamScore.getAgainstPoints());
+                    generalTeamScore.setFouls(generalTeamScore.getFouls() + actualTeamScore.getFouls());
+                }
+            });
+            generalTeams.add(generalTeam);
+        });
+
+        return generalTeams;
+    }
+
+    private void generateAllEventTeams(List<String> allTeamNames, List<Team> allTeams){
+        event.getModalities().forEach(modality ->{
+            modality.getGenders().forEach(gender -> {
+                if(!gender.getTeams().isEmpty()){
+                    allTeams.addAll(gender.getTeams());
+                    gender.getTeams().forEach(team -> {
+                        if(!allTeamNames.contains(team.getName()))
+                            allTeamNames.add(team.getName());
+                    });
+                }
+            });
+        });
+    }
+
     private void listTeamsOnTable(){
         rootLeaderBoard.getChildren().clear();
-        List<Team> teams = actualGender.getTeams();
+        List<Team> teams = leaderBoardTabs.getSelectedToggle().equals(tabGeneral) ?
+                calculateGeneralTeamsScoreAndReturn() : actualGender.getTeams();
 
         teams.sort(Comparator.comparing((Team team) -> team.getScore().getPoints())
                 .thenComparing((Team team) -> team.getScore().getOwnPoints())
@@ -63,8 +120,10 @@ public class LeaderBoardController implements Initializable {
     @FXML
     protected void exportLeaderBoardToPdf() throws IOException, DocumentException {
         PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
-        String title = MessageFormat.format(strings.getString("leaderboardTitle"),
-                modalityAndGender, event.getName());
+        String title = leaderBoardTabs.getSelectedToggle().equals(tabModalityAndGender) ?
+                MessageFormat.format(strings.getString("leaderboardTitle.modalityAndGender"),
+                        modalityAndGender, event.getName()) :
+                MessageFormat.format(strings.getString("leaderboardTitle.general"), event.getName());
         pdfTableGenerator.createPdf(title, "../../../classificacao-gereco.pdf", rootLeaderBoard.getChildren());
 
         HomeController.showToastMessage(strings.getString("successDownloadPDF"));

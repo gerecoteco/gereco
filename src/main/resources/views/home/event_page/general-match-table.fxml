@@ -25,7 +25,7 @@
       </HBox>
       <AnchorPane>
          <children>
-            <HBox prefHeight="23.0" prefWidth="510.0" spacing="2.0" styleClass="general-match-tab" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox prefHeight="23.0" prefWidth="510.0" spacing="2.0" styleClass="table-tab" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <JFXToggleNode fx:id="btnTab1" minWidth="-Infinity" onAction="#changeTab" prefWidth="100.0" text="1" />
                   <JFXToggleNode fx:id="btnTab2" minWidth="-Infinity" onAction="#changeTab" prefWidth="100.0" text="2" />
