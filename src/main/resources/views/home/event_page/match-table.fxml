@@ -33,7 +33,7 @@
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnFinalMatches" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#generateFinalMatches" styleClass="btnEvent" text="%generateFinals" HBox.hgrow="ALWAYS">
+            <JFXButton fx:id="btnFinalMatches" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#loadGenerateFinalMatchesDialog" styleClass="btnEvent" text="%generateFinals" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="14.0" />
                </font>

@@ -4,10 +4,7 @@ import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.*;
 import controllers.home.HomeController;
 import controllers.home.event_list.EventItemController;
-import helpers.MatchTableModel;
-import helpers.MatchesGenerator;
-import helpers.PdfTableGenerator;
-import helpers.UTF8Control;
+import helpers.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +24,6 @@ import services.EventService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -121,7 +117,22 @@ public class MatchTableController implements Initializable {
     }
 
     @FXML
-    protected void generateFinalMatches(){
+    protected void loadGenerateFinalMatchesDialog(){
+        String heading = strings.getString("generateFinalMatchDialog.heading");
+        String body = strings.getString("generateFinalMatchDialog.body");
+        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, HomeController.staticStackPaneMain);
+
+        JFXDialog dialog = dialogBuilder.createDialogAndReturn();
+        dialogBuilder.setConfirmAction(action -> {
+            generateFinalMatches();
+            HomeController.showToastMessage(strings.getString("successGenerateFinalMatches"));
+            dialog.close();
+        });
+
+        dialog.show();
+    }
+
+    private void generateFinalMatches(){
         List<Team> finalGroup = new ArrayList<>();
 
         getGenderGroups().forEach(teams -> {
