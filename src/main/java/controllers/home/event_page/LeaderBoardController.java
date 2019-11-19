@@ -18,6 +18,7 @@ import models.Team;
 import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 import static controllers.home.event_page.EventPageController.*;
@@ -120,12 +121,15 @@ public class LeaderBoardController implements Initializable {
     @FXML
     protected void exportLeaderBoardToPdf() throws IOException, DocumentException {
         PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
-        String title = leaderBoardTabs.getSelectedToggle().equals(tabModalityAndGender) ?
+        JFXToggleNode selectedTab = (JFXToggleNode) leaderBoardTabs.getSelectedToggle();
+        String title = selectedTab.equals(tabModalityAndGender) ?
                 MessageFormat.format(strings.getString("leaderboardTitle.modalityAndGender"),
                         modalityAndGender, event.getName()) :
                 MessageFormat.format(strings.getString("leaderboardTitle.general"), event.getName());
-        pdfTableGenerator.createPdf(title, "../../../classificacao-gereco.pdf", rootLeaderBoard.getChildren());
+        String fileName = strings.getString("leaderboard") + " - " + selectedTab.getText() +
+                " - " + LocalDate.now() + ".pdf";
 
+        pdfTableGenerator.createPdf(title, "../../../" + fileName, rootLeaderBoard.getChildren());
         HomeController.showToastMessage(strings.getString("successDownloadPDF"));
     }
 
