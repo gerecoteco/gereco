@@ -26,6 +26,20 @@
             </Label>
          </children>
       </HBox>
+      <HBox fx:id="hboxButtons" alignment="CENTER" spacing="15.0">
+         <children>
+            <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openMatchFormView" styleClass="btnEvent" text="%editSelected" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnFinalMatches" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#generateFinalMatches" styleClass="btnEvent" text="%generateFinals" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
       <JFXTreeTableView fx:id="matchTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" sortMode="ONLY_FIRST_LEVEL" VBox.vgrow="ALWAYS">
          <columns>
             <TreeTableColumn fx:id="stageColumn" editable="false" minWidth="60.0" prefWidth="73.0" resizable="false" sortable="false" text="%stage" />
@@ -42,19 +56,10 @@
             <Insets />
          </VBox.margin>
       </JFXTreeTableView>
-      <HBox fx:id="hboxButtons" alignment="CENTER" spacing="15.0">
-         <children>
-            <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openMatchFormView" styleClass="btnEvent" text="%editSelected" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="btnFinalMatches" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#generateFinalMatches" styleClass="btnEvent" text="%generateFinals" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
-         </children>
-      </HBox>
+      <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#downloadMatchTablePDF" styleClass="btnEvent" text="%downloadPDF">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
    </children>
 </VBox>

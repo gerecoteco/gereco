@@ -50,5 +50,6 @@
             <Insets />
          </VBox.margin>
       </JFXTreeTableView>
+      <JFXButton maxWidth="1.7976931348623157E308" onAction="#downloadGeneralMatchTablePDF" text="%downloadPDF" />
    </children>
 </VBox>

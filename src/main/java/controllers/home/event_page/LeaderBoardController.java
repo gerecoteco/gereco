@@ -129,7 +129,7 @@ public class LeaderBoardController implements Initializable {
         String fileName = strings.getString("leaderboard") + " - " + selectedTab.getText() +
                 " - " + LocalDate.now() + ".pdf";
 
-        pdfTableGenerator.createPdf(title, "../../../" + fileName, rootLeaderBoard.getChildren());
+        pdfTableGenerator.generateLeaderBoardPdf(title, "../../../" + fileName, rootLeaderBoard.getChildren());
         HomeController.showToastMessage(strings.getString("successDownloadPDF"));
     }
 

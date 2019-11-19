@@ -1,13 +1,12 @@
 package controllers.home.event_page;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXSnackbar;
-import com.jfoenix.controls.JFXSnackbarLayout;
-import com.jfoenix.controls.JFXTreeTableView;
+import com.itextpdf.text.DocumentException;
+import com.jfoenix.controls.*;
 import controllers.home.HomeController;
 import controllers.home.event_list.EventItemController;
 import helpers.MatchTableModel;
 import helpers.MatchesGenerator;
+import helpers.PdfTableGenerator;
 import helpers.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +27,8 @@ import services.EventService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.MessageFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -76,6 +77,16 @@ public class MatchTableController implements Initializable {
 
             rootMatch.getChildren().add(matchRow);
         });
+    }
+
+    @FXML
+    protected void downloadMatchTablePDF() throws IOException, DocumentException {
+        PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
+        String title = strings.getString("matchTable") + modalityAndGender;
+        String fileName = title + " - " + LocalDate.now() + ".pdf";
+
+        pdfTableGenerator.generateMatchTablePdf(title, "../../../" + fileName, rootMatch.getChildren());
+        HomeController.showToastMessage(strings.getString("successDownloadPDF"));
     }
 
     @FXML
