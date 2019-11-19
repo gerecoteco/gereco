@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleNode?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableColumn?>
@@ -17,11 +18,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblModalityAndGender">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+         </children>
+      </HBox>
+      <HBox prefHeight="23.0" prefWidth="510.0" spacing="2.0" styleClass="table-tab">
+         <children>
+            <JFXToggleNode fx:id="tabModalityAndGender" maxWidth="1.7976931348623157E308" minWidth="100.0" onAction="#changeTab" />
+            <JFXToggleNode fx:id="tabGeneral" minWidth="-Infinity" onAction="#changeTab" prefWidth="100.0" text="%general" />
          </children>
       </HBox>
       <JFXTreeTableView fx:id="leaderBoardTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" VBox.vgrow="SOMETIMES">

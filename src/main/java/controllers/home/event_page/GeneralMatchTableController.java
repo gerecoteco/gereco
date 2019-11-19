@@ -1,8 +1,10 @@
 package controllers.home.event_page;
 
+import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.JFXToggleNode;
 import com.jfoenix.controls.JFXTreeTableView;
 import controllers.home.HomeController;
+import helpers.PdfTableGenerator;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,10 +20,13 @@ import javafx.scene.input.TransferMode;
 import models.GeneralMatch;
 import services.EventService;
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import static controllers.home.event_page.EventPageController.event;
+import static controllers.home.event_page.EventPageController.modalityAndGender;
 
 public class GeneralMatchTableController implements Initializable {
     public JFXTreeTableView matchTableView;
@@ -51,6 +56,18 @@ public class GeneralMatchTableController implements Initializable {
         setRowFactoryOfTable();
         loadAllEventMatches();
     }
+
+    @FXML
+    protected void downloadGeneralMatchTablePDF() throws IOException, DocumentException {
+        PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
+        int tabNumber = tabIndex+1;
+        String title = strings.getString("generalMatchTable") + " " + tabNumber + " - " + modalityAndGender;
+        String fileName = title + " - " + LocalDate.now() + ".pdf";
+
+        pdfTableGenerator.generateGeneralMatchTablePdf(title, "../../../" + fileName, rootMatch.getChildren());
+        HomeController.showToastMessage(strings.getString("successDownloadPDF"));
+    }
+
 
     @FXML
     protected void changeTab(ActionEvent event){

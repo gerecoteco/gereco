@@ -29,6 +29,10 @@
             <JFXComboBox fx:id="cbxEventStatus" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
          </children>
       </HBox>
-      <JFXButton fx:id="btnSearch" onAction="#searchEvent" styleClass="btnEvent" text="%btnSearch" />
+      <HBox fx:id="hboxSearchButtons" spacing="5.0">
+         <children>
+            <JFXButton fx:id="btnSearch" onAction="#searchEvent" styleClass="btnEvent" text="%btnSearch" />
+         </children>
+      </HBox>
    </children>
 </HBox>

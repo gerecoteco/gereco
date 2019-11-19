@@ -61,7 +61,7 @@ public class EventListController implements Initializable {
         pageIndex = 0;
 
         loadEventSearchView();
-        if(institutionEvents.size() > 0) showEventsOnView();
+        if(!institutionEvents.isEmpty()) showEventsOnView();
         else showNoEventsMessage();
     }
 
@@ -85,7 +85,7 @@ public class EventListController implements Initializable {
         hboxEventsPerPage.setVisible(false);
         paneNavigation.setVisible(false);
 
-        Label message = new Label(strings.getString("noEvent"));
+        Label message = new Label(strings.getString(filteredEvents != null ? "searchEvent.noEventsFound" : "noEvent"));
         message.getStyleClass().add("no-events-message");
         hboxEventList.getChildren().clear();
         hboxEventList.getChildren().add(message);

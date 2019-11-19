@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXTextField;
 import controllers.home.HomeController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.HBox;
 import models.Event;
 import models.EventStatus;
 import services.EventService;
@@ -23,7 +24,9 @@ public class EventSearchController implements Initializable {
     public JFXDatePicker dateCreateDate1;
     public JFXDatePicker dateCreateDate2;
     public JFXComboBox cbxEventStatus;
+    public HBox hboxSearchButtons;
     public JFXButton btnSearch;
+    private JFXButton btnDisableFilters;
     private ResourceBundle strings;
 
     public static List<Event> filteredEvents;
@@ -43,6 +46,8 @@ public class EventSearchController implements Initializable {
         dateCreateDate1.setValue(date1);
         dateCreateDate2.setValue(date2);
         cbxEventStatus.setValue(eventStatus == null ? strings.getString("all") : eventStatus);
+
+        initializeBtnDisableFilters();
     }
 
     @FXML
@@ -56,10 +61,7 @@ public class EventSearchController implements Initializable {
                 .requestAllEventsOfInstitution(Session.getInstance().getInstitution().getEvents_id());
 
         filterEvents();
-        if(!filteredEvents.isEmpty())
-            HomeController.loadEventListView();
-        else
-            HomeController.showToastMessage(strings.getString("searchEvent.noEventsFound"));
+        HomeController.loadEventListView();
     }
 
     public static void resetFilters(){
@@ -82,5 +84,16 @@ public class EventSearchController implements Initializable {
             filteredEvents = filteredEvents.stream().filter(event ->
                     event.getEventStatus().getText().equals(eventStatus)).collect(Collectors.toList());
         }
+    }
+
+    private void initializeBtnDisableFilters(){
+        btnDisableFilters = new JFXButton(strings.getString("searchEvent.disableFilters"));
+        btnDisableFilters.getStyleClass().add("btnEvent");
+        btnDisableFilters.setOnAction(event -> {
+            resetFilters();
+            HomeController.loadEventListView();
+        });
+
+        if(filteredEvents != null) hboxSearchButtons.getChildren().add(btnDisableFilters);
     }
 }

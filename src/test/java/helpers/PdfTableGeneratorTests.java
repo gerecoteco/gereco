@@ -36,7 +36,7 @@ public class PdfTableGeneratorTests {
     public void should_create_a_valid_pdf() throws IOException, DocumentException {
         PdfTableGenerator pdfTableGenerator = new TestablePdqTableGenerator();
 
-        pdfTableGenerator.createPdf(TITLE, DESTINATION, LEADER_BOARD_VIEWS);
+        pdfTableGenerator.generateLeaderBoardPdf(TITLE, DESTINATION, LEADER_BOARD_VIEWS);
 
         verify(document).open();
 

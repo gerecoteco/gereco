@@ -3,6 +3,7 @@ package controllers.external;
 import com.google.gson.Gson;
 import com.jfoenix.controls.*;
 import controllers.home.HomeController;
+import controllers.home.event_list.EventSearchController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -108,6 +109,7 @@ public class EventCreateController implements Initializable {
             String eventJson = new Gson().toJson(newEvent);
             eventService.insertEventInCollection(eventJson);
 
+            EventSearchController.resetFilters();
             HomeController.loadEventListView();
             getActualStage(event).close();
             HomeController.showToastMessage(strings.getString("successEventCreation"));

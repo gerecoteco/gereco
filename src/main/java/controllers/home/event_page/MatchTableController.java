@@ -1,14 +1,10 @@
 package controllers.home.event_page;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXSnackbar;
-import com.jfoenix.controls.JFXSnackbarLayout;
-import com.jfoenix.controls.JFXTreeTableView;
+import com.itextpdf.text.DocumentException;
+import com.jfoenix.controls.*;
 import controllers.home.HomeController;
 import controllers.home.event_list.EventItemController;
-import helpers.MatchTableModel;
-import helpers.MatchesGenerator;
-import helpers.UTF8Control;
+import helpers.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,6 +24,7 @@ import services.EventService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -79,6 +76,16 @@ public class MatchTableController implements Initializable {
     }
 
     @FXML
+    protected void downloadMatchTablePDF() throws IOException, DocumentException {
+        PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
+        String title = strings.getString("matchTable") + modalityAndGender;
+        String fileName = title + " - " + LocalDate.now() + ".pdf";
+
+        pdfTableGenerator.generateMatchTablePdf(title, "../../../" + fileName, rootMatch.getChildren());
+        HomeController.showToastMessage(strings.getString("successDownloadPDF"));
+    }
+
+    @FXML
     protected void openMatchFormView(){
         selectedMatch = (TreeItem<MatchTableModel>) matchTableView.getSelectionModel().getSelectedItem();
 
@@ -110,7 +117,22 @@ public class MatchTableController implements Initializable {
     }
 
     @FXML
-    protected void generateFinalMatches(){
+    protected void loadGenerateFinalMatchesDialog(){
+        String heading = strings.getString("generateFinalMatchDialog.heading");
+        String body = strings.getString("generateFinalMatchDialog.body");
+        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, HomeController.staticStackPaneMain);
+
+        JFXDialog dialog = dialogBuilder.createDialogAndReturn();
+        dialogBuilder.setConfirmAction(action -> {
+            generateFinalMatches();
+            HomeController.showToastMessage(strings.getString("successGenerateFinalMatches"));
+            dialog.close();
+        });
+
+        dialog.show();
+    }
+
+    private void generateFinalMatches(){
         List<Team> finalGroup = new ArrayList<>();
 
         getGenderGroups().forEach(teams -> {

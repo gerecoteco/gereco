@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -36,6 +37,7 @@ public class EventPageController implements Initializable {
     public AnchorPane paneMatchTable;
     public AnchorPane paneGeneralMatchTable;
     public AnchorPane paneLeaderBoard;
+    public TabPane tabPaneEventManager;
     private ToggleGroup genderGroup;
 
     public static Event event;
@@ -44,6 +46,7 @@ public class EventPageController implements Initializable {
 
     static Modality actualModality;
     private static int genderIndex;
+    private static Integer tabIndex;
     private ResourceBundle strings;
 
     @Override
@@ -52,6 +55,8 @@ public class EventPageController implements Initializable {
         genderGroup = new ToggleGroup();
         event = findEventById();
         lblEventName.setText(event.getName() + " |");
+        tabPaneEventManager.getSelectionModel().select(tabIndex == null ? 0 : tabIndex);
+
         initializeEventStatusComboBox();
         appendModalitiesInComboBox();
 
@@ -67,6 +72,13 @@ public class EventPageController implements Initializable {
 
         changeModalityAndGender();
         loadEventManagerViews();
+    }
+
+    @FXML
+    private void handleOnSelectedTabChange(){
+        boolean eventPageAlrearyInitialized = !cbxEventStatus.getItems().isEmpty();
+        if(eventPageAlrearyInitialized)
+            tabIndex = tabPaneEventManager.getSelectionModel().getSelectedIndex();
     }
 
     private void initializeEventStatusComboBox(){

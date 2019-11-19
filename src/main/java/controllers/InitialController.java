@@ -20,7 +20,10 @@ import javafx.util.Duration;
 import models.Institution;
 import services.InstitutionService;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -109,14 +112,15 @@ public class InitialController implements Initializable {
     }
 
     @FXML
-    protected void loadForgotPasswordDialog(){
-        String heading = strings.getString("resetPassword");
-        String body = strings.getString("forgotPasswordDialogBody");
-        DialogBuilder dialogBuilder = new DialogBuilder(heading, body, stackPaneLogin);
-
-        JFXDialog dialog = dialogBuilder.createDialogAndReturn();
-        dialogBuilder.setConfirmAction(action -> dialog.close());
-        dialog.show();
+    protected void openForgotPasswordWebPage() {
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desktop.browse(new URI("https://gereco.herokuapp.com"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void showToastMessage(String messsage) {

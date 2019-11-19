@@ -54,9 +54,9 @@
             </AnchorPane>
             <AnchorPane fx:id="paneManager" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
-                  <TabPane prefHeight="593.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TabPane fx:id="tabPaneEventManager" prefHeight="593.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
-                      <Tab closable="false" text="%teams">
+                      <Tab closable="false" onSelectionChanged="#handleOnSelectedTabChange" text="%teams">
                         <content>
                               <HBox alignment="CENTER" spacing="50.0" styleClass="tab-hbox">
                                  <children>
@@ -78,7 +78,7 @@
                               </HBox>
                         </content>
                       </Tab>
-                      <Tab closable="false" text="%matches">
+                      <Tab closable="false" onSelectionChanged="#handleOnSelectedTabChange" text="%matches">
                         <content>
                               <HBox alignment="CENTER" spacing="50.0" styleClass="tab-hbox">
                                  <children>
