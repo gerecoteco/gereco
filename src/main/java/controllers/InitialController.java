@@ -112,11 +112,7 @@ public class InitialController implements Initializable {
     }
 
     @FXML
-    protected void loadForgotPasswordDialog()  {
-        openForgotPasswordWebPage();
-    }
-
-    private void openForgotPasswordWebPage() {
+    protected void openForgotPasswordWebPage() {
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
         if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
             try {
