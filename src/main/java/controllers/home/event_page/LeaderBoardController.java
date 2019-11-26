@@ -12,15 +12,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.input.ScrollEvent;
+import javafx.stage.DirectoryChooser;
 import models.Score;
 import models.Team;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.*;
 
+import static application.Main.mainStage;
 import static controllers.home.event_page.EventPageController.*;
 
 public class LeaderBoardController implements Initializable {
@@ -40,11 +44,31 @@ public class LeaderBoardController implements Initializable {
         strings = resources;
         tabModalityAndGender.setText(modalityAndGender);
         initializeLeaderBoardTabs();
+        generateLeaderBoardTable();
+    }
 
+    private void generateLeaderBoardTable(){
         leaderBoardTableView.setRoot(rootLeaderBoard);
         generateColumns();
+        blockTableHozizontalScroll();
 
         if(!actualGender.getTeams().isEmpty()) listTeamsOnTable();
+    }
+
+    private void generateColumns(){
+        positionColumn.setCellValueFactory(param -> param.getValue().getValue().positionProperty());
+        nameColumn.setCellValueFactory(param -> param.getValue().getValue().nameProperty());
+        pointsColumn.setCellValueFactory(param -> param.getValue().getValue().pointsProperty());
+        ownPointsColumn.setCellValueFactory(param -> param.getValue().getValue().ownPointsProperty());
+        againstPoinstColumn.setCellValueFactory(param -> param.getValue().getValue().againstPointsProperty());
+        balanceColumn.setCellValueFactory(param -> param.getValue().getValue().balanceProperty());
+        foulsColumn.setCellValueFactory(param -> param.getValue().getValue().foulsProperty());
+    }
+
+    private void blockTableHozizontalScroll(){
+        leaderBoardTableView.addEventFilter(ScrollEvent.ANY, event -> {
+            if (event.getDeltaX() != 0) event.consume();
+        });
     }
 
     @FXML
@@ -120,6 +144,9 @@ public class LeaderBoardController implements Initializable {
 
     @FXML
     protected void exportLeaderBoardToPdf() throws IOException, DocumentException {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File choosedDirectory = directoryChooser.showDialog(mainStage);
+
         PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
         JFXToggleNode selectedTab = (JFXToggleNode) leaderBoardTabs.getSelectedToggle();
         String title = selectedTab.equals(tabModalityAndGender) ?
@@ -129,17 +156,8 @@ public class LeaderBoardController implements Initializable {
         String fileName = strings.getString("leaderboard") + " - " + selectedTab.getText() +
                 " - " + LocalDate.now() + ".pdf";
 
-        pdfTableGenerator.generateLeaderBoardPdf(title, "../../../" + fileName, rootLeaderBoard.getChildren());
+        pdfTableGenerator.generateLeaderBoardPdf(
+                title, choosedDirectory + "/" + fileName, rootLeaderBoard.getChildren());
         HomeController.showToastMessage(strings.getString("successDownloadPDF"));
-    }
-
-    private void generateColumns(){
-        positionColumn.setCellValueFactory(param -> param.getValue().getValue().positionProperty());
-        nameColumn.setCellValueFactory(param -> param.getValue().getValue().nameProperty());
-        pointsColumn.setCellValueFactory(param -> param.getValue().getValue().pointsProperty());
-        ownPointsColumn.setCellValueFactory(param -> param.getValue().getValue().ownPointsProperty());
-        againstPoinstColumn.setCellValueFactory(param -> param.getValue().getValue().againstPointsProperty());
-        balanceColumn.setCellValueFactory(param -> param.getValue().getValue().balanceProperty());
-        foulsColumn.setCellValueFactory(param -> param.getValue().getValue().foulsProperty());
     }
 }

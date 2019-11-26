@@ -34,7 +34,7 @@
             <JFXButton onAction="#handleBtnChangeMatchToAnotherTab" text="%changeMatchToAnotherTab" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <JFXTreeTableView fx:id="matchTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" sortMode="ONLY_FIRST_LEVEL" VBox.vgrow="ALWAYS">
+      <JFXTreeTableView fx:id="generalMatchTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" sortMode="ONLY_FIRST_LEVEL" VBox.vgrow="ALWAYS">
          <columns>
             <TreeTableColumn fx:id="modalityColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%modality" />
             <TreeTableColumn fx:id="genderColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" resizable="false" sortable="false" text="%gender" />

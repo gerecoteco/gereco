@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -48,11 +49,32 @@ public class MatchTableController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         strings = resources;
         lblModalityAndGender.setText(modalityAndGender);
+        generateMatchTable();
 
+        if(isFinalRound() || actualGender.getMatches().isEmpty()) hboxButtons.getChildren().remove(btnFinalMatches);
+    }
+
+    private void generateMatchTable(){
         matchTableView.setRoot(rootMatch);
         generateColumns();
+        blockTableHozizontalScroll();
+
         if(!actualGender.getMatches().isEmpty()) listMatchesOnTable();
-        if(isFinalRound() || actualGender.getMatches().isEmpty()) hboxButtons.getChildren().remove(btnFinalMatches);
+    }
+
+    private void generateColumns(){
+        stageColumn.setCellValueFactory(param -> param.getValue().getValue().stageProperty());
+        versusColumn.setCellValueFactory(param -> param.getValue().getValue().versusProperty());
+        teamAColumn.setCellValueFactory(param -> param.getValue().getValue().teamAProperty());
+        teamBColumn.setCellValueFactory(param -> param.getValue().getValue().teamBProperty());
+        scoreboardAColumn.setCellValueFactory(param -> param.getValue().getValue().scoreAProperty());
+        scoreboardBColumn.setCellValueFactory(param -> param.getValue().getValue().scoreBProperty());
+    }
+
+    private void blockTableHozizontalScroll(){
+        matchTableView.addEventFilter(ScrollEvent.ANY, event -> {
+            if (event.getDeltaX() != 0) event.consume();
+        });
     }
 
     private boolean isFinalRound(){
@@ -158,15 +180,6 @@ public class MatchTableController implements Initializable {
         for (Match match : finalMatches)
             event.getMatches().get(0).add(new GeneralMatch(actualModality.getName(),
                     actualGender.getName(), match.getStage(), match.getTeams().get(0), match.getTeams().get(1)));
-    }
-
-    private void generateColumns(){
-        stageColumn.setCellValueFactory(param -> param.getValue().getValue().stageProperty());
-        versusColumn.setCellValueFactory(param -> param.getValue().getValue().versusProperty());
-        teamAColumn.setCellValueFactory(param -> param.getValue().getValue().teamAProperty());
-        teamBColumn.setCellValueFactory(param -> param.getValue().getValue().teamBProperty());
-        scoreboardAColumn.setCellValueFactory(param -> param.getValue().getValue().scoreAProperty());
-        scoreboardBColumn.setCellValueFactory(param -> param.getValue().getValue().scoreBProperty());
     }
 
     private void showToastMessage(String messsage) {
