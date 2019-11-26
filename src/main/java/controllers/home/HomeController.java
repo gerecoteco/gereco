@@ -15,14 +15,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import models.Institution;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static application.Main.mainStage;
 
 public class HomeController {
     public Label lblInstitutionInfo;
@@ -116,6 +120,11 @@ public class HomeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static File openDirectoryChooserAndReturnDirectory(){
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        return directoryChooser.showDialog(mainStage);
     }
 
     public static void showToastMessage(String messsage) {

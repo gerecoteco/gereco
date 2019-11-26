@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 import static application.Main.mainStage;
+import static controllers.home.HomeController.openDirectoryChooserAndReturnDirectory;
 import static controllers.home.event_page.EventPageController.*;
 
 public class LeaderBoardController implements Initializable {
@@ -144,8 +145,7 @@ public class LeaderBoardController implements Initializable {
 
     @FXML
     protected void exportLeaderBoardToPdf() throws IOException, DocumentException {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        File choosedDirectory = directoryChooser.showDialog(mainStage);
+        File choosedDirectory = openDirectoryChooserAndReturnDirectory();
 
         PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
         JFXToggleNode selectedTab = (JFXToggleNode) leaderBoardTabs.getSelectedToggle();

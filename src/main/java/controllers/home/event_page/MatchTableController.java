@@ -23,6 +23,7 @@ import models.Score;
 import models.Team;
 import services.EventService;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -31,6 +32,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static controllers.home.HomeController.openDirectoryChooserAndReturnDirectory;
 import static controllers.home.event_page.EventPageController.*;
 
 public class MatchTableController implements Initializable {
@@ -99,11 +101,13 @@ public class MatchTableController implements Initializable {
 
     @FXML
     protected void downloadMatchTablePDF() throws IOException, DocumentException {
+        File choosedDirectory = openDirectoryChooserAndReturnDirectory();
+
         PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
         String title = strings.getString("matchTable") + modalityAndGender;
         String fileName = title + " - " + LocalDate.now() + ".pdf";
 
-        pdfTableGenerator.generateMatchTablePdf(title, "../../../" + fileName, rootMatch.getChildren());
+        pdfTableGenerator.generateMatchTablePdf(title, choosedDirectory + "/" + fileName, rootMatch.getChildren());
         HomeController.showToastMessage(strings.getString("successDownloadPDF"));
     }
 

@@ -17,11 +17,13 @@ import javafx.scene.input.*;
 import models.GeneralMatch;
 import services.EventService;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import static controllers.home.HomeController.openDirectoryChooserAndReturnDirectory;
 import static controllers.home.event_page.EventPageController.event;
 import static controllers.home.event_page.EventPageController.modalityAndGender;
 
@@ -68,12 +70,15 @@ public class GeneralMatchTableController implements Initializable {
 
     @FXML
     protected void downloadGeneralMatchTablePDF() throws IOException, DocumentException {
+        File choosedDirectory = openDirectoryChooserAndReturnDirectory();
+
         PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
         int tabNumber = tabIndex+1;
         String title = strings.getString("generalMatchTable") + " " + tabNumber + " - " + modalityAndGender;
         String fileName = title + " - " + LocalDate.now() + ".pdf";
 
-        pdfTableGenerator.generateGeneralMatchTablePdf(title, "../../../" + fileName, rootGeneralMatch.getChildren());
+        pdfTableGenerator.generateGeneralMatchTablePdf(
+                title, choosedDirectory + "/" + fileName, rootGeneralMatch.getChildren());
         HomeController.showToastMessage(strings.getString("successDownloadPDF"));
     }
 
