@@ -26,6 +26,12 @@ JFXButton {
     -fx-text-fill: white;
 }
 
+/* Download PDF button */
+.download-pdf {
+    -fx-image: url("../../img/download-pdf.png");
+    -fx-cursor: HAND;
+}
+
 /* scroll bar */
 JFXTreeTableView .scroll-bar:horizontal { /* hide horizontal scroll bar */
     -fx-min-width: 0;
@@ -49,7 +55,6 @@ JFXTreeTableView .scroll-bar:horizontal { /* hide horizontal scroll bar */
     -fx-background-color :transparent;
     -fx-background-radius : 0.0em;
     -fx-padding :0.0 0.0 10.0 0.0;
-
 }
 
 .scroll-bar:vertical .increment-button,
@@ -57,7 +62,6 @@ JFXTreeTableView .scroll-bar:horizontal { /* hide horizontal scroll bar */
     -fx-background-color :transparent;
     -fx-background-radius : 0.0em;
     -fx-padding :0.0 10.0 0.0 0.0;
-
 }
 
 .scroll-bar .increment-arrow,

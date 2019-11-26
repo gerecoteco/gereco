@@ -6,6 +6,7 @@
 
 .trash-icon {
     -fx-image: url("../../../img/trash-icon.png");
+    -fx-fit-to-width: 10px;
 }
 
 .trash-icon:hover {
@@ -14,5 +15,11 @@
 
 JFXButton {
     -fx-background-color: #369137;
+    -fx-background-size: 20 20;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+    -fx-background-image: url("../../../img/arrow.png");
     -fx-text-fill: white;
 }

@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -14,15 +15,16 @@
 
 <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.home.event_page.GeneralMatchTableController">
    <children>
-      <HBox alignment="CENTER">
+      <AnchorPane>
          <children>
-            <Label alignment="CENTER" text="%generalMatchTable">
+            <Label alignment="CENTER" text="%generalMatchTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#downloadGeneralMatchTablePDF" pickOnBounds="true" preserveRatio="true" styleClass="download-pdf" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-      </HBox>
+      </AnchorPane>
       <AnchorPane>
          <children>
             <HBox prefHeight="23.0" prefWidth="510.0" spacing="2.0" styleClass="table-tab" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -50,6 +52,5 @@
             <Insets />
          </VBox.margin>
       </JFXTreeTableView>
-      <JFXButton maxWidth="1.7976931348623157E308" onAction="#downloadGeneralMatchTablePDF" text="%downloadPDF" />
    </children>
 </VBox>
