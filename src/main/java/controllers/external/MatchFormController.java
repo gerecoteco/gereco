@@ -4,6 +4,8 @@ import controllers.home.event_list.EventItemController;
 import controllers.home.HomeController;
 import controllers.home.event_page.MatchTableController;
 import helpers.MatchTableModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -44,6 +46,19 @@ public class MatchFormController implements Initializable {
         txtOwnPointsB.setText(String.valueOf(actualMatch.getScores().get(1).getOwnPoints()));
         txtFoulsA.setText(String.valueOf(actualMatch.getScores().get(0).getFouls()));
         txtFoulsB.setText(String.valueOf(actualMatch.getScores().get(1).getFouls()));
+
+        makeTextFieldNumericOnly(txtOwnPointsA);
+        makeTextFieldNumericOnly(txtOwnPointsB);
+        makeTextFieldNumericOnly(txtFoulsA);
+        makeTextFieldNumericOnly(txtFoulsB);
+    }
+
+    private void makeTextFieldNumericOnly(TextField txt){
+        txt.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*"))
+                txt.setText(newValue.replaceAll("[^\\d]", ""));
+            if (newValue.isEmpty()) txt.setText("0");
+        });
     }
 
     @FXML
