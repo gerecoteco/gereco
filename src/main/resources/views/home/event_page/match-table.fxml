@@ -49,13 +49,8 @@
             <Insets />
          </VBox.margin>
       </JFXTreeTableView>
-      <HBox fx:id="hboxButtons" alignment="CENTER" spacing="15.0">
+      <HBox fx:id="hboxBtnFinalMatches" alignment="CENTER" spacing="15.0">
          <children>
-            <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#openMatchFormView" styleClass="btnEvent" text="%editSelected" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
             <JFXButton fx:id="btnFinalMatches" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#loadGenerateFinalMatchesDialog" styleClass="btnEvent" text="%generateFinals" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="14.0" />

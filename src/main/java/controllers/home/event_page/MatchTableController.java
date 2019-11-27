@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableRow;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -37,7 +39,7 @@ import static controllers.home.event_page.EventPageController.*;
 
 public class MatchTableController implements Initializable {
     public JFXTreeTableView matchTableView;
-    public HBox hboxButtons;
+    public HBox hboxBtnFinalMatches;
     public JFXButton btnFinalMatches;
     public TreeTableColumn<MatchTableModel, String> versusColumn, teamAColumn, teamBColumn;
     public TreeTableColumn<MatchTableModel, Number> stageColumn, scoreboardAColumn, scoreboardBColumn;
@@ -53,13 +55,15 @@ public class MatchTableController implements Initializable {
         lblModalityAndGender.setText(modalityAndGender);
         generateMatchTable();
 
-        if(isFinalRound() || actualGender.getMatches().isEmpty()) hboxButtons.getChildren().remove(btnFinalMatches);
+        if(isFinalRound() || actualGender.getMatches().isEmpty())
+            hboxBtnFinalMatches.getChildren().remove(btnFinalMatches);
     }
 
     private void generateMatchTable(){
         matchTableView.setRoot(rootMatch);
         generateColumns();
         blockTableHozizontalScroll();
+        setRowFactory();
 
         if(!actualGender.getMatches().isEmpty()) listMatchesOnTable();
     }
@@ -71,6 +75,20 @@ public class MatchTableController implements Initializable {
         teamBColumn.setCellValueFactory(param -> param.getValue().getValue().teamBProperty());
         scoreboardAColumn.setCellValueFactory(param -> param.getValue().getValue().scoreAProperty());
         scoreboardBColumn.setCellValueFactory(param -> param.getValue().getValue().scoreBProperty());
+    }
+
+    private void setRowFactory(){
+        matchTableView.setRowFactory(tv -> {
+            TreeTableRow<MatchTableModel> row = new TreeTableRow<>();
+            row.setOnMouseClicked(e -> {
+                if(e.getClickCount() == 2) openMatchFormView();
+            });
+            return row;
+        });
+
+        matchTableView.setOnKeyPressed(e -> {
+            if(e.getCode() == KeyCode.ENTER) openMatchFormView();
+        });
     }
 
     private void blockTableHozizontalScroll(){
@@ -111,8 +129,7 @@ public class MatchTableController implements Initializable {
         HomeController.showToastMessage(strings.getString("successDownloadPDF"));
     }
 
-    @FXML
-    protected void openMatchFormView(){
+    private void openMatchFormView(){
         selectedMatch = (TreeItem<MatchTableModel>) matchTableView.getSelectionModel().getSelectedItem();
 
         if(!matchTableView.getSelectionModel().isEmpty()){
