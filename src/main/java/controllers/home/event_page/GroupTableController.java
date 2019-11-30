@@ -1,5 +1,6 @@
 package controllers.home.event_page;
 
+import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
@@ -15,13 +16,17 @@ import models.Match;
 import models.Team;
 import services.EventService;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
 
+import static controllers.home.HomeController.openDirectoryChooserAndReturnDirectory;
 import static controllers.home.event_page.EventPageController.*;
 
 public class GroupTableController implements Initializable {
@@ -85,11 +90,23 @@ public class GroupTableController implements Initializable {
         else HomeController.showToastMessage(strings.getString("error.addTeamsFirst"));
     }
 
+    @FXML
+    private void downloadGroupTablePdf() throws IOException, DocumentException {
+        File choosedDirectory = openDirectoryChooserAndReturnDirectory();
+
+        PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
+        String title = MessageFormat.format(strings.getString("groupsPdf.title"), modalityAndGender);
+        String fileName = title + " - " + LocalDate.now() + ".pdf";
+
+        pdfTableGenerator.generateGroupTablesPdf(title, choosedDirectory + "/" + fileName, groups);
+        HomeController.showToastMessage(strings.getString("successDownloadPDF"));
+    }
+
     private void generateGroups(){
         TeamGroupsManager teamGroupsManager = new TeamGroupsManager();
 
         teamGroupsManager.groupAllTeamsByTag(TeamsGridController.teams, getTeamTags());
-        groups = teamGroupsManager.generateGroupsAndReturn(3);
+        groups = teamGroupsManager.generateGroupsAndReturn(4);
         actualGender.setTeams(teamGroupsManager.getOrderedTeams());
         generateMatches();
 
