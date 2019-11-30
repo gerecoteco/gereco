@@ -7,10 +7,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import models.GeneralMatch;
+import models.Team;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PdfTableGenerator {
@@ -113,6 +115,48 @@ public class PdfTableGenerator {
         document.add(new Phrase(title));
         document.add(table);
         document.close();
+    }
+
+    public void generateGroupTablesPdf(
+            String title, String dest,  List<List<Team>> genderGroups)
+            throws IOException, DocumentException {
+
+        Document document = createDocument(dest);
+        document.open();
+
+        PdfPTable table;
+        document.add(new Phrase(title));
+
+        for (List<Team> group : genderGroups) {
+            table = initializeGroupTableColumnsAndReturn();
+            backgrounColor = BaseColor.WHITE;
+            for (Team team : group) {
+                table.addCell(createCell(team.getName()));
+                table.addCell(createCell(String.valueOf(team.getScore().getPoints())));
+                table.addCell(createCell(String.valueOf(team.getScore().getOwnPoints())));
+                table.addCell(createCell(String.valueOf(team.getScore().getAgainstPoints())));
+                table.addCell(createCell(String.valueOf(team.getScore().getBalance())));
+                table.addCell(createCell(String.valueOf(team.getScore().getFouls())));
+            }
+            document.add(Chunk.NEWLINE);
+            document.add(table);
+        }
+
+        document.close();
+    }
+
+    private PdfPTable initializeGroupTableColumnsAndReturn(){
+        PdfPTable table = new PdfPTable(6);
+        backgrounColor = BaseColor.LIGHT_GRAY;
+
+        table.addCell(createCell(strings.getString("team")));
+        table.addCell(createCell(strings.getString("points")));
+        table.addCell(createCell(strings.getString("ownPoints")));
+        table.addCell(createCell(strings.getString("againstPoints")));
+        table.addCell(createCell(strings.getString("balance")));
+        table.addCell(createCell(strings.getString("fouls")));
+
+        return table;
     }
 
     Document createDocument(String dest) throws DocumentException, FileNotFoundException {
