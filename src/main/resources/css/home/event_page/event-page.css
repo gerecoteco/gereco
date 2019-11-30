@@ -6,7 +6,7 @@
 
 .event_page JFXToggleNode {
     -fx-background-color: white;
-    -fx-border-color: #666;
+    -fx-border-color: #ddd;
     -fx-max-height: Infinity;
     -fx-max-width: Infinity;
     -fx-cursor: HAND;
@@ -31,6 +31,11 @@
 .hover_team:hover {
     -fx-background-color: #369137;
     -fx-text-fill: white;
+}
+
+.team-grid {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #ddd;
 }
 
 JFXButton {

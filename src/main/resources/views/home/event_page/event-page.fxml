@@ -62,7 +62,7 @@
                                  <children>
                                     <VBox alignment="TOP_CENTER" spacing="40.0">
                                        <children>
-                                          <AnchorPane fx:id="paneTeamGrid" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #828282;">
+                                          <AnchorPane fx:id="paneTeamGrid" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="team-grid">
                                              <opaqueInsets>
                                                 <Insets />
                                              </opaqueInsets>

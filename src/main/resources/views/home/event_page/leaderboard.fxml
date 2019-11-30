@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -20,12 +21,17 @@
             </Label>
          </children>
       </HBox>
-      <HBox prefHeight="23.0" prefWidth="510.0" spacing="2.0" styleClass="table-tab">
+      <AnchorPane>
          <children>
-            <JFXToggleNode fx:id="tabModalityAndGender" maxWidth="1.7976931348623157E308" minWidth="100.0" onAction="#changeTab" />
-            <JFXToggleNode fx:id="tabGeneral" minWidth="-Infinity" onAction="#changeTab" prefWidth="100.0" text="%general" />
+            <HBox maxWidth="1.7976931348623157E308" prefHeight="23.0" prefWidth="510.0" spacing="2.0" styleClass="table-tab" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <JFXToggleNode fx:id="tabModalityAndGender" maxWidth="1.7976931348623157E308" minWidth="100.0" onAction="#changeTab" />
+                  <JFXToggleNode fx:id="tabGeneral" minWidth="-Infinity" onAction="#changeTab" prefWidth="100.0" text="%general" />
+               </children>
+            </HBox>
+            <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#exportLeaderBoardToPdf" pickOnBounds="true" preserveRatio="true" styleClass="download-pdf" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-      </HBox>
+      </AnchorPane>
       <JFXTreeTableView fx:id="leaderBoardTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showRoot="false" VBox.vgrow="SOMETIMES">
          <columns>
             <TreeTableColumn fx:id="positionColumn" minWidth="92.0" prefWidth="92.0" resizable="false" text="%position" />
@@ -37,10 +43,5 @@
             <TreeTableColumn fx:id="foulsColumn" minWidth="100.0" prefWidth="115.0" resizable="false" text="%fouls" />
          </columns>
       </JFXTreeTableView>
-      <JFXButton maxWidth="1.7976931348623157E308" onAction="#exportLeaderBoardToPdf" styleClass="btnEvent" text="%downloadPDF">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
    </children>
 </VBox>
