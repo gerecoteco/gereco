@@ -4,6 +4,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import controllers.home.event_page.EventPageController;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import models.GeneralMatch;
@@ -85,13 +86,36 @@ public class PdfTableGenerator {
         document.close();
     }
 
-    public void generateGeneralMatchTablePdf(
-            String title, String dest, ObservableList<TreeItem<GeneralMatch>> matchTableItems)
-            throws IOException, DocumentException {
-
+    public void generateGeneralMatchTablePdf(String title, String dest) throws IOException, DocumentException {
         Document document = createDocument(dest);
         document.open();
 
+        PdfPTable table;
+
+        List<List<GeneralMatch>> eventMatches = EventPageController.event.getMatches();
+        for (int i = 0; i < eventMatches.size(); i++) {
+            List<GeneralMatch> matches = eventMatches.get(i);
+            if(matches.isEmpty()) break;
+
+            table = initializeGeneralMatchTableColumnsAndReturn();
+            backgrounColor = BaseColor.WHITE;
+            for (GeneralMatch match : matches) {
+                table.addCell(createCell(match.getModality()));
+                table.addCell(createCell(match.getGender()));
+                table.addCell(createCell(String.valueOf(match.getStage())));
+                table.addCell(createCell(String.valueOf(match.getTeamA())));
+                table.addCell(createCell("X"));
+                table.addCell(createCell(String.valueOf(match.getTeamB())));
+            }
+            document.add(new Phrase(title + " (" + (i + 1) + ")"));
+            document.add(table);
+            document.add(Chunk.NEXTPAGE);
+        }
+
+        document.close();
+    }
+
+    private PdfPTable initializeGeneralMatchTableColumnsAndReturn(){
         PdfPTable table = new PdfPTable(6);
         backgrounColor = BaseColor.LIGHT_GRAY;
 
@@ -102,19 +126,7 @@ public class PdfTableGenerator {
         table.addCell(createCell("X"));
         table.addCell(createCell(strings.getString("team")));
 
-        backgrounColor = BaseColor.WHITE;
-        for (TreeItem<GeneralMatch> matchTableItem : matchTableItems) {
-            table.addCell(createCell(matchTableItem.getValue().getModality()));
-            table.addCell(createCell(matchTableItem.getValue().getGender()));
-            table.addCell(createCell(String.valueOf(matchTableItem.getValue().getStage())));
-            table.addCell(createCell(String.valueOf(matchTableItem.getValue().getTeamA())));
-            table.addCell(createCell("X"));
-            table.addCell(createCell(String.valueOf(matchTableItem.getValue().getTeamB())));
-        }
-
-        document.add(new Phrase(title));
-        document.add(table);
-        document.close();
+        return table;
     }
 
     public void generateGroupTablesPdf(
