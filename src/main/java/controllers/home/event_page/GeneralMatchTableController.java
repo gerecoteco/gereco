@@ -30,7 +30,7 @@ import static controllers.home.event_page.EventPageController.modalityAndGender;
 public class GeneralMatchTableController implements Initializable {
     public JFXTreeTableView generalMatchTableView;
     public TreeTableColumn<GeneralMatch, String> modalityColumn, genderColumn,versusColumn, teamAColumn, teamBColumn;
-    public TreeTableColumn<GeneralMatch, Number> stageColumn;
+    public TreeTableColumn<GeneralMatch, Number> matchColumn, stageColumn;
     public JFXToggleNode btnTab1, btnTab2;
     private ToggleGroup tabGroup;
     private TreeItem<GeneralMatch> rootGeneralMatch = new TreeItem<>(new GeneralMatch());
@@ -117,6 +117,8 @@ public class GeneralMatchTableController implements Initializable {
     }
 
     private void generateColumns(){
+        matchColumn.setCellValueFactory(param -> new SimpleIntegerProperty(
+                event.getMatches().get(tabIndex).indexOf(param.getValue().getValue()) + 1));
         modalityColumn.setCellValueFactory(param ->
                 new SimpleStringProperty(param.getValue().getValue().getModality()));
         genderColumn.setCellValueFactory(param ->
