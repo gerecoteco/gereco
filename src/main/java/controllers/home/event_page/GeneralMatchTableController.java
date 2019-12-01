@@ -73,7 +73,7 @@ public class GeneralMatchTableController implements Initializable {
         File choosedDirectory = openDirectoryChooserAndReturnDirectory();
 
         PdfTableGenerator pdfTableGenerator = new PdfTableGenerator();
-        String title = strings.getString("generalMatchTable") + " - " + modalityAndGender;
+        String title = strings.getString("generalMatchTable");
         String fileName = title + " - " + LocalDate.now() + ".pdf";
 
         pdfTableGenerator.generateGeneralMatchTablePdf(title, choosedDirectory + "/" + fileName);

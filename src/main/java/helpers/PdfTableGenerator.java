@@ -77,8 +77,8 @@ public class PdfTableGenerator {
             table.addCell(createCell(matchTableItem.getValue().teamAProperty().get()));
             table.addCell(createCell(String.valueOf(matchTableItem.getValue().scoreAProperty().get())));
             table.addCell(createCell("X"));
-            table.addCell(createCell(matchTableItem.getValue().teamBProperty().get()));
             table.addCell(createCell(String.valueOf(matchTableItem.getValue().scoreBProperty().get())));
+            table.addCell(createCell(matchTableItem.getValue().teamBProperty().get()));
         }
 
         document.add(new Phrase(title));
@@ -99,9 +99,12 @@ public class PdfTableGenerator {
 
             table = initializeGeneralMatchTableColumnsAndReturn();
             backgrounColor = BaseColor.WHITE;
-            for (GeneralMatch match : matches) {
+            for (int j = 0; j < matches.size(); j++) {
+                GeneralMatch match = matches.get(j);
+
+                table.addCell(createCell(String.valueOf(j+1)));
                 table.addCell(createCell(match.getModality()));
-                table.addCell(createCell(match.getGender()));
+                table.addCell(createCell(strings.getString(match.getGender())));
                 table.addCell(createCell(String.valueOf(match.getStage())));
                 table.addCell(createCell(String.valueOf(match.getTeamA())));
                 table.addCell(createCell("X"));
@@ -116,9 +119,10 @@ public class PdfTableGenerator {
     }
 
     private PdfPTable initializeGeneralMatchTableColumnsAndReturn(){
-        PdfPTable table = new PdfPTable(6);
+        PdfPTable table = new PdfPTable(7);
         backgrounColor = BaseColor.LIGHT_GRAY;
 
+        table.addCell(createCell(strings.getString("match")));
         table.addCell(createCell(strings.getString("modality")));
         table.addCell(createCell(strings.getString("gender")));
         table.addCell(createCell(strings.getString("stage")));
